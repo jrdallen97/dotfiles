@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+DOTFILES=$(dirname $(readlink -f $0))
+
+function install_to_home () {
+  dotfile="${DOTFILES}/${1}"
+  target="${HOME}/${2}"
+
+  if [ ! -e $target -a ! -L $target ]; then
+    # echo "$target not found, linking..."
+    ln -sv $dotfile $target
+  else
+    echo "$target already found, ignoring..."
+  fi
+}
+
+install_to_home zsh/.zshrc .zshrc

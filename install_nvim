@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+DOTFILES=$(dirname $(readlink -f $0))
+CONFIG_DIR=${XDG_CONFIG_HOME:=$HOME/.config}
+
+function install_to_config () {
+  dotfile="${DOTFILES}/${1}"
+  target="${CONFIG_DIR}/${2}"
+
+  if [ ! -e $target -a ! -L $target ]; then
+    # echo "$target not found, linking..."
+    ln -sv $dotfile $target
+  else
+    echo "$target already found, ignoring..."
+  fi
+}
+
+mkdir -p "${XDG_CONFIG_HOME}/nvim"
+
+install_to_config nvim/init.vim nvim/init.vim
