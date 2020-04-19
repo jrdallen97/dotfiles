@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 DOTFILES=$(dirname $(readlink -f $0))
+ZSH_PLUGINS="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins"
 
 function install_to_home () {
   dotfile="${DOTFILES}/${1}"
@@ -9,8 +10,21 @@ function install_to_home () {
     # echo "$target not found, linking..."
     ln -sv $dotfile $target
   else
-    echo "$target already found, ignoring..."
+    echo "$target already exists, skipping..."
   fi
 }
 
 install_to_home zsh/.zshrc .zshrc
+
+if [ ! -e "${ZSH_PLUGINS}/zsh-syntax-highlighting" ]; then
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting "${ZSH_PLUGINS}/zsh-syntax-highlighting"
+else
+  echo "${ZSH_PLUGINS}/zsh-syntax-highlighting already exists, skipping..."
+fi
+
+if [ ! -e "${ZSH_PLUGINS}/zsh-z" ]; then
+  git clone https://github.com/agkozak/zsh-z "${ZSH_PLUGINS}/zsh-z"
+else
+  echo "${ZSH_PLUGINS}/zsh-z already exists, skipping..."
+fi
+
