@@ -7,24 +7,32 @@ function install_to_home () {
   target="${HOME}/${2}"
 
   if [ ! -e $target -a ! -L $target ]; then
-    # echo "$target not found, linking..."
     ln -sv $dotfile $target
   else
-    echo "$target already exists, skipping..."
+    echo "$target already exists, skipping..." 1>&2
   fi
 }
 
+# Install oh-my-zsh if not already installed
+if [ ! -e "${HOME}/.oh-my-zsh" ]; then
+  RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+else
+  echo ".oh-my-zsh already exists, skipping..." 1>&2
+fi
+
+# Install dotfiles
 install_to_home zsh/.zshrc .zshrc
 
+# Add oh-my-zsh plugins
 if [ ! -e "${ZSH_PLUGINS}/zsh-syntax-highlighting" ]; then
   git clone https://github.com/zsh-users/zsh-syntax-highlighting "${ZSH_PLUGINS}/zsh-syntax-highlighting"
 else
-  echo "${ZSH_PLUGINS}/zsh-syntax-highlighting already exists, skipping..."
+  echo "${ZSH_PLUGINS}/zsh-syntax-highlighting already exists, skipping..." 1>&2
 fi
 
 if [ ! -e "${ZSH_PLUGINS}/zsh-z" ]; then
   git clone https://github.com/agkozak/zsh-z "${ZSH_PLUGINS}/zsh-z"
 else
-  echo "${ZSH_PLUGINS}/zsh-z already exists, skipping..."
+  echo "${ZSH_PLUGINS}/zsh-z already exists, skipping..." 1>&2
 fi
 
