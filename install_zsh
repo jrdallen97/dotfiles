@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 FORCE=0
 test "$1" == '-f' && FORCE=1
 
