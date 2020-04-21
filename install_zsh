@@ -37,3 +37,5 @@ else
   echo "${ZSH_PLUGINS}/zsh-z already exists, skipping..." 1>&2
 fi
 
+# Fix permissions on plugins'
+chmod -R g-w,o-w "$ZSH_PLUGINS"
