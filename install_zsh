@@ -16,6 +16,7 @@ function install_to_home () {
 # Install oh-my-zsh if not already installed
 if [ ! -e "${HOME}/.oh-my-zsh" ]; then
   RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  rm "${HOME}/.zshrc"
 else
   echo ".oh-my-zsh already exists, skipping..." 1>&2
 fi
