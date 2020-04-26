@@ -2,7 +2,7 @@
 FORCE=0
 test "$1" == '-f' && FORCE=1
 
-DOTFILES=$(dirname $(readlink -f $0))
+DOTFILES=$(cd "$(dirname "$0")" && pwd)
 CONFIG_DIR=${XDG_CONFIG_HOME:=$HOME/.config}
 
 function install_to_config () {
