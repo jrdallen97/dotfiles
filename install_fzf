@@ -1,0 +1,11 @@
+#!/bin/bash
+FORCE=0
+test "$1" == '-f' && FORCE=1
+
+if [[ $FORCE == 1 && -d "$HOME/.fzf" ]]; then
+  echo "$HOME/.fzf found, removing..."
+  rm -rf "$HOME/.fzf"
+fi
+
+git clone --depth 1 https://github.com/junegunn/fzf.git "$HOME/.fzf"
+$HOME/.fzf/install --all

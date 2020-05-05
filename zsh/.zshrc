@@ -99,3 +99,4 @@ function yt-play () {
   youtube-dl $1 -o - | mpv -
 }
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
