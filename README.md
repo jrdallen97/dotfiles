@@ -7,14 +7,14 @@ My config files for Linux. Installation should be as easy as cloning the repo an
 ### Ubuntu
 
 ```bash
-sudo apt install zsh neovim curl git mpv streamlink youtube-dl htop
+sudo apt install zsh neovim curl git mpv streamlink youtube-dl htop ripgrep
 ```
 
 ### Differences on Windows
 
 Install WSL using an Ubuntu base image, then install [WSLtty](https://github.com/mintty/wsltty) for a nicer terminal.
 
-For neovim, install it on both WSL and Windows itself (using chocolatey) to get it to use the included win32yank binary for clipboard support.
+Install neovim in both linux **and** in Windows (using chocolatey). This will make win32yank (included in the Windows install) available to neovim in WSL, enabling clipboard support.
 
 ### Other edge cases
 
