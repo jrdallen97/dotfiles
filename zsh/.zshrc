@@ -68,7 +68,13 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-z zsh-syntax-highlighting)
+plugins=(
+  git
+  zsh-z
+  zsh-syntax-highlighting
+)
+
+test -f "$HOME/.zshrc.local" && source "$HOME/.zshrc.local"
 
 source $ZSH/oh-my-zsh.sh
 
