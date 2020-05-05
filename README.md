@@ -7,7 +7,7 @@ My config files for Linux. Installation should be as easy as cloning the repo an
 ### Ubuntu
 
 ```bash
-sudo apt install zsh neovim
+sudo apt install zsh neovim curl git mpv streamlink youtube-dl htop
 ```
 
 ### Differences on Windows
