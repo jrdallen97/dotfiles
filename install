@@ -1,0 +1,10 @@
+#!/bin/bash
+FORCE=0
+test "$1" = '-f' && FORCE=1
+
+DOTFILES=$(cd "$(dirname "$0")" && pwd)
+ARGS=$([[ $FORCE == 1 ]] && echo '-f')
+
+"$DOTFILES/install_nvim" $ARGS
+"$DOTFILES/install_zsh" $ARGS
+"$DOTFILES/install_fzf" $ARGS
