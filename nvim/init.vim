@@ -31,6 +31,8 @@ set tabstop=8
 set softtabstop=2
 set shiftwidth=2
 set noexpandtab
+" Add space & eol to listchars
+set listchars+=space:·,eol:¬
 
 " ========== Colourscheme ==========
 set termguicolors
@@ -42,12 +44,14 @@ colorscheme gruvbox
 " Fix Y's weird default behaviour
 nnoremap Y y$
 " Run current file (using shebang)
-nmap <Leader>r :w<cr>:!%:p<cr>
+nmap <leader>r :w<cr>:!%:p<cr>
 " FZF bindings
-nmap <Leader>ff :Files<cr>
-nmap <Leader>fs :Rg<cr>
+nmap <leader>ff :Files<cr>
+nmap <leader>fs :Rg<cr>
 " Easily edit init.vim
-nmap <Leader>ev :tabe ~/.config/nvim/init.vim<cr>
+nmap <leader>ev :tabe ~/.config/nvim/init.vim<cr>
+" Easily toggle showing whitespace
+nmap <leader>l :set list!<cr>
 
 " ========== Misc ==========
 " Re-enable netrw_banner (disabled by vinegar)
