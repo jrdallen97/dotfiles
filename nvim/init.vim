@@ -13,7 +13,8 @@ Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
 
 " Colourschemes
-Plug 'crusoexia/vim-monokai'
+Plug 'morhetz/gruvbox'
+"Plug 'crusoexia/vim-monokai'
 "Plug 'patstockwell/vim-monokai-tasty'
 "Plug 'Reewr/vim-monokai-phoenix'
 
@@ -36,7 +37,9 @@ set noexpandtab
 
 " ========== Colourscheme ==========
 set termguicolors
-colorscheme monokai
+let g:gruvbox_italic=1
+let g:gruvbox_contrast_dark='hard'
+colorscheme gruvbox
 
 " ========== Custom keybinds ==========
 " Fix Y's weird default behaviour
