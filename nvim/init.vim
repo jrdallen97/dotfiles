@@ -12,11 +12,8 @@ Plug 'machakann/vim-highlightedyank'
 Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
 
-" Colourschemes
+" Colourscheme
 Plug 'morhetz/gruvbox'
-"Plug 'crusoexia/vim-monokai'
-"Plug 'patstockwell/vim-monokai-tasty'
-"Plug 'Reewr/vim-monokai-phoenix'
 
 call plug#end()
 " ========== End vim-plug section ==========
@@ -26,7 +23,7 @@ call plug#end()
 set scrolloff=3
 " Search as you type
 set incsearch
-" Ignore case in searches until you use an uppercase letter
+" Ignore case when searching, unless search term includes caps
 set ignorecase
 set smartcase
 " Tab settings (as-per :help tabstop)
@@ -57,6 +54,6 @@ nmap <Leader>ev :tabe ~/.config/nvim/init.vim<cr>
 " See https://github.com/neovim/neovim/issues/11405
 let g:netrw_banner=1
 " Auto-source init.vim when changed
-augroup Reload
+augroup AutoSource
   autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 augroup end
