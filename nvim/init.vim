@@ -39,15 +39,21 @@ set termguicolors
 colorscheme monokai
 
 " ========== Custom keybinds ==========
-" Fix weird default behaviour for Y
+" Fix Y's weird default behaviour
 nnoremap Y y$
 " Run current file (using shebang)
 nmap <Leader>r :w<cr>:!%:p<cr>
 " FZF bindings
 nmap <Leader>ff :Files<cr>
 nmap <Leader>fs :Rg<cr>
+" Easily edit init.vim
+nmap <Leader>ev :tabe ~/.config/nvim/init.vim<cr>
 
 " ========== Misc ==========
 " Re-enable netrw_banner (disabled by vinegar)
 " See https://github.com/neovim/neovim/issues/11405
 let g:netrw_banner=1
+" Auto-source init.vim when changed
+augroup Reload
+  autocmd! bufwritepost $MYVIMRC source $MYVIMRC
+augroup end
