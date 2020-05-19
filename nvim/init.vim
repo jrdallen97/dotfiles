@@ -32,7 +32,7 @@ set softtabstop=2
 set shiftwidth=2
 set noexpandtab
 " Add space & eol to listchars
-set listchars+=space:·,eol:¬
+set listchars+=tab:>-,space:·,eol:¬
 
 " ========== Colourscheme ==========
 set termguicolors
