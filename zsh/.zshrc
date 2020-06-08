@@ -100,6 +100,7 @@ export VISUAL='nvim'
 
 alias vim='nvim'
 alias v='nvim .'
+alias diary='nvim ~/notes/diary/$(date "+%Y-%m-%d").md'
 
 # Open the given YT video in mpv
 function yt-play () {
