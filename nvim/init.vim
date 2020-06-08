@@ -33,6 +33,9 @@ set shiftwidth=2
 set noexpandtab
 " Add space & eol to listchars
 set listchars+=tab:>-,space:·,eol:¬
+" Word wrap & only wrap between words
+set wrap
+set linebreak
 
 " ========== Colourscheme ==========
 set termguicolors
