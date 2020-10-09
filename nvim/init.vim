@@ -12,6 +12,9 @@ Plug 'machakann/vim-highlightedyank'
 Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
 
+" Syntax highlighting
+Plug 'ianks/vim-tsx'
+
 " Colourscheme
 Plug 'morhetz/gruvbox'
 
@@ -56,6 +59,8 @@ nmap <leader>fs :Rg<cr>
 nmap <leader>ev :tabe ~/.config/nvim/init.vim<cr>
 " Easily toggle showing whitespace
 nmap <leader>l :set list!<cr>
+" Hide highlighted search results
+nmap <leader>/ :noh<cr>
 
 " ========== Misc ==========
 " Re-enable netrw_banner (disabled by vinegar)
