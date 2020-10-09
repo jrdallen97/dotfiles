@@ -107,7 +107,7 @@ function yt-play () {
   youtube-dl $1 -o - | mpv -
 }
 
-# Remove mode switching delay.
+# Remove vim mode switching delay
 KEYTIMEOUT=5
 # Set cursor stuff
 MODE_CURSOR_VIINS="#00ff00 blinking bar"
