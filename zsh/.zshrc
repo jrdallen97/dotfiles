@@ -107,6 +107,7 @@ function yt-play () {
   youtube-dl $1 -o - | mpv -
 }
 
+alias :q='exit'
 # Remove vim mode switching delay
 KEYTIMEOUT=5
 # Set cursor stuff
