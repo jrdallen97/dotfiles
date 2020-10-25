@@ -14,6 +14,7 @@ Plug 'junegunn/fzf.vim'
 
 " Syntax highlighting
 Plug 'ianks/vim-tsx'
+Plug 'zah/nim.vim'
 
 " Colourscheme
 Plug 'morhetz/gruvbox'
