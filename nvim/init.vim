@@ -5,9 +5,22 @@ set mouse=a
 set background=dark
 
 " ========== Start vim-plug section ==========
-call plug#begin('~/.config/nvim/plugged')
+" Set up paths
+let autoload_path = '~/.config/nvim/autoload/'
+let plugged_path = '~/.config/nvim/plugged'
+
+" Auto-download vim-plug if not installed
+if empty(glob(autoload_path . 'plug.vim'))
+  execute 'silent !curl -fLo ' . autoload_path . 'plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" Start installing plugins
+call plug#begin(plugged_path)
 
 Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-surround'
 Plug 'machakann/vim-highlightedyank'
 Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
@@ -15,6 +28,9 @@ Plug 'junegunn/fzf.vim'
 " Syntax highlighting
 Plug 'ianks/vim-tsx'
 Plug 'zah/nim.vim'
+if has('macunix')
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+endif
 
 " Colourscheme
 Plug 'morhetz/gruvbox'
@@ -52,7 +68,8 @@ set cursorline
 " Fix Y's weird default behaviour
 nnoremap Y y$
 " Run current file (using shebang)
-nmap <leader>r :w<cr>:!%:p<cr>
+nmap <leader>rr :w<cr>:!%:p<cr>
+nmap <leader>rg :w<cr>:!go run %:p<cr>
 " FZF bindings
 nmap <leader>ff :Files<cr>
 nmap <leader>fs :Rg<cr>
