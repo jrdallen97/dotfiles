@@ -8,3 +8,4 @@ ARGS=$([[ $FORCE == 1 ]] && echo '-f')
 "$DOTFILES/install_nvim" $ARGS
 "$DOTFILES/install_zsh" $ARGS
 "$DOTFILES/install_fzf" $ARGS
+"$DOTFILES/install_tmux" $ARGS

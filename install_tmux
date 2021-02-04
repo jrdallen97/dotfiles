@@ -1,0 +1,19 @@
+#!/bin/bash
+FORCE=0
+test "$1" == '-f' && FORCE=1
+
+DOTFILES=$(cd "$(dirname "$0")" && pwd)
+CONFIG_DIR=$HOME
+
+function install_to_config () {
+  dotfile="${DOTFILES}/${1}"
+  target="${CONFIG_DIR}/${2}"
+
+  if [[ ! -e $target || $FORCE -eq 1 ]]; then
+    ln -sfnv $dotfile $target
+  else
+    echo "$target already exists, ignoring..."
+  fi
+}
+
+install_to_config tmux/.tmux.conf .tmux.conf
