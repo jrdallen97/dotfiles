@@ -9,31 +9,31 @@ set background=dark
 let autoload_path = '~/.config/nvim/autoload/'
 let plugged_path = '~/.config/nvim/plugged'
 
-" Auto-download vim-plug if not installed
-if empty(glob(autoload_path . 'plug.vim'))
-  execute 'silent !curl -fLo ' . autoload_path . 'plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
 " Start installing plugins
 call plug#begin(plugged_path)
 
+" Plugins
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-surround'
 Plug 'machakann/vim-highlightedyank'
 Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
 
-" Syntax highlighting
-Plug 'ianks/vim-tsx'
-Plug 'zah/nim.vim'
-if has('macunix')
-  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-endif
-
 " Colourscheme
 Plug 'morhetz/gruvbox'
+
+" Misc. languages
+Plug 'ianks/vim-tsx'
+if executable('nim')
+  Plug 'zah/nim.vim', {'for': 'nim'}
+endif
+
+" Go
+if executable('go')
+  Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoUpdateBinaries'}
+endif
+" disable vim-go's :GoDef binding (gd) - will be handled by coc.nvim instead
+let g:go_def_mapping_enabled = 0
 
 call plug#end()
 " ========== End vim-plug section ==========
@@ -53,7 +53,7 @@ set shiftwidth=2
 set noexpandtab
 " Add space & eol to listchars
 set listchars+=tab:>-,space:·,eol:¬
-" Word wrap & only wrap between words
+" Turn on line wrapping & only wrap between words
 set wrap
 set linebreak
 
