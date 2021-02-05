@@ -2,10 +2,19 @@
 FORCE=0
 test "$1" == '-f' && FORCE=1
 
-if [[ $FORCE == 1 && -d "$HOME/.fzf" ]]; then
-  echo "$HOME/.fzf found, removing..."
-  rm -rf "$HOME/.fzf"
+FZF_DIR="$HOME/.fzf"
+
+if [[ $FORCE == 1 && -e "$FZF_DIR" ]]; then
+  echo "$FZF_DIR found, removing..."
+  rm -rf "$FZF_DIR"
 fi
 
-git clone --depth 1 https://github.com/junegunn/fzf.git "$HOME/.fzf"
-$HOME/.fzf/install --all
+if [[ ! -e "$FZF_DIR" ]]; then
+  echo "$FZF_DIR not found, installing..."
+  git clone --depth 1 https://github.com/junegunn/fzf.git "$FZF_DIR"
+elif [[ -d "$FZF_DIR" ]]; then
+  echo "$FZF_DIR found, updating..."
+  (cd "$FZF_DIR" && git pull)
+fi
+
+$FZF_DIR/install --all
