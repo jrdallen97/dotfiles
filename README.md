@@ -2,6 +2,18 @@
 
 My config files for Linux. Installation should be as easy as cloning the repo and running one of the included install scripts, e.g. `./install_zsh`.
 
+## Notes
+
+### Nvim
+
+**coc.nvim**
+- Check status & recent logs with `:CocInfo`
+- Requires languages to be installed manually with `:CocInstall`. I use:
+  - `coc-go`
+- Requires node & npm to be installed, e.g.:
+  - `sudo apt install nodejs npm`
+  - `sudo pacman -S nodejs npm`
+
 ## Install packages
 
 ### Ubuntu
