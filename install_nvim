@@ -4,23 +4,34 @@ test "$1" == '-f' && FORCE=1
 
 DOTFILES=$(cd "$(dirname "$0")" && pwd)
 CONFIG_DIR=${XDG_CONFIG_HOME:=$HOME/.config}
+NVIM_DIR="$CONFIG_DIR/nvim"
 
-function install_to_config () {
-  dotfile="${DOTFILES}/${1}"
-  target="${CONFIG_DIR}/${2}"
+function link_file () {
+  dotfile="${1}"
+  target="${2}"
 
   if [[ ! -e $target || $FORCE -eq 1 ]]; then
-    ln -sfnv $dotfile $target
+    ln -sfnv "$dotfile" "$target"
   else
-    echo "$target already exists, ignoring..."
+    echo "$target already exists, skipping..."
   fi
 }
 
-mkdir -p "${XDG_CONFIG_HOME}/nvim"
+# Link main config file
+mkdir -p "$NVIM_DIR"
+link_file "$DOTFILES/nvim/init.vim" "$NVIM_DIR/init.vim"
 
-install_to_config nvim/init.vim nvim/init.vim
+# Link file-specific settings
+mkdir -p "$CONFIG_DIR/nvim/ftplugin"
+for f in $(cd "$DOTFILES/nvim/ftplugin" && find . -type f | sed 's|^\./||'); do
+  link_file "$DOTFILES/nvim/ftplugin/$f" "$NVIM_DIR/ftplugin/$f"
+done
 
 # Install vim-plug
-echo "Installing vim-plug..."
-curl -sfLo ~/.config/nvim/autoload/plug.vim --create-dirs \
+if [[ ! -e $target || $FORCE -eq 1 ]]; then
+  echo "Installing vim-plug..."
+  curl -sfLo ~/.config/nvim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+else
+  echo "vim-plug already installed, skipping..."
+fi

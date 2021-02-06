@@ -5,12 +5,8 @@ set mouse=a
 set background=dark
 
 " ========== Start vim-plug section ==========
-" Set up paths
-let autoload_path = '~/.config/nvim/autoload/'
-let plugged_path = '~/.config/nvim/plugged'
-
 " Start installing plugins
-call plug#begin(plugged_path)
+call plug#begin( '~/.config/nvim/plugged')
 
 " Plugins
 Plug 'tpope/vim-vinegar'
@@ -18,6 +14,7 @@ Plug 'tpope/vim-surround'
 Plug 'machakann/vim-highlightedyank'
 Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'ntpeters/vim-better-whitespace'
 
 " Colourscheme
 Plug 'morhetz/gruvbox'
@@ -66,6 +63,8 @@ let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark='hard'
 colorscheme gruvbox
 set cursorline
+" Set trailing whitespace colour (from vim-better-whitespace)
+hi ExtraWhitespace guibg=#990000 ctermbg=red
 
 " ========== Custom keybinds ==========
 " Fix Y's weird default behaviour
@@ -76,6 +75,7 @@ nmap <leader>rg :w<cr>:!go run %:p<cr>
 " FZF bindings
 nmap <leader>ff :Files<cr>
 nmap <leader>fs :Rg<cr>
+nmap <leader>fr :History<cr>
 " Easily edit init.vim
 nmap <leader>ev :tabe ~/.config/nvim/init.vim<cr>
 " Easily toggle showing whitespace
