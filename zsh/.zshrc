@@ -77,6 +77,7 @@ plugins=(
   zsh-syntax-highlighting
 )
 
+# Source machine-specific zsh config if available
 test -f "$HOME/.zshrc.local" && source "$HOME/.zshrc.local"
 
 source $ZSH/oh-my-zsh.sh
@@ -89,8 +90,13 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor
-export EDITOR='nvim'
-export VISUAL='nvim'
+if command -v nvim >/dev/null; then
+  export EDITOR='nvim'
+  export VISUAL='nvim'
+else
+  export EDITOR='vim'
+  export VISUAL='vim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -112,6 +118,7 @@ function yt-play () {
   youtube-dl $1 -o - | mpv -
 }
 
+# For when I forget I'm not in vim
 alias :q='exit'
 # Remove vim mode switching delay
 KEYTIMEOUT=5
