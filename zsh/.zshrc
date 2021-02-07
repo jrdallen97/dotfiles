@@ -113,10 +113,10 @@ alias vim='nvim'
 alias v='nvim .'
 alias diary='nvim ~/notes/diary/$(date "+%Y-%m-%d").md'
 
+mcd() { mkdir -p $1 && cd $1 }
+
 # Open the given YT video in mpv
-function yt-play () {
-  youtube-dl $1 -o - | mpv -
-}
+yt-play() { youtube-dl $1 -o - | mpv - }
 
 # For when I forget I'm not in vim
 alias :q='exit'
