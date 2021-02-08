@@ -130,4 +130,8 @@ MODE_CURSOR_SEARCH="#ff00ff steady underline"
 MODE_CURSOR_VISUAL="$MODE_CURSOR_VICMD steady bar"
 MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL #00ffff"
 
+# FZF
+if command -v fd >/dev/null; then
+  export FZF_DEFAULT_COMMAND='fd -HI'
+fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
