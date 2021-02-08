@@ -11,6 +11,7 @@ call plug#begin( '~/.config/nvim/plugged')
 " Plugins
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-surround'
+Plug 'airblade/vim-gitgutter'
 Plug 'machakann/vim-highlightedyank'
 Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
