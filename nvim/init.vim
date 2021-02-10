@@ -74,9 +74,10 @@ nnoremap Y y$
 nmap <leader>rr :w<cr>:!%:p<cr>
 nmap <leader>rg :w<cr>:!go run %:p<cr>
 " FZF bindings
-nmap <leader>ff :Files<cr>
-nmap <leader>fs :Rg<cr>
-nmap <leader>fr :History<cr>
+nmap <leader>ff :Files!<cr>
+nmap <leader>fg :GFiles!<cr>
+nmap <leader>fs :Rg!<cr>
+nmap <leader>fr :History!<cr>
 " Easily edit init.vim
 nmap <leader>ev :tabe ~/.config/nvim/init.vim<cr>
 " Easily toggle showing whitespace
@@ -99,7 +100,7 @@ set hidden
 " Some servers have issues with backup files, see #649.
 set nobackup nowritebackup
 " Give more space for displaying messages.
-"set cmdheight=2
+set cmdheight=2
 " Having longer updatetime leads to noticeable delays and poor user experience (default: 4000ms)
 set updatetime=300
 " Don't pass messages to |ins-completion-menu|.
