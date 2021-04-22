@@ -1,9 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env zsh
 FORCE=0
-test "$1" == '-f' && FORCE=1
+test "$1" = '-f' && FORCE=1
 
 DOTFILES=$(cd "$(dirname "$0")" && pwd)
-ZSH_PLUGINS="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins"
 
 function link_to_home () {
   dotfile="${DOTFILES}/${1}"
@@ -16,35 +15,9 @@ function link_to_home () {
   fi
 }
 
-# Install oh-my-zsh if not already installed
-if [[ ! -e "${HOME}/.oh-my-zsh" ]]; then
-  RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  rm "${HOME}/.zshrc"
-else
-  echo ".oh-my-zsh already exists, skipping..." 1>&2
-fi
-
 # Install dotfiles
 link_to_home zsh/.zshrc .zshrc
+link_to_home zsh/aliases.zsh aliases.zsh
 
-# Add oh-my-zsh plugins
-if [ ! -e "${ZSH_PLUGINS}/zsh-syntax-highlighting" ]; then
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting "${ZSH_PLUGINS}/zsh-syntax-highlighting"
-else
-  echo "${ZSH_PLUGINS}/zsh-syntax-highlighting already exists, skipping..." 1>&2
-fi
-
-if [ ! -e "${ZSH_PLUGINS}/zsh-z" ]; then
-  git clone https://github.com/agkozak/zsh-z "${ZSH_PLUGINS}/zsh-z"
-else
-  echo "${ZSH_PLUGINS}/zsh-z already exists, skipping..." 1>&2
-fi
-
-if [ ! -e "${ZSH_PLUGINS}/zsh-vim-mode" ]; then
-  git clone https://github.com/softmoth/zsh-vim-mode "${ZSH_PLUGINS}/zsh-vim-mode"
-else
-  echo "${ZSH_PLUGINS}/zsh-vim-mode already exists, skipping..." 1>&2
-fi
-
-# Fix permissions on plugins'
-chmod -R g-w,o-w "$ZSH_PLUGINS"
+read 'choice?Install sparx-specific config? [y/N] '
+[[ $choice =~ ^[Yy] ]] && link_to_home zsh/.zshrc.sparx .zshrc.sparx
