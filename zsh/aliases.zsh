@@ -45,7 +45,7 @@ alias gst='git status'
 alias gunignore='git update-index --no-assume-unchanged'
 
 # Silly helpers
-alias ..='cd ../..'
+alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
