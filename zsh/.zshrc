@@ -47,5 +47,11 @@ if command -v rg >/dev/null; then
 fi
 safesource "$HOME/.fzf.zsh"
 
-# Load zsh-syntax-highlighting (must be loaded last)
+safesource "$HOME/.zsh/zsh-z/zsh-z.plugin.zsh"
+
+safesource "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
+autoload -U compinit && compinit
+
 safesource "$HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
