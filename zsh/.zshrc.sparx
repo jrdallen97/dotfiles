@@ -68,13 +68,12 @@ nosparx() {
   kdev db ctl stop --force
 }
 
-safesource "$HOME/.iterm2_shell_integration.zsh"
+[[ -r "$HOME/.iterm2_shell_integration.zsh" ]] && source "$HOME/.iterm2_shell_integration.zsh"
 
 # The next line updates PATH for the Google Cloud SDK.
-safesource "$HOME/google-cloud-sdk/path.zsh.inc"
-
+[[ -r "$HOME/google-cloud-sdk/path.zsh.inc" ]] && source "$HOME/google-cloud-sdk/path.zsh.inc"
 # The next line enables shell command completion for gcloud.
-safesource "$HOME/google-cloud-sdk/completion.zsh.inc"
+[[ -r "$HOME/google-cloud-sdk/completion.zsh.inc" ]] && source "$HOME/google-cloud-sdk/completion.zsh.inc"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"  # This loads nvm

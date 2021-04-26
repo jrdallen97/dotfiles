@@ -34,33 +34,44 @@ else
   export VISUAL='vim'
 fi
 
-# So I don't have to type this crap every damn time
-safesource() { [[ -r "$1" ]] && source "$1" }
-
 # Load my aliases (and some functions)
-safesource "$HOME/.zsh_aliases"
-
+[[ -r "$HOME/.zsh_aliases" ]] && source "$HOME/.zsh_aliases"
 # Load optional configs
-safesource "$HOME/.zshrc.sparx"
+[[ -r "$HOME/.zshrc.sparx" ]] && source "$HOME/.zshrc.sparx"
 # Load local config (useful for storing secrets)
-safesource "$HOME/.zshrc.local"
+[[ -r "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
+
+# zplug plugin setup
+if [[ -r ~/.zplug/init.zsh ]]; then
+  source ~/.zplug/init.zsh
+
+  zplug "zsh-users/zsh-autosuggestions"
+  ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+  ZSH_AUTOSUGGEST_USE_ASYNC=true
+
+  zplug "agkozak/zsh-z"
+
+  # zsh-syntax-highlighting must be loaded after executing compinit command and sourcing other plugins
+  # a defer tag >= 2 will run after compinit command
+  zplug "zsh-users/zsh-syntax-highlighting", defer:2
+
+  # Install plugins if there are plugins that have not been installed
+  if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+      echo; zplug install
+    fi
+  fi
+
+  zplug load
+fi
 
 # FZF
 if command -v rg >/dev/null; then
   # Use rg if available as it's generally faster
   export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden'
 fi
-safesource "$HOME/.fzf.zsh"
-
-safesource "$HOME/.zsh/zsh-z/zsh-z.plugin.zsh"
-
-safesource "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
-ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-ZSH_AUTOSUGGEST_USE_ASYNC=true
-
-autoload -U compinit && compinit
-
-safesource "$HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+[[ -r ~/.fzf.zsh ]] && source ~/.fzf.zsh
 
 if command -v starship >/dev/null; then
   eval "$(starship init zsh)"

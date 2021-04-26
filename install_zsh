@@ -1,26 +1,15 @@
 #!/usr/bin/env zsh
 FORCE=0
-test "$1" = '-f' && FORCE=1
+[[ "$1" = '-f' ]] && FORCE=1
 DOTFILES=$(cd "$(dirname "$0")" && pwd)
 source "$DOTFILES/helpers.zsh"
 
 # Install dotfiles
 link_to_home zsh/.zshrc .zshrc
 link_to_home zsh/.zsh_aliases .zsh_aliases
-link_to_home zsh/.p10k.zsh .p10k.zsh
-mkdir -p ~/.zsh
 
-if [[ ! -e ~/.zsh/zsh-syntax-highlighting ]]; then
-  git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
-fi
-
-if [[ ! -e ~/.zsh/zsh-autosuggestions ]]; then
-  git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
-fi
-
-if [[ ! -e ~/.zsh/zsh-z ]]; then
-  git clone https://github.com/agkozak/zsh-z ~/.zsh/zsh-z
-fi
+# Install zplug plugin manager
+pull_repo https://github.com/zplug/zplug "$HOME/.zplug"
 
 # Install optional dotfiles
 read 'choice?Install sparx config? [y/N] '

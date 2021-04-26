@@ -1,20 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env zsh
 FORCE=0
-test "$1" == '-f' && FORCE=1
+[[ "$1" = '-f' ]] && FORCE=1
+DOTFILES=$(cd "$(dirname "$0")" && pwd)
+source "$DOTFILES/helpers.zsh"
 
 FZF_DIR="$HOME/.fzf"
-
-if [[ $FORCE == 1 && -e "$FZF_DIR" ]]; then
-  echo "$FZF_DIR found, removing..."
-  rm -rf "$FZF_DIR"
-fi
-
-if [[ ! -e "$FZF_DIR" ]]; then
-  echo "$FZF_DIR not found, installing..."
-  git clone --depth 1 https://github.com/junegunn/fzf.git "$FZF_DIR"
-elif [[ -d "$FZF_DIR" ]]; then
-  echo "$FZF_DIR found, updating..."
-  (cd "$FZF_DIR" && git pull)
-fi
-
+pull_repo https://github.com/junegunn/fzf.git "$FZF_DIR"
 $FZF_DIR/install --all
