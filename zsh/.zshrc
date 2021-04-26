@@ -5,16 +5,6 @@ export PATH=$PATH:$HOME/go/bin
 # Set a basic prompt in case the fancy prompt doesn't work
 PROMPT='%F{red}%n%f %F{yellow}%~%f [%?] $ '
 
-# So I don't have to type this crap every damn time
-safesource() { [[ -r "$1" ]] && source "$1" }
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-safesource "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-
-# Load powerlevel10k. To customize prompt, run `p10k configure` or edit ~/.p10k.zsh
-safesource ~/.zsh/powerlevel10k/powerlevel10k.zsh-theme
-safesource ~/.p10k.zsh
-
 # Turn on zsh history file
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
@@ -31,6 +21,9 @@ else
   export EDITOR='vim'
   export VISUAL='vim'
 fi
+
+# So I don't have to type this crap every damn time
+safesource() { [[ -r "$1" ]] && source "$1" }
 
 # Load my aliases (and some functions)
 safesource "$HOME/.zsh_aliases"
@@ -55,3 +48,9 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 autoload -U compinit && compinit
 
 safesource "$HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+if command -v starship >/dev/null; then
+  eval "$(starship init zsh)"
+else
+  echo "starship not found, falling back to simple prompt"
+fi
