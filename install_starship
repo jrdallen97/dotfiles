@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+FORCE=0
+test "$1" = '-f' && FORCE=1
+DOTFILES=$(cd "$(dirname "$0")" && pwd)
+source "$DOTFILES/helpers.zsh"
+
+mkdir -p "$CONFIG_DIR"
+link_to_config starship/starship.toml starship.toml
+sh -c "$(curl -fsSL https://starship.rs/install.sh)"

@@ -1,0 +1,29 @@
+format = """
+$directory\
+$git_branch\
+$git_status\
+$kubernetes\
+$cmd_duration\
+$line_break\
+$character
+"""
+
+add_newline = false
+
+[directory]
+truncate_to_repo = true
+
+[kubernetes]
+format = '[$context:$namespace]($style) '
+disabled = true
+style = "purple"
+symbol = ""
+
+[git_branch]
+style = "bold yellow"
+format = "[$branch]($style)"
+
+[git_status]
+format = "[$all_status$ahead_behind]($style) "
+modified = "*"
+style = "bright-purple"
