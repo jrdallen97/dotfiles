@@ -1,0 +1,81 @@
+# Mysql
+export PATH="/usr/local/mysql/bin:$PATH"
+# Homebrew
+export PATH="/usr/local/sbin:$PATH"
+# Istio
+export PATH="$PATH:$HOME/.istioctl/bin"
+# Old path stuff
+#export PATH=$HOME/.composer/vendor/bin:$PATH
+#export PATH=$HOME/Library/Python/3.7/bin:$PATH
+#export PATH=`yarn global bin`:$PATH
+
+export ISTIO_VERSION='1.8.1'
+
+# Sparx
+export GOPATH="$HOME/go"
+export PATH="$PATH:$GOPATH/bin"
+export CLOUDPATH="$GOPATH/src/github.com/supersparks/CloudExperiments"
+alias kdev="$CLOUDPATH/kdev.sh"
+alias barx="$CLOUDPATH/barx.sh"
+genproto() {(cd "$CLOUDPATH/jspackages/grpc" && ./genproto.sh)}
+# Sparx downloads files from remote cache so you don't have to build them locally.
+# It often fails to even reach the remote cache, and has a 90s timeout each time it tries.
+# With bad internet it's faster just to build them yourself everytime.
+export BARX_NO_REMOTE_CACHE=1
+# Fix kdev docker context
+export KDEV_KUBE_CONTEXT="docker-desktop"
+
+# HM
+alias pa='php artisan'
+alias p='./vendor/bin/phpunit --exclude-group wonde-integration'
+alias pg='./vendor/bin/phpunit --group'
+alias pf='./vendor/bin/phpunit --filter'
+
+# E2Es
+alias duskf='php artisan dusk --filter'
+headless() { sed -i '' "s/  \/\/ '--headless'/  '--headless'/" tests/DuskTestCase.php }
+headfull() { sed -i '' "s/  '--headless'/  \/\/ '--headless'/" tests/DuskTestCase.php }
+
+# Other
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+alias activate='source ./venv/bin/activate'
+alias diff='colordiff'
+
+hegarty() {
+  valet start
+  brew services start redis
+  sudo launchctl load -F /Library/LaunchDaemons/com.oracle.oss.mysql.mysqld.plist
+  #nvm alias default 11.10.1 && nvm use default
+  nvm alias default 14 && nvm use default
+}
+nohegarty() {
+  valet stop
+  brew services stop redis
+  sudo launchctl unload -F /Library/LaunchDaemons/com.oracle.oss.mysql.mysqld.plist
+}
+sparx() {
+  open /Applications/Docker.app
+  kdev supervisor start
+  kdev supervisor ctl start all
+  mkdir -p /usr/local/etc/postgresql/9.6/sparx-dev/conf.d
+  kdev db ctl start
+  nvm alias default 12.13.0 && nvm use default
+}
+nosparx() {
+  osascript -e 'quit app "Docker"'
+  kdev supervisor ctl stop all
+  kdev supervisor stop
+  kdev db ctl stop --force
+}
+
+safesource "$HOME/.iterm2_shell_integration.zsh"
+
+# The next line updates PATH for the Google Cloud SDK.
+safesource "$HOME/google-cloud-sdk/path.zsh.inc"
+
+# The next line enables shell command completion for gcloud.
+safesource "$HOME/google-cloud-sdk/completion.zsh.inc"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
