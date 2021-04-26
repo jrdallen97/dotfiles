@@ -56,6 +56,7 @@ safesource "$HOME/.zsh/zsh-z/zsh-z.plugin.zsh"
 
 safesource "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+ZSH_AUTOSUGGEST_USE_ASYNC=true
 
 autoload -U compinit && compinit
 
