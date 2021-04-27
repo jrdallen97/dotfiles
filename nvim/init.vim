@@ -72,6 +72,7 @@ hi ExtraWhitespace guibg=#990000 ctermbg=red
 nnoremap Y y$
 " Run current file (using shebang)
 nmap <leader>rr :w<cr>:!%:p<cr>
+nmap <leader>rt :w<cr>:!time %:p<cr>
 nmap <leader>rg :w<cr>:!go run %:p<cr>
 " FZF bindings
 nmap <leader>ff :Files!<cr>
