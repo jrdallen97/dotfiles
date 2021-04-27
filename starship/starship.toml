@@ -21,9 +21,10 @@ symbol = ""
 
 [git_branch]
 style = "bold yellow"
-format = "[$branch]($style)"
+format = "[$branch]($style) "
 
 [git_status]
+disabled = true
 format = "[$all_status$ahead_behind]($style) "
 modified = "*"
 style = "bright-purple"
