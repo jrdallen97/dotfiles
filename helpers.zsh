@@ -30,7 +30,7 @@ pull_repo() {
 
   if [[ ! -e "$DIR" ]]; then
     echo "$DIR not found, installing..."
-    git clone --depth 1 https://github.com/junegunn/fzf.git "$DIR"
+    git clone --depth 1 "$REPO" "$DIR"
   elif [[ -d "$DIR" ]]; then
     echo "$DIR found, updating..."
     (cd "$DIR" && git pull)
