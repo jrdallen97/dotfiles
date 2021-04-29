@@ -4,6 +4,7 @@ $git_branch\
 $git_status\
 $kubernetes\
 $cmd_duration\
+$status\
 $line_break\
 $character
 """
@@ -28,3 +29,7 @@ disabled = true
 format = "[$all_status$ahead_behind]($style) "
 modified = "*"
 style = "bright-purple"
+
+[status]
+format = "exit [$status]($style) "
+disabled = false
