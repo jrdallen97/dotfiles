@@ -33,3 +33,6 @@ style = "bright-purple"
 [status]
 format = "exit [$status]($style) "
 disabled = false
+
+[character]
+format = "[❯](bold green) "
