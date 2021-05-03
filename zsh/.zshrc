@@ -2,18 +2,6 @@
 export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$HOME/go/bin
 
-function set-prompt() {
-  local dir="%B%F{51}%~%f%b "
-  local branch="%B%F{226}$(git rev-parse --abbrev-ref HEAD 2>/dev/null)%f%b "
-  local exitcode="%(?..exit %B%F{160}%?%f%b )"
-  local newline=$'\n'
-  local character='%F{46}%(!.#.❯)%f '
-
-  PROMPT="$dir$branch$exitcode$newline$character"
-}
-autoload -Uz add-zsh-hook
-add-zsh-hook precmd set-prompt
-
 # Turn on zsh history file
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
@@ -95,3 +83,41 @@ if command -v rg >/dev/null; then
   export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden'
 fi
 [[ -r ~/.fzf.zsh ]] && source ~/.fzf.zsh
+
+# Will be run before every prompt draw
+prompt_precmd() {
+  PROMPT_CMD_STATUS=$? # Save exit code as it'll be wiped by the logic below
+
+  if (( ${+PROMPT_CMD_START} )); then
+    ((PROMPT_CMD_DURATION = $(date +%s) - PROMPT_CMD_START))
+    unset PROMPT_CMD_START
+  fi
+}
+prompt_preexec() {
+  PROMPT_CMD_START=$(date +%s)
+}
+# Create the precmd/preexec arrays if not already set (required for hook-check to work)
+(( ! ${+precmd_functions} )) && precmd_functions=()
+(( ! ${+preexec_functions} )) && preexec_functions=()
+# Hook prompt precmd/preexec functions if not already hooked
+[[ -z ${precmd_functions[(re)prompt_precmd]} ]] && precmd_functions+=(prompt_precmd)
+[[ -z ${preexec_function[(re)prompt_preexec]} ]] && preexec_functions+=(prompt_preexec)
+
+function set-prompt() {
+  local dir="%B%F{51}%~%f%b "
+  local branch="%B%F{226}$(git rev-parse --abbrev-ref HEAD 2>/dev/null)%f%b "
+  #local exitcode
+  if [[ $PROMPT_CMD_STATUS -gt 0 ]]; then
+    local exitcode="%(?..exit %B%F{160}$PROMPT_CMD_STATUS%f%b )"
+  fi
+  local newline=$'\n'
+  local character='%F{46}%(!.#.❯)%f '
+  #local duration
+  if [[ $PROMPT_CMD_DURATION -ge 2 ]]; then
+    local duration="took %B%F{226}${PROMPT_CMD_DURATION}s%f%b "
+  fi
+
+  PROMPT="$dir$branch$exitcode$duration$newline$character"
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd set-prompt
