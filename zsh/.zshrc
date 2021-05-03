@@ -2,12 +2,17 @@
 export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$HOME/go/bin
 
-# Set a basic prompt in case the fancy prompt doesn't work
-if command -v starship >/dev/null; then
-  eval "$(starship init zsh)"
-else
-  PROMPT='%F{red}%n%f %F{yellow}%~%f [%?] $ '
-fi
+function set-prompt() {
+  local dir="%B%F{51}%~%f%b "
+  local branch="%B%F{226}$(git rev-parse --abbrev-ref HEAD 2>/dev/null)%f%b "
+  local exitcode="%(?..exit %B%F{160}%?%f%b )"
+  local newline=$'\n'
+  local character='%F{46}%(!.#.❯)%f '
+
+  PROMPT="$dir$branch$exitcode$newline$character"
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd set-prompt
 
 # Turn on zsh history file
 HISTFILE=~/.zsh_history
