@@ -105,17 +105,21 @@ prompt_preexec() {
 
 function set-prompt() {
   local dir="%B%F{51}%~%f%b "
-  local branch="%B%F{226}$(git rev-parse --abbrev-ref HEAD 2>/dev/null)%f%b "
-  #local exitcode
+  local branch
+  local PROMPT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+  if [[ $PROMPT_BRANCH != "" ]]; then
+    branch="%B%F{226}$PROMPT_BRANCH%f%b "
+  fi
+  local exitcode
   if [[ $PROMPT_CMD_STATUS -gt 0 ]]; then
-    local exitcode="%(?..exit %B%F{160}$PROMPT_CMD_STATUS%f%b )"
+    exitcode="%(?..exit %B%F{160}$PROMPT_CMD_STATUS%f%b )"
+  fi
+  local duration
+  if [[ $PROMPT_CMD_DURATION -ge 2 ]]; then
+    duration="took %B%F{226}${PROMPT_CMD_DURATION}s%f%b "
   fi
   local newline=$'\n'
   local character='%F{46}%(!.#.❯)%f '
-  #local duration
-  if [[ $PROMPT_CMD_DURATION -ge 2 ]]; then
-    local duration="took %B%F{226}${PROMPT_CMD_DURATION}s%f%b "
-  fi
 
   PROMPT="$dir$branch$exitcode$duration$newline$character"
 }
