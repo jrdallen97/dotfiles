@@ -86,16 +86,14 @@ fi
 
 # Will be run before every prompt draw
 prompt_precmd() {
-  PROMPT_CMD_STATUS=$? # Save exit code as it'll be wiped by the logic below
+  PROMPT_CMD_STATUS=$? # Save exit code as it may be wiped by the logic below
 
   if (( ${+PROMPT_CMD_START} )); then
     ((PROMPT_CMD_DURATION = $(date +%s) - PROMPT_CMD_START))
     unset PROMPT_CMD_START
   fi
 }
-prompt_preexec() {
-  PROMPT_CMD_START=$(date +%s)
-}
+prompt_preexec() { PROMPT_CMD_START=$(date +%s); }
 # Create the precmd/preexec arrays if not already set (required for hook-check to work)
 (( ! ${+precmd_functions} )) && precmd_functions=()
 (( ! ${+preexec_functions} )) && preexec_functions=()
@@ -105,19 +103,30 @@ prompt_preexec() {
 
 function set-prompt() {
   local dir="%B%F{51}%~%f%b "
+
+  # TODO: consider changing this to use vcs_info?
   local branch
   local PROMPT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
   if [[ $PROMPT_BRANCH != "" ]]; then
     branch="%B%F{226}$PROMPT_BRANCH%f%b "
   fi
+
   local exitcode
   if [[ $PROMPT_CMD_STATUS -gt 0 ]]; then
     exitcode="%(?..exit %B%F{160}$PROMPT_CMD_STATUS%f%b )"
   fi
+
   local duration
   if [[ $PROMPT_CMD_DURATION -ge 2 ]]; then
-    duration="took %B%F{226}${PROMPT_CMD_DURATION}s%f%b "
+    # Work out seconds first
+    local formatted="$((PROMPT_CMD_DURATION%60))s"
+    # Then add the minutes if there are any
+    local m=$((PROMPT_CMD_DURATION/60))
+    [[ $m > 0 ]] && formatted="${m}m $formatted"
+    # Finally, format it nicely
+    duration="took %B%F{226}${formatted}%f%b "
   fi
+
   local newline=$'\n'
   local character='%F{46}%(!.#.❯)%f '
 
