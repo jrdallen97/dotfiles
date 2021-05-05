@@ -102,7 +102,13 @@ prompt_preexec() { PROMPT_CMD_START=$(date +%s); }
 [[ -z ${preexec_function[(re)prompt_preexec]} ]] && preexec_functions+=(prompt_preexec)
 
 function set-prompt() {
-  local dir="%B%F{51}%~%f%b "
+  local dir=$PWD # Get current dir
+  local PROMPT_GIT_DIR=$(git rev-parse --show-toplevel 2>/dev/null) # Get git repo root
+  if [[ $PROMPT_GIT_DIR != '' ]]; then
+    PROMPT_GIT_DIR="$(dirname $PROMPT_GIT_DIR)/" # Get everything before the git repo root...
+    dir=${dir#$PROMPT_GIT_DIR} # ... and trim it off the current dir
+  fi
+  dir="%B%F{51}$(print -rD $dir)%f%b " # print -D converts home dir -> ~
 
   # TODO: consider changing this to use vcs_info?
   local branch
