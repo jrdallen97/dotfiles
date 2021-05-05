@@ -130,10 +130,16 @@ function set-prompt() {
     duration="took %B%F{226}${formatted}%f%b "
   fi
 
+  local jobstring
+  local jobcount=$#jobstates
+  if [[ $jobcount -gt 0 ]]; then
+    jobstring="[%B%F{135}$jobcount%f%b] "
+  fi
+
   local newline=$'\n'
   local character='%F{46}%(!.#.❯)%f '
 
-  PROMPT="$dir$branch$exitcode$duration$newline$character"
+  PROMPT="$dir$branch$exitcode$duration$jobstring$newline$character"
 }
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd set-prompt
