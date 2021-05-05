@@ -123,6 +123,9 @@ function set-prompt() {
     # Then add the minutes if there are any
     local m=$((PROMPT_CMD_DURATION/60))
     [[ $m > 0 ]] && formatted="${m}m $formatted"
+    # Then add the hours if there are any
+    local h=$((PROMPT_CMD_DURATION/60/60))
+    [[ $h > 0 ]] && formatted="${h}h $formatted"
     # Finally, format it nicely
     duration="took %B%F{226}${formatted}%f%b "
   fi
