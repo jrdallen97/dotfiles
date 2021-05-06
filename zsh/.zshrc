@@ -88,6 +88,8 @@ fi
 prompt_precmd() {
   PROMPT_CMD_STATUS=$? # Save exit code as it may be wiped by the logic below
 
+  echo -ne "\033];$(basename $PWD)\007" # Set the tab title to be the current dir
+
   if (( ${+PROMPT_CMD_START} )); then
     ((PROMPT_CMD_DURATION = $(date +%s) - PROMPT_CMD_START))
     unset PROMPT_CMD_START
@@ -97,7 +99,7 @@ prompt_preexec() { PROMPT_CMD_START=$(date +%s); }
 # Create the precmd/preexec arrays if not already set (required for hook-check to work)
 (( ! ${+precmd_functions} )) && precmd_functions=()
 (( ! ${+preexec_functions} )) && preexec_functions=()
-# Hook prompt precmd/preexec functions if not already hooked
+# Hook precmd/preexec functions if not already hooked
 [[ -z ${precmd_functions[(re)prompt_precmd]} ]] && precmd_functions+=(prompt_precmd)
 [[ -z ${preexec_function[(re)prompt_preexec]} ]] && preexec_functions+=(prompt_preexec)
 
