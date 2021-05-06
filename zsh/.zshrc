@@ -84,6 +84,12 @@ if command -v rg >/dev/null; then
 fi
 [[ -r ~/.fzf.zsh ]] && source ~/.fzf.zsh
 
+
+
+##############################
+# Prompt configuration stuff #
+##############################
+
 # Will be run before every prompt draw
 prompt_precmd() {
   PROMPT_CMD_STATUS=$? # Save exit code as it may be wiped by the logic below
