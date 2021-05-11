@@ -11,6 +11,18 @@ alias lsa='ls -lah'
 alias md='mkdir -p'
 mcd() { mkdir -p $1 && cd $1; }
 
+# Simple colour tester (useful when tweaking prompt colours)
+prompt_colours() {
+  local on='%K'; local off='%k'; local text='   '
+  if [[ $1 == '-f' ]]; then
+    on='%F'; off='%f'; text='asd '
+  fi
+  for i in {000..255}; do
+    print -nP "$i$on{$i}$text$off"
+    (( (i+1)%16==0 )) && print
+  done
+}
+
 # Git
 git_current_branch() {
   git rev-parse --abbrev-ref HEAD
