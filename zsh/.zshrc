@@ -135,7 +135,7 @@ function set-prompt() {
     # Work out seconds first
     local formatted="$((PROMPT_CMD_DURATION%60))s"
     # Then add the minutes if there are any
-    local m=$((PROMPT_CMD_DURATION/60))
+    local m=$((PROMPT_CMD_DURATION/60%60))
     [[ $m > 0 ]] && formatted="${m}m $formatted"
     # Then add the hours if there are any
     local h=$((PROMPT_CMD_DURATION/60/60))
