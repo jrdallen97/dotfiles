@@ -33,7 +33,7 @@ if [[ -r ~/.zplug/init.zsh ]]; then
 
   zplug "agkozak/zsh-z"
   zplug "zsh-users/zsh-autosuggestions"
-  ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+  ZSH_AUTOSUGGEST_STRATEGY=(completion)
   ZSH_AUTOSUGGEST_USE_ASYNC=true
 
   zplug "softmoth/zsh-vim-mode"
