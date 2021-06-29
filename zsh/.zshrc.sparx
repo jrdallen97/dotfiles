@@ -25,6 +25,11 @@ export BARX_NO_REMOTE_CACHE=1
 # Fix kdev docker context
 export KDEV_KUBE_CONTEXT="docker-desktop"
 
+# Fix horrible BSD rubbish
+alias cut='gcut'
+alias awk='gawk'
+alias sed='gsed'
+
 # HM
 alias pa='php artisan'
 alias p='./vendor/bin/phpunit --exclude-group wonde-integration'

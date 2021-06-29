@@ -30,30 +30,47 @@ git_current_branch() {
 git_default_branch() {
   git symbolic-ref refs/remotes/origin/HEAD | sed 's|^refs/remotes/origin/||'
 }
+# git add
 alias ga='git add'
 alias gaa='git add --all'
 alias gap='git add --patch'
+# git branch
 alias gb='git branch'
 alias gbD='git branch -D'
 alias gbd='git branch -d'
+# git commit
 alias gc='git commit -v'
 alias gca='git commit -v -a'
+alias gcm='git commit -m'
+# git checkout
 alias gcb='git checkout -b'
 alias gcd='git checkout $(git_default_branch)'
-alias gcm='git commit -m'
 alias gco='git checkout'
+# git switch
+alias gsw='git switch'
+alias gswd='git switch $(git_default_branch)'
+# git diff
 alias gd='git diff'
 alias gdca='git diff --cached'
+# git pull
 alias gf='git fetch'
-alias gignore='git update-index --assume-unchanged'
 alias gl='git pull'
+alias glforce='git fetch && git reset --hard origin/$(git_current_branch)'
+# git log
 alias glg='git log --stat'
 alias glgo='git log --oneline --decorate'
+# git merge
 alias gm='git merge'
-alias gm='git merge'
+# git push
 alias gp='git push'
+alias gpforce='git push --force'
 alias gpsup='git push -u origin $(git_current_branch)'
-alias gst='git status'
+# git status
+alias gs='git status'
+# git stash
+alias gst='git stash'
+# git update-index
+alias gignore='git update-index --assume-unchanged'
 alias gunignore='git update-index --no-assume-unchanged'
 
 # Silly helpers
