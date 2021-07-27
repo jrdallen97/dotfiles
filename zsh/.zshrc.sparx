@@ -25,6 +25,9 @@ export BARX_NO_REMOTE_CACHE=1
 # Fix kdev docker context
 export KDEV_KUBE_CONTEXT="docker-desktop"
 
+# I'm gonna type yarn a lot by accident
+alias yarn='echo "Use pnpm!"'
+
 # Fix horrible BSD rubbish
 alias cut='gcut'
 alias awk='gawk'
@@ -58,20 +61,20 @@ nohegarty() {
   brew services stop redis
   sudo launchctl unload -F /Library/LaunchDaemons/com.oracle.oss.mysql.mysqld.plist
 }
-sparx() {
-  open /Applications/Docker.app
-  kdev supervisor start
-  kdev supervisor ctl start all
-  mkdir -p /usr/local/etc/postgresql/9.6/sparx-dev/conf.d
-  kdev db ctl start
-  nvm alias default 12.13.0 && nvm use default
-}
-nosparx() {
-  osascript -e 'quit app "Docker"'
-  kdev supervisor ctl stop all
-  kdev supervisor stop
-  kdev db ctl stop --force
-}
+#sparx() {
+#  open /Applications/Docker.app
+#  kdev supervisor start
+#  kdev supervisor ctl start all
+#  mkdir -p /usr/local/etc/postgresql/9.6/sparx-dev/conf.d
+#  kdev db ctl start
+#  nvm alias default 12.17.0 && nvm use default
+#}
+#nosparx() {
+#  osascript -e 'quit app "Docker"'
+#  kdev supervisor ctl stop all
+#  kdev supervisor stop
+#  kdev db ctl stop --force
+#}
 
 [[ -r "$HOME/.iterm2_shell_integration.zsh" ]] && source "$HOME/.iterm2_shell_integration.zsh"
 
