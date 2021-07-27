@@ -22,10 +22,7 @@ mkdir -p "$NVIM_DIR"
 link_file "$DOTFILES/nvim/init.vim" "$NVIM_DIR/init.vim"
 
 # Link file-specific settings
-mkdir -p "$CONFIG_DIR/nvim/ftplugin"
-for f in $(cd "$DOTFILES/nvim/ftplugin" && find . -type f | sed 's|^\./||'); do
-  link_file "$DOTFILES/nvim/ftplugin/$f" "$NVIM_DIR/ftplugin/$f"
-done
+link_file "$DOTFILES/nvim/ftplugin" "$NVIM_DIR/ftplugin"
 
 # Install vim-plug
 if [[ ! -e $target || $FORCE -eq 1 ]]; then
