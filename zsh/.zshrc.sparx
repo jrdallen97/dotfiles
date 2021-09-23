@@ -12,15 +12,9 @@ export PATH="$PATH:$HOME/.istioctl/bin"
 export ISTIO_VERSION='1.8.1'
 
 # Sparx
-export GOPATH="$HOME/go"
-export PATH="$PATH:$GOPATH/bin"
-export CLOUDPATH="$GOPATH/src/github.com/supersparks/CloudExperiments"
-# Sparx downloads files from remote cache so you don't have to build them locally.
-# It often fails to even reach the remote cache, and has a 90s timeout each time it tries.
-# With bad internet it's faster just to build them yourself everytime.
-export BARX_NO_REMOTE_CACHE=1
-# Fix kdev docker context
-export KDEV_KUBE_CONTEXT="docker-desktop"
+export GOPATH="$HOME/go" # Used by a number of our scripts
+export PATH="$PATH:$GOPATH/bin" # Add go bin to path
+export CLOUDPATH="$HOME/code/CloudExperiments" # Save CloudExperiments path - useful for commands/aliases
 
 # Sparx commands
 alias kdev="$CLOUDPATH/kdev.sh"
@@ -37,6 +31,13 @@ alias yarn='echo "Use pnpm!"'
 alias cut='gcut'
 alias awk='gawk'
 alias sed='gsed'
+
+# Sparx downloads files from remote cache so you don't have to build them locally.
+# It often fails to even reach the remote cache, and has a 90s timeout each time it tries.
+# With bad internet it's faster just to build them yourself everytime.
+export BARX_NO_REMOTE_CACHE=1
+# Fix kdev docker context
+export KDEV_KUBE_CONTEXT="docker-desktop"
 
 # HM
 #alias pa='php artisan'
