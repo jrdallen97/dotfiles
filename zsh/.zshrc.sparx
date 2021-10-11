@@ -19,9 +19,12 @@ export CLOUDPATH="$HOME/code/CloudExperiments" # Save CloudExperiments path - us
 # Sparx commands
 alias kdev="$CLOUDPATH/kdev.sh"
 alias barx="$CLOUDPATH/barx.sh"
-genproto() {(cd "$CLOUDPATH/jspackages/grpc" && ./genproto.sh)}
-tp2() {(cd "$CLOUDPATH/teacherportal/tpclient2" && pnpm start-test2)}
 alias pf="orca pf"
+genproto() {(cd "$CLOUDPATH/jspackages/grpc" && ./genproto.sh)}
+
+# Client helpers
+tp2() {(cd "$CLOUDPATH/teacherportal/tpclient2" && pnpm start-test2)}
+adminportal() {(cd "$CLOUDPATH/schools/admin-portal" && pnpm dev)}
 alias adminportal-pf="orca pf clear && orca pf apply $CLOUDPATH/schools/admin-portal/orca.ports"
 
 # I'm gonna type yarn a lot by accident
