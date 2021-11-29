@@ -19,8 +19,10 @@ export CLOUDPATH="$HOME/code/CloudExperiments" # Save CloudExperiments path - us
 # Sparx commands
 alias kdev="$CLOUDPATH/kdev.sh"
 alias barx="$CLOUDPATH/barx.sh"
+alias gazelle="$CLOUDPATH/barx.sh gazelle"
 alias pf="orca pf"
 genproto() {(cd "$CLOUDPATH/jspackages/grpc" && ./genproto.sh)}
+changemonkey() {cd "$CLOUDPATH" && python3 tools/release/change_monkey.py "$@"}
 
 # Client helpers
 tp2() {(cd "$CLOUDPATH/teacherportal/tpclient2" && pnpm start-test2)}
