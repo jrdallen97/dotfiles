@@ -23,6 +23,18 @@ prompt_colours() {
   done
 }
 
+cpustress () {
+  [[ ! -z "$1" ]] && local cores=$1 || local cores=$(sysctl -n hw.ncpu)
+
+  local core
+  for core in {1..$cores}; do
+      dd if='/dev/random' of='/dev/null' &
+  done
+
+  echo "Stressing ${cores} core(s)\nPress enter to stop stressing"
+  read; killall dd; echo 'Done'
+}
+
 # Git
 git_current_branch() {
   git rev-parse --abbrev-ref HEAD
