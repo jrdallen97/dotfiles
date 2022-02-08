@@ -4,7 +4,7 @@ export PATH=$PATH:$HOME/go/bin
 
 # Turn on zsh history file
 HISTFILE=~/.zsh_history
-HISTSIZE=10000
+HISTSIZE=100000
 SAVEHIST=$HISTSIZE
 setopt EXTENDED_HISTORY # Use the timestamp format
 setopt INC_APPEND_HISTORY_TIME # Add new lines when they are run, but ensure the timing works
