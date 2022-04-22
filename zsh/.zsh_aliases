@@ -77,6 +77,8 @@ alias gm='git merge'
 alias gp='git push'
 alias gpforce='git push --force'
 alias gpsup='git push -u origin $(git_current_branch)'
+# git rebase
+alias grb='git rebase'
 # git status
 alias gs='git status'
 # git stash
