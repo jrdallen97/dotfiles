@@ -79,6 +79,7 @@ nmap <leader>ff :Files!<cr>
 nmap <leader>fg :GFiles!<cr>
 nmap <leader>fs :Rg!<cr>
 nmap <leader>fr :History!<cr>
+nmap <leader>fb :Buffers!<cr>
 " Easily edit init.vim
 nmap <leader>ev :tabe ~/.config/nvim/init.vim<cr>
 " Easily toggle showing whitespace
