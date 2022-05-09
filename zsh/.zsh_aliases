@@ -67,6 +67,7 @@ alias gdca='git diff --cached'
 # git pull
 alias gf='git fetch'
 alias gl='git pull'
+alias gla='git pull --autostash'
 alias glforce='git fetch && git reset --hard origin/$(git_current_branch)'
 # git log
 alias glg='git log --stat'
