@@ -1,6 +1,8 @@
+# Random aliases
 alias vim='nvim'
 alias v='nvim .'
 alias :q='exit'
+alias beep="tput bel; sleep 0.4"
 
 # Common command shortcuts
 alias l='ls -lah'
@@ -33,6 +35,35 @@ cpustress () {
 
   echo "Stressing ${cores} core(s)\nPress enter to stop stressing"
   read; killall dd; echo 'Done'
+}
+
+countdown () {
+  local n=${1:=1}
+  local msg=${2:=countdown}
+
+  local reset="$(tput cuu 1)$(tput el)"
+  echo
+  local i
+  for i in {$n..1}; do {
+    printf "$reset$msg: $i\n"
+    sleep 1
+  }; done
+  printf "${reset}"
+}
+
+intervalbeeper () {
+  local n=${1:=1}
+  local rest=${2:=5}
+  local go=${3:=55}
+
+  for interval in {1..$n}; do {
+    echo $interval
+    countdown $rest pause
+    beep
+    countdown $go go
+    beep; beep
+  }; done
+  beep
 }
 
 # Git

@@ -56,7 +56,7 @@ headfull() { sed -i '' "s/  '--headless'/  \/\/ '--headless'/" tests/DuskTestCas
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 alias activate='source ./venv/bin/activate'
 alias diff='colordiff'
-alias beep='osascript -e beep'
+#alias beep='osascript -e beep'
 
 #hegarty() {
 #  valet start
