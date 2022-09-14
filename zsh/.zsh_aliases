@@ -51,10 +51,11 @@ countdown () {
   printf "${reset}"
 }
 
+# intervalbeeper [loops] [go] [rest]
 intervalbeeper () {
   local n=${1:=1}
-  local rest=${2:=5}
-  local go=${3:=55}
+  local go=${2:=55}
+  local rest=${3:=5}
 
   for interval in {1..$n}; do {
     echo $interval
