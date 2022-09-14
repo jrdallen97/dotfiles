@@ -9,7 +9,7 @@ export PATH="$PATH:$HOME/.istioctl/bin"
 #export PATH=$HOME/Library/Python/3.7/bin:$PATH
 #export PATH=`yarn global bin`:$PATH
 
-export ISTIO_VERSION='1.8.1'
+export ISTIO_VERSION='1.14.1'
 
 # Sparx
 export GOPATH="$HOME/go" # Used by a number of our scripts
@@ -26,7 +26,7 @@ changemonkey() {cd "$CLOUDPATH" && python3 tools/release/change_monkey.py "$@"}
 
 # Client helpers
 tp2() {(cd "$CLOUDPATH/teacherportal/tpclient2" && pnpm i && pnpm start-test2)}
-adminportal() {(cd "$CLOUDPATH/schools/admin-portal" && pnpm dev)}
+adminportal() {(cd "$CLOUDPATH/schools/admin-portal" && pnpm i && pnpm dev)}
 alias adminportal-pf="orca pf clear && orca pf apply $CLOUDPATH/schools/admin-portal/orca.ports"
 
 # Fix horrible BSD rubbish
@@ -46,6 +46,7 @@ export KDEV_KUBE_CONTEXT="docker-desktop"
 #alias p='./vendor/bin/phpunit --exclude-group wonde-integration'
 #alias pg='./vendor/bin/phpunit --group'
 #alias pf='./vendor/bin/phpunit --filter'
+export PATH="$HOME/.composer/vendor/bin:$PATH"
 
 # E2Es
 alias duskf='php artisan dusk --filter'
