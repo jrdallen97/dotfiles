@@ -2,7 +2,7 @@
 alias vim='nvim'
 alias v='nvim .'
 alias :q='exit'
-alias beep="tput bel; sleep 0.4"
+alias beep="tput bel; sleep 0.3"
 
 # Common command shortcuts
 alias l='ls -lah'
