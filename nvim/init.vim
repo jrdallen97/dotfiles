@@ -23,6 +23,7 @@ Plug 'morhetz/gruvbox'
 " Misc. languages
 Plug 'ianks/vim-tsx'
 Plug 'cespare/vim-toml'
+Plug 'fladson/vim-kitty'
 if executable('nim')
   Plug 'zah/nim.vim', {'for': 'nim'}
 endif
