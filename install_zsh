@@ -12,5 +12,5 @@ link_to_home zsh/.zsh_aliases .zsh_aliases
 pull_repo https://github.com/zplug/zplug "$HOME/.zplug"
 
 # Install optional dotfiles
-read 'choice?Install sparx config? [y/N] '
+read 'choice?Install sparx zsh config? [y/N] '
 [[ $choice =~ ^[Yy] ]] && link_to_home zsh/.zshrc.sparx .zshrc.sparx

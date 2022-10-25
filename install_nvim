@@ -1,31 +1,19 @@
-#!/bin/bash
+#!/usr/bin/env zsh
 FORCE=0
-test "$1" == '-f' && FORCE=1
-
+[[ "$1" = '-f' ]] && FORCE=1
 DOTFILES=$(cd "$(dirname "$0")" && pwd)
-CONFIG_DIR=${XDG_CONFIG_HOME:=$HOME/.config}
-NVIM_DIR="$CONFIG_DIR/nvim"
+source "$DOTFILES/helpers.zsh"
 
-function link_file () {
-  dotfile="${1}"
-  target="${2}"
-
-  if [[ ! -e $target || $FORCE -eq 1 ]]; then
-    ln -sfnv "$dotfile" "$target"
-  else
-    echo "$target already exists, skipping..."
-  fi
-}
+mkdir -p "$CONFIG_DIR/nvim"
 
 # Link main config file
-mkdir -p "$NVIM_DIR"
-link_file "$DOTFILES/nvim/init.vim" "$NVIM_DIR/init.vim"
+link_to_config nvim/init.vim nvim/init.vim
 
-# Link file-specific settings
-link_file "$DOTFILES/nvim/ftplugin" "$NVIM_DIR/ftplugin"
+# Link filetype-specific settings (dir)
+link_to_config /nvim/ftplugin nvim/ftplugin
 
 # Install vim-plug
-if [[ ! -e $target || $FORCE -eq 1 ]]; then
+if [[ ! -e "$CONFIG_DIR/nvim/autoload/plug.vim" || $FORCE -eq 1 ]]; then
   echo "Installing vim-plug..."
   curl -sfLo ~/.config/nvim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
