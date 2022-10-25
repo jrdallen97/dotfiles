@@ -29,6 +29,11 @@ tp2() {(cd "$CLOUDPATH/teacherportal/tpclient2" && pnpm i && pnpm start-test2)}
 adminportal() {(cd "$CLOUDPATH/schools/admin-portal" && pnpm i && pnpm dev)}
 alias adminportal-pf="orca pf clear && orca pf apply $CLOUDPATH/schools/admin-portal/orca.ports"
 
+# DB connection
+alias sparx-db-test2='kubectl --context test2 -n pgbouncer-iguana port-forward deployment/pgbouncer 5432:5432'
+alias sparx-db-test1='kubectl --context test1 -n pgbouncer-stingray port-forward deployment/pgbouncer 5432:5432'
+alias sparx-db-prod='kubectl --context prod -n pgbouncer-seahorse port-forward deployment/pgbouncer 5432:5432'
+
 # Fix horrible BSD rubbish
 alias cut='gcut'
 alias awk='gawk'
