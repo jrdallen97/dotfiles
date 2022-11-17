@@ -90,11 +90,23 @@ fi
 # Prompt configuration stuff #
 ##############################
 
+# Helper to return the current directory or a shorter alternative if possible
+# E.g. truncate to start from `~` or the root of the current git repo
+short-pwd() {
+  local dir=$PWD # Get current dir
+  local PROMPT_GIT_DIR=$(git rev-parse --show-toplevel 2>/dev/null) # Get git repo root
+  if [[ $PROMPT_GIT_DIR != '' ]]; then
+    PROMPT_GIT_DIR="$(dirname $PROMPT_GIT_DIR)/" # Get everything before the git repo root...
+    dir=${dir#$PROMPT_GIT_DIR} # ... and trim it off the current dir
+  fi
+  print -rD "$dir" # print -D converts home dir -> ~
+}
+
 # Will be run before every prompt draw
 prompt_precmd() {
   PROMPT_CMD_STATUS=$? # Save exit code as it may be wiped by the logic below
 
-  echo -ne "\033];$(basename $PWD)\007" # Set the tab title to be the current dir
+  echo -ne "\033];$(short-pwd)\007" # Set the tab title to be the current dir
 
   if (( ${+PROMPT_CMD_START} )); then
     ((PROMPT_CMD_DURATION = $(date +%s) - PROMPT_CMD_START))
@@ -109,14 +121,8 @@ prompt_preexec() { PROMPT_CMD_START=$(date +%s); }
 [[ -z ${precmd_functions[(re)prompt_precmd]} ]] && precmd_functions+=(prompt_precmd)
 [[ -z ${preexec_function[(re)prompt_preexec]} ]] && preexec_functions+=(prompt_preexec)
 
-function set-prompt() {
-  local dir=$PWD # Get current dir
-  local PROMPT_GIT_DIR=$(git rev-parse --show-toplevel 2>/dev/null) # Get git repo root
-  if [[ $PROMPT_GIT_DIR != '' ]]; then
-    PROMPT_GIT_DIR="$(dirname $PROMPT_GIT_DIR)/" # Get everything before the git repo root...
-    dir=${dir#$PROMPT_GIT_DIR} # ... and trim it off the current dir
-  fi
-  dir="%B%F{51}$(print -rD $dir)%f%b " # print -D converts home dir -> ~
+set-prompt() {
+  dir="%B%F{51}$(short-pwd)%f%b "
 
   # TODO: consider changing this to use vcs_info?
   local branch
