@@ -112,6 +112,8 @@ alias gpforce='git push --force'
 alias gpsup='git push -u origin $(git_current_branch)'
 # git rebase
 alias grb='git rebase'
+# git restore - discard unstaged changes
+alias grst='git restore'
 # git status
 alias gs='git status'
 # git stash
