@@ -27,6 +27,9 @@ Plug 'fladson/vim-kitty'
 if executable('nim')
   Plug 'zah/nim.vim', {'for': 'nim'}
 endif
+if executable('raku')
+  Plug 'Raku/vim-raku', {'for': 'raku'}
+endif
 
 " Go
 if executable('go')
