@@ -9,8 +9,6 @@ export PATH="$PATH:$HOME/.istioctl/bin"
 #export PATH=$HOME/Library/Python/3.7/bin:$PATH
 #export PATH=`yarn global bin`:$PATH
 
-export ISTIO_VERSION='1.14.1'
-
 # Sparx
 export GOPATH="$HOME/go" # Used by a number of our scripts
 export PATH="$PATH:$GOPATH/bin" # Add go bin to path
@@ -101,6 +99,10 @@ alias diff='colordiff'
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# pnpm
+#export PNPM_HOME="$HOME/Library/pnpm"
+#export PATH="$PNPM_HOME:$PATH"
 
 # pnpm completion
 # tabtab source for packages
