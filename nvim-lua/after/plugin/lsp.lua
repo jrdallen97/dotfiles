@@ -9,4 +9,7 @@ lsp.ensure_installed({
   'gopls'
 })
 
+-- Handle vim config properly
+lsp.nvim_workspace()
+
 lsp.setup()

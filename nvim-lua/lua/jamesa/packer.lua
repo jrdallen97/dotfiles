@@ -9,7 +9,7 @@ return require('packer').startup(function(use)
 
   -- Telescope
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.x',
+    'nvim-telescope/telescope.nvim', branch = '0.1.x',
     requires = { { 'nvim-lua/plenary.nvim' } }
   }
 
@@ -37,15 +37,24 @@ return require('packer').startup(function(use)
 
   use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
 
+  --use 'mhartington/formatter.nvim'
+
   use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
   use 'tpope/vim-vinegar' -- Improvements to netrw
   use 'tpope/vim-fugitive' -- Git integration
   use 'machakann/vim-highlightedyank' -- Briefly highlights yanked text
-  use 'mbbill/undotree' -- Provides an a tree view for interacting with file history
   use 'ntpeters/vim-better-whitespace' -- Highlight and remove trailing whitespace
 
+  -- Provides an a tree view for interacting with file history
+  use {
+    'mbbill/undotree',
+    config = function()
+      vim.g.undotree_SetFocusWhenToggle = 1
+      vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
+    end
+  }
+
   -- Mark git changed lines in the gutter
-  --use 'airblade/vim-gitgutter'
   use {
     'lewis6991/gitsigns.nvim',
     config = function()
