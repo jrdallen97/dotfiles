@@ -17,6 +17,9 @@ export CLOUDPATH="$HOME/code/CloudExperiments" # Save CloudExperiments path - us
 # Use new auth plugin
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
+# Preferred prod context name
+export PROD_CONTEXT_NAME=prod
+
 # Sparx commands
 alias kdev="$CLOUDPATH/kdev.sh"
 alias barx="$CLOUDPATH/barx.sh"
