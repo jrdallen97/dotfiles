@@ -7,11 +7,3 @@ source "$DOTFILES/helpers.zsh"
 if [[ ! -e "$CONFIG_DIR/nvim" || $FORCE -eq 1 ]]; then
   ln -sfnv "$DOTFILES/nvim" "$CONFIG_DIR/nvim"
 fi
-
-# Set up packer.nvim for package management
-PACKER_DIR="$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim"
-if [[ $FORCE -eq 1 ]]; then
-  echo "Removing existing packer..."
-  rm -rf "$PACKER_DIR"
-fi
-git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
