@@ -14,6 +14,9 @@ export GOPATH="$HOME/go" # Used by a number of our scripts
 export PATH="$PATH:$GOPATH/bin" # Add go bin to path
 export CLOUDPATH="$HOME/code/CloudExperiments" # Save CloudExperiments path - useful for commands/aliases
 
+# Use new auth plugin
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+
 # Sparx commands
 alias kdev="$CLOUDPATH/kdev.sh"
 alias barx="$CLOUDPATH/barx.sh"
