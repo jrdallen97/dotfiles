@@ -10,6 +10,7 @@ vim.keymap.set('t', '<leader><esc>', '<c-\\><c-n>', { desc = 'escape from termin
 
 -- Jump to vim settings
 vim.keymap.set('n', '<leader>ev', ':tabe ~/.config/nvim<cr>', { desc = '[e]dit [v]im settings' })
+vim.keymap.set('n', '<leader>ec', ':tabe ~/.config/nvim/CHEATSHEET.md<cr>', { desc = '[e]dit [c]heatsheet' })
 
 vim.keymap.set('n', '<leader>l', ':set list!<cr>', { desc = 'toggle [l]ist' })
 vim.keymap.set('n', '<leader>w', ':set wrap!<cr>', { desc = 'toggle [w]rap' })
