@@ -42,6 +42,7 @@ return require('packer').startup(function(use)
   use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
   use 'tpope/vim-vinegar' -- Improvements to netrw
   use 'tpope/vim-fugitive' -- Git integration
+  use 'tpope/vim-surround' -- Edit surrounding characters (e.g. quotes and brackets)
   use 'machakann/vim-highlightedyank' -- Briefly highlights yanked text
   use 'ntpeters/vim-better-whitespace' -- Highlight and remove trailing whitespace
 
@@ -62,10 +63,9 @@ return require('packer').startup(function(use)
     end
   }
 
-  --use 'tpope/vim-surround'
   --use '~/.fzf'
   --use 'junegunn/fzf.vim'
 
-  use "ellisonleao/gruvbox.nvim"
+  use "ellisonleao/gruvbox.nvim" -- Theme
 
 end)
