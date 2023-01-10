@@ -1,6 +1,4 @@
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
-
--- Foo
+-- Bootstrap packer - if not installed, it will install itself
 local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
@@ -11,8 +9,15 @@ local ensure_packer = function()
   end
   return false
 end
-
 local packer_bootstrap = ensure_packer()
+
+-- Automatically run PackerSync if this file is changed
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost packer.lua source <afile> | PackerSync
+  augroup end
+]])
 
 return require('packer').startup(function(use)
   -- Packer can manage itself
@@ -79,7 +84,9 @@ return require('packer').startup(function(use)
 
   use "ellisonleao/gruvbox.nvim" -- Theme
 
+  -- If packer has just installed itself, run :PackerSync automatically
   if packer_bootstrap then
     require('packer').sync()
+    print("Packer bootstrapped; relaunch nvim")
   end
 end)
