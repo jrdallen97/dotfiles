@@ -12,5 +12,12 @@ vim.keymap.set('t', '<leader><esc>', '<c-\\><c-n>', { desc = 'escape from termin
 vim.keymap.set('n', '<leader>ev', ':tabe ~/.config/nvim<cr>', { desc = '[e]dit [v]im settings' })
 vim.keymap.set('n', '<leader>ec', ':tabe ~/.config/nvim/CHEATSHEET.md<cr>', { desc = '[e]dit [c]heatsheet' })
 
+-- Quick toggles
 vim.keymap.set('n', '<leader>l', ':set list!<cr>', { desc = 'toggle [l]ist' })
 vim.keymap.set('n', '<leader>w', ':set wrap!<cr>', { desc = 'toggle [w]rap' })
+
+-- Move lines up & down easily
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'move selection down' }) -- Move selection down, reindent & reselect
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'move selection up' })
+vim.keymap.set('v', '<S-Down>', ":m '>+1<CR>gv=gv", { desc = 'move selection down' })
+vim.keymap.set('v', '<S-Up>', ":m '<-2<CR>gv=gv", { desc = 'move selection up' })

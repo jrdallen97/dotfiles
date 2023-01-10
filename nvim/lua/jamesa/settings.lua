@@ -2,6 +2,7 @@
 vim.opt.mouse = 'a' -- Enable mouse support
 vim.opt.number = true -- Show line numbers
 --vim.opt.relativenumber = true -- Relative line numbers
+vim.opt.spell = false -- Disable spellcheck
 
 -- Appearance
 vim.opt.background = 'dark'

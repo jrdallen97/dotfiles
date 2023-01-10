@@ -9,8 +9,9 @@ require'nvim-treesitter.configs'.setup {
     "tsx",
     "go",
     "python",
+    "markdown", -- Ensure both markdown & markdown_inline are installed for proper highlighting
+    "markdown_inline",
     -- "html",
-    -- "markdown",
     -- "proto",
     -- "css",
     -- "sql",
@@ -26,6 +27,9 @@ require'nvim-treesitter.configs'.setup {
   highlight = {
     -- `false` will disable the whole extension
     enable = true,
+
+    -- List of languages that will be disabled
+    disable = {},
 
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
