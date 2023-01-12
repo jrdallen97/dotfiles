@@ -1,5 +1,4 @@
 vim.g.mapleader = ' '
---vim.keymap.set('n', ',', '<leader>', { remap = true }) -- Use ',' as an additional leader key
 
 -- Run files
 vim.keymap.set('n', '<leader>rr', ':w<cr>:!%:p<cr>', { desc = '[r]un current file (shebang)' })
@@ -21,3 +20,11 @@ vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'move selection down' }) -
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'move selection up' })
 vim.keymap.set('v', '<S-Down>', ":m '>+1<CR>gv=gv", { desc = 'move selection down' })
 vim.keymap.set('v', '<S-Up>', ":m '<-2<CR>gv=gv", { desc = 'move selection up' })
+
+-- Quickfix helpers
+vim.keymap.set('n', '<leader>co', ':copen<CR>', { desc = 'Open the quickfix list window' })
+vim.keymap.set('n', '<leader>cc', ':cclose<CR>', { desc = 'Close the quickfix list window' })
+vim.keymap.set('n', '<leader>cn', ':cnext<CR>', { desc = 'Go to the next item on the list' })
+vim.keymap.set('n', '<leader>cp', ':cprev<CR>', { desc = 'Go to the previous item on the list' })
+vim.keymap.set('n', '<leader>cf', ':cfirst<CR>', { desc = 'Go to the first item on the list' })
+vim.keymap.set('n', '<leader>cl', ':clast<CR>', { desc = 'Go to the last item on the list' })

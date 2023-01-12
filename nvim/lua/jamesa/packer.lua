@@ -59,6 +59,7 @@ return require('packer').startup(function(use)
   use 'tpope/vim-vinegar' -- Improvements to netrw
   use 'tpope/vim-fugitive' -- Git integration
   use 'tpope/vim-surround' -- Edit surrounding characters (e.g. quotes and brackets)
+  use 'tpope/vim-unimpaired' -- Provides handy helpers for a bunch of things (mostly using `[]`)
   use 'machakann/vim-highlightedyank' -- Briefly highlights yanked text
   use 'ntpeters/vim-better-whitespace' -- Highlight and remove trailing whitespace
 
