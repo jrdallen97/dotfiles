@@ -19,12 +19,16 @@
 
 Note: most of these work even if you continue holding `Ctrl` for the 2nd key, e.g. `<C-w><C-o>`.
 
+- `<C-w>s`: `:sp[lit]`
+- `<C-w>v`: `:vsp[lit]`
 - `<C-w><direction>`: Move to the window in `<direction>` (`<Up>`, `k`, etc)
-- `<C-w>o`: Make the current window the only one on the screen (all others are `:q[uit]`)
+- `<C-w><DIRECTION>`: Move the current window all the way to `<DIRECTION>` (only `HJKL`)
+- `<C-w>o`: `:q[uit]` all but the current window (also: `:only`)
 - `<C-w>w`: Move to the previous window (move left/up), loop to last window if already at first
 - `<C-w>t`: Move to the top-left/first window
 - `<C-w>b`: Move to the bottom-right/last window
 - `<C-w>p`: Move to the most recently accessed window
+- `<C-w>=`: Make all windows the same size
 
 ## Jumps
 
