@@ -5,7 +5,7 @@ lsp.preset('recommended')
 -- LSP names come from the `lspconfig` server names, not `mason.nvim` package names
 -- See here: https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
 lsp.ensure_installed({
-  'sumneko_lua',
+  'lua_ls',
   'vimls',
   'bashls',
   'gopls',
