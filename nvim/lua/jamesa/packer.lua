@@ -62,6 +62,7 @@ return require('packer').startup(function(use)
   use 'tpope/vim-unimpaired' -- Provides handy helpers for a bunch of things (mostly using `[]`)
   use 'machakann/vim-highlightedyank' -- Briefly highlights yanked text
   use 'ntpeters/vim-better-whitespace' -- Highlight and remove trailing whitespace
+  use 'terrortylor/nvim-comment' -- Quick comment/uncomment bindings
 
   -- Provides an a tree view for interacting with file history
   use {

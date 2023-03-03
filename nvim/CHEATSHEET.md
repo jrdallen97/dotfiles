@@ -119,6 +119,17 @@ Supports many standard mappings (e.g. `H/M/L`, `gg/G`, normal/insert mode).
 - `<C-u>`: Scroll up in preview window
 - `<C-d>`: Scroll down in preview window
 
+## Comments
+
+Provided by `terrortylor/nvim-comment`.
+
+Provides some handy shortcuts for commenting/uncommenting blocks of code.
+
+- `gcc`:            Toggle comment on line
+- `gc` (visual):    Toggle comment on selected line(s)
+- `:CommentToggle`: Toggle comment on line(s), e.g.:
+  - `:%g/Foobar/CommentToggle`: Comment lines matching regex
+
 ## netrw
 
 - `I`: Toggle help
