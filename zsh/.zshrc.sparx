@@ -20,6 +20,10 @@ export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 # Preferred prod context name
 export PROD_CONTEXT_NAME=prod
 
+# Kubes shortcuts
+alias kcx='kubectx'
+alias kns='kubens'
+
 # Sparx commands
 alias kdev="$CLOUDPATH/kdev.sh"
 alias barx="$CLOUDPATH/barx.sh"
@@ -107,8 +111,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # pnpm
-#export PNPM_HOME="$HOME/Library/pnpm"
-#export PATH="$PNPM_HOME:$PATH"
+export PNPM_HOME="$HOME/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
 
 # pnpm completion
 # tabtab source for packages
