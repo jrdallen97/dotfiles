@@ -38,9 +38,13 @@ if [[ -r ~/.zplug/init.zsh ]]; then
 
   zplug "softmoth/zsh-vim-mode"
 
+  # Must run after compinit but before things like zsh-syntax-highlighting
+  # Note: idk what will happen if fzf is not installed
+  zplug "Aloxaf/fzf-tab", defer:2
+
   # zsh-syntax-highlighting must be loaded after executing compinit command and sourcing other plugins
   # a defer tag >= 2 will run after compinit command
-  zplug "zsh-users/zsh-syntax-highlighting", defer:2
+  zplug "zsh-users/zsh-syntax-highlighting", defer:3
 
   # Install plugins if there are plugins that have not been installed
   if ! zplug check --verbose; then
