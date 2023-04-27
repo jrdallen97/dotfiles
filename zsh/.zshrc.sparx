@@ -66,9 +66,9 @@ export KDEV_KUBE_CONTEXT="docker-desktop"
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 
 # E2Es
-alias duskf='php artisan dusk --filter'
-headless() { sed -i '' "s/  \/\/ '--headless'/  '--headless'/" tests/DuskTestCase.php }
-headfull() { sed -i '' "s/  '--headless'/  \/\/ '--headless'/" tests/DuskTestCase.php }
+#alias duskf='php artisan dusk --filter'
+#headless() { sed -i '' "s/  \/\/ '--headless'/  '--headless'/" tests/DuskTestCase.php }
+#headfull() { sed -i '' "s/  '--headless'/  \/\/ '--headless'/" tests/DuskTestCase.php }
 
 # Other
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
