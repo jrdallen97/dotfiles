@@ -25,4 +25,17 @@ require("gruvbox").setup({
   transparent_mode = false,
 })
 
-vim.cmd("colorscheme gruvbox")
+require("catppuccin").setup({
+  flavour = "macchiato", -- latte, frappe, macchiato, mocha
+  dim_inactive = {
+    enabled = true,
+    shade = "dark",
+    percentage = 0.15,
+  },
+  styles = {
+    comments = { "italic" },
+    conditionals = { "italic" },
+  },
+})
+
+vim.cmd("colorscheme catppuccin")

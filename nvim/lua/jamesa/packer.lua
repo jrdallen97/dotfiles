@@ -84,7 +84,9 @@ return require('packer').startup(function(use)
   --use '~/.fzf'
   --use 'junegunn/fzf.vim'
 
-  use "ellisonleao/gruvbox.nvim" -- Theme
+  -- Theme
+  use "ellisonleao/gruvbox.nvim"
+  use { "catppuccin/nvim", as = "catppuccin" }
 
   -- If packer has just installed itself, run :PackerSync automatically
   if packer_bootstrap then
