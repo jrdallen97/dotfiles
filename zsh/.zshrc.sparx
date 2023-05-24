@@ -31,7 +31,8 @@ alias kns='kubens'
 # Sparx commands
 alias kdev="$CLOUDPATH/kdev.sh"
 alias barx="$CLOUDPATH/barx.sh"
-alias gazelle="$CLOUDPATH/barx.sh gazelle"
+alias spx="spxdev"
+alias gazelle="spxdev gen gazelle"
 alias pf="orca pf"
 genproto() {(cd "$CLOUDPATH/jspackages/grpc" && pnpm generate)}
 changemonkey() {(cd "$CLOUDPATH" && python3 tools/release/change_monkey.py "$@")}
