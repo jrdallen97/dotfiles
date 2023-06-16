@@ -81,6 +81,12 @@ return require('packer').startup(function(use)
     end
   }
 
+  -- Cool interactive markdown preview generator
+  use {
+    'iamcco/markdown-preview.nvim',
+    run = function() vim.fn["mkdp#util#install"]() end,
+  }
+
   --use '~/.fzf'
   --use 'junegunn/fzf.vim'
 
