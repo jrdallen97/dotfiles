@@ -31,7 +31,8 @@ alias kns='kubens'
 # Sparx commands
 alias kdev="$CLOUDPATH/kdev.sh"
 alias barx="$CLOUDPATH/barx.sh"
-alias spx="spxdev"
+alias dev="spxdev"
+alias gen="spxdev gen"
 alias gazelle="spxdev gen gazelle"
 alias pf="orca pf"
 genproto() {(cd "$CLOUDPATH/jspackages/grpc" && pnpm generate)}
@@ -74,7 +75,7 @@ export PATH="$HOME/.composer/vendor/bin:$PATH"
 # Other
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 alias activate='source ./venv/bin/activate'
-alias diff='colordiff'
+alias diff='diff --color=auto'
 #alias beep='osascript -e beep'
 
 #hegarty() {
