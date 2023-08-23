@@ -83,6 +83,10 @@ alias gap='git add --patch'
 alias gb='git branch'
 alias gbD='git branch -D'
 alias gbd='git branch -d'
+# git bisect
+alias gbi='git bisect'
+alias gbgood='git bisect good'
+alias gbbad='git bisect bad'
 # git commit
 alias gc='git commit -v'
 alias gca='git commit -v -a'
@@ -120,6 +124,7 @@ alias grst='git restore'
 alias gs='git status'
 # git stash
 alias gst='git stash'
+alias gstp='git stash pop'
 # git update-index
 alias gignore='git update-index --assume-unchanged'
 alias gunignore='git update-index --no-assume-unchanged'
