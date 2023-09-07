@@ -1,0 +1,8 @@
+{
+  "catppuccin": { "branch": "main", "commit": "09b29cf2a60c64d6f9b5154ea7e4632772418539" },
+  "gitsigns.nvim": { "branch": "main", "commit": "983f1a216cca1a079399ba050bc4b9ce130de83a" },
+  "lazy.nvim": { "branch": "main", "commit": "2a9354c7d2368d78cbd5575a51a2af5bd8a6ad01" },
+  "nvim-treesitter": { "branch": "master", "commit": "80b4fa7970ee159e5c2c715bbcd386143c48dcb1" },
+  "vim-sleuth": { "branch": "master", "commit": "1cc4557420f215d02c4d2645a748a816c220e99b" },
+  "vim-vinegar": { "branch": "master", "commit": "bb1bcddf43cfebe05eb565a84ab069b357d0b3d6" }
+}
