@@ -33,4 +33,8 @@ return {
       require('gitsigns').setup()
     end,
   },
+  {
+    'numToStr/Comment.nvim', -- Smart and Powerful commenting plugin
+    config = true,
+  },
 }
