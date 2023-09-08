@@ -27,5 +27,10 @@ return {
       })
     end
   },
-  { 'lewis6991/gitsigns.nvim' }, -- Git changed lines in gutter
+  {
+    'lewis6991/gitsigns.nvim', -- Git changed lines in gutter
+    config = function()
+      require('gitsigns').setup()
+    end,
+  },
 }
