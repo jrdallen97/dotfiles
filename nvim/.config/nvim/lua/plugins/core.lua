@@ -21,6 +21,11 @@ return {
     lazy = false,
     config = function()
       require('nvim-treesitter.configs').setup({
+        ensure_installed = {
+          'bash',
+          'go',
+          'lua',
+        },
         highlight = {
           enable = true
         }
@@ -29,12 +34,12 @@ return {
   },
   {
     'lewis6991/gitsigns.nvim', -- Git changed lines in gutter
-    config = function()
-      require('gitsigns').setup()
-    end,
+    config = true,
   },
   {
     'numToStr/Comment.nvim', -- Smart and Powerful commenting plugin
     config = true,
   },
+  { 'machakann/vim-highlightedyank' }, -- Highlights yanked region
+  { 'ntpeters/vim-better-whitespace' }, -- Highlight and remove trailing whitespace
 }

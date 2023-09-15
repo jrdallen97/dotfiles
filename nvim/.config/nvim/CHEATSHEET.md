@@ -155,6 +155,10 @@ Enhancements provided by `tpope/vim-vinegar`:
 - `~`: Go to `~`
 - `y.`: Yank absolute path to file under cursor
 
+Custom bindings:
+
+- `/`: Find files in current directory (using Telescope)
+
 Getting into netrw:
 
 - `Ex[plore]`:  Open netrw in current file's directory
