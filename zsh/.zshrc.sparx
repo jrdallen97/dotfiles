@@ -27,6 +27,9 @@ export PROD_CONTEXT_NAME=prod
 # Kubes shortcuts
 alias kcx='kubectx'
 alias kns='kubens'
+alias ktest2='kubectx test2'
+alias ktest1='kubectx test1'
+alias kprod='kubectx prod'
 
 # Sparx commands
 alias kdev="$CLOUDPATH/kdev.sh"
@@ -39,7 +42,7 @@ genproto() {(cd "$CLOUDPATH/jspackages/grpc" && pnpm generate)}
 changemonkey() {(cd "$CLOUDPATH" && python3 tools/release/change_monkey.py "$@")}
 
 # Client helpers
-tp2() {(cd "$CLOUDPATH/teacherportal/tpclient2" && pnpm i && pnpm start-test2)}
+tp2() {(cd "$CLOUDPATH/teacherportal/tpclient2"; chance 3 && pnpm i; pnpm start-test2)}
 adminportal() {(cd "$CLOUDPATH/schools/admin-portal" && pnpm i && pnpm dev)}
 alias adminportal-pf="orca pf clear && orca pf apply $CLOUDPATH/schools/admin-portal/orca.ports"
 
