@@ -1,6 +1,9 @@
 -- Quick jump to nvim config
 vim.keymap.set('n', '<leader>,', ':tabe ~/.config/nvim<cr>', { desc = 'jump to nvim config' })
 
+-- Dumb stuff :)
+vim.keymap.set('n', '<C-s>', ':w<cr>', { desc = 'Save file' })
+
 -- Quick settings toggles
 vim.keymap.set('n', '<leader>l', ':set list!<cr>', { desc = 'toggle [l]ist' })
 vim.keymap.set('n', '<leader>w', ':set wrap!<cr>', { desc = 'toggle [w]rap' })
