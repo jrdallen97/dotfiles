@@ -5,6 +5,9 @@ alias :q='exit'
 alias beep="tput bel; sleep 0.3"
 alias prettypath='echo $PATH | sed "s/:/\n/g"'
 
+# Rebind if installed
+command -v bat &>/dev/null && alias bat='bat -P'
+
 # Common command shortcuts
 alias l='ls -lah'
 alias la='ls -lAh'
