@@ -1,6 +1,6 @@
 # dotfiles
 
-My config files for Linux. Installation should be as easy as cloning the repo and running one of the included install scripts, e.g. `./install_zsh`.
+My config files for Linux. Installation should be as easy as cloning the repo and running one of the included install scripts, e.g. `./install_zsh`. Going forward I'll be mainly using GNU stow for managing dotfiles, rather than writing custom symlinking scripts for everything.
 
 ## Rendering markdown to HTML
 
@@ -19,7 +19,7 @@ You can use `--embed-resources` to embed the styles (change the path to the CSS 
 ### Ubuntu
 
 ```bash
-sudo apt install zsh neovim curl git mpv streamlink youtube-dl htop ripgrep
+sudo apt install zsh neovim curl git mpv streamlink youtube-dl htop ripgrep stow
 ```
 
 ### Differences on Windows
@@ -37,26 +37,3 @@ sudo add-apt-repository ppa:neovim-ppa/stable
 sudo apt update
 sudo apt install neovim
 ```
-
-## Nvim (old)
-
-**nvim** (old)
-- When first opening, run `:PlugInstall` to install plugins
-- Plugins are installed using `vim-plug`. See [junegunn/vim-plug](https://github.com/junegunn/vim-plug) for more info, but tl;dr:
-  - Plugins are managed in `init.vim`
-  - Run `:PlugInstall` to install any plugins in `init.vim`
-  - Run `:PlugClean` to remove old plugins
-  - Run `:PlugUpdate` to update installed plugins
-- Check health with `:checkhealth`
-  - You may need to configure a clipboard provider to get system clipboard working:
-    - On linux, install `xclip`
-    - On Windows, see the Windows section below
-
-**coc.nvim** (old)
-- Check status & recent logs with `:CocInfo`
-- Requires languages to be installed manually with `:CocInstall`. I use:
-  - `coc-go`
-- Requires node & npm to be installed, e.g.:
-  - `sudo apt install nodejs npm`
-  - `sudo pacman -S nodejs npm`
-
