@@ -1,5 +1,7 @@
 # nvim
 
+My original nvim config, written using vimscript & vim-plug.
+
 **nvim** (old)
 - When first opening, run `:PlugInstall` to install plugins
 - Plugins are installed using `vim-plug`. See [junegunn/vim-plug](https://github.com/junegunn/vim-plug) for more info, but tl;dr:
