@@ -5,7 +5,7 @@ test "$1" = '-f' && FORCE=1
 DOTFILES=$(cd "$(dirname "$0")" && pwd)
 ARGS=$([[ $FORCE == 1 ]] && echo '-f')
 
-"$DOTFILES/install_nvim" $ARGS
+stow nvim
 "$DOTFILES/install_zsh" $ARGS
 "$DOTFILES/install_fzf" $ARGS
 "$DOTFILES/install_tmux" $ARGS
