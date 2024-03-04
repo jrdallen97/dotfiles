@@ -19,6 +19,8 @@ return {
     'stevearc/oil.nvim',
     config = function()
       require('oil').setup()
+
+      -- Mimic the vim-vinegar method of navigating to the parent directory of a file
       vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
     end,
   },
@@ -29,19 +31,8 @@ return {
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
-  {
-    -- Adds git related signs to the gutter, as well as utilities for managing changes
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-    },
-  },
+  -- Adds git related signs to the gutter, as well as utilities for managing changes
+  { 'lewis6991/gitsigns.nvim', config = true },
 
   {
     -- Useful plugin to show you pending keybinds.
