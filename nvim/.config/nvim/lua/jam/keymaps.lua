@@ -1,6 +1,14 @@
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
+-- Jump to vim settings
+vim.keymap.set('n', '<leader>ev', ':tabe ~/.config/nvim/lua/jam<cr>', { desc = '[E]dit [V]im settings' })
+vim.keymap.set('n', '<leader>ec', ':tabe ~/.config/nvim/CHEATSHEET.md<cr>', { desc = '[E]dit [C]heatsheet' })
+
+-- Easily run executable files
+vim.keymap.set('n', '<leader>rr', ':w<cr>:!%:p<cr>', { desc = '[RR]un current file (shebang)' })
+vim.keymap.set('n', '<leader>rt', ':w<cr>:!time %:p<cr>', { desc = '[R]un & [T]ime current file (shebang)' })
+
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
@@ -23,3 +31,20 @@ vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left wind
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+-- Quick toggles
+-- vim.keymap.set('n', '<leader>tl', ':set list!<cr>', { desc = '[T]oggle [L]ist' })
+vim.keymap.set('n', '<leader>tw', ':set wrap!<cr>', { desc = '[T]oggle [W]rap' })
+
+-- Move lines up & down easily
+-- E.g. ":m '>+1<CR>gv" = Move selection down, reindent & reselect
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv", { desc = 'Move selection down' })
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv", { desc = 'Move selection up' })
+vim.keymap.set('v', '<S-Down>', ":m '>+1<CR>gv", { desc = 'Move selection down' })
+vim.keymap.set('v', '<S-Up>', ":m '<-2<CR>gv", { desc = 'Move selection up' })
+
+-- Reselect after changing indentation
+vim.keymap.set('v', '>', '>gv', { desc = 'Increase indentation & reselect' })
+vim.keymap.set('v', '<', '<gv', { desc = 'Decrease indentation & reselect' })
+vim.keymap.set('v', '<S-Right>', '>gv', { desc = 'Increase indentation & reselect' })
+vim.keymap.set('v', '<S-Left>', '<gv', { desc = 'Decrease indentation & reselect' })
