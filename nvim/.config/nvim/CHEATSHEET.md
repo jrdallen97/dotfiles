@@ -30,6 +30,12 @@ Note: most of these work even if you continue holding `Ctrl` for the 2nd key, e.
 - `<C-w>p`: Move to the most recently accessed window
 - `<C-w>=`: Make all windows the same size
 
+Also, for tabs:
+
+- `gt`: Next tab
+- `gT`: Prev tab
+- `[n]gt`: Goto nth tab
+
 ## Jumps
 
 `:h jump-motions`
@@ -60,6 +66,8 @@ A special buffer for showing a list of locations/files e.g as the results of a s
 
 Handy shortcuts:
 
+TODO: not yet ported over
+
 - `[q`: `:cprev` (from `tpope/vim-unimpaired`)
 - `]q`: `:cnext` (from `tpope/vim-unimpaired`)
 - `<leader>co`: `:copen`
@@ -71,7 +79,7 @@ Handy shortcuts:
 
 ## LSP
 
-Provided by `VonHeikemen/lsp-zero.nvim`.
+Provided by `neovim/nvim-lspconfig` (amongst others.)
 
 - `K`:    Show hover information about symbol under cursor
 - `C-k`:  Show signature information
