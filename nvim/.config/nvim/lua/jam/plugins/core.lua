@@ -163,9 +163,6 @@ return {
         },
       }
 
-      -- Minimal and fast autopairs
-      require('mini.pairs').setup()
-
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin
@@ -177,6 +174,7 @@ return {
   },
 
   {
+    -- A git interface for Neovim, inspired by Magit
     'NeogitOrg/neogit',
     dependencies = {
       'nvim-lua/plenary.nvim', -- required
@@ -190,5 +188,20 @@ return {
       { '<leader>nn', '<cmd>Neogit<cr>', { desc = '[N]eogit' } },
       { '<leader>nc', '<cmd>Neogit commit<cr>', { desc = '[N]eogit [C]ommit' } },
     },
+  },
+
+  {
+    -- A super powerful autopair plugin for Neovim that supports multiple characters
+    'windwp/nvim-autopairs',
+    dependencies = {
+      'hrsh7th/nvim-cmp', -- optional
+    },
+    config = function()
+      require('nvim-autopairs').setup {}
+      -- If you want to automatically add `(` after selecting a function or method
+      local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+      local cmp = require 'cmp'
+      cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+    end,
   },
 }

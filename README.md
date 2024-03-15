@@ -2,6 +2,17 @@
 
 My config files for Linux. Installation should be as easy as cloning the repo and running one of the included install scripts, e.g. `./install_zsh`. Going forward I'll be mainly using GNU stow for managing dotfiles, rather than writing custom symlinking scripts for everything.
 
+## Installation
+
+### nvim
+
+Uninstall existing nvim config & install with GNU stow:
+
+```shell
+rm -rf ~/.config/nvim ~/.local/share/nvim
+stow nvim
+```
+
 ## Rendering markdown to HTML
 
 Some of my dotfiles have their own markdown files (e.g. nvim). You can render these nicely with, for example:
