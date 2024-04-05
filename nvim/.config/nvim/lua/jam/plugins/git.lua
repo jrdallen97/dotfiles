@@ -11,6 +11,7 @@ return {
         --   vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
         -- end
         local function map(mode, l, r, desc)
+          desc = desc or '?'
           vim.keymap.set(mode, l, r, {
             buffer = bufnr,
             desc = 'Git: ' .. desc,
@@ -56,7 +57,7 @@ return {
         map('n', '<leader>td', gitsigns.toggle_deleted, '[T]oggle [D]eleted lines')
 
         -- Text object
-        map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+        map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', '[I]nner [H]unk')
       end,
     },
   },
