@@ -39,9 +39,6 @@ return {
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
-  -- Adds git related signs to the gutter, as well as utilities for managing changes
-  { 'lewis6991/gitsigns.nvim', config = true },
-
   {
     -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
@@ -53,6 +50,7 @@ return {
       require('which-key').register {
         ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
         ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
+        ['<leader>h'] = { name = '[H]unk', _ = 'which_key_ignore' },
         ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
         ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
@@ -171,23 +169,6 @@ return {
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
-  },
-
-  {
-    -- A git interface for Neovim, inspired by Magit
-    'NeogitOrg/neogit',
-    dependencies = {
-      'nvim-lua/plenary.nvim', -- required
-      'sindrets/diffview.nvim', -- optional - Diff integration
-
-      -- Only one of these is needed, not both.
-      'nvim-telescope/telescope.nvim', -- optional
-    },
-    config = true,
-    keys = {
-      { '<leader>nn', '<cmd>Neogit<cr>', { desc = '[N]eogit' } },
-      { '<leader>nc', '<cmd>Neogit commit<cr>', { desc = '[N]eogit [C]ommit' } },
-    },
   },
 
   {
