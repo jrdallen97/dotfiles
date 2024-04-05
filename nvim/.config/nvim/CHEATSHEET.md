@@ -157,6 +157,24 @@ Provides some handy shortcuts for commenting/uncommenting blocks of code.
 - `:CommentToggle`: Toggle comment on line(s), e.g.:
   - `:%g/Foobar/CommentToggle`: Comment lines matching regex
 
+## Git
+
+Provided by `lewis6991/gitsigns.nvim`.
+
+- `]c`: Next change
+- `[c`: Prev change
+- `<leader>hs`: Stage hunk
+- `<leader>hS`: Stage all in file
+- `<leader>hu`: Undo stage hunk
+- `<leader>hr`: Reset hunk
+- `<leader>hb`: Blame current line
+- `<leader>td`: Toggle showing deleted lines
+
+Text object:
+- `ih`: inner hunk, e.g.
+  - `vih`: Select all changes in a hunk
+  - `dih`: Delete all changes in a hunk
+
 ## netrw
 
 - `I`: Toggle help
