@@ -14,6 +14,14 @@
 - `zt`:    Re-centre screen with the cursor at the top
 - `zz`:    Re-centre screen with the cursor in the middle
 - `zb`:    Re-centre screen with the cursor at the bottom
+- `p`:     Paste after the cursor
+- `P`:     Paste before the cursor
+
+Visual mode:
+
+- `p`: Paste over selection and yank previous contents
+- `P`: Paste over selection without yanking previous contents
+  - This is especially useful when using something like `vi"` to select an entire string, for example.
 
 ## Window commands
 
@@ -28,13 +36,15 @@ Note: most of these work even if you continue holding `Ctrl` for the 2nd key, e.
 - `<C-w>t`: Move to the top-left/first window
 - `<C-w>b`: Move to the bottom-right/last window
 - `<C-w>p`: Move to the most recently accessed window
-- `<C-w>=`: Make all windows the same size
+- `<C-w>=`: Equalise splits/make all windows the same size
 
 Also, for tabs:
 
 - `gt`: Next tab
 - `gT`: Prev tab
 - `[n]gt`: Goto nth tab
+- `:tabe[dit]`:  Open a file in a new tab
+- `:tabc[lose]`: Close current tab
 
 ## Jumps
 
@@ -96,7 +106,16 @@ Provided by `neovim/nvim-lspconfig` (amongst others.)
 
 ## Autocompletion
 
-Provided by `VonHeikemen/lsp-zero.nvim`.
+- `<C-Space>`: Manually trigger completion (doesn't work?)
+- `<C-y>`:  Accept completion
+- `<Down>`: Next item in list
+- `<C-n>`:  Next item in list
+- `<Up>`:   Previous item in list
+- `<C-p>`:  Previous item in list
+- `<C-l>`:  (after accepting snippet) Next location in snippet
+- `<C-h>`:  (after accepting snippet) Previous location in snippet
+
+Old: Provided by `VonHeikemen/lsp-zero.nvim`.
 
 - `<C-e>`:   Toggle completion popup
 - `<Tab>`:   Show completion (if in word)

@@ -5,6 +5,17 @@
 vim.keymap.set('n', '<leader>ev', ':tabe ~/.config/nvim/lua/jam<cr>', { desc = '[E]dit [V]im settings' })
 vim.keymap.set('n', '<leader>ec', ':tabe ~/.config/nvim/CHEATSHEET.md<cr>', { desc = '[E]dit [C]heatsheet' })
 
+-- Notes
+vim.keymap.set('n', '<leader>en', ':tabe ~/notes/<cr>', { desc = '[E]dit [N]otes' })
+-- vim.keymap.set(
+--   'n',
+--   '<leader>ed',
+--   -- Open today's daily note, open TODOs in a split, change back to the first split.
+--   ':exec "tabe ~/notes/diary/".strftime("%F").".md"<cr>:sp ~/notes/diary/TODO.md<cr><C-w><C-k>',
+--   { desc = '[E]dit [D]aily note' }
+-- )
+vim.keymap.set('n', '<leader>et', ':tabe ~/notes/diary/TODO.md<cr>', { desc = '[E]dit [T]odo list' })
+
 -- Easily run executable files
 vim.keymap.set('n', '<leader>rr', ':w<cr>:!%:p<cr>', { desc = '[RR]un current file (shebang)' })
 vim.keymap.set('n', '<leader>rt', ':w<cr>:!time %:p<cr>', { desc = '[R]un & [T]ime current file (shebang)' })
@@ -12,7 +23,7 @@ vim.keymap.set('n', '<leader>rt', ':w<cr>:!time %:p<cr>', { desc = '[R]un & [T]i
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
+vim.keymap.set('n', '<leader>E', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
