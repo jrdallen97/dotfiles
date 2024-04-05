@@ -41,7 +41,7 @@ alias dev="spxdev"
 alias gen="spxdev gen"
 alias gaz="spxdev gen gazelle"
 alias pf="orca pf"
-genproto() {(cd "$CLOUDPATH/jspackages/grpc" && pnpm generate)}
+alias genproto="spxdev gen client-types"
 changemonkey() {(cd "$CLOUDPATH" && python3 tools/release/change_monkey.py "$@")}
 
 # Client helpers
