@@ -11,10 +11,9 @@ return {
         --   vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
         -- end
         local function map(mode, l, r, desc)
-          desc = desc or '?'
           vim.keymap.set(mode, l, r, {
             buffer = bufnr,
-            desc = 'Git: ' .. desc,
+            desc = 'Git: ' .. (desc or '?'),
           })
         end
 
@@ -47,9 +46,7 @@ return {
         map('n', '<leader>hu', gitsigns.undo_stage_hunk, '[H]unk [U]ndo stage')
         map('n', '<leader>hR', gitsigns.reset_buffer, '[H]unk [R]eset all')
         map('n', '<leader>hp', gitsigns.preview_hunk, '[H]unk [P]review')
-        map('n', '<leader>hb', function()
-          gitsigns.blame_line { full = true }
-        end, '[B]lame line')
+        map('n', '<leader>hb', gitsigns.blame_line, '[B]lame line')
         map('n', '<leader>hd', gitsigns.diffthis, '[D]iff')
         map('n', '<leader>hD', function()
           gitsigns.diffthis '~'
@@ -59,6 +56,17 @@ return {
         -- Text object
         map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', '[I]nner [H]unk')
       end,
+    },
+  },
+
+  {
+    -- A Git wrapper so awesome, it should be illegal
+    'tpope/vim-fugitive',
+    keys = {
+      { '<leader>gs', '<cmd>G<cr>', desc = '[G]it [S]tatus' },
+      { '<leader>gc', '<cmd>Git commit<cr>', desc = '[G]it [C]ommit' },
+      { '<leader>gp', '<cmd>Git push<cr>', desc = '[G]it [P]ush' },
+      { '<leader>gl', '<cmd>Git pull<cr>', desc = '[G]it Pul[L]' },
     },
   },
 
@@ -74,8 +82,8 @@ return {
     },
     config = true,
     keys = {
-      { '<leader>nn', '<cmd>Neogit<cr>', { desc = '[N]eogit' } },
-      { '<leader>nc', '<cmd>Neogit commit<cr>', { desc = '[N]eogit [C]ommit' } },
+      { '<leader>nn', '<cmd>Neogit<cr>', desc = '[N]eogit' },
+      { '<leader>nc', '<cmd>Neogit commit<cr>', desc = '[N]eogit [C]ommit' },
     },
   },
 }
