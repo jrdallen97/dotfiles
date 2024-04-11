@@ -62,28 +62,13 @@ return {
   {
     -- A Git wrapper so awesome, it should be illegal
     'tpope/vim-fugitive',
+    lazy = false,
     keys = {
-      { '<leader>gs', '<cmd>G<cr>', desc = '[G]it [S]tatus' },
+      { '<leader>gs', '<cmd>tab G<cr>', desc = '[G]it [S]tatus' },
+      { '<leader>gb', '<cmd>Git blame<cr>', desc = '[G]it [B]lame' },
       { '<leader>gc', '<cmd>Git commit<cr>', desc = '[G]it [C]ommit' },
       { '<leader>gp', '<cmd>Git push<cr>', desc = '[G]it [P]ush' },
       { '<leader>gl', '<cmd>Git pull<cr>', desc = '[G]it Pul[L]' },
-    },
-  },
-
-  {
-    -- A git interface for Neovim, inspired by Magit
-    'NeogitOrg/neogit',
-    dependencies = {
-      'nvim-lua/plenary.nvim', -- required
-      'sindrets/diffview.nvim', -- optional - Diff integration
-
-      -- Only one of these is needed, not both.
-      'nvim-telescope/telescope.nvim', -- optional
-    },
-    config = true,
-    keys = {
-      { '<leader>nn', '<cmd>Neogit<cr>', desc = '[N]eogit' },
-      { '<leader>nc', '<cmd>Neogit commit<cr>', desc = '[N]eogit [C]ommit' },
     },
   },
 }

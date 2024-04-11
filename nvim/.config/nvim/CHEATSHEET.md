@@ -91,45 +91,45 @@ TODO: not yet ported over
 
 Provided by `neovim/nvim-lspconfig` (amongst others.)
 
-- `K`:    Show hover information about symbol under cursor
-- `C-k`:  Show signature information
-- `gl`:   Show diagnostics in floating window
-- `[d`:   Previous diagnostic
-- `]d`:   Next diagnostic
-- `gd`:   Goto definition
-- `gD`:   Goto declaration (some LSPs don't implement this)
-- `go`:   Goto type definition
-- `gi`:   List implementations (quickfix)
-- `gr`:   List references (quickfix)
-- `<F2>`: Rename symbol
-- `<F4>`: Select code action
+- `K`:     Show hover information about symbol under cursor
+- `<C-k>`: Show hover information about symbol under cursor (also works in insert)
+- `<C-s>`: Show signature information (also works in insert)
+- `gd`: Goto definition
+- `gr`: Goto references (telescope)
+- `gI`: Goto implementation (telescope)
+- `gD`: Goto declaration (some LSPs don't implement this)
+- `<leader>D`:  Goto type definition
+- `<leader>ca`: Code actions
+- `<F4>`:       Code actions
+- `<leader>rn`: Rename symbol under cursor
+- `<F2>`:       Rename symbol under cursor
+- `<leader>ds`: Document symbols, fuzzy find all the symbols in your current document (telescope)
+- `<leader>ws`: Workspace symbols, fuzzy find all the symbols in your current workspace (telescope)
+
+## Diagnostics
+
+Kinda built in, but also fed by LSP.
+
+- `[d`: Previous diagnostic
+- `]d`: Next diagnostic
+- `<leader>E`: Open floating diagnostics window
+- `<leader>q`: Send diagnostics to quickfix
 
 ## Autocompletion
 
+Provided by `hrsh7th/nvim-cmp`.
+
 - `<C-Space>`: Manually trigger completion (doesn't work?)
 - `<C-y>`:  Accept completion
+- `<Tab>`:  Accept completion
 - `<Down>`: Next item in list
 - `<C-n>`:  Next item in list
 - `<Up>`:   Previous item in list
 - `<C-p>`:  Previous item in list
+- `<C-u>`:  Scroll documentation window up
+- `<C-d>`:  Scroll documentation window down
 - `<C-l>`:  (after accepting snippet) Next location in snippet
 - `<C-h>`:  (after accepting snippet) Previous location in snippet
-
-Old: Provided by `VonHeikemen/lsp-zero.nvim`.
-
-- `<C-e>`:   Toggle completion popup
-- `<Tab>`:   Show completion (if in word)
-- `<S-Tab>`: Literal tab character (if in word)
-- `<Enter>`: Confirm selection
-- `<C-y>`:   Confirm selection
-- `<Down>`:  Next item in list
-- `<Tab>`:   Next item in list
-- `<C-n>`:   Next item in list
-- `<Up>`:    Previous item in list
-- `<S-Tab>`: Previous item in list
-- `<C-p>`:   Previous item in list
-- `<C-d>`:   Next placeholder in snippet
-- `<C-b>`:   Previous placeholder in snippet
 
 ## Telescope
 
@@ -174,6 +174,26 @@ Text object:
 - `ih`: inner hunk, e.g.
   - `vih`: Select all changes in a hunk
   - `dih`: Delete all changes in a hunk
+
+### Fugitive
+
+Provided by `tpope/vim-fugitive`.
+
+- `:G`: Open fugitive in a split
+- `:tab G`:     Open fugitive in a new tab
+- `<leader>gs`: Open fugitive in a new tab
+- `<leader>gb`: Git blame
+- `<leader>gc`: Git commit
+- `<leader>gp`: Git push
+- `<leader>gl`: Git pull
+
+From within fugitive:
+
+- `s`: Stage file/hunk
+- `u`: Unstage file/hunk
+- `U`: Unstage all
+- `-`: Toggle staged for file/hunk
+- `=`: Toggle inline diff for file/hunk
 
 ## netrw
 

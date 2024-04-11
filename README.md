@@ -10,7 +10,7 @@ Uninstall existing nvim config & install with GNU stow:
 
 ```shell
 rm -rf ~/.config/nvim ~/.local/share/nvim
-stow nvim
+stow -t ~ nvim
 ```
 
 ## Rendering markdown to HTML
