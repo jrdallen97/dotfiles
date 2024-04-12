@@ -64,7 +64,7 @@ return {
     'tpope/vim-fugitive',
     lazy = false,
     keys = {
-      { '<leader>gs', '<cmd>tab G<cr>', desc = '[G]it [S]tatus' },
+      { '<leader>gg', '<cmd>tab G<cr>', desc = '[G]it Open Fugitive' },
       { '<leader>gb', '<cmd>Git blame<cr>', desc = '[G]it [B]lame' },
       { '<leader>gc', '<cmd>Git commit<cr>', desc = '[G]it [C]ommit' },
       { '<leader>gp', '<cmd>Git push<cr>', desc = '[G]it [P]ush' },

@@ -181,7 +181,8 @@ Provided by `tpope/vim-fugitive`.
 
 - `:G`: Open fugitive in a split
 - `:tab G`:     Open fugitive in a new tab
-- `<leader>gs`: Open fugitive in a new tab
+- `<leader>gg`: Open fugitive in a new tab
+- `<leader>gs`: Git status (telescope)
 - `<leader>gb`: Git blame
 - `<leader>gc`: Git commit
 - `<leader>gp`: Git push
