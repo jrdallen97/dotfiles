@@ -59,6 +59,7 @@ return {
           layout_strategy = 'flex',
           layout_config = { width = 0.95, height = 0.95 },
           path_display = { 'truncate' },
+          dynamic_preview_title = true,
         },
         -- pickers = {},
         extensions = {
@@ -108,6 +109,9 @@ return {
       vim.keymap.set('n', '<leader>sn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
+
+      -- Enable line numbers in telescope preview
+      vim.cmd 'autocmd User TelescopePreviewerLoaded setlocal number'
     end,
   },
 }

@@ -74,12 +74,15 @@ A special buffer for showing a list of locations/files e.g as the results of a s
 - `:cla[st]`:  Go to the last item on the list.
 - `:cc <n>`:   Go to the nth item.
 
+The location list also behaves similarly but only stores locations for the current buffer.
+The commands to use it are the same, replacing the first `c` with `l` (e.g. `:lopen`, `]l`).
+
+`tpope/vim-unimpaired` provides `q` for `:cn`/`:cp` and `Q` for `:cfir`/`:cla`, or `l`/`L` for the location list.
+
 Handy shortcuts:
 
 TODO: not yet ported over
 
-- `[q`: `:cprev` (from `tpope/vim-unimpaired`)
-- `]q`: `:cnext` (from `tpope/vim-unimpaired`)
 - `<leader>co`: `:copen`
 - `<leader>cc`: `:cclose`
 - `<leader>cn`: `:cnext`
@@ -105,6 +108,8 @@ Provided by `neovim/nvim-lspconfig` (amongst others.)
 - `<F2>`:       Rename symbol under cursor
 - `<leader>ds`: Document symbols, fuzzy find all the symbols in your current document (telescope)
 - `<leader>ws`: Workspace symbols, fuzzy find all the symbols in your current workspace (telescope)
+- `<leader>q`:  Send all diagnostics to the quickfix list (project-wide)
+- `<leader>l`:  Send all diagnostics to the location list (current file only)
 
 ## Diagnostics
 
@@ -195,6 +200,8 @@ From within fugitive:
 - `U`: Unstage all
 - `-`: Toggle staged for file/hunk
 - `=`: Toggle inline diff for file/hunk
+- `]]`: Next section
+- `[[`: Previous section
 
 ## netrw
 
