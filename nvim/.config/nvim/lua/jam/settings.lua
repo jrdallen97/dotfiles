@@ -20,7 +20,11 @@ vim.opt.showmode = false
 --  See `:help 'clipboard'`
 vim.opt.clipboard = 'unnamedplus'
 
--- Enable break indent
+-- Turn on line wrapping by default
+vim.opt.wrap = true
+-- Slightly smarter line wrapping
+vim.opt.linebreak = true
+-- Keep wrapped lines at the same indentation as the first line
 vim.opt.breakindent = true
 
 -- Save undo history
@@ -59,6 +63,8 @@ vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 5
+-- Minimal number of screen columns to keep left and right of the cursor.
+vim.opt.sidescrolloff = 3
 
 -- [[ Basic Autocommands ]]
 --  See :help lua-guide-autocommands
