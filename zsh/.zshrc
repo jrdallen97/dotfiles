@@ -20,6 +20,9 @@ else
   export VISUAL='vim'
 fi
 
+# Make less a little nicer
+export LESS='-RiF --mouse --wheel-lines=3'
+
 # Load my aliases (and some functions)
 [[ -r "$HOME/.zsh_aliases" ]] && source "$HOME/.zsh_aliases"
 # Load optional configs
