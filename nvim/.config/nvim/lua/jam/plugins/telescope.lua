@@ -61,7 +61,20 @@ return {
           path_display = { 'truncate' },
           dynamic_preview_title = true,
         },
-        -- pickers = {},
+        pickers = {
+          buffers = {
+            mappings = {
+              i = {
+                ['<C-d>'] = require('telescope.actions').delete_buffer,
+              },
+              n = {
+                ['<C-d>'] = require('telescope.actions').delete_buffer,
+              },
+            },
+            sort_lastused = true,
+            sort_mru = true,
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
