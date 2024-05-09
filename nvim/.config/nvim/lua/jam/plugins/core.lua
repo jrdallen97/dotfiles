@@ -36,8 +36,17 @@ return {
     end,
   },
 
-  -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth',
+  {
+    -- Automatic indentation style detection for Neovim
+    'nmac427/guess-indent.nvim',
+    config = {
+      filetype_exclude = { -- A list of filetypes for which the auto command gets disabled
+        'netrw',
+        'tutor',
+        'go',
+      },
+    },
+  },
 
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
