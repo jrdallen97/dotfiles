@@ -27,10 +27,9 @@ export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 export PROD_CONTEXT_NAME=prod
 
 # Kubes shortcuts
-alias kcx='kubectx'
-alias kns='kubens'
-alias ktest2='kubectx test2'
-alias ktest1='kubectx test1'
+alias kn='kubens'
+alias k2='kubectx test2'
+alias k1='kubectx test1'
 alias kprod='kubectx prod'
 
 # Sparx commands
