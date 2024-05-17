@@ -82,11 +82,11 @@ return {
         lsp_fallback = true,
       },
       formatters_by_ft = {
-        javascript = { 'prettier' },
-        javascriptreact = { 'prettier' },
+        javascript = { 'eslint_d' },
+        javascriptreact = { 'eslint_d' },
         lua = { 'stylua' },
-        typescript = { 'prettier' },
-        typescriptreact = { 'prettier' },
+        typescript = { 'eslint_d' },
+        typescriptreact = { 'eslint_d' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --

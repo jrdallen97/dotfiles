@@ -189,6 +189,7 @@ return {
       -- vim.list_extend(ensure_installed, {})
       require('mason-tool-installer').setup {
         ensure_installed = {
+          'eslint_d',
           'golangci-lint',
           'gopls',
           'prettier',
