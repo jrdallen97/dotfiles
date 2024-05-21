@@ -57,9 +57,10 @@ return {
           --   i = { ['<c-enter>'] = 'to_fuzzy_refine' },
           -- },
           layout_strategy = 'flex',
-          layout_config = { width = 0.95, height = 0.95 },
+          layout_config = { width = 0.99, height = 0.99, prompt_position = 'top' },
           path_display = { 'truncate' },
           dynamic_preview_title = true,
+          sorting_strategy = 'ascending',
         },
         pickers = {
           buffers = {
