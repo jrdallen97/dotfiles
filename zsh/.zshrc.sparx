@@ -44,10 +44,15 @@ alias genproto="spxdev gen client-types"
 changemonkey() {(cd "$CLOUDPATH" && python3 tools/release/change_monkey.py "$@")}
 
 # Client helpers
-tp2() {(cd "$CLOUDPATH/teacherportal/tpclient2"; pnpm start-test2)}
-tp2i() {(cd "$CLOUDPATH/teacherportal/tpclient2"; pnpm i)}
-adminportal() {(cd "$CLOUDPATH/schools/admin-portal" && pnpm i && pnpm dev)}
-alias adminportal-pf="orca pf clear && orca pf apply $CLOUDPATH/schools/admin-portal/orca.ports"
+tp2() {(cd "$CLOUDPATH/js/apps/tpclient2"; pnpm start-test2)}
+tp2i() {(cd "$CLOUDPATH/js/apps/tpclient2"; pnpm i)}
+rdr() {(cd "$CLOUDPATH/js/apps/reader"; pnpm start-test2)}
+rdri() {(cd "$CLOUDPATH/js/apps/reader"; pnpm i)}
+sci() {(cd "$CLOUDPATH/js/apps/science"; pnpm start-test2)}
+scii() {(cd "$CLOUDPATH/js/apps/science"; pnpm i)}
+adm() {(cd "$CLOUDPATH/schools/admin-portal"; pnpm dev)}
+admi() {(cd "$CLOUDPATH/schools/admin-portal"; pnpm i)}
+admpf() {orca pf clear && orca pf apply $CLOUDPATH/schools/admin-portal/orca.ports}
 
 # DB connection
 alias sparx-db-test2='kubectl --context test2 -n pgbouncer-iguana port-forward deployment/pgbouncer 5432:5432'
