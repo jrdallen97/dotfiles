@@ -46,9 +46,9 @@ changemonkey() {(cd "$CLOUDPATH" && python3 tools/release/change_monkey.py "$@")
 # Client helpers
 tp2() {(cd "$CLOUDPATH/js/apps/tpclient2"; pnpm start-test2)}
 tp2i() {(cd "$CLOUDPATH/js/apps/tpclient2"; pnpm i)}
-rdr() {(cd "$CLOUDPATH/js/apps/reader"; pnpm start-test2)}
+rdr() {(cd "$CLOUDPATH/js/apps/reader"; pnpm dev-test2)}
 rdri() {(cd "$CLOUDPATH/js/apps/reader"; pnpm i)}
-sci() {(cd "$CLOUDPATH/js/apps/science"; pnpm start-test2)}
+sci() {(cd "$CLOUDPATH/js/apps/science"; pnpm dev-test2)}
 scii() {(cd "$CLOUDPATH/js/apps/science"; pnpm i)}
 adm() {(cd "$CLOUDPATH/schools/admin-portal"; pnpm dev)}
 admi() {(cd "$CLOUDPATH/schools/admin-portal"; pnpm i)}
