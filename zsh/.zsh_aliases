@@ -111,6 +111,7 @@ alias gcb='echo use gsc'
 alias gcd='echo use gsd'
 # git switch
 alias gss='git switch'
+alias gsw='git switch'
 alias gsc='git switch -c'
 alias gsd='git switch $(git_default_branch)'
 # git diff

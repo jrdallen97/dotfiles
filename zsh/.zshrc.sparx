@@ -36,7 +36,6 @@ alias kprod='kubectx prod'
 alias kdev="$CLOUDPATH/kdev.sh"
 alias prod-perms="kdev prod-perms k8s"
 alias barx="$CLOUDPATH/barx.sh"
-alias dev="spxdev"
 alias gen="spxdev gen"
 alias gaz="spxdev gen gazelle"
 alias pf="orca pf"
