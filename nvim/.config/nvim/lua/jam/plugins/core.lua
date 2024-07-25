@@ -22,6 +22,8 @@ return {
     'stevearc/oil.nvim',
     config = function()
       require('oil').setup {
+        -- Replace netrw
+        default_file_explorer = true,
         -- Skip the confirmation popup for simple operations (:help oil.skip_confirm_for_simple_edits)
         skip_confirm_for_simple_edits = true,
 

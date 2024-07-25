@@ -19,7 +19,13 @@ return {
           return vim.fn.executable 'make' == 1
         end,
       },
-      { 'nvim-telescope/telescope-ui-select.nvim' },
+
+      -- Use a telescope picker for builtin nvim select windows (e.g. LSP code actions)
+      'nvim-telescope/telescope-ui-select.nvim',
+
+      -- A file browser extension for telescope.nvim.
+      -- It supports synchronized creation, deletion, renaming, and moving of files and folders.
+      'nvim-telescope/telescope-file-browser.nvim',
 
       -- Useful for getting pretty icons, but requires special font.
       --  If you already have a Nerd Font, or terminal set up with fallback fonts
@@ -80,12 +86,26 @@ return {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
+          file_browser = {
+            -- Disables netrw and use telescope-file-browser in its place
+            -- hijack_netrw = true,
+            mappings = {
+              ['i'] = {
+                -- Disable backspace going up a level when prompt empty
+                -- ['<bs>'] = false,
+              },
+              ['n'] = {
+                -- your custom normal mode mappings
+              },
+            },
+          },
         },
       }
 
       -- Enable telescope extensions, if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
+      pcall(require('telescope').load_extension, 'file_browser')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
@@ -120,12 +140,15 @@ return {
       end, { desc = '[S]earch [/] in Open Files' })
 
       -- Shortcut for searching your neovim configuration files
-      vim.keymap.set('n', '<leader>sn', function()
+      vim.keymap.set('n', '<leader>sv', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
-      end, { desc = '[S]earch [N]eovim files' })
+      end, { desc = '[S]earch [V]im config' })
 
       -- Enable line numbers in telescope preview
       vim.cmd 'autocmd User TelescopePreviewerLoaded setlocal number'
+
+      -- Open file browser with the path of the current buffer
+      vim.keymap.set('n', '_', ':Telescope file_browser path=%:p:h select_buffer=true<CR>', { desc = 'Explore with Telescope File Browser' })
     end,
   },
 }
