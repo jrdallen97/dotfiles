@@ -144,8 +144,9 @@ return {
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        -- tsserver = {},
-        --
+        tsserver = {},
+
+        emmet = {},
 
         lua_ls = {
           -- cmd = {...},
@@ -189,12 +190,11 @@ return {
       -- vim.list_extend(ensure_installed, {})
       require('mason-tool-installer').setup {
         ensure_installed = {
-          'eslint_d',
           'golangci-lint',
           'gopls',
-          'prettier',
           'stylua', -- Used to format lua code
           'tsserver',
+          'emmet_language_server',
         },
       }
 
