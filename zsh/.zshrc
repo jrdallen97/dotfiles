@@ -93,6 +93,7 @@ MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL #00ffff"
 if command -v rg >/dev/null; then
   # Use rg if available as it's generally faster
   export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 fi
 [[ -r ~/.fzf.zsh ]] && source ~/.fzf.zsh
 
