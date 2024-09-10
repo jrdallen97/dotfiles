@@ -144,7 +144,7 @@ return {
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        tsserver = {},
+        ts_ls = {},
 
         emmet = {},
 
@@ -193,7 +193,7 @@ return {
           'golangci-lint',
           'gopls',
           'stylua', -- Used to format lua code
-          'tsserver',
+          'ts_ls',
           'emmet_language_server',
         },
       }
