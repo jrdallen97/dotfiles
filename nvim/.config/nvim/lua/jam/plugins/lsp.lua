@@ -195,6 +195,7 @@ return {
           'stylua', -- Used to format lua code
           'ts_ls',
           'emmet_language_server',
+          'prettierd',
         },
       }
 
