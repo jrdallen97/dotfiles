@@ -5,11 +5,8 @@ export PATH="/usr/local/sbin:$PATH"
 # Istio
 export PATH="$PATH:$HOME/.istioctl/bin"
 
-# Old path stuff
-#export PATH=$HOME/.composer/vendor/bin:$PATH
-#export PATH=$HOME/Library/Python/3.7/bin:$PATH
-#export PATH=`yarn global bin`:$PATH
-
+# Adding homebrew site-functions to FPATH lets us completions that are installed there
+# (mostly just completion helpers)
 export FPATH=$FPATH:/opt/homebrew/share/zsh/site-functions
 
 # IntelliJ
@@ -19,6 +16,7 @@ idea() { open -na "IntelliJ IDEA.app" --args "$@" }
 export GOPATH="$HOME/go" # Used by a number of our scripts
 export PATH="$PATH:$GOPATH/bin" # Add go bin to path
 export CLOUDPATH="$HOME/code/CloudExperiments" # Save CloudExperiments path - useful for commands/aliases
+export SPX_ARCH="arm64"
 
 # Use new auth plugin
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
@@ -36,7 +34,6 @@ alias kprod='kubectx prod'
 # Sparx commands
 alias kdev="$CLOUDPATH/kdev.sh"
 alias prod-perms="kdev prod-perms k8s"
-alias barx="$CLOUDPATH/barx.sh"
 alias gen="spxdev gen"
 alias gaz="spxdev gen gazelle"
 alias pf="orca pf"
@@ -64,57 +61,10 @@ alias cut='gcut'
 alias awk='gawk'
 alias sed='gsed'
 
-# Sparx downloads files from remote cache so you don't have to build them locally.
-# It often fails to even reach the remote cache, and has a 90s timeout each time it tries.
-# With bad internet it's faster just to build them yourself everytime.
-export BARX_NO_REMOTE_CACHE=1
-# Fix kdev docker context
-export KDEV_KUBE_CONTEXT="docker-desktop"
-
-# HM
-#alias pa='php artisan'
-#alias p='./vendor/bin/phpunit --exclude-group wonde-integration'
-#alias pg='./vendor/bin/phpunit --group'
-#alias pf='./vendor/bin/phpunit --filter'
-export PATH="$HOME/.composer/vendor/bin:$PATH"
-
-# E2Es
-#alias duskf='php artisan dusk --filter'
-#headless() { sed -i '' "s/  \/\/ '--headless'/  '--headless'/" tests/DuskTestCase.php }
-#headfull() { sed -i '' "s/  '--headless'/  \/\/ '--headless'/" tests/DuskTestCase.php }
-
 # Other
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 alias activate='source ./venv/bin/activate'
 alias diff='diff --color=auto'
-#alias beep='osascript -e beep'
-
-#hegarty() {
-#  valet start
-#  brew services start redis
-#  sudo launchctl load -F /Library/LaunchDaemons/com.oracle.oss.mysql.mysqld.plist
-#  #nvm alias default 11.10.1 && nvm use default
-#  nvm alias default 14 && nvm use default
-#}
-#nohegarty() {
-#  valet stop
-#  brew services stop redis
-#  sudo launchctl unload -F /Library/LaunchDaemons/com.oracle.oss.mysql.mysqld.plist
-#}
-#sparx() {
-#  open /Applications/Docker.app
-#  kdev supervisor start
-#  kdev supervisor ctl start all
-#  mkdir -p /usr/local/etc/postgresql/9.6/sparx-dev/conf.d
-#  kdev db ctl start
-#  nvm alias default 12.17.0 && nvm use default
-#}
-#nosparx() {
-#  osascript -e 'quit app "Docker"'
-#  kdev supervisor ctl stop all
-#  kdev supervisor stop
-#  kdev db ctl stop --force
-#}
 
 [[ -r "$HOME/.iterm2_shell_integration.zsh" ]] && source "$HOME/.iterm2_shell_integration.zsh"
 
@@ -127,3 +77,7 @@ alias diff='diff --color=auto'
 # tabtab source for packages
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
+
+if command -v ngrok &>/dev/null; then
+  eval "$(ngrok completion)"
+fi
