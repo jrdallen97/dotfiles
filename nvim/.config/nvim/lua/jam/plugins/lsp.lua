@@ -174,6 +174,16 @@ return {
             },
           },
         },
+
+        tailwindcss = {
+          hovers = true,
+          suggestions = true,
+          root_dir = function(fname)
+            -- Disable for files without a tailwind config
+            local root_pattern = require('lspconfig.util').root_pattern('tailwind.config.cjs', 'tailwind.config.js', 'postcss.config.js')
+            return root_pattern(fname)
+          end,
+        },
       }
 
       -- Ensure the servers and tools above are installed
