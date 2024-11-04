@@ -134,7 +134,16 @@ return {
         },
         -- Autoinstall languages that are not installed
         auto_install = true,
-        highlight = { enable = true },
+        highlight = {
+          enable = true,
+          disable = function(lang, bufnr)
+            -- Disable in large markdown buffers
+            -- return lang == 'markdown' and vim.api.nvim_buf_line_count(bufnr) > 50000
+
+            -- Disable in huge buffers
+            return vim.api.nvim_buf_line_count(bufnr) > 50000
+          end,
+        },
         indent = { enable = true },
       }
 

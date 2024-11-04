@@ -194,6 +194,7 @@ return {
           'gopls',
           'stylua', -- Used to format lua code
           'ts_ls',
+          'cssls',
           'emmet_language_server',
           'prettierd',
         },
