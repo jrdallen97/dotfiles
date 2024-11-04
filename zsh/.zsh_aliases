@@ -146,6 +146,8 @@ alias gstp='git stash pop'
 # git update-index
 alias gignore='git update-index --assume-unchanged'
 alias gunignore='git update-index --no-assume-unchanged'
+# git add all & commit w/ ISO date as commit msg
+alias gcdate='git add --all && git commit -m "$(date -Iseconds)"'
 
 # Silly helpers
 alias ..='cd ..'
