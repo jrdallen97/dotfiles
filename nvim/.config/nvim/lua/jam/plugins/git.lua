@@ -6,18 +6,15 @@ return {
       on_attach = function(bufnr)
         local gitsigns = require 'gitsigns'
 
-        -- local map = function(keys, func, desc, mode)
-        --   mode = mode or 'n'
-        --   vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
-        -- end
-        local function map(mode, l, r, desc)
-          vim.keymap.set(mode, l, r, {
+        local function map(mode, lhs, rhs, desc)
+          vim.keymap.set(mode, lhs, rhs, {
             buffer = bufnr,
             desc = 'Git: ' .. (desc or '?'),
           })
         end
 
         -- Navigation
+        -- Using c to match built-in diff binding, overriding to use git for non-diff buffers
         map('n', ']c', function()
           if vim.wo.diff then
             vim.cmd.normal { ']c', bang = true }
