@@ -101,6 +101,7 @@ Provided by `neovim/nvim-lspconfig` (amongst others.)
 - `gr`: Goto references (telescope)
 - `gI`: Goto implementation (telescope)
 - `gD`: Goto declaration (some LSPs don't implement this)
+- `gT`: Goto type definition
 - `<leader>D`:  Goto type definition
 - `<leader>ca`: Code actions
 - `<F4>`:       Code actions
@@ -150,6 +151,7 @@ Supports many standard mappings (e.g. `H/M/L`, `gg/G`, normal/insert mode).
 - `<C-t>`: Open file in a new tab
 - `<C-u>`: Scroll up in preview window
 - `<C-d>`: Scroll down in preview window
+- `<C-d>`: Delete buffer (in *buffer switcher only**)
 
 ## Comments
 
