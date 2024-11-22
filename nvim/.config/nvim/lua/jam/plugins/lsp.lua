@@ -207,6 +207,7 @@ return {
           'cssls',
           'emmet_language_server',
           'prettierd',
+          'eslint_d',
           'markdown_oxide',
         },
       }
