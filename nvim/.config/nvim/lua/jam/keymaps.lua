@@ -1,35 +1,37 @@
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
+local set = vim.keymap.set
+
 -- Jump to vim settings
-vim.keymap.set('n', '<leader>ev', ':tabe ~/.config/nvim/lua/jam<cr>', { desc = '[E]dit [V]im settings' })
-vim.keymap.set('n', '<leader>ec', ':tabe ~/.config/nvim/CHEATSHEET.md<cr>', { desc = '[E]dit [C]heatsheet' })
+set('n', '<leader>ev', ':tabe ~/.config/nvim/lua/jam<cr>', { desc = '[E]dit [V]im settings' })
+set('n', '<leader>ec', ':tabe ~/.config/nvim/CHEATSHEET.md<cr>', { desc = '[E]dit [C]heatsheet' })
 
 -- Notes
-vim.keymap.set('n', '<leader>en', ':tabe ~/notes/<cr>', { desc = '[E]dit [N]otes' })
--- vim.keymap.set(
+set('n', '<leader>en', ':tabe ~/notes/<cr>', { desc = '[E]dit [N]otes' })
+-- set(
 --   'n',
 --   '<leader>ed',
 --   -- Open today's daily note, open TODOs in a split, change back to the first split.
 --   ':exec "tabe ~/notes/diary/".strftime("%F").".md"<cr>:sp ~/notes/diary/TODO.md<cr><C-w><C-k>',
 --   { desc = '[E]dit [D]aily note' }
 -- )
-vim.keymap.set('n', '<leader>et', ':tabe ~/notes/diary/TODO.md<cr>', { desc = '[E]dit [T]odo list' })
+set('n', '<leader>et', ':tabe ~/notes/diary/TODO.md<cr>', { desc = '[E]dit [T]odo list' })
 
 -- Easily run executable files
-vim.keymap.set('n', '<leader>rr', ':w<cr>:!%:p<cr>', { desc = '[RR]un current file (shebang)' })
-vim.keymap.set('n', '<leader>rt', ':w<cr>:!time %:p<cr>', { desc = '[R]un & [T]ime current file (shebang)' })
+set('n', '<leader>rr', ':w<cr>:!%:p<cr>', { desc = '[RR]un current file (shebang)' })
+set('n', '<leader>rt', ':w<cr>:!time %:p<cr>', { desc = '[R]un & [T]ime current file (shebang)' })
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-vim.keymap.set('n', '<leader>L', vim.diagnostic.setloclist, { desc = 'Open diagnostic [L]ocation list (all diagnostics)' })
-vim.keymap.set('n', '<leader>Q', vim.diagnostic.setqflist, { desc = 'Open diagnostic [Q]uickfix list (all diagnostics)' })
+set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
+set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+set('n', '<leader>L', vim.diagnostic.setloclist, { desc = 'Open diagnostic [L]ocation list (all diagnostics)' })
+set('n', '<leader>Q', vim.diagnostic.setqflist, { desc = 'Open diagnostic [Q]uickfix list (all diagnostics)' })
 -- Less busy diagnostic keymaps
-vim.keymap.set('n', '<leader>l', function()
+set('n', '<leader>l', function()
   vim.diagnostic.setloclist { severity = { min = vim.diagnostic.severity.ERROR } }
 end, { desc = 'Open diagnostic [L]ocation list (errors only)' })
-vim.keymap.set('n', '<leader>q', function()
+set('n', '<leader>q', function()
   vim.diagnostic.setqflist { severity = { min = vim.diagnostic.severity.ERROR } }
 end, { desc = 'Open diagnostic [Q]uickfix list (errors only)' })
 
@@ -39,30 +41,30 @@ end, { desc = 'Open diagnostic [Q]uickfix list (errors only)' })
 --
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Quick toggles
--- vim.keymap.set('n', '<leader>tl', ':set list!<cr>', { desc = '[T]oggle [L]ist' })
-vim.keymap.set('n', '<leader>tw', ':set wrap!<cr>', { desc = '[T]oggle [W]rap' })
+-- set('n', '<leader>tl', ':set list!<cr>', { desc = '[T]oggle [L]ist' })
+set('n', '<leader>tw', ':set wrap!<cr>', { desc = '[T]oggle [W]rap' })
 
 -- Move lines up & down easily
 -- E.g. ":m '>+1<CR>gv" = Move selection down, reindent & reselect
-vim.keymap.set('v', 'J', ":m '>+1<CR>gv", { desc = 'Move selection down' })
-vim.keymap.set('v', 'K', ":m '<-2<CR>gv", { desc = 'Move selection up' })
-vim.keymap.set('v', '<S-Down>', ":m '>+1<CR>gv", { desc = 'Move selection down' })
-vim.keymap.set('v', '<S-Up>', ":m '<-2<CR>gv", { desc = 'Move selection up' })
+set('v', 'J', ":m '>+1<CR>gv", { desc = 'Move selection down' })
+set('v', 'K', ":m '<-2<CR>gv", { desc = 'Move selection up' })
+set('v', '<S-Down>', ":m '>+1<CR>gv", { desc = 'Move selection down' })
+set('v', '<S-Up>', ":m '<-2<CR>gv", { desc = 'Move selection up' })
 
 -- Reselect after changing indentation
-vim.keymap.set('v', '>', '>gv', { desc = 'Increase indentation & reselect' })
-vim.keymap.set('v', '<', '<gv', { desc = 'Decrease indentation & reselect' })
-vim.keymap.set('v', '<S-Right>', '>gv', { desc = 'Increase indentation & reselect' })
-vim.keymap.set('v', '<S-Left>', '<gv', { desc = 'Decrease indentation & reselect' })
+set('v', '>', '>gv', { desc = 'Increase indentation & reselect' })
+set('v', '<', '<gv', { desc = 'Decrease indentation & reselect' })
+set('v', '<S-Right>', '>gv', { desc = 'Increase indentation & reselect' })
+set('v', '<S-Left>', '<gv', { desc = 'Decrease indentation & reselect' })
