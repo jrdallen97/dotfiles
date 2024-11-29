@@ -37,20 +37,15 @@ alias prod-perms="kdev prod-perms k8s"
 alias gen="spxdev gen"
 alias gaz="spxdev gen gazelle"
 alias pf="orca pf"
-alias genproto="spxdev gen client-types"
 changemonkey() {(cd "$CLOUDPATH" && python3 tools/release/change_monkey.py "$@")}
 
 # Client helpers
-tp2() {(cd "$CLOUDPATH/js/apps/tpclient2"; pnpm start-test2)}
-tp2i() {(cd "$CLOUDPATH/js/apps/tpclient2"; pnpm i)}
-mat() {(cd "$CLOUDPATH/js/apps/maths"; pnpm dev-test2)}
-mati() {(cd "$CLOUDPATH/js/apps/maths"; pnpm i)}
-rdr() {(cd "$CLOUDPATH/js/apps/reader"; pnpm dev-test2)}
-rdri() {(cd "$CLOUDPATH/js/apps/reader"; pnpm i)}
-sci() {(cd "$CLOUDPATH/js/apps/science"; pnpm dev-test2)}
-scii() {(cd "$CLOUDPATH/js/apps/science"; pnpm i)}
-adm() {(cd "$CLOUDPATH/schools/admin-portal"; pnpm dev)}
-admi() {(cd "$CLOUDPATH/schools/admin-portal"; pnpm i)}
+tp2() {(cd "$CLOUDPATH/js/apps/tpclient2"; pnpm ${@:-start-test2})}
+sw2() {(cd "$CLOUDPATH/js/apps/swclient2"; pnpm ${@:-dev})}
+mat() {(cd "$CLOUDPATH/js/apps/maths"; pnpm ${@:-dev-test2})}
+rdr() {(cd "$CLOUDPATH/js/apps/reader"; pnpm ${@:-dev-test2})}
+sci() {(cd "$CLOUDPATH/js/apps/science"; pnpm ${@:-dev-test2})}
+adm() {(cd "$CLOUDPATH/schools/admin-portal"; pnpm ${@:-dev})}
 admpf() {orca pf clear && orca pf apply $CLOUDPATH/schools/admin-portal/orca.ports}
 
 # DB connection
