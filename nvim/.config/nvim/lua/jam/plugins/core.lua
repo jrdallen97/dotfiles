@@ -130,6 +130,13 @@ return {
       --  and try some other statusline plugin
       require('mini.statusline').setup()
 
+      -- Work with trailing whitespace
+      require('mini.trailspace').setup()
+      -- Add a command to easily trim whitespace
+      vim.api.nvim_create_user_command('TrimWhitespace', function()
+        MiniTrailspace.trim()
+      end, {})
+
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
