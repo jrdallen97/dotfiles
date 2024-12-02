@@ -1,6 +1,28 @@
 # Vim cheatsheet
 
-## Random (mostly movement)
+<!-- mtoc-start -->
+
+- [Built-in](CHEATSHEET#Built-in)
+    - [Random (mostly movement)](CHEATSHEET#Random (mostly movement))
+    - [Window commands](CHEATSHEET#Window commands)
+    - [Jumps](CHEATSHEET#Jumps)
+    - [Folds](CHEATSHEET#Folds)
+    - [Quickfix list](CHEATSHEET#Quickfix list)
+    - [netrw](CHEATSHEET#netrw)
+- [Plugins](CHEATSHEET#Plugins)
+    - [LSP](CHEATSHEET#LSP)
+    - [Diagnostics](CHEATSHEET#Diagnostics)
+    - [Autocompletion](CHEATSHEET#Autocompletion)
+    - [Telescope](CHEATSHEET#Telescope)
+    - [Comments](CHEATSHEET#Comments)
+    - [Git](CHEATSHEET#Git)
+        - [Fugitive](CHEATSHEET#Fugitive)
+
+<!-- mtoc-end -->
+
+## Built-in
+
+### Random (mostly movement)
 
 - `*`:     Search for the word under the cursor
 - `#`:     Search for the word under the cursor (reverse)
@@ -21,9 +43,9 @@ Visual mode:
 
 - `p`: Paste over selection and yank previous contents
 - `P`: Paste over selection without yanking previous contents
-  - This is especially useful when using something like `vi"` to select an entire string, for example.
+    - This is especially useful when using something like `vi"` to select an entire string, for example.
 
-## Window commands
+### Window commands
 
 Note: most of these work even if you continue holding `Ctrl` for the 2nd key, e.g. `<C-w><C-o>`.
 
@@ -46,7 +68,7 @@ Also, for tabs:
 - `:tabe[dit]`:  Open a file in a new tab
 - `:tabc[lose]`: Close current tab
 
-## Jumps
+### Jumps
 
 `:h jump-motions`
 
@@ -62,7 +84,23 @@ Note: scrolling (e.g. `<C-d>`) is not a jump.
 - `M`:     Jump the cursor to the middle of the screen (**m**iddle)
 - `L`:     Jump the cursor to the bottom of the screen (**l**ow)
 
-## Quickfix list
+### Folds
+
+`:h folds`
+
+- `za`: Toggle fold under the cursor
+- `zv`: View cursor line: Open just enough folds to make the line in which the cursor is located not folded.
+- `zM`: Close all folds: set `foldlevel` to 0
+- `zR`: Open all folds: set `foldlevel` to highest fold level in file
+- `zm`: Fold more: Subtract 1 (or count) from `foldlevel`
+- `zr`: Reduce folding: Add 1 (or count) to `foldlevel`
+- Less useful?
+    - `zo`: Close one fold under the cursor. Accepts count (e.g. `3zo`)
+    - `zO`: Close all folds under the cursor recursively. Folds that don't contain the cursor line are unchanged.
+    - `zc`: Close one fold under the cursor. Accepts count (e.g. `3zc`)
+    - `zC`: Close all folds under the cursor recursively. Folds that don't contain the cursor line are unchanged.
+
+### Quickfix list
 
 A special buffer for showing a list of locations/files e.g as the results of a search.
 
@@ -90,122 +128,7 @@ TODO: not yet ported over
 - `<leader>cf`: `:cfirst`
 - `<leader>cl`: `:clast`
 
-## LSP
-
-Provided by `neovim/nvim-lspconfig` (amongst others.)
-
-- `K`:     Show hover information about symbol under cursor
-- `<C-k>`: Show hover information about symbol under cursor (also works in insert)
-- `<C-s>`: Show signature information (also works in insert)
-- `gd`: Goto definition
-- `gr`: Goto references (telescope)
-- `gI`: Goto implementation (telescope)
-- `gD`: Goto declaration (some LSPs don't implement this)
-- `gT`: Goto type definition
-- `<leader>D`:  Goto type definition
-- `<leader>ca`: Code actions
-- `<F4>`:       Code actions
-- `<leader>rn`: Rename symbol under cursor
-- `<F2>`:       Rename symbol under cursor
-- `<leader>ds`: Document symbols, fuzzy find all the symbols in your current document (telescope)
-- `<leader>ws`: Workspace symbols, fuzzy find all the symbols in your current workspace (telescope)
-- `<leader>q`:  Send all diagnostics to the quickfix list (project-wide)
-- `<leader>l`:  Send all diagnostics to the location list (current file only)
-
-## Diagnostics
-
-Kinda built in, but also fed by LSP.
-
-- `[d`: Previous diagnostic
-- `]d`: Next diagnostic
-- `<leader>E`: Open floating diagnostics window
-- `<leader>q`: Send diagnostics to quickfix
-
-## Autocompletion
-
-Provided by `hrsh7th/nvim-cmp`.
-
-- `<C-Space>`: Manually trigger completion (doesn't work?)
-- `<C-y>`:  Accept completion
-- `<Tab>`:  Accept completion
-- `<Down>`: Next item in list
-- `<C-n>`:  Next item in list
-- `<Up>`:   Previous item in list
-- `<C-p>`:  Previous item in list
-- `<C-u>`:  Scroll documentation window up
-- `<C-d>`:  Scroll documentation window down
-- `<C-l>`:  (after accepting snippet) Next location in snippet
-- `<C-h>`:  (after accepting snippet) Previous location in snippet
-
-## Telescope
-
-Provided by `nvim-telescope/telescope.nvim`.
-
-Supports many standard mappings (e.g. `H/M/L`, `gg/G`, normal/insert mode).
-
-- `?`:     Show telescope bindings (normal mode)
-- `<C-/>`: Show telescope bindings (insert mode)
-- `<C-c>`: Close telescope
-- `<C-x>`: Open file in a new horizontal split
-- `<C-v>`: Open file in a new vertical split
-- `<C-t>`: Open file in a new tab
-- `<C-u>`: Scroll up in preview window
-- `<C-d>`: Scroll down in preview window
-- `<C-d>`: Delete buffer (in *buffer switcher only**)
-
-## Comments
-
-Provided by `terrortylor/nvim-comment`.
-
-Provides some handy shortcuts for commenting/uncommenting blocks of code.
-
-- `gcc`:            Toggle comment on line
-- `gc` (visual):    Toggle comment on selected line(s)
-- `:CommentToggle`: Toggle comment on line(s), e.g.:
-  - `:%g/Foobar/CommentToggle`: Comment lines matching regex
-
-## Git
-
-Provided by `lewis6991/gitsigns.nvim`.
-
-- `]c`: Next change
-- `[c`: Prev change
-- `<leader>hs`: Stage hunk
-- `<leader>hS`: Stage all in file
-- `<leader>hu`: Undo stage hunk
-- `<leader>hr`: Reset hunk
-- `<leader>hb`: Blame current line
-- `<leader>td`: Toggle showing deleted lines
-
-Text object:
-- `ih`: inner hunk, e.g.
-  - `vih`: Select all changes in a hunk
-  - `dih`: Delete all changes in a hunk
-
-### Fugitive
-
-Provided by `tpope/vim-fugitive`.
-
-- `:G`: Open fugitive in a split
-- `:tab G`:     Open fugitive in a new tab
-- `<leader>gg`: Open fugitive in a new tab
-- `<leader>gs`: Git status (telescope)
-- `<leader>gb`: Git blame
-- `<leader>gc`: Git commit
-- `<leader>gp`: Git push
-- `<leader>gl`: Git pull
-
-From within fugitive:
-
-- `s`: Stage file/hunk
-- `u`: Unstage file/hunk
-- `U`: Unstage all
-- `-`: Toggle staged for file/hunk
-- `=`: Toggle inline diff for file/hunk
-- `]]`: Next section
-- `[[`: Previous section
-
-## netrw
+### netrw
 
 - `I`: Toggle help
 - `o`: Open in horizontal split
@@ -232,3 +155,120 @@ Getting into netrw:
 - `Sex[plore]`: `:Ex` in a new horizontal split
 - `Vex[plore]`: `:Ex` in a new vertical split
 - `Tex[plore]`: `:Ex` in a new tab
+
+## Plugins
+
+### LSP
+
+Provided by `neovim/nvim-lspconfig` (amongst others.)
+
+- `K`:     Show hover information about symbol under cursor
+- `<C-k>`: Show hover information about symbol under cursor (also works in insert)
+- `<C-s>`: Show signature information (also works in insert)
+- `gd`: Goto definition
+- `gr`: Goto references (telescope)
+- `gI`: Goto implementation (telescope)
+- `gD`: Goto declaration (some LSPs don't implement this)
+- `gT`: Goto type definition
+- `<leader>D`:  Goto type definition
+- `<leader>ca`: Code actions
+- `<F4>`:       Code actions
+- `<leader>rn`: Rename symbol under cursor
+- `<F2>`:       Rename symbol under cursor
+- `<leader>ds`: Document symbols, fuzzy find all the symbols in your current document (telescope)
+- `<leader>ws`: Workspace symbols, fuzzy find all the symbols in your current workspace (telescope)
+- `<leader>q`:  Send all diagnostics to the quickfix list (project-wide)
+- `<leader>l`:  Send all diagnostics to the location list (current file only)
+
+### Diagnostics
+
+Kinda built in, but also fed by LSP.
+
+- `[d`: Previous diagnostic
+- `]d`: Next diagnostic
+- `<leader>E`: Open floating diagnostics window
+- `<leader>q`: Send diagnostics to quickfix
+
+### Autocompletion
+
+Provided by `hrsh7th/nvim-cmp`.
+
+- `<C-Space>`: Manually trigger completion (doesn't work?)
+- `<C-y>`:  Accept completion
+- `<Tab>`:  Accept completion
+- `<Down>`: Next item in list
+- `<C-n>`:  Next item in list
+- `<Up>`:   Previous item in list
+- `<C-p>`:  Previous item in list
+- `<C-u>`:  Scroll documentation window up
+- `<C-d>`:  Scroll documentation window down
+- `<C-l>`:  (after accepting snippet) Next location in snippet
+- `<C-h>`:  (after accepting snippet) Previous location in snippet
+
+### Telescope
+
+Provided by `nvim-telescope/telescope.nvim`.
+
+Supports many standard mappings (e.g. `H/M/L`, `gg/G`, normal/insert mode).
+
+- `?`:     Show telescope bindings (normal mode)
+- `<C-/>`: Show telescope bindings (insert mode)
+- `<C-c>`: Close telescope
+- `<C-x>`: Open file in a new horizontal split
+- `<C-v>`: Open file in a new vertical split
+- `<C-t>`: Open file in a new tab
+- `<C-u>`: Scroll up in preview window
+- `<C-d>`: Scroll down in preview window
+- `<C-d>`: Delete buffer (in *buffer switcher only**)
+
+### Comments
+
+Provided by `terrortylor/nvim-comment`.
+
+Provides some handy shortcuts for commenting/uncommenting blocks of code.
+
+- `gcc`:            Toggle comment on line
+- `gc` (visual):    Toggle comment on selected line(s)
+- `:CommentToggle`: Toggle comment on line(s), e.g.:
+    - `:%g/Foobar/CommentToggle`: Comment lines matching regex
+
+### Git
+
+Provided by `lewis6991/gitsigns.nvim`.
+
+- `]c`: Next change
+- `[c`: Prev change
+- `<leader>hs`: Stage hunk
+- `<leader>hS`: Stage all in file
+- `<leader>hu`: Undo stage hunk
+- `<leader>hr`: Reset hunk
+- `<leader>hb`: Blame current line
+- `<leader>td`: Toggle showing deleted lines
+
+Text object:
+- `ih`: inner hunk, e.g.
+    - `vih`: Select all changes in a hunk
+    - `dih`: Delete all changes in a hunk
+
+#### Fugitive
+
+Provided by `tpope/vim-fugitive`.
+
+- `:G`: Open fugitive in a split
+- `:tab G`:     Open fugitive in a new tab
+- `<leader>gg`: Open fugitive in a new tab
+- `<leader>gs`: Git status (telescope)
+- `<leader>gb`: Git blame
+- `<leader>gc`: Git commit
+- `<leader>gp`: Git push
+- `<leader>gl`: Git pull
+
+From within fugitive:
+
+- `s`: Stage file/hunk
+- `u`: Unstage file/hunk
+- `U`: Unstage all
+- `-`: Toggle staged for file/hunk
+- `=`: Toggle inline diff for file/hunk
+- `]]`: Next section
+- `[[`: Previous section
