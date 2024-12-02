@@ -168,8 +168,7 @@ Provided by `neovim/nvim-lspconfig` (amongst others.)
 - `gd`: Goto definition
 - `gr`: Goto references (telescope)
 - `gI`: Goto implementation (telescope)
-- `gD`: Goto declaration (some LSPs don't implement this)
-- `gT`: Goto type definition
+- `gD`: Goto type definition
 - `<leader>D`:  Goto type definition
 - `<leader>ca`: Code actions
 - `<F4>`:       Code actions
@@ -179,6 +178,10 @@ Provided by `neovim/nvim-lspconfig` (amongst others.)
 - `<leader>ws`: Workspace symbols, fuzzy find all the symbols in your current workspace (telescope)
 - `<leader>q`:  Send all diagnostics to the quickfix list (project-wide)
 - `<leader>l`:  Send all diagnostics to the location list (current file only)
+
+Currently disabled:
+
+- `gD`: Goto declaration (some LSPs don't implement this)
 
 ### Diagnostics
 
