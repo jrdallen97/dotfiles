@@ -2,6 +2,9 @@
 
 <!-- mtoc-start -->
 
+- [Misc](CHEATSHEET#Misc)
+    - [Launch options](CHEATSHEET#Launch options)
+    - [Help](CHEATSHEET#Help)
 - [Built-in](CHEATSHEET#Built-in)
     - [Random (mostly movement)](CHEATSHEET#Random (mostly movement))
     - [Window commands](CHEATSHEET#Window commands)
@@ -19,6 +22,19 @@
         - [Fugitive](CHEATSHEET#Fugitive)
 
 <!-- mtoc-end -->
+
+## Misc
+
+### Launch options
+
+- `-d`: Open in diff-mode
+- `-p`: Open a tab for each file passed
+- `-O`: Open a vertical split for each file passed
+- `-o`: Open a horizontal split for each file passed
+
+### Help
+
+- `<C-]>`: Jump to definition (e.g. open help)
 
 ## Built-in
 
