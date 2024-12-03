@@ -66,8 +66,34 @@ vim.opt.scrolloff = 5
 -- Minimal number of screen columns to keep left and right of the cursor.
 vim.opt.sidescrolloff = 3
 
+-- Enable treesitter-based code folding by default
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+-- Don't fold anything by default
+vim.opt.foldlevelstart = 99
+-- Leave the first line of the fold as-is
+vim.opt.foldtext = ''
+
 -- [[ Basic Autocommands ]]
 --  See :help lua-guide-autocommands
+
+-- Reset fold level when entering a file. This ensures foldlevel is set to the
+-- max depth of the file rather than the default of 99, ensuring that `zm` will
+-- work as expected without needing `zR` first.
+--
+-- Normally, this would have the side-effect of re-opening all folds when
+-- switching buffers. We can avoid this by storing a variable on the buffer to
+-- track whether we've already reset folds.
+vim.api.nvim_create_autocmd('WinEnter', {
+  desc = 'Reset fold level when opening a file',
+  group = vim.api.nvim_create_augroup('reset-folds', { clear = true }),
+  callback = function()
+    if not vim.b.folds_reset then
+      vim.cmd [[ silent! normal zR ]]
+      vim.b.folds_reset = true
+    end
+  end,
+})
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
