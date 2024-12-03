@@ -84,7 +84,8 @@ return {
         },
         extensions = {
           ['ui-select'] = {
-            require('telescope.themes').get_dropdown(),
+            -- Don't bother using the dropdown theme bc it's pretty thin
+            -- require('telescope.themes').get_dropdown(),
           },
           file_browser = {
             -- Disables netrw and use telescope-file-browser in its place
