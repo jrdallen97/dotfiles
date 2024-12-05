@@ -1,16 +1,26 @@
 # dotfiles
 
-My config files for Linux. Installation should be as easy as cloning the repo and running one of the included install scripts, e.g. `./install_zsh`. Going forward I'll be mainly using GNU stow for managing dotfiles, rather than writing custom symlinking scripts for everything.
+My config files for Linux. Installation should be as easy as cloning the repo and either:
+
+- linking dotfiles with stow
+- using an install script, e.g. `./install_fzf`
+
+Going forward I'll be mainly using GNU stow for managing dotfiles, rather than writing custom symlinking scripts for everything. Any remaining install scripts will just be doing things like installing & configuring other tools for you (e.g. cloning github repos, in the case of fzf).
 
 ## Installation
 
+For the most part, just use GNU stow. For example:
+
+```shell
+stow -t ~ nvim zsh zsh-sparx
+```
+
 ### nvim
 
-Uninstall existing nvim config & install with GNU stow:
+You may need to uninstall any existing nvim config first:
 
 ```shell
 rm -rf ~/.config/nvim ~/.local/share/nvim
-stow -t ~ nvim
 ```
 
 ## Rendering markdown to HTML

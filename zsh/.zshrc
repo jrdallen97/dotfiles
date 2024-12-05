@@ -30,6 +30,11 @@ export LESS='-RiF --mouse --wheel-lines=3'
 # Load local config (useful for storing secrets)
 [[ -r "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
 
+# Install zplug if it's not installed by default
+if [[ ! -d ~/.zplug ]]; then
+  git clone https://github.com/zplug/zplug ~/.zplug
+fi
+
 # zplug plugin setup
 if [[ -r ~/.zplug/init.zsh ]]; then
   source ~/.zplug/init.zsh
