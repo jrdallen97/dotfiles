@@ -68,3 +68,11 @@ set('v', '>', '>gv', { desc = 'Increase indentation & reselect' })
 set('v', '<', '<gv', { desc = 'Decrease indentation & reselect' })
 set('v', '<S-Right>', '>gv', { desc = 'Increase indentation & reselect' })
 set('v', '<S-Left>', '<gv', { desc = 'Decrease indentation & reselect' })
+
+-- If foldlevel is at 99 (default), reset it with zR before running zm
+set('n', 'zm', function()
+  if vim.opt.foldlevel:get() == 99 then
+    return 'zRzm'
+  end
+  return 'zm'
+end, { expr = true })
