@@ -28,7 +28,7 @@ vim.api.nvim_create_user_command('FormatToggle', function()
   end
 end, { desc = 'Toggle autoformat-on-save' })
 -- Also add a keymap to do it more easily!
-vim.keymap.set('n', '<leader>tf', ':FormatToggle<cr>', { desc = '[T]oggle [F]ormat' })
+vim.keymap.set('n', '<leader>tf', ':FormatToggle<cr>', { desc = '[T]oggle Auto[F]ormat' })
 
 return {
   {

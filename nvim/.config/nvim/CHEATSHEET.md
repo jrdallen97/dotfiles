@@ -105,16 +105,21 @@ Note: scrolling (e.g. `<C-d>`) is not a jump.
 `:h folds`
 
 - `za`: Toggle fold under the cursor
+- `zA`: Toggle all folds under the cursor (i.e. close everything up to foldlevel 1)
 - `zv`: View cursor line: Open just enough folds to make the line in which the cursor is located not folded.
 - `zM`: Close all folds: set `foldlevel` to 0
 - `zR`: Open all folds: set `foldlevel` to highest fold level in file
 - `zm`: Fold more: Subtract 1 (or count) from `foldlevel`
 - `zr`: Reduce folding: Add 1 (or count) to `foldlevel`
+- `zi`: Toggle `foldenable`, i.e. enable/disable all folding in buffer
 - Less useful?
     - `zo`: Close one fold under the cursor. Accepts count (e.g. `3zo`)
     - `zO`: Close all folds under the cursor recursively. Folds that don't contain the cursor line are unchanged.
     - `zc`: Close one fold under the cursor. Accepts count (e.g. `3zc`)
     - `zC`: Close all folds under the cursor recursively. Folds that don't contain the cursor line are unchanged.
+
+- `:set foldlevel/fdl`: Get/set the foldlevel of the current buffer
+    - e.g. `:set fdl=5`: Fold entire file at depth 5. Now you can use `zm`/`zr` to increase/decrease folding.
 
 ### Quickfix list
 
