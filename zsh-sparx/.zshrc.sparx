@@ -5,8 +5,8 @@ export PATH="/usr/local/sbin:$PATH"
 # Istio
 export PATH="$PATH:$HOME/.istioctl/bin"
 
-# Adding homebrew site-functions to FPATH lets us completions that are installed there
-# (mostly just completion helpers)
+# FPATH is the list of directories zsh checks to find shell functions
+# Homebrew adds a bunch of helpers to site-functions (e.g. completion helpers)
 export FPATH=$FPATH:/opt/homebrew/share/zsh/site-functions
 
 # IntelliJ
@@ -47,6 +47,10 @@ rdr() {(cd "$CLOUDPATH/js/apps/reader"; pnpm ${@:-dev-test2})}
 sci() {(cd "$CLOUDPATH/js/apps/science"; pnpm ${@:-dev-test2})}
 adm() {(cd "$CLOUDPATH/schools/admin-portal"; pnpm ${@:-dev})}
 admpf() {orca pf clear && orca pf apply $CLOUDPATH/schools/admin-portal/orca.ports}
+
+# Less commonly used clients
+curman() {(cd "$CLOUDPATH/js/apps/curman"; pnpm ${@:-dev-test2})}
+curriculum() {(cd "$CLOUDPATH/js/apps/curriculum"; pnpm ${@:-dev})}
 
 # DB connection
 alias sparx-db-test2='kubectl --context test2 -n pgbouncer-iguana port-forward deployment/pgbouncer 5432:5432'

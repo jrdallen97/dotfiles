@@ -30,7 +30,9 @@ prompt_colours() {
   fi
   for i in {000..255}; do
     print -nP "$i$on{$i}$text$off"
-    (( (i+1)%16==0 )) && print
+    if (( i == 15 )) || (( i > 15 )) && (( (i-15) % 6 == 0 )); then
+      print
+    fi
   done
 }
 
