@@ -22,14 +22,50 @@ zz() {
   cd "$(z | tail -n1 | awk '{print $2}')"
 }
 
-# Simple colour tester (useful when tweaking prompt colours)
-prompt_colours() {
-  local on='%K'; local off='%k'; local text='   '
-  if [[ $1 == '-f' ]]; then
-    on='%F'; off='%f'; text='asd '
-  fi
+# Slightly over-engineered colour tester (useful when tweaking prompt colours)
+promptcolours() {
+  local quiet=false inline=false custom='' on='%K' off='%k' text='   '
+
+  while [[ $# -gt 0 ]]; do
+    case $1 in
+      -q)
+        quiet=true
+        ;;
+      -f)
+        on='%F'; off='%f'; text="Foo "
+        ;;
+      -s)
+        custom="$2"
+        shift
+        ;;
+      -i)
+        inline=true
+        ;;
+      *)
+        echo "Usage:"
+        echo " -h: Show help"
+        echo " -q: Disable printing colour code labels"
+        echo " -f: Colour foreground (i.e. text) instead of background"
+        echo " -s <arg>: Override coloured string to <arg>"
+        echo " -i: Inline colour codes (prepend to override string if passed)"
+        return
+        ;;
+    esac
+    shift # Always shift once after each arg
+  done
+
+  [[ $inline = true ]] && text=""
+  [[ $custom ]] && text="$custom"
+
+  local i
   for i in {000..255}; do
-    print -nP "$i$on{$i}$text$off"
+    local code="$i"
+    if [[ $quiet = true ]] || [[ $inline = true ]]; then
+      code=""
+    fi
+    local temp="$text"
+    [[ $inline = true ]] && temp="$i$temp"
+    print -nP "$code$on{$i}$temp$off"
     if (( i == 15 )) || (( i > 15 )) && (( (i-15) % 6 == 0 )); then
       print
     fi
