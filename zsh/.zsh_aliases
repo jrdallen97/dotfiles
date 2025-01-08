@@ -66,7 +66,9 @@ promptcolours() {
     local temp="$text"
     [[ $inline = true ]] && temp="$i$temp"
     print -nP "$code$on{$i}$temp$off"
-    if (( i == 15 )) || (( i > 15 )) && (( (i-15) % 6 == 0 )); then
+    if (( i >= 15 )) && (( (i-15) % 6 == 0 )); then
+      print
+    elif (( i == 7 )); then
       print
     fi
   done
