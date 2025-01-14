@@ -23,12 +23,17 @@ You may need to uninstall any existing nvim config first:
 rm -rf ~/.config/nvim ~/.local/share/nvim
 ```
 
+### fzf
+
+The `install_fzf` script just runs the commands needed to clone & set up fzf locally. It's not necessarily required, but is used by zsh & nvim.
+
 ## Rendering markdown to HTML
 
 Some of my dotfiles have their own markdown files (e.g. nvim). You can render these nicely with, for example:
 
 ```shell
-pandoc nvim/CHEATSHEET.md -s --to=html --toc --css=../styles.css -o nvim/CHEATSHEET.html
+cd nvim/.config/nvim
+pandoc CHEATSHEET.md -s --to=html --toc --css=../../../styles.css -o CHEATSHEET.html
 ```
 
 ...and view it at `file:///path/to/dotfiles/nvim/CHEATSHEET.html`.

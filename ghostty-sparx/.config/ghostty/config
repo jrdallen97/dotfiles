@@ -1,0 +1,8 @@
+theme = iTerm2 Default
+font-family = Hack Nerd Font Mono
+font-size = 14
+font-feature = -liga
+window-width = 220
+window-height = 70
+shell-integration = zsh
+working-directory = /Users/jamesa/code/CloudExperiments
