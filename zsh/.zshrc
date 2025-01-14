@@ -149,6 +149,11 @@ set-prompt() {
     branch="%B%F{226}$PROMPT_BRANCH%f%b "
   fi
 
+  local venv
+  if [[ $VIRTUAL_ENV != "" ]]; then
+    venv="%B%F{033}$(basename $VIRTUAL_ENV)%f%b "
+  fi
+
   local exitcode
   if [[ $PROMPT_CMD_STATUS -gt 0 ]]; then
     exitcode="%(?..exit %B%F{160}$PROMPT_CMD_STATUS%f%b )"
@@ -177,7 +182,7 @@ set-prompt() {
   local newline=$'\n'
   local character='%F{46}%(!.#.❯)%f '
 
-  PROMPT="$dir$branch$exitcode$duration$jobstring$newline$character"
+  PROMPT="$dir$branch$venv$exitcode$duration$jobstring$newline$character"
 }
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd set-prompt
