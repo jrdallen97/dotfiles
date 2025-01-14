@@ -11,6 +11,12 @@ setopt INC_APPEND_HISTORY_TIME # Add new lines when they are run, but ensure the
 setopt HIST_IGNORE_SPACE # Ignore lines starting with a space
 setopt HIST_IGNORE_DUPS # Don't log subsequent identical lines
 
+# cd settings (e.g. history)
+setopt AUTO_PUSHD # Make cd push the old directory onto the directory stack
+setopt PUSHD_IGNORE_DUPS # Don't add dupe directories to the stack
+setopt PUSHD_MINUS # Swap the meaning of `+` & `-` for `cd` (so that e.g. `cd -2` will go back 2 dirs in the stack)
+DIRSTACKSIZE=20 # I don't really need a long history
+
 # Preferred editor
 if command -v nvim >/dev/null; then
   export EDITOR='nvim'
