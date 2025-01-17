@@ -9,18 +9,15 @@ alias prettypath='echo $PATH | sed "s/:/\n/g"'
 command -v bat &>/dev/null && alias bat='bat -P'
 
 # Common command shortcuts
-alias l='ls -lah'
-alias la='ls -lAh'
-alias ll='ls -lh'
 alias ls='ls -G'
-alias lsa='ls -lah'
+alias l='ls -lAh'
+alias la='ls -lah'
+alias ll='ls -lh'
 alias md='mkdir -p'
-mcd() { mkdir -p $1 && cd $1; }
+mcd() { mkdir -p $1 && cd $1 }
 
 # Use z to cd to most common directory
-zz() {
-  cd "$(z | tail -n1 | awk '{print $2}')"
-}
+zz() { cd "$(z | tail -n1 | awk '{print $2}')" }
 
 # Slightly over-engineered colour tester (useful when tweaking prompt colours)
 promptcolours() {
@@ -195,7 +192,6 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
-alias -- -='cd -'
 # Note: these need setopt PUSHD_MINUS to work, otherwise should use + instead
 alias 1='cd -'
 alias 2='cd -2'
