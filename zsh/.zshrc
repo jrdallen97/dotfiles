@@ -46,11 +46,13 @@ if [[ -r ~/.zplug/init.zsh ]]; then
   source ~/.zplug/init.zsh
 
   zplug "agkozak/zsh-z"
+
   zplug "zsh-users/zsh-autosuggestions"
   ZSH_AUTOSUGGEST_STRATEGY=(completion)
   ZSH_AUTOSUGGEST_USE_ASYNC=true
 
-  zplug "softmoth/zsh-vim-mode"
+  ZVM_INIT_MODE=sourcing # Make zvm load like other plugins
+  zplug "jeffreytse/zsh-vi-mode", defer:2
 
   # Must run after compinit but before things like zsh-syntax-highlighting
   # Note: idk what will happen if fzf is not installed
@@ -93,12 +95,10 @@ bindkey "\e[F" end-of-line
 
 # Vim-mode settings
 KEYTIMEOUT=3
-MODE_CURSOR_VIINS="#00ff00 blinking bar"
-MODE_CURSOR_REPLACE="$MODE_CURSOR_VIINS #ff0000"
-MODE_CURSOR_VICMD="green block"
-MODE_CURSOR_SEARCH="#ff00ff steady underline"
-MODE_CURSOR_VISUAL="$MODE_CURSOR_VICMD steady bar"
-MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL #00ffff"
+# ZVM settings
+ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT # Always start in insert mode
+ZVM_NORMAL_MODE_CURSOR=$ZVM_CURSOR_BLOCK
+ZVM_VI_HIGHLIGHT_BACKGROUND=cyan
 
 # FZF
 if command -v rg >/dev/null; then
