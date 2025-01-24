@@ -262,12 +262,24 @@ Provided by `lewis6991/gitsigns.nvim`.
 
 - `]c`: Next change
 - `[c`: Prev change
-- `<leader>hs`: Stage hunk
-- `<leader>hS`: Stage all in file
-- `<leader>hu`: Undo stage hunk
-- `<leader>hr`: Reset hunk
-- `<leader>hb`: Blame current line
-- `<leader>td`: Toggle showing deleted lines
+- Staging:
+    - `<leader>hs`: Stage hunk
+    - `<leader>hS`: Stage all hunks in file
+    - `<leader>hu`: Undo stage hunk
+    - `<leader>hr`: Reset hunk
+    - `<leader>hR`: Reset all hunks in file
+    - `<leader>hp`: Preview current hunk
+    - `<leader>hi`: Preview current hunk (inline)
+    - `<leader>hq`: Send hunks to quickfix (buffer)
+    - `<leader>hQ`: Send hunks to quickfix (all files)
+- Blame
+    - `<leader>hb`: Blame current line
+- Diff
+    - `<leader>hd`: Diff current file
+    - `<leader>hD`: Diff current file vs previous commit (`~`)
+- Toggles
+    - `<leader>tb`: Toggle inline blame
+    - `<leader>td`: Toggle showing deleted lines
 
 Text object:
 - `ih`: inner hunk, e.g.

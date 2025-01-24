@@ -19,14 +19,14 @@ return {
           if vim.wo.diff then
             vim.cmd.normal { ']c', bang = true }
           else
-            gitsigns.next_hunk()
+            gitsigns.nav_hunk 'next'
           end
         end, 'Next hunk')
         map('n', '[c', function()
           if vim.wo.diff then
             vim.cmd.normal { '[c', bang = true }
           else
-            gitsigns.prev_hunk()
+            gitsigns.nav_hunk 'prev'
           end
         end, 'Prev hunk')
 
@@ -39,15 +39,28 @@ return {
         map('v', '<leader>hr', function()
           gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
         end, '[H]unk [R]eset')
-        map('n', '<leader>hS', gitsigns.stage_buffer, '[H]unk [S]tage all')
+        map('n', '<leader>hS', gitsigns.stage_buffer, '[H]unk [S]tage buffer')
         map('n', '<leader>hu', gitsigns.undo_stage_hunk, '[H]unk [U]ndo stage')
-        map('n', '<leader>hR', gitsigns.reset_buffer, '[H]unk [R]eset all')
+        map('n', '<leader>hR', gitsigns.reset_buffer, '[H]unk [R]eset buffer')
         map('n', '<leader>hp', gitsigns.preview_hunk, '[H]unk [P]review')
-        map('n', '<leader>hb', gitsigns.blame_line, '[B]lame line')
+        map('n', '<leader>hi', gitsigns.preview_hunk_inline, '[H]unk preview [I]nline')
+
+        map('n', '<leader>hb', function()
+          gitsigns.blame_line { full = true }
+        end, '[B]lame line')
+
         map('n', '<leader>hd', gitsigns.diffthis, '[D]iff')
         map('n', '<leader>hD', function()
           gitsigns.diffthis '~'
-        end, '[D]iff ~')
+        end, '[D]iff vs. previous commit (~)')
+
+        map('n', '<leader>hQ', function()
+          gitsigns.setqflist 'all'
+        end, 'Send [H]unks to [Q]uickfix (all files)')
+        map('n', '<leader>hq', gitsigns.setqflist, 'Send [H]unks to [Q]uickfix (current buffer)')
+
+        -- Toggles
+        map('n', '<leader>tb', gitsigns.toggle_current_line_blame, '[T]oggle [B]lame (inline)')
         map('n', '<leader>td', gitsigns.toggle_deleted, '[T]oggle [D]eleted lines')
 
         -- Text object
