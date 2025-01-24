@@ -23,7 +23,7 @@ You may need to uninstall any existing nvim config first:
 rm -rf ~/.config/nvim ~/.local/share/nvim
 ```
 
-You may need to copy `local.sample.lua` to `local.lua` to enable certain system-specific settings (e.g. enable nerd font symbols).
+You may need to copy `lua/jam/local.sample.lua` to `lua/jam/local.lua` to enable certain system-specific settings (e.g. enable nerd font symbols).
 
 ### fzf
 

@@ -6,6 +6,12 @@ vim.g.maplocalleader = ' '
 
 require 'jam.settings'
 
+-- Catch the error if `jam.local` doesn't exist
+local ok = pcall(require, 'jam.local')
+if not ok then
+  print 'Warn: no `jam/local.lua` file'
+end
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'

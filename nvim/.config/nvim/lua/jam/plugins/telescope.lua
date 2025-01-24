@@ -79,12 +79,12 @@ return {
             sort_lastused = true,
             sort_mru = true,
           },
+          current_buffer_fuzzy_find = {
+            -- Disable previewer pane for current-buffer search since it's unnecessary
+            previewer = false,
+          },
         },
         extensions = {
-          ['ui-select'] = {
-            -- Don't bother using the dropdown theme bc it's pretty thin
-            -- require('telescope.themes').get_dropdown(),
-          },
           file_browser = {
             -- Disables netrw and use telescope-file-browser in its place
             -- hijack_netrw = true,
@@ -127,16 +127,9 @@ return {
         }
       end, { desc = '[S]earch [D]irectories' })
 
-      -- Slightly advanced example of overriding default behavior and theme
-      map('n', '<leader>/', function()
-        -- You can pass additional configuration to telescope to change theme, layout, etc.
-        builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-          winblend = 10,
-          previewer = false,
-        })
-      end, { desc = '[/] Fuzzily search in current buffer' })
+      map('n', '<leader>/', builtin.current_buffer_fuzzy_find, { desc = '[/] Fuzzily search in current buffer' })
 
-      -- Also possible to pass additional configuration options.
+      -- It's also possible to pass additional configuration options.
       --  See `:help telescope.builtin.live_grep()` for information about particular keys
       map('n', '<leader>s/', function()
         builtin.live_grep {

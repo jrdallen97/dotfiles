@@ -125,6 +125,7 @@ return {
   {
     -- Highlight todo, notes, etc in comments
     'folke/todo-comments.nvim',
+    event = 'VimEnter',
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts = { signs = false },
   },
@@ -136,29 +137,48 @@ return {
       -- Better Around/Inside textobjects
       --
       -- Examples:
-      --  - va)  - [V]isually select [A]round [)]parenthen
-      --  - yinq - [Y]ank [I]nside [N]ext [']quote
+      --  - va)  - [V]isually select [A]round [)]paren
+      --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
       --  - ci'  - [C]hange [I]nside [']quote
       require('mini.ai').setup { n_lines = 500 }
 
       -- Add/delete/replace surroundings (brackets, quotes, etc.)
       --
-      -- - ysiw) - [Y]Add [S]urround [I]nner [W]ord [)]Paren
-      -- - ysa'" - [Y]Add [S]urround [A]round [']quotes ["]quotes
-      -- - ds'   - [D]elete [S]urround [']quotes
-      -- - cs)'  - [C]hange [S]urround [)] [']
+      -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
+      -- - sd'   - [S]urround [D]elete [']quotes
+      -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup {
         -- Override mappings to be more like tpope/vim-surround
         -- The defaults conflict with the standard vim `s` (remove char & enter insert mode)
         mappings = {
-          add = 'ys', -- Add surrounding in Normal and Visual modes
-          delete = 'ds', -- Delete surrounding
+          -- Defaults
+          -- add = 'sa', -- Add surrounding in Normal and Visual modes
+          -- delete = 'sd', -- Delete surrounding
+          -- find = 'sf', -- Find surrounding (to the right)
+          -- find_left = 'sF', -- Find surrounding (to the left)
+          -- highlight = 'sh', -- Highlight surrounding
+          -- replace = 'sr', -- Replace surrounding
+          -- update_n_lines = 'sn', -- Update `n_lines` (the number of lines within which surrounding is searched)
+          -- suffix_last = 'l', -- Suffix to search with "prev" method
+          -- suffix_next = 'n', -- Suffix to search with "next" method
+
+          -- vim-surround-like settings:
+          -- add = 'ys', -- Add surrounding in Normal and Visual modes
+          -- delete = 'ds', -- Delete surrounding
+          -- find = '', -- Find surrounding (to the right)
+          -- find_left = '', -- Find surrounding (to the left)
+          -- highlight = '', -- Highlight surrounding
+          -- replace = 'cs', -- Replace surrounding
+          -- update_n_lines = '', -- Update `n_lines`
+
+          -- Custom: disable some of the default bindings
+          add = 'sa', -- Add surrounding in Normal and Visual modes
+          delete = 'sd', -- Delete surrounding
           find = '', -- Find surrounding (to the right)
           find_left = '', -- Find surrounding (to the left)
           highlight = '', -- Highlight surrounding
-          replace = 'cs', -- Replace surrounding
+          replace = 'sr', -- Replace surrounding
           update_n_lines = '', -- Update `n_lines`
-
           suffix_last = '', -- Suffix to search with "prev" method
           suffix_next = '', -- Suffix to search with "next" method
         },
@@ -167,7 +187,15 @@ return {
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin
-      require('mini.statusline').setup()
+      local statusline = require 'mini.statusline'
+      -- set use_icons to true if you have a Nerd Font
+      statusline.setup { use_icons = vim.g.have_nerd_font }
+
+      -- Override the section for cursor location to LINE:COLUMN
+      ---@diagnostic disable-next-line: duplicate-set-field
+      statusline.section_location = function()
+        return '%2l│%2v'
+      end
 
       -- Work with trailing whitespace
       require('mini.trailspace').setup()

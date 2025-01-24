@@ -8,14 +8,25 @@ return {
       {
         'L3MON4D3/LuaSnip',
         build = (function()
-          -- Build Step is needed for regex support in snippets
-          -- This step is not supported in many windows environments
-          -- Remove the below condition to re-enable on windows
+          -- Build Step is needed for regex support in snippets.
+          -- This step is not supported in many windows environments.
+          -- Remove the below condition to re-enable on windows.
           if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
             return
           end
           return 'make install_jsregexp'
         end)(),
+        dependencies = {
+          -- `friendly-snippets` contains a variety of premade snippets.
+          --    See the README about individual language/framework/plugin snippets:
+          --    https://github.com/rafamadriz/friendly-snippets
+          {
+            'rafamadriz/friendly-snippets',
+            config = function()
+              require('luasnip.loaders.from_vscode').lazy_load()
+            end,
+          },
+        },
       },
       'saadparwaiz1/cmp_luasnip',
 
@@ -24,21 +35,12 @@ return {
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
-
-      -- If you want to add a bunch of pre-configured snippets,
-      --    you can use this plugin to help you. It even has snippets
-      --    for various frameworks/libraries/etc. but you will have to
-      --    set up the ones that are useful for you.
-      'rafamadriz/friendly-snippets',
     },
     config = function()
       -- See `:help cmp`
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
       luasnip.config.setup {}
-
-      -- Load additional snippets
-      require('luasnip.loaders.from_vscode').lazy_load()
 
       cmp.setup {
         snippet = {
@@ -58,6 +60,10 @@ return {
           -- Select the [p]revious item
           ['<C-p>'] = cmp.mapping.select_prev_item(),
 
+          -- Scroll docs up/down. I chose this mapping to match telescope's default.
+          ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-d>'] = cmp.mapping.scroll_docs(4),
+
           -- Accept ([y]es) the completion.
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
@@ -71,11 +77,7 @@ return {
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
           --  completions whenever it has completion options available.
-          ['<C-Space>'] = cmp.mapping.complete(),
-
-          -- Scroll docs up/down. I chose this mapping to match telescope's default.
-          ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-d>'] = cmp.mapping.scroll_docs(4),
+          ['<C-Space>'] = cmp.mapping.complete {},
 
           -- Think of <c-l> as moving to the right of your snippet expansion.
           --  So if you have a snippet that's like:
@@ -99,7 +101,8 @@ return {
         sources = {
           {
             name = 'lazydev',
-            group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+            -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
+            group_index = 0,
           },
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
