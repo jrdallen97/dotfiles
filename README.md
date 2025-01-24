@@ -23,6 +23,8 @@ You may need to uninstall any existing nvim config first:
 rm -rf ~/.config/nvim ~/.local/share/nvim
 ```
 
+You may need to copy `local.sample.lua` to `local.lua` to enable certain system-specific settings (e.g. enable nerd font symbols).
+
 ### fzf
 
 The `install_fzf` script just runs the commands needed to clone & set up fzf locally. It's not necessarily required, but is used by zsh & nvim.
