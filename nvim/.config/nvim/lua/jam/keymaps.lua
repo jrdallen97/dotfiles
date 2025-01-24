@@ -23,8 +23,6 @@ set('n', '<leader>rr', ':w<cr>:!%:p<cr>', { desc = '[RR]un current file (shebang
 set('n', '<leader>rt', ':w<cr>:!time %:p<cr>', { desc = '[R]un & [T]ime current file (shebang)' })
 
 -- Diagnostic keymaps
-set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 set('n', '<leader>L', vim.diagnostic.setloclist, { desc = 'Open diagnostic [L]ocation list (all diagnostics)' })
 set('n', '<leader>Q', vim.diagnostic.setqflist, { desc = 'Open diagnostic [Q]uickfix list (all diagnostics)' })
 -- Less busy diagnostic keymaps
@@ -34,6 +32,9 @@ end, { desc = 'Open diagnostic [L]ocation list (errors only)' })
 set('n', '<leader>q', function()
   vim.diagnostic.setqflist { severity = { min = vim.diagnostic.severity.ERROR } }
 end, { desc = 'Open diagnostic [Q]uickfix list (errors only)' })
+
+-- Clear highlights on search when pressing <Esc> in normal mode
+set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
