@@ -227,4 +227,12 @@ return {
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
+
+  {
+    -- A collection of small QoL plugins for Neovim
+    'folke/snacks.nvim',
+    opts = {
+      indent = {},
+    },
+  },
 }
