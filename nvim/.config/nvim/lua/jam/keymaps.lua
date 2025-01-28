@@ -59,10 +59,10 @@ set('n', '<leader>tw', ':set wrap!<cr>', { desc = '[T]oggle [W]rap' })
 
 -- Move lines up & down easily
 -- E.g. ":m '>+1<CR>gv" = Move selection down, reindent & reselect
-set('v', 'J', ":m '>+1<CR>gv", { desc = 'Move selection down' })
-set('v', 'K', ":m '<-2<CR>gv", { desc = 'Move selection up' })
-set('v', '<S-Down>', ":m '>+1<CR>gv", { desc = 'Move selection down' })
-set('v', '<S-Up>', ":m '<-2<CR>gv", { desc = 'Move selection up' })
+-- set('v', 'J', ":m '>+1<CR>gv", { desc = 'Move selection down' })
+-- set('v', 'K', ":m '<-2<CR>gv", { desc = 'Move selection up' })
+-- set('v', '<S-Down>', ":m '>+1<CR>gv", { desc = 'Move selection down' })
+-- set('v', '<S-Up>', ":m '<-2<CR>gv", { desc = 'Move selection up' })
 
 -- Reselect after changing indentation
 set('v', '>', '>gv', { desc = 'Increase indentation & reselect' })

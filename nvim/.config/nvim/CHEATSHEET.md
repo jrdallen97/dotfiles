@@ -20,6 +20,7 @@
     - [Comments](CHEATSHEET#Comments)
     - [Git](CHEATSHEET#Git)
         - [Fugitive](CHEATSHEET#Fugitive)
+    - [Mini](CHEATSHEET#Mini)
 
 <!-- mtoc-end -->
 
@@ -308,3 +309,10 @@ From within fugitive:
 - `=`: Toggle inline diff for file/hunk
 - `]]`: Next section
 - `[[`: Previous section
+
+### Mini
+
+- `mini.splitjoin`:
+    - `gS`: Split if arguments are on single line, join otherwise (also works on visual selection to disambiguate)
+- `mini.move`:
+    - `<M-direction>`: Move current line/selection in direction (works in normal, visual & visual line modes)

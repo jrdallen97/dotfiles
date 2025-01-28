@@ -204,6 +204,25 @@ return {
         MiniTrailspace.trim()
       end, {})
 
+      -- Split and join arguments
+      require('mini.splitjoin').setup()
+
+      -- Move any selection in any direction
+      require('mini.move').setup {
+        mappings = {
+          -- Default mapping (`<M-hjkl>`) doesn't work on mac bc meta is intercepted
+          left = '<M-Left>',
+          right = '<M-Right>',
+          up = '<M-Up>',
+          down = '<M-Down>',
+
+          line_left = '<M-Left>',
+          line_right = '<M-Right>',
+          line_up = '<M-Up>',
+          line_down = '<M-Down>',
+        },
+      }
+
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
