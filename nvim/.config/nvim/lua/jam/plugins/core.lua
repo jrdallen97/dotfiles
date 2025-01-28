@@ -223,6 +223,13 @@ return {
         },
       }
 
+      -- Text edit operators (e.g. evaluate text, duplicate text)
+      require('mini.operators').setup {
+        -- Disable exchange (default map conflicts with `gx` + it doesn't seem very useful)
+        exchange = { prefix = '' },
+        replace = { prefix = '' },
+      }
+
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
@@ -232,7 +239,19 @@ return {
     -- A collection of small QoL plugins for Neovim
     'folke/snacks.nvim',
     opts = {
+      -- Indent guides and scopes
       indent = {},
+      -- Open LazyGit in a float, auto-configure colorscheme and integration with Neovim
+      lazygit = {},
+    },
+    keys = {
+      {
+        '<leader>gg',
+        function()
+          require('snacks').lazygit.open()
+        end,
+        desc = 'LazyGit',
+      },
     },
   },
 }

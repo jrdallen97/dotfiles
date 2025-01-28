@@ -69,18 +69,18 @@ return {
     },
   },
 
-  {
-    -- A Git wrapper so awesome, it should be illegal
-    'tpope/vim-fugitive',
-    lazy = false,
-    keys = {
-      { '<leader>gg', '<cmd>tab G<cr>', desc = '[G]it Open Fugitive' },
-      { '<leader>gb', '<cmd>Git blame<cr>', desc = '[G]it [B]lame' },
-      { '<leader>gc', '<cmd>Git commit<cr>', desc = '[G]it [C]ommit' },
-      { '<leader>gp', '<cmd>Git push<cr>', desc = '[G]it [P]ush' },
-      { '<leader>gl', '<cmd>Git pull<cr>', desc = '[G]it Pul[L]' },
-    },
-  },
+  -- {
+  --   -- A Git wrapper so awesome, it should be illegal
+  --   'tpope/vim-fugitive',
+  --   lazy = false,
+  --   keys = {
+  --     { '<leader>gg', '<cmd>tab G<cr>', desc = '[G]it Open Fugitive' },
+  --     { '<leader>gb', '<cmd>Git blame<cr>', desc = '[G]it [B]lame' },
+  --     { '<leader>gc', '<cmd>Git commit<cr>', desc = '[G]it [C]ommit' },
+  --     { '<leader>gp', '<cmd>Git push<cr>', desc = '[G]it [P]ush' },
+  --     { '<leader>gl', '<cmd>Git pull<cr>', desc = '[G]it Pul[L]' },
+  --   },
+  -- },
 
   {
     -- Edit and review GitHub issues and pull requests from the comfort of your favorite editor
