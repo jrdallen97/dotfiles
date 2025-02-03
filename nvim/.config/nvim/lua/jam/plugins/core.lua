@@ -243,20 +243,31 @@ return {
   {
     -- A collection of small QoL plugins for Neovim
     'folke/snacks.nvim',
+    priority = 1000,
+    lazy = false,
     opts = {
+      bigfile = {
+        notify = true, -- show notification when big file detected
+        size = 1 * 1024 * 1024, -- 1MB
+      },
+      quickfile = {},
       -- Indent guides and scopes
-      indent = {},
+      indent = {
+        only_current = true,
+      },
       -- Open LazyGit in a float, auto-configure colorscheme and integration with Neovim
       lazygit = {},
+      -- Scope detection based on treesitter or indent
+      scope = {},
     },
     keys = {
-      {
-        '<leader>gg',
-        function()
-          require('snacks').lazygit.open()
-        end,
-        desc = 'LazyGit',
-      },
+      -- {
+      --   '<leader>gg',
+      --   function()
+      --     require('snacks').lazygit.open()
+      --   end,
+      --   desc = 'LazyGit',
+      -- },
     },
   },
 }
