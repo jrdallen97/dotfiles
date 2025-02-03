@@ -335,6 +335,8 @@ From within fugitive:
 - `mini.operators`:
     - `g=`: Evaluate selected (e.g. `1+1` -> `2`)
     - `gs`: Sort selected
+    - `gm`: Multiply (duplicate) selected
+        - `gmm`: Multiply (duplicate) current line
     - More?
 - `mini.bracketed`:
     - Go forward/backward with square brackets (similar to `tpope/vim-unimpaired`)

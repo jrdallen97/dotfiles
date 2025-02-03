@@ -130,6 +130,7 @@ return {
         TIL = {
           icon = ' ',
           color = '#47d66b',
+          alt = { 'VIM' },
         },
       },
       highlight = {
