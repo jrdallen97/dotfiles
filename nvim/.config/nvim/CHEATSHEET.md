@@ -6,7 +6,7 @@
     - [Launch options](CHEATSHEET#Launch options)
     - [Help](CHEATSHEET#Help)
 - [Built-in](CHEATSHEET#Built-in)
-    - [Random (mostly movement)](CHEATSHEET#Random (mostly movement))
+    - [Misc](CHEATSHEET#Misc)
     - [Window commands](CHEATSHEET#Window commands)
     - [Jumps](CHEATSHEET#Jumps)
     - [Folds](CHEATSHEET#Folds)
@@ -39,13 +39,18 @@
 
 ## Built-in
 
-### Random (mostly movement)
+### Misc
 
-- `*`:     Search for the word under the cursor
-- `#`:     Search for the word under the cursor (reverse)
-- `;`:     Repeat last f/e/etc movement
-- `,`:     Repeat last f/e/etc movement (reverse)
-- `ge`:    Move to the end of the previous word
+Movement:
+
+- `*`:  Search for the word under the cursor
+- `#`:  Search for the word under the cursor (reverse)
+- `;`:  Repeat last f/e/etc movement
+- `,`:  Repeat last f/e/etc movement (reverse)
+- `ge`: Move to the end of the previous word
+
+Scrolling:
+
 - `<C-u>`: Scroll up half a page (note: not a jump)
 - `<C-d>`: Scroll down half a page
 - `<C-b>`: Page up (also `<PageUp>` & `<S-Up`>)
@@ -53,14 +58,22 @@
 - `zt`:    Re-centre screen with the cursor at the top
 - `zz`:    Re-centre screen with the cursor in the middle
 - `zb`:    Re-centre screen with the cursor at the bottom
-- `p`:     Paste after the cursor
-- `P`:     Paste before the cursor
 
-Visual mode:
+Copy/paste:
 
-- `p`: Paste over selection and yank previous contents
-- `P`: Paste over selection without yanking previous contents
-    - This is especially useful when using something like `vi"` to select an entire string, for example.
+- `p`: Paste after the cursor
+- `P`: Paste before the cursor
+- Visual mode:
+    - `p`: Paste over selection and yank previous contents
+    - `P`: Paste over selection without yanking previous contents
+        - This is especially useful when using something like `vi"` to select an entire string, for example.
+
+Spell:
+
+- `z=`:  Spelling suggestions
+- `zg`:  Mark word as good (add to good word list)
+- `zw`:  Mark word as wrong (add to wrong word list)
+- `zug`: Undo `zg`/`zw`, remove word from spellfile
 
 ### Window commands
 
@@ -137,7 +150,7 @@ A special buffer for showing a list of locations/files e.g as the results of a s
 The location list also behaves similarly but only stores locations for the current buffer.
 The commands to use it are the same, replacing the first `c` with `l` (e.g. `:lopen`, `]l`).
 
-`tpope/vim-unimpaired` provides `q` for `:cn`/`:cp` and `Q` for `:cfir`/`:cla`, or `l`/`L` for the location list.
+`mini.bracketed` provides `q` for `:cn`/`:cp` and `Q` for `:cfir`/`:cla`, or `l`/`L` for the location list.
 
 Handy shortcuts:
 
@@ -302,13 +315,14 @@ Provided by `tpope/vim-fugitive`.
 
 From within fugitive:
 
+- `]]`: Next section
+- `[[`: Previous section
+- `-`: Toggle staged for file/hunk
+- `=`: Toggle inline diff for file/hunk
 - `s`: Stage file/hunk
 - `u`: Unstage file/hunk
 - `U`: Unstage all
-- `-`: Toggle staged for file/hunk
-- `=`: Toggle inline diff for file/hunk
-- `]]`: Next section
-- `[[`: Previous section
+- `X`: Discard file/hunk
 
 ### Mini
 
@@ -316,3 +330,29 @@ From within fugitive:
     - `gS`: Split if arguments are on single line, join otherwise (also works on visual selection to disambiguate)
 - `mini.move`:
     - `<M-direction>`: Move current line/selection in direction (works in normal, visual & visual line modes)
+- `mini.operators`:
+    - `g=`: Evaluate selected (e.g. `1+1` -> `2`)
+    - `gs`: Sort selected
+    - More?
+- `mini.bracketed`:
+    - Go forward/backward with square brackets (similar to `tpope/vim-unimpaired`)
+    - All bindings have the same format:
+        - `]x`: next x
+        - `[x`: prev x
+        - `]X`: last x
+        - `[X`: first x
+    - `b`: Buffer
+    - `c`: Comment block
+    - `d`: Diagnostic
+    - `f`: File on disk
+    - `i`: Indentation change
+    - `j`: Jump in jumplist (current buffer)
+    - `l`: Location in location list
+    - `o`: Old files
+    - `q`: Quickfix entry from quickfix list
+    - `w`: Window (current tab)
+    - `x`: Conflict
+    - I've disabled a few:
+        - `t`: Treesitter node or parent
+        - `u`: Undo state (???)
+        - `y`: Yank (???)

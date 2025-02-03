@@ -14,9 +14,6 @@ return {
   -- Improvements to netrw. Press `I` to toggle the help back on!
   -- 'tpope/vim-vinegar',
 
-  -- Pairs of handy bracket mappings
-  'tpope/vim-unimpaired',
-
   {
     -- A vim-vinegar like file explorer that lets you edit your filesystem like a normal Neovim buffer.
     'stevearc/oil.nvim',
@@ -228,6 +225,14 @@ return {
         -- Disable exchange (default map conflicts with `gx` + it doesn't seem very useful)
         exchange = { prefix = '' },
         replace = { prefix = '' },
+      }
+
+      -- Go forward/backward with square brackets
+      require('mini.bracketed').setup {
+        -- Disable the weird ones
+        treesitter = { suffix = '' },
+        undo = { suffix = '' },
+        yank = { suffix = '' },
       }
 
       -- ... and there is more!
