@@ -274,10 +274,12 @@ Provides some handy shortcuts for commenting/uncommenting blocks of code.
 
 Provided by `lewis6991/gitsigns.nvim`.
 
-- `]c`: Next change
-- `[c`: Prev change
+- `]h`: Next hunk
+- `[h`: Prev hunk
+- `]H`: Last hunk
+- `[H`: First hunk
 - Staging:
-    - `<leader>hs`: Stage hunk
+    - `<leader>hs`: Stage hunk (toggle) (also works in visual mode)
     - `<leader>hS`: Stage all hunks in file
     - `<leader>hu`: Undo stage hunk
     - `<leader>hr`: Reset hunk

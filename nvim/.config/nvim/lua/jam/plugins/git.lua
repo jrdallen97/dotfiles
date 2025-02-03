@@ -14,46 +14,48 @@ return {
         end
 
         -- Navigation
-        -- Using c to match built-in diff binding, overriding to use git for non-diff buffers
-        map('n', ']c', function()
+        -- Using `h` for 'hunk'. Avoiding `c` since it conflicts with `mini.bracketed`.
+        map('n', ']h', function()
           if vim.wo.diff then
             vim.cmd.normal { ']c', bang = true }
           else
-            gitsigns.nav_hunk 'next'
+            gitsigns.nav_hunk('next', { target = 'all' })
           end
         end, 'Next hunk')
-        map('n', '[c', function()
+        map('n', '[h', function()
           if vim.wo.diff then
             vim.cmd.normal { '[c', bang = true }
           else
-            gitsigns.nav_hunk 'prev'
+            gitsigns.nav_hunk('prev', { target = 'all' })
           end
         end, 'Prev hunk')
+        -- Also add a version for first/last hunk
+        map('n', ']H', function()
+          gitsigns.nav_hunk('last', { target = 'all' })
+        end, 'Last Hunk')
+        map('n', '[H', function()
+          gitsigns.nav_hunk('first', { target = 'all' })
+        end, 'First Hunk')
 
-        -- Actions
-        map('n', '<leader>hs', gitsigns.stage_hunk, '[H]unk [S]tage')
-        map('n', '<leader>hr', gitsigns.reset_hunk, '[H]unk [R]eset')
-        map('v', '<leader>hs', function()
-          gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
-        end, '[H]unk [S]tage')
-        map('v', '<leader>hr', function()
-          gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
-        end, '[H]unk [R]eset')
+        -- Stage/reset
+        map({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>', '[H]unk Toggle [S]taged')
+        map({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<CR>', '[H]unk [R]eset')
         map('n', '<leader>hS', gitsigns.stage_buffer, '[H]unk [S]tage buffer')
         map('n', '<leader>hu', gitsigns.undo_stage_hunk, '[H]unk [U]ndo stage')
         map('n', '<leader>hR', gitsigns.reset_buffer, '[H]unk [R]eset buffer')
+        -- Preview
         map('n', '<leader>hp', gitsigns.preview_hunk, '[H]unk [P]review')
         map('n', '<leader>hi', gitsigns.preview_hunk_inline, '[H]unk preview [I]nline')
-
+        -- Blame
         map('n', '<leader>hb', function()
           gitsigns.blame_line { full = true }
         end, '[B]lame line')
-
+        -- Diff
         map('n', '<leader>hd', gitsigns.diffthis, '[D]iff')
         map('n', '<leader>hD', function()
           gitsigns.diffthis '~'
         end, '[D]iff vs. previous commit (~)')
-
+        -- Quickfix
         map('n', '<leader>hQ', function()
           gitsigns.setqflist 'all'
         end, 'Send [H]unks to [Q]uickfix (all files)')
@@ -69,18 +71,18 @@ return {
     },
   },
 
-  -- {
-  --   -- A Git wrapper so awesome, it should be illegal
-  --   'tpope/vim-fugitive',
-  --   lazy = false,
-  --   keys = {
-  --     { '<leader>gg', '<cmd>tab G<cr>', desc = '[G]it Open Fugitive' },
-  --     { '<leader>gb', '<cmd>Git blame<cr>', desc = '[G]it [B]lame' },
-  --     { '<leader>gc', '<cmd>Git commit<cr>', desc = '[G]it [C]ommit' },
-  --     { '<leader>gp', '<cmd>Git push<cr>', desc = '[G]it [P]ush' },
-  --     { '<leader>gl', '<cmd>Git pull<cr>', desc = '[G]it Pul[L]' },
-  --   },
-  -- },
+  {
+    -- A Git wrapper so awesome, it should be illegal
+    'tpope/vim-fugitive',
+    lazy = false,
+    keys = {
+      { '<leader>gg', '<cmd>tab G<cr>', desc = '[G]it Open Fugitive' },
+      { '<leader>gb', '<cmd>Git blame<cr>', desc = '[G]it [B]lame' },
+      { '<leader>gc', '<cmd>Git commit<cr>', desc = '[G]it [C]ommit' },
+      { '<leader>gp', '<cmd>Git push<cr>', desc = '[G]it [P]ush' },
+      { '<leader>gl', '<cmd>Git pull<cr>', desc = '[G]it Pul[L]' },
+    },
+  },
 
   {
     -- Edit and review GitHub issues and pull requests from the comfort of your favorite editor
