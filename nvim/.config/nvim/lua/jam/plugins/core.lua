@@ -124,7 +124,34 @@ return {
     'folke/todo-comments.nvim',
     event = 'VimEnter',
     dependencies = { 'nvim-lua/plenary.nvim' },
-    opts = { signs = false },
+    opts = {
+      signs = false,
+      keywords = {
+        TIL = {
+          icon = ' ',
+          color = '#47d66b',
+        },
+      },
+      highlight = {
+        comments_only = false,
+      },
+    },
+    keys = {
+      {
+        ']t',
+        function()
+          require('todo-comments').jump_next()
+        end,
+        desc = 'Next [T]odo comment',
+      },
+      {
+        '[t',
+        function()
+          require('todo-comments').jump_prev()
+        end,
+        desc = 'Previous [T]odo comment',
+      },
+    },
   },
 
   {
