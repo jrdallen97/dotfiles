@@ -1,8 +1,14 @@
 theme = iTerm2 Default
-font-family = Hack Nerd Font Mono
+font-family = Hack Nerd Font Mono Regular
 font-size = 14
 font-feature = -liga
+adjust-cell-height = +5%
+adjust-cell-width = -5%
 window-width = 220
-window-height = 70
+window-height = 56
+window-padding-color = extend
+# Always show tabs
+# macos-titlebar-style = tabs
 shell-integration = zsh
 working-directory = /Users/jamesa/code/CloudExperiments
+window-inherit-working-directory = false
