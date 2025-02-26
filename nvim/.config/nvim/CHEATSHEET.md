@@ -261,14 +261,12 @@ Supports many standard mappings (e.g. `H/M/L`, `gg/G`, normal/insert mode).
 
 ### Comments
 
-Provided by `terrortylor/nvim-comment`.
+Provided by `numToStr/Comment.nvim`.
 
-Provides some handy shortcuts for commenting/uncommenting blocks of code.
+Provides some handy shortcuts for commenting/uncommenting blocks of code. Some of this functionality is now built-in, but this plugin extends and improves it.
 
-- `gcc`:            Toggle comment on line
-- `gc` (visual):    Toggle comment on selected line(s)
-- `:CommentToggle`: Toggle comment on line(s), e.g.:
-    - `:%g/Foobar/CommentToggle`: Comment lines matching regex
+- `gcc`: Toggle comment on line
+- `gc` (visual): Toggle comment on selected line(s)
 
 ### Git
 
