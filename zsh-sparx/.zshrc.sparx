@@ -1,13 +1,18 @@
 # Mysql
 export PATH="/usr/local/mysql/bin:$PATH"
-# Homebrew
-export PATH="/usr/local/sbin:$PATH"
 # Istio
 export PATH="$PATH:$HOME/.istioctl/bin"
 
-# FPATH is the list of directories zsh checks to find shell functions
-# Homebrew adds a bunch of helpers to site-functions (e.g. completion helpers)
-export FPATH=$FPATH:/opt/homebrew/share/zsh/site-functions
+# asdf
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+
+# pnpm
+export PNPM_HOME="/Users/jamesallen/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
 
 # IntelliJ
 idea() { open -na "IntelliJ IDEA.app" --args "$@" }

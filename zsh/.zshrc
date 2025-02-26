@@ -62,11 +62,6 @@ if [[ -r ~/.zplug/init.zsh ]]; then
   # a defer tag >= 2 will run after compinit command
   zplug "zsh-users/zsh-syntax-highlighting", defer:3
 
-  # Only install these plugins if my work settings are installed
-  if [[ -r "$HOME/.zshrc.sparx" ]]; then
-    zplug "kiurchv/asdf.plugin.zsh", defer:2
-  fi
-
   # Install plugins if there are plugins that have not been installed
   if ! zplug check --verbose; then
     printf "Install? [y/N]: "
