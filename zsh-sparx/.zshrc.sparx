@@ -19,7 +19,8 @@ idea() { open -na "IntelliJ IDEA.app" --args "$@" }
 
 # Sparx
 export GOPATH="$HOME/go" # Used by a number of our scripts
-export PATH="$PATH:$GOPATH/bin" # Add go bin to path
+export GOBIN="$GOPATH/bin" # Manually override GOBIN (otherwise scripts end up in a weird mise folder)
+export PATH="$PATH:$GOBIN" # Add go bin to path
 export CLOUDPATH="$HOME/code/CloudExperiments" # Save CloudExperiments path - useful for commands/aliases
 export SPX_ARCH="arm64"
 
