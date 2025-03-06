@@ -1,2 +1,2 @@
-# Homebrew
-[[ -r "/opt/homebrew/bin/brew" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+# Load optional configs
+[[ -r "$HOME/.zprofile.sparx" ]] && source "$HOME/.zprofile.sparx"

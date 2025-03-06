@@ -7,12 +7,8 @@ export PATH="$PATH:$HOME/.istioctl/bin"
 export PATH="$HOME/.local/share/mise/shims:$PATH"
 
 # pnpm
-export PNPM_HOME="/Users/jamesallen/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
+export PNPM_HOME="$HOME/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
 
 # IntelliJ
 idea() { open -na "IntelliJ IDEA.app" --args "$@" }
