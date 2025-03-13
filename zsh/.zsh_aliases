@@ -9,7 +9,7 @@ alias prettypath='echo $PATH | sed "s/:/\n/g"'
 command -v bat &>/dev/null && alias bat='bat -P'
 
 # Common command shortcuts
-alias ls='ls -G'
+alias ls='ls --color=auto'
 alias l='ls -lAh'
 alias la='ls -lah'
 alias ll='ls -lh'
