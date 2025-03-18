@@ -93,3 +93,30 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+
+-- Disable slow features in big files
+-- I've left the features that seem fine commented out so they're easy to re-add if I want them
+vim.cmd [[
+function BigFileStuff()
+    echo("Big file, disabling slow features")
+
+    " if exists(':TSBufDisable')
+    "     exec 'TSBufDisable autotag'
+    "     exec 'TSBufDisable highlight'
+    "     " etc...
+    " endif
+
+    setlocal foldmethod=manual
+    " syntax off
+    filetype off
+    " setlocal noundofile
+    " setlocal noswapfile
+    " setlocal noloadplugins
+endfunction
+
+augroup BigFileDisable
+    autocmd!
+    " Run for files bigger than 1MB
+    autocmd BufWinEnter * if getfsize(expand("%")) > 1 * 1024 * 1024 | exec BigFileStuff() | endif
+augroup END
+]]

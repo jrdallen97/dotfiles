@@ -288,11 +288,6 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
-      bigfile = {
-        notify = true, -- show notification when big file detected
-        size = 1 * 1024 * 1024, -- 1MB
-      },
-      quickfile = {},
       -- Indent guides and scopes
       indent = {
         only_current = true,
