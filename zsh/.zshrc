@@ -121,18 +121,37 @@ short-pwd() {
   print -rD "$dir" # print -D converts home dir -> ~
 }
 
+# Helper to easily set the tab/window title
+# Takes current dir & (optionally) current command
+# Inspired by https://github.com/trystan2k/zsh-tab-title
+local set-title() {
+  if [[ $2 != "" ]]; then
+    2=": $2"
+  fi
+  print -Pn "\e]1;$1$2\a" # Tab title
+  print -Pn "\e]2;$1$2\a" # Window title
+}
+
 # Will be run before every prompt draw
 prompt_precmd() {
   PROMPT_CMD_STATUS=$? # Save exit code as it may be wiped by the logic below
 
-  echo -ne "\033];$(short-pwd)\007" # Set the tab title to be the current dir
+  set-title "$(short-pwd)"
 
   if (( ${+PROMPT_CMD_START} )); then
     ((PROMPT_CMD_DURATION = $(date +%s) - PROMPT_CMD_START))
     unset PROMPT_CMD_START
   fi
 }
-prompt_preexec() { PROMPT_CMD_START=$(date +%s); }
+# Will be run before every command is executed
+prompt_preexec() {
+  setopt extended_glob
+
+  PROMPT_CMD_START=$(date +%s)
+
+  local cmd=${1[(wr)^(*=*|sudo|ssh|mosh|rake|-*)]:gs/%/%%}
+  set-title "$(short-pwd)" "$cmd"
+}
 # Create the precmd/preexec arrays if not already set (required for hook-check to work)
 (( ! ${+precmd_functions} )) && precmd_functions=()
 (( ! ${+preexec_functions} )) && preexec_functions=()
