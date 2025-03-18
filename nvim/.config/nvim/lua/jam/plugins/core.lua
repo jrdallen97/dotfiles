@@ -11,6 +11,20 @@ return {
     end,
   },
 
+  {
+    -- Vimade let's you dim, fade, tint, animate, and customize colors in your windows and buffers
+    -- (I mainly use it for dimming inactive splits)
+    'tadaa/vimade',
+    opts = {
+      -- Don't dim the entire window
+      fadelevel = 1,
+      tint = {
+        -- Dim just the background by 10%
+        bg = { rgb = { 0, 0, 0 }, intensity = 0.15 },
+      },
+    },
+  },
+
   -- Improvements to netrw. Press `I` to toggle the help back on!
   -- 'tpope/vim-vinegar',
 
