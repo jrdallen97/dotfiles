@@ -25,6 +25,17 @@ return {
     },
   },
 
+  {
+    -- Indent guides for Neovim
+    'lukas-reineke/indent-blankline.nvim',
+    main = 'ibl',
+    opts = {
+      scope = {
+        enabled = false,
+      },
+    },
+  },
+
   -- Improvements to netrw. Press `I` to toggle the help back on!
   -- 'tpope/vim-vinegar',
 
@@ -288,10 +299,6 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
-      -- Indent guides and scopes
-      indent = {
-        only_current = true,
-      },
       -- Open LazyGit in a float, auto-configure colorscheme and integration with Neovim
       lazygit = {},
       -- Scope detection based on treesitter or indent
