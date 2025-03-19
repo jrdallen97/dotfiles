@@ -108,7 +108,7 @@ function BigFileStuff()
 
     setlocal foldmethod=manual
     " syntax off
-    filetype off
+    " filetype off
     " setlocal noundofile
     " setlocal noswapfile
     " setlocal noloadplugins
