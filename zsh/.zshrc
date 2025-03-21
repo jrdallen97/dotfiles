@@ -160,7 +160,7 @@ prompt_preexec() {
 [[ -z ${preexec_function[(re)prompt_preexec]} ]] && preexec_functions+=(prompt_preexec)
 
 set-prompt() {
-  dir="%B%F{51}$(short-pwd)%f%b "
+  local dir="%B%F{51}$(short-pwd)%f%b "
 
   # TODO: consider changing this to use vcs_info?
   local branch
