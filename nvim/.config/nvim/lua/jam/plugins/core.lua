@@ -289,8 +289,20 @@ return {
         yank = { suffix = '' },
       }
 
+      -- Icon provider
+      require('mini.icons').setup {
+        style = vim.g.have_nerd_font and 'glyph' or 'ascii',
+      }
+
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
+    end,
+    init = function()
+      -- Make 'mini.icons' pretend to be 'nvim-web-devicons'
+      package.preload['nvim-web-devicons'] = function()
+        require('mini.icons').mock_nvim_web_devicons()
+        return package.loaded['nvim-web-devicons']
+      end
     end,
   },
 
