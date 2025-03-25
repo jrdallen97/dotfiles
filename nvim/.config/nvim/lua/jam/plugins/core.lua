@@ -64,7 +64,7 @@ return {
   {
     -- Automatic indentation style detection for Neovim
     'nmac427/guess-indent.nvim',
-    config = {
+    opts = {
       filetype_exclude = { -- A list of filetypes for which the auto command gets disabled
         'netrw',
         'tutor',
@@ -294,6 +294,28 @@ return {
         style = vim.g.have_nerd_font and 'glyph' or 'ascii',
       }
 
+      -- Visualize and work with indent scope
+      require('mini.indentscope').setup {
+        draw = {
+          delay = 0,
+          animation = require('mini.indentscope').gen_animation.linear {
+            easing = 'out',
+            duration = 10,
+            unit = 'step',
+          },
+        },
+        options = {
+          -- Only assume top border is real (seems to be overriden by real scope when possible?)
+          border = 'top',
+          -- Ignore cursor column when calculating current scope
+          -- indent_at_cursor = false,
+          -- Use inner scope when used on a scope border (e.g. function header)
+          try_as_border = true,
+        },
+        -- Use the same symbol as 'indent-blankline.nvim'
+        symbol = '▎',
+      }
+
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
@@ -304,27 +326,5 @@ return {
         return package.loaded['nvim-web-devicons']
       end
     end,
-  },
-
-  {
-    -- A collection of small QoL plugins for Neovim
-    'folke/snacks.nvim',
-    priority = 1000,
-    lazy = false,
-    opts = {
-      -- Open LazyGit in a float, auto-configure colorscheme and integration with Neovim
-      lazygit = {},
-      -- Scope detection based on treesitter or indent
-      scope = {},
-    },
-    keys = {
-      -- {
-      --   '<leader>gg',
-      --   function()
-      --     require('snacks').lazygit.open()
-      --   end,
-      --   desc = 'LazyGit',
-      -- },
-    },
   },
 }
