@@ -6,6 +6,7 @@
     - [Launch options](CHEATSHEET#Launch options)
     - [Help](CHEATSHEET#Help)
 - [Built-in](CHEATSHEET#Built-in)
+    - [Editing](CHEATSHEET#Editing)
     - [Misc](CHEATSHEET#Misc)
     - [Window commands](CHEATSHEET#Window commands)
     - [Jumps](CHEATSHEET#Jumps)
@@ -38,6 +39,13 @@
 - `<C-]>`: Jump to definition (e.g. open help)
 
 ## Built-in
+
+### Editing
+
+Not gonna list all the basics here...
+
+- `[<Space>`: Insert newline above cursor
+- `[<Space>`: Insert newline below cursor
 
 ### Misc
 
@@ -149,6 +157,14 @@ A special buffer for showing a list of locations/files e.g as the results of a s
 - `:cla[st]`:  Go to the last item on the list.
 - `:cc <n>`:   Go to the nth item.
 
+Keybinds:
+
+- `gO`: File outline (if supported, e.g. markdown, help).
+- `]q`: Jump to next in quickfix list.
+- `[q`: Jump to prev in quickfix list.
+- `]Q`: Jump to first in quickfix list.
+- `[Q`: Jump to last in quickfix list.
+
 The location list also behaves similarly but only stores locations for the current buffer.
 The commands to use it are the same, replacing the first `c` with `l` (e.g. `:lopen`, `]l`).
 
@@ -197,11 +213,23 @@ Getting into netrw:
 
 ### LSP
 
-Provided by `neovim/nvim-lspconfig` (amongst others.)
+Built-in keybinds:
 
-- `K`:     Show hover information about symbol under cursor
-- `<C-k>`: Show hover information about symbol under cursor (also works in insert)
-- `<C-s>`: Show signature information (also works in insert)
+- `K`:     Hover information
+- `<C-s>`: (Insert) Signature help
+- `grr`: Goto references
+- `gri`: Goto implementation
+- `grn`: Rename symbol
+- `gra`: Code actions
+- `gO`:  Document symbols
+
+Extended by `neovim/nvim-lspconfig` (amongst others.)
+
+Extended keybinds:
+
+- `K`:     Hover information
+- `<C-k>`: (Normal/Insert) Hover information
+- `<C-s>`: (Normal/Insert) Signature help
 - `gd`: Goto definition
 - `gr`: Goto references (telescope)
 - `gI`: Goto implementation (telescope)
@@ -226,14 +254,18 @@ Kinda built in, but also fed by LSP.
 
 - `[d`: Previous diagnostic
 - `]d`: Next diagnostic
-- `<leader>E`: Open floating diagnostics window
-- `<leader>q`: Send diagnostics to quickfix
+- `[D`: First diagnostic
+- `]D`: Last diagnostic
+- `<leader>q`: Send diagnostics to quickfix (error only)
+- `<leader>Q`: Send diagnostics to quickfix (all diagnostics)
+- `<leader>l`: Send diagnostics to quickfix (error only)
+- `<leader>L`: Send diagnostics to quickfix (all diagnostics)
 
 ### Autocompletion
 
 Provided by `hrsh7th/nvim-cmp`.
 
-- `<C-Space>`: Manually trigger completion (doesn't work?)
+- `<C-Space>`: Manually trigger completion
 - `<C-y>`:  Accept completion
 - `<Tab>`:  Accept completion
 - `<Down>`: Next item in list
@@ -328,6 +360,11 @@ From within fugitive:
 
 ### Mini
 
+- `mini.surround`:
+    - Add/delete/replace surroundings (brackets, quotes, etc.)
+    - `sa`: Add surrounding
+    - `sr`: Replace surrounding
+    - `sd`: Delete surrounding
 - `mini.splitjoin`:
     - `gS`: Split if arguments are on single line, join otherwise (also works on visual selection to disambiguate)
 - `mini.move`:
@@ -341,22 +378,34 @@ From within fugitive:
 - `mini.bracketed`:
     - Go forward/backward with square brackets (similar to `tpope/vim-unimpaired`)
     - All bindings have the same format:
-        - `]x`: next x
         - `[x`: prev x
-        - `]X`: last x
+        - `]x`: next x
         - `[X`: first x
-    - `b`: Buffer
+        - `]X`: last x
+    - `b`: Buffer (now built-in)
     - `c`: Comment block
-    - `d`: Diagnostic
+    - `d`: Diagnostic (now built-in)
     - `f`: File on disk
     - `i`: Indentation change
     - `j`: Jump in jumplist (current buffer)
-    - `l`: Location in location list
+    - `l`: Location list (now built-in)
     - `o`: Old files
-    - `q`: Quickfix entry from quickfix list
+    - `q`: Quickfix list (now built-in)
     - `w`: Window (current tab)
     - `x`: Conflict
     - I've disabled a few:
         - `t`: Treesitter node or parent
         - `u`: Undo state (???)
         - `y`: Yank (???)
+- `mini.trailspace`:
+    - Highlights trailing whitespace
+    - `:TrimWhitespace`: Trim trailing whitespace
+- `mini.indentscope`:
+    - Visualize and work with indent scope
+    - Adds `i` textobject for indents (e.g. `]i`, `cii`, `vai`)
+- `mini.sessions`:
+    - Session management
+    - Once a session is active (e.g. after load or save), it will be autosaved
+    - `:Save <name>`: Save the current session as `<name>`
+    - `:Resume`: Result the most recent session
+    - `:Sessions`: Fuzzy-select a session to load
