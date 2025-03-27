@@ -184,6 +184,7 @@ return {
   {
     -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
+    lazy = false,
     config = function()
       -- Better Around/Inside textobjects
       --
@@ -313,6 +314,21 @@ return {
         -- Use the same symbol as 'indent-blankline.nvim'
         symbol = '▎',
       }
+
+      -- Session management (read, write, delete)
+      require('mini.sessions').setup {
+        autoread = true,
+      }
+      -- Add a command to easily save/create a new session
+      vim.api.nvim_create_user_command('Save', function(opts)
+        MiniSessions.write(opts.args)
+      end, { nargs = 1, desc = 'mini.sessions: Save session' })
+      vim.api.nvim_create_user_command('Resume', function()
+        MiniSessions.read(MiniSessions.get_latest())
+      end, { nargs = 0, desc = 'mini.sessions: Resume most recent session' })
+      vim.api.nvim_create_user_command('Sessions', function()
+        MiniSessions.select()
+      end, { nargs = 0, desc = 'mini.sessions: Select session' })
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
