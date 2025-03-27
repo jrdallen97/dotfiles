@@ -17,18 +17,26 @@ local js = function(bufnr)
   return { 'eslint_d', first(bufnr, 'prettierd', 'prettier') }
 end
 
+-- Helper to more easily toggle autoformat
+---@param v boolean
+---@param scope string
+local function toggleFormat(v, scope)
+  print('Auto-format ' .. (v and 'enabled' or 'disabled') .. ' (' .. scope .. ')')
+  return not v
+end
+
 -- Add a command to globally enable/disable autoformatting
-vim.api.nvim_create_user_command('FormatToggle', function()
-  if vim.g.disable_autoformat then
-    vim.g.disable_autoformat = false
-    print 'Auto-format enabled'
-  else
-    vim.g.disable_autoformat = true
-    print 'Auto-format disabled'
-  end
-end, { desc = 'Toggle autoformat-on-save' })
+vim.api.nvim_create_user_command('ToggleFormatGlobal', function()
+  vim.g.disable_autoformat = toggleFormat(vim.g.disable_autoformat, 'global')
+end, { desc = 'Toggle autoformat-on-save (global)' })
+
+-- And another for doing it per-buffer
+vim.api.nvim_create_user_command('ToggleFormat', function()
+  vim.b.disable_autoformat = toggleFormat(vim.b.disable_autoformat, 'buffer')
+end, { desc = 'Toggle autoformat-on-save (buffer)' })
+
 -- Also add a keymap to do it more easily!
-vim.keymap.set('n', '<leader>tf', ':FormatToggle<cr>', { desc = '[T]oggle Auto[F]ormat' })
+vim.keymap.set('n', '<leader>tf', ':ToggleFormat<cr>', { desc = '[T]oggle Auto[F]ormat (buffer)' })
 
 return {
   {

@@ -305,8 +305,6 @@ return {
           },
         },
         options = {
-          -- Only assume top border is real (seems to be overriden by real scope when possible?)
-          border = 'top',
           -- Ignore cursor column when calculating current scope
           -- indent_at_cursor = false,
           -- Use inner scope when used on a scope border (e.g. function header)
