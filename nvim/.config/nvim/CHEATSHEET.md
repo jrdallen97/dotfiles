@@ -45,7 +45,7 @@
 Not gonna list all the basics here...
 
 - `[<Space>`: Insert newline above cursor
-- `[<Space>`: Insert newline below cursor
+- `]<Space>`: Insert newline below cursor
 
 ### Misc
 
