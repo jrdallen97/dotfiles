@@ -12,9 +12,11 @@ config.adjust_window_size_when_changing_font_size = false
 config.window_padding = {
   left = '0',
   right = '0',
-  top = '0.5cell',
-  bottom = '0.5cell',
+  top = '2px',
+  bottom = '4px',
 }
+-- Snap to cell sizes
+config.use_resize_increments = true
 
 -- Disable weird font features (combining characters, ligatures)
 config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
