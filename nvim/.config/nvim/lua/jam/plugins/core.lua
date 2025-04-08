@@ -26,7 +26,7 @@ return {
       signs = false,
       keywords = {
         TIL = {
-          icon = ' ',
+          icon = '🧠',
           color = '#47d66b',
           alt = { 'VIM' },
         },

@@ -92,11 +92,9 @@ return {
       'nvim-telescope/telescope.nvim',
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
-    config = function()
-      require('octo').setup {
-        -- Using the local filesystem for review means features like LSP will still work
-        use_local_fs = true,
-      }
-    end,
+    opts = {
+      -- Using the local filesystem for review means features like LSP will still work
+      use_local_fs = true,
+    },
   },
 }
