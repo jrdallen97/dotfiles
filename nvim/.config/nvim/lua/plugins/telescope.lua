@@ -136,7 +136,7 @@ return {
 
     -- Shortcut for searching your neovim configuration files
     map('n', '<leader>sv', function()
-      builtin.find_files { cwd = vim.fn.stdpath 'config' }
+      builtin.live_grep { cwd = vim.fn.stdpath 'config' .. '/lua' }
     end, { desc = '[S]earch [V]im config' })
 
     -- Enable line numbers in telescope preview

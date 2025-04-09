@@ -114,7 +114,10 @@ return {
 
     -- Session management (read, write, delete)
     require('mini.sessions').setup {
-      autoread = true,
+      -- Whether to read default session if Neovim opened without file arguments
+      autoread = false,
+      -- Whether to print session path after action
+      verbose = { read = true, write = true, delete = true },
     }
     -- Add a command to easily save/create a new session
     vim.api.nvim_create_user_command('Save', function(opts)

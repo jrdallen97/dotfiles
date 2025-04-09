@@ -3,9 +3,6 @@
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
--- Disable nerd font icons by default (cab be overridden by `local.lua`)
-vim.g.have_nerd_font = false
-
 -- Make line numbers default
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
@@ -94,8 +91,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- Disable slow features in big files
--- I've left the features that seem fine commented out so they're easy to re-add if I want them
+-- Disable slow features when opening big files
+-- Most of these seem fine, but I've left them commented out so they're easy to re-enable
 vim.cmd [[
 function BigFileStuff()
     echo("Big file, disabling slow features")
@@ -116,7 +113,7 @@ endfunction
 
 augroup BigFileDisable
     autocmd!
-    " Run for files bigger than 1MB
-    autocmd BufWinEnter * if getfsize(expand("%")) > 1 * 1024 * 1024 | exec BigFileStuff() | endif
+    " Run for files bigger than 10MB
+    autocmd BufWinEnter * if getfsize(expand("%")) > 10 * 1024 * 1024 | exec BigFileStuff() | endif
 augroup END
 ]]
