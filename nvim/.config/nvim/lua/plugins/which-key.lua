@@ -1,5 +1,5 @@
 return {
-  -- Useful plugin to show you pending keybinds.
+  -- Show available keybindings in a popup as you type
   'folke/which-key.nvim',
   event = 'VimEnter', -- Load before all the UI elements are loaded
   keys = {
@@ -58,7 +58,7 @@ return {
       { '<leader>d', group = '[D]ocument' },
       { '<leader>e', group = '[E]dit' },
       { '<leader>g', group = '[G]it' },
-      { '<leader>h', group = 'Git [H]unk' },
+      { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
       { '<leader>r', group = '[R]ename' },
       { '<leader>s', group = '[S]earch' },
       { '<leader>t', group = '[T]oggle' },

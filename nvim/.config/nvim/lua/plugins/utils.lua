@@ -7,6 +7,7 @@ end
 
 return {
   {
+    -- Generate and auto-update table of contents list for markdown
     'hedyhli/markdown-toc.nvim',
     cmd = { 'Mtoc' }, -- Lazy load on "Mtoc" command
     opts = {

@@ -4,7 +4,7 @@
 local set = vim.keymap.set
 
 -- Jump to vim settings
-set('n', '<leader>ev', ':tabe ~/.config/nvim/lua/jam<cr>', { desc = '[E]dit [V]im settings' })
+set('n', '<leader>ev', ':tabe ~/.config/nvim/lua<cr>', { desc = '[E]dit [V]im settings' })
 set('n', '<leader>ec', ':tabe ~/.config/nvim/CHEATSHEET.md<cr>', { desc = '[E]dit [C]heatsheet' })
 
 -- Notes
