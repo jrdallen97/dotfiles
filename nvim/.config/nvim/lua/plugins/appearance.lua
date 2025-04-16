@@ -12,6 +12,55 @@ return {
   },
 
   {
+    -- A fancy statusline
+    'nvim-lualine/lualine.nvim',
+    opts = {
+      options = {
+        always_show_tabline = false,
+      },
+      sections = {
+        lualine_a = {
+          {
+            'mode',
+            fmt = function(str)
+              -- Truncate to only show first letter
+              return str:sub(1, 1)
+            end,
+          },
+        },
+        lualine_b = { 'branch', 'diff', 'diagnostics' },
+        lualine_c = { 'filename' },
+        lualine_x = { 'encoding', 'fileformat', 'filetype' },
+        lualine_y = { 'progress' },
+        lualine_z = { 'location' },
+      },
+      inactive_sections = {
+        lualine_c = {},
+      },
+      winbar = {
+        lualine_a = {
+          { 'filename', path = 1 },
+        },
+      },
+      inactive_winbar = {
+        lualine_b = {
+          { 'filename', path = 1 },
+        },
+      },
+    },
+  },
+
+  {
+    -- A simple statusline with icons
+    'crispgm/nvim-tabline',
+    opts = {
+      show_index = false,
+      show_icon = true,
+      brackets = { '', '' },
+    },
+  },
+
+  {
     -- Vimade let's you dim, fade, tint, animate, and customize colors in your windows and buffers
     -- (I mainly use it for dimming inactive splits)
     'tadaa/vimade',
