@@ -29,7 +29,7 @@ return {
           },
         },
         lualine_b = { 'branch', 'diff', 'diagnostics' },
-        lualine_c = { 'filename' },
+        lualine_c = { 'filename', 'searchcount', 'selectioncount' },
         lualine_x = { 'encoding', 'fileformat', 'filetype' },
         lualine_y = { 'progress' },
         lualine_z = { 'location' },
@@ -39,12 +39,12 @@ return {
       },
       winbar = {
         lualine_a = {
-          { 'filename', path = 1 },
+          { 'filename', path = 1, newfile_status = true, shorting_target = 10 },
         },
       },
       inactive_winbar = {
         lualine_b = {
-          { 'filename', path = 1 },
+          { 'filename', path = 1, newfile_status = true, shorting_target = 10 },
         },
       },
     },

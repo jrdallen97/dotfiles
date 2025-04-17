@@ -105,7 +105,7 @@ return {
           -- Opens a popup that displays documentation about the word under your cursor
           --  See `:help K` for why this keymap
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
-          map('<C-k>', vim.lsp.buf.hover, 'Hover Documentation', { 'n', 'i' })
+          map('<C-k>', vim.lsp.buf.hover, 'Hover Documentation', { 'i' })
 
           -- Opens a popup that displays signature help for the word under your cursor
           map('<C-s>', vim.lsp.buf.signature_help, 'Signature Help', { 'n', 'i' })
