@@ -54,7 +54,7 @@ return {
     -- A simple statusline with icons
     'crispgm/nvim-tabline',
     opts = {
-      show_index = false,
+      show_index = true,
       show_icon = true,
       brackets = { '', '' },
     },
