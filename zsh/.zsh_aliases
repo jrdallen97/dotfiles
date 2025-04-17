@@ -143,12 +143,9 @@ alias gc='git commit -v'
 alias gca='git commit -v -a'
 alias gcm='git commit -m'
 # git checkout
-alias gco='echo use gss'
-alias gcb='echo use gsc'
-alias gcd='echo use gsd'
+alias gco='git checkout'
 # git switch
 alias gss='git switch'
-alias gsw='git switch'
 alias gsc='git switch -c'
 alias gsd='git switch $(git_default_branch)'
 # git diff
