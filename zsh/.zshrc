@@ -136,7 +136,7 @@ local set-title() {
 prompt_precmd() {
   PROMPT_CMD_STATUS=$? # Save exit code as it may be wiped by the logic below
 
-  set-title "$(short-pwd)"
+  set-title "$(short-pwd): zsh"
 
   if (( ${+PROMPT_CMD_START} )); then
     ((PROMPT_CMD_DURATION = $(date +%s) - PROMPT_CMD_START))
