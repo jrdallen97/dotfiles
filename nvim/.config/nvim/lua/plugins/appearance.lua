@@ -17,6 +17,10 @@ return {
     opts = {
       options = {
         always_show_tabline = false,
+        refresh = {
+          -- Increase winbar refresh rate to reduce pop-in
+          winbar = 10,
+        },
       },
       sections = {
         lualine_a = {

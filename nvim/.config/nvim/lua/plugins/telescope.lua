@@ -71,7 +71,7 @@ return {
               ['<C-d>'] = require('telescope.actions').delete_buffer,
             },
           },
-          sort_lastused = true,
+          -- sort_lastused = true,
           sort_mru = true,
         },
         current_buffer_fuzzy_find = {

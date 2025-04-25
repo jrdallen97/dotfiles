@@ -21,12 +21,12 @@ return {
       -- The defaults conflict with the standard vim `s` (remove char & enter insert mode)
       mappings = {
         -- Custom: disable some of the default bindings
-        add = 'sa', -- Add surrounding in Normal and Visual modes
-        delete = 'sd', -- Delete surrounding
+        add = 'ss', -- Add surrounding in Normal and Visual modes
+        delete = 'ds', -- Delete surrounding
         find = '', -- Find surrounding (to the right)
         find_left = '', -- Find surrounding (to the left)
         highlight = '', -- Highlight surrounding
-        replace = 'sr', -- Replace surrounding
+        replace = 'cs', -- Replace surrounding
         update_n_lines = '', -- Update `n_lines`
         suffix_last = '', -- Suffix to search with "prev" method
         suffix_next = '', -- Suffix to search with "next" method
