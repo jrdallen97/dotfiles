@@ -190,6 +190,7 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 # Note: these need setopt PUSHD_MINUS to work, otherwise should use + instead
+alias -- -='cd -'
 alias 1='cd -'
 alias 2='cd -2'
 alias 3='cd -3'

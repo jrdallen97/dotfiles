@@ -1,5 +1,6 @@
 # PATH
 export PATH=$PATH:$HOME/bin
+export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/go/bin
 
 # Turn on zsh history file
@@ -12,6 +13,7 @@ setopt HIST_IGNORE_SPACE # Ignore lines starting with a space
 setopt HIST_IGNORE_DUPS # Don't log subsequent identical lines
 
 # cd settings (e.g. history)
+setopt AUTO_CD # Lets you cd by typing the name of a directory
 setopt AUTO_PUSHD # Make cd push the old directory onto the directory stack
 setopt PUSHD_IGNORE_DUPS # Don't add dupe directories to the stack
 setopt PUSHD_MINUS # Swap the meaning of `+` & `-` for `cd` (so that e.g. `cd -2` will go back 2 dirs in the stack)
