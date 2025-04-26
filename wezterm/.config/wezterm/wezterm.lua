@@ -27,4 +27,13 @@ config.scrollback_lines = 100000
 -- By default wezterm uses a weird fake fullscreen mode
 config.native_macos_fullscreen_mode = true
 
+-- Windows-specific settings
+if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
+  config.font_size = 12
+  config.default_domain = 'WSL:Ubuntu'
+
+  config.initial_rows = 40
+  config.initial_cols = 100
+end
+
 return config
