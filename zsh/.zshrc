@@ -38,41 +38,36 @@ export LESS='-RiF --mouse --wheel-lines=3'
 # Load local config (useful for storing secrets)
 [[ -r "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
 
-# Install zplug if it's not installed by default
-if [[ ! -d ~/.zplug ]]; then
-  git clone https://github.com/zplug/zplug ~/.zplug
+# Install zcomet
+ZCOMET_PATH="$HOME/.zcomet/bin/zcomet.zsh"
+if [[ ! -f $ZCOMET_PATH ]]; then
+  git clone --depth=1 https://github.com/agkozak/zcomet.git $HOME/.zcomet/bin
 fi
 
-# zplug plugin setup
-if [[ -r ~/.zplug/init.zsh ]]; then
-  source ~/.zplug/init.zsh
+# Load plugins
+if [[ -r $ZCOMET_PATH ]]; then
+  source $ZCOMET_PATH
 
-  zplug "agkozak/zsh-z"
+  zcomet load "agkozak/zsh-z"
 
-  zplug "zsh-users/zsh-autosuggestions"
-  ZSH_AUTOSUGGEST_STRATEGY=(completion)
-  ZSH_AUTOSUGGEST_USE_ASYNC=true
-
-  ZVM_INIT_MODE=sourcing # Make zvm load like other plugins
-  zplug "jeffreytse/zsh-vi-mode", defer:2
+  # Make zvm load like other plugins - this avoids issues with pressing up/down to see history
+  ZVM_INIT_MODE=sourcing
+  zcomet load "jeffreytse/zsh-vi-mode"
 
   # Must run after compinit but before things like zsh-syntax-highlighting
   # Note: idk what will happen if fzf is not installed
-  zplug "Aloxaf/fzf-tab", defer:2
+  zcomet load "Aloxaf/fzf-tab"
 
-  # zsh-syntax-highlighting must be loaded after executing compinit command and sourcing other plugins
-  # a defer tag >= 2 will run after compinit command
-  zplug "zsh-users/zsh-syntax-highlighting", defer:3
+  # It's important to load this almost-last
+  zcomet load "zsh-users/zsh-syntax-highlighting"
 
-  # Install plugins if there are plugins that have not been installed
-  if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-      echo; zplug install
-    fi
-  fi
+  # It's important to load this last
+  zcomet load "zsh-users/zsh-autosuggestions"
+  ZSH_AUTOSUGGEST_STRATEGY=(completion)
+  ZSH_AUTOSUGGEST_USE_ASYNC=true
 
-  zplug load
+  # Run compinit and compile its cache
+  zcomet compinit
 fi
 
 # Enable history-scrolling w/ up/down arrows
