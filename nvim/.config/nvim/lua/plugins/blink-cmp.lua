@@ -21,14 +21,19 @@ return {
         -- `friendly-snippets` contains a variety of premade snippets.
         --    See the README about individual language/framework/plugin snippets:
         --    https://github.com/rafamadriz/friendly-snippets
-        {
-          'rafamadriz/friendly-snippets',
-          config = function()
-            require('luasnip.loaders.from_vscode').lazy_load()
-          end,
-        },
+        'rafamadriz/friendly-snippets',
       },
       opts = {},
+      config = function()
+        -- Enable js snippets in ts/react
+        require('luasnip').filetype_extend('javascript', {
+          'javascriptreact',
+          'typescript',
+          'typescriptreact',
+        })
+
+        require('luasnip.loaders.from_vscode').lazy_load()
+      end,
     },
     'folke/lazydev.nvim',
   },
@@ -76,10 +81,18 @@ return {
     },
 
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'lazydev' },
+      default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' },
       providers = {
-        lsp = { score_offset = 200 },
-        lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+        lsp = { score_offset = 2 },
+        path = { score_offset = 10 },
+        snippets = { score_offset = 0 },
+        buffer = { score_offset = -5 },
+        lazydev = {
+          name = 'LazyDev',
+          module = 'lazydev.integrations.blink',
+          -- Make lazydev completions top priority
+          score_offset = 100,
+        },
       },
     },
 
@@ -92,7 +105,10 @@ return {
     -- the rust implementation via `'prefer_rust_with_warning'`
     --
     -- See :h blink-cmp-config-fuzzy for more information
-    fuzzy = { implementation = 'prefer_rust_with_warning' },
+    fuzzy = {
+      implementation = 'prefer_rust_with_warning',
+      sorts = { 'score', 'sort_text' },
+    },
 
     -- Shows a signature help window while you type arguments for a function
     signature = { enabled = true },
