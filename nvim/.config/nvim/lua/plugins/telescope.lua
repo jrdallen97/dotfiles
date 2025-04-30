@@ -20,10 +20,6 @@ return {
 
     -- Use a telescope picker for builtin nvim select windows (e.g. LSP code actions)
     'nvim-telescope/telescope-ui-select.nvim',
-
-    -- A file browser extension for telescope.nvim.
-    -- It supports synchronized creation, deletion, renaming, and moving of files and folders.
-    'nvim-telescope/telescope-file-browser.nvim',
   },
   config = function()
     -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -79,27 +75,11 @@ return {
           previewer = false,
         },
       },
-      extensions = {
-        file_browser = {
-          -- Disables netrw and use telescope-file-browser in its place
-          -- hijack_netrw = true,
-          mappings = {
-            ['i'] = {
-              -- Disable backspace going up a level when prompt empty
-              -- ['<bs>'] = false,
-            },
-            ['n'] = {
-              -- your custom normal mode mappings
-            },
-          },
-        },
-      },
     }
 
     -- Enable Telescope extensions if they are installed
     pcall(require('telescope').load_extension, 'fzf')
     pcall(require('telescope').load_extension, 'ui-select')
-    pcall(require('telescope').load_extension, 'file_browser')
 
     -- See `:help telescope.builtin`
     local builtin = require 'telescope.builtin'
@@ -140,8 +120,5 @@ return {
 
     -- Enable line numbers in telescope preview
     vim.cmd 'autocmd User TelescopePreviewerLoaded setlocal number'
-
-    -- Open file browser with the path of the current buffer
-    map('n', '_', ':Telescope file_browser path=%:p:h select_buffer=true<CR>', { desc = 'Explore with Telescope File Browser' })
   end,
 }
