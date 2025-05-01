@@ -107,7 +107,22 @@ return {
     -- See :h blink-cmp-config-fuzzy for more information
     fuzzy = {
       implementation = 'prefer_rust_with_warning',
-      sorts = { 'score', 'sort_text' },
+      -- Disable typo resistance to reduce spam
+      max_typos = function()
+        return 0
+      end,
+      sorts = {
+        -- Deprioritise emmet suggestions bc they're really annoying!
+        function(a, b)
+          if (a.client_name == nil or b.client_name == nil) or (a.client_name == b.client_name) then
+            return
+          end
+          return b.client_name == 'emmet_language_server'
+        end,
+        'exact',
+        'score',
+        'sort_text',
+      },
     },
 
     -- Shows a signature help window while you type arguments for a function

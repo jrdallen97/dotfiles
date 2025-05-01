@@ -12,6 +12,11 @@ return {
     },
   },
   {
+    -- Use treesitter to auto close and auto rename html tag
+    'windwp/nvim-ts-autotag',
+    opts = {},
+  },
+  {
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
     dependencies = {
