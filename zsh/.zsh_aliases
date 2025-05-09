@@ -71,6 +71,11 @@ promptcolours() {
   done
 }
 
+# function to gauge zsh's startup time
+timezsh () {
+  repeat 10 { time ${1-$SHELL} -i -c exit }
+}
+
 cpustress () {
   [[ ! -z "$1" ]] && local cores=$1 || local cores=$(sysctl -n hw.ncpu)
 
