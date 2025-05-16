@@ -8,6 +8,9 @@ config.font = wezterm.font 'Hack'
 config.font_size = 15
 config.adjust_window_size_when_changing_font_size = false
 
+-- Make the cursor use inverted colours for better visibility (particularly for light colourschemes)
+config.force_reverse_video_cursor = true
+
 -- Reduce padding
 config.window_padding = {
   left = '0',
