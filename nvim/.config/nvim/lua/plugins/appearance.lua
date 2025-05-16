@@ -25,8 +25,9 @@ return {
         always_show_tabline = false,
         refresh = {
           -- Increase winbar refresh rate to reduce pop-in
-          winbar = 10,
+          winbar = 1,
         },
+        component_separators = { left = '', right = '' },
       },
       sections = {
         lualine_a = {
@@ -39,21 +40,26 @@ return {
           },
         },
         lualine_b = { 'branch', 'diff', 'diagnostics' },
-        lualine_c = { 'filename', 'searchcount', 'selectioncount' },
-        lualine_x = { 'encoding', 'fileformat', 'filetype' },
+        lualine_c = { 'filename', 'selectioncount', 'searchcount' },
+        lualine_x = {
+          'filetype',
+          'encoding',
+          { 'fileformat', padding = { left = 1, right = 2 } },
+        },
         lualine_y = { 'progress' },
         lualine_z = { 'location' },
       },
       inactive_sections = {
-        lualine_c = {},
+        lualine_b = { 'diff', 'diagnostics' },
+        lualine_c = { 'filename' },
       },
       winbar = {
-        lualine_a = {
+        lualine_c = {
           { 'filename', path = 1, newfile_status = true, shorting_target = 10 },
         },
       },
       inactive_winbar = {
-        lualine_b = {
+        lualine_c = {
           { 'filename', path = 1, newfile_status = true, shorting_target = 10 },
         },
       },
@@ -66,7 +72,7 @@ return {
     opts = {
       show_index = true,
       show_icon = true,
-      brackets = { '', '' },
+      brackets = { ' ', '' },
     },
   },
 
