@@ -83,18 +83,4 @@ return {
       { '<leader>gl', '<cmd>Git pull<cr>', desc = '[G]it Pul[L]' },
     },
   },
-
-  {
-    -- Edit and review GitHub issues and pull requests from the comfort of your favorite editor
-    'pwntester/octo.nvim',
-    requires = {
-      'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope.nvim',
-      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
-    },
-    opts = {
-      -- Using the local filesystem for review means features like LSP will still work
-      use_local_fs = true,
-    },
-  },
 }
