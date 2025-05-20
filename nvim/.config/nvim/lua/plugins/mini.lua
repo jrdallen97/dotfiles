@@ -126,5 +126,21 @@ return {
       require('mini.icons').mock_nvim_web_devicons()
       return package.loaded['nvim-web-devicons']
     end
+
+    -- Disable indentscope in certain buffers
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = {
+        'fzf',
+        'help',
+        'lazy',
+        'mason',
+        'neo-tree',
+        'trouble',
+        'Trouble',
+      },
+      callback = function()
+        vim.b.miniindentscope_disable = true
+      end,
+    })
   end,
 }
