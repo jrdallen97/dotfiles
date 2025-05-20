@@ -8,6 +8,9 @@ return {
     config = function()
       require('catppuccin').setup {
         flavour = 'macchiato',
+        dim_inactive = {
+          enabled = true,
+        },
         integrations = {
           blink_cmp = true,
           which_key = true,
@@ -83,20 +86,6 @@ return {
       show_index = true,
       show_icon = true,
       brackets = { ' ', '' },
-    },
-  },
-
-  {
-    -- Vimade let's you dim, fade, tint, animate, and customize colors in your windows and buffers
-    -- (I mainly use it for dimming inactive splits)
-    'tadaa/vimade',
-    opts = {
-      -- Don't dim the entire window
-      fadelevel = 1,
-      tint = {
-        -- Dim just the background by 10%
-        bg = { rgb = { 0, 0, 0 }, intensity = 0.15 },
-      },
     },
   },
 
