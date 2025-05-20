@@ -11,6 +11,7 @@ return {
         integrations = {
           blink_cmp = true,
           which_key = true,
+          fzf = true,
         },
       }
       vim.cmd.colorscheme 'catppuccin'

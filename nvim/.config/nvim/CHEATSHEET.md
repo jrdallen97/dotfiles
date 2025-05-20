@@ -17,7 +17,7 @@
     - [LSP](CHEATSHEET#LSP)
     - [Diagnostics](CHEATSHEET#Diagnostics)
     - [Autocompletion](CHEATSHEET#Autocompletion)
-    - [Telescope](CHEATSHEET#Telescope)
+    - [Fzf](CHEATSHEET#Fzf)
     - [Comments](CHEATSHEET#Comments)
     - [Git](CHEATSHEET#Git)
         - [Fugitive](CHEATSHEET#Fugitive)
@@ -277,21 +277,41 @@ Provided by `hrsh7th/nvim-cmp`.
 - `<C-l>`:  (after accepting snippet) Next location in snippet
 - `<C-h>`:  (after accepting snippet) Previous location in snippet
 
-### Telescope
+### Fzf
 
-Provided by `nvim-telescope/telescope.nvim`.
+Provided by `ibhagwan/fzf-lua`
 
-Supports many standard mappings (e.g. `H/M/L`, `gg/G`, normal/insert mode).
+Shortcuts:
 
-- `?`:     Show telescope bindings (normal mode)
-- `<C-/>`: Show telescope bindings (insert mode)
-- `<C-c>`: Close telescope
-- `<C-x>`: Open file in a new horizontal split
-- `<C-v>`: Open file in a new vertical split
-- `<C-t>`: Open file in a new tab
-- `<C-u>`: Scroll up in preview window
-- `<C-d>`: Scroll down in preview window
-- `<C-d>`: Delete buffer (in *buffer switcher only**)
+- `<leader><leader>`: Switch buffers
+
+Inside fzf:
+
+- `<F1>`: Toggle help
+- `<F2>`: Toggle fullscreen
+- `<F3>`: Toggle line wrap (only in `builtin` previewer)
+- `<F4>`: Toggle preview (only in `builtin` previewer)
+- `<M-g>`: Jump to first result
+- `<M-G>`: Jump to last result
+- Opening files/selections:
+    - `<Enter>`: Open OR send selected to quickfix
+    - `<C-v>`: Open in vertical split(s)
+    - `<C-s>`: Open in horizontal split(s)
+    - `<C-t>`: Open in new tab
+    - `<Tab>`: Toggle selected
+    - `<M-a>`: Toggle select-all
+    - `<M-q>`: Send selection to quickfix
+    - `<M-Q>`: Send selection to loclist
+- Scroll preview:
+    - `<S-Up>`:     Scroll preview up (page)
+    - `<M-S-Up>`  : Scroll preview up (line)
+    - `<S-Down>`:   Scroll preview down (page)
+    - `<M-S-Down>`: Scroll preview down (page)
+    - `<S-Left>`:   Reset preview
+- Toggle settings:
+    - `<M-i>`: Toggle ignore
+    - `<M-h>`: Toggle hidden
+    - `<M-f>`: Toggle follow (?)
 
 ### Comments
 
