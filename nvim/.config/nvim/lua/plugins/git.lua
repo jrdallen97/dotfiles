@@ -15,6 +15,7 @@ return {
 
         -- Navigation
         -- Using `h` for 'hunk'. Avoiding `c` since it conflicts with `mini.bracketed`.
+        -- Next hunk
         map('n', ']h', function()
           if vim.wo.diff then
             vim.cmd.normal { ']c', bang = true }
@@ -22,6 +23,7 @@ return {
             gitsigns.nav_hunk('next', { target = 'all' })
           end
         end, 'Next hunk')
+        -- Prev hunk
         map('n', '[h', function()
           if vim.wo.diff then
             vim.cmd.normal { '[c', bang = true }
@@ -38,11 +40,10 @@ return {
         end, 'First Hunk')
 
         -- Stage/reset
-        map({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>', '[H]unk Toggle [S]taged')
+        map({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>', '[H]unk [S]tage (toggle)')
         map({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<CR>', '[H]unk [R]eset')
-        map('n', '<leader>hS', gitsigns.stage_buffer, '[H]unk [S]tage buffer')
-        map('n', '<leader>hu', gitsigns.undo_stage_hunk, '[H]unk [U]ndo stage')
-        map('n', '<leader>hR', gitsigns.reset_buffer, '[H]unk [R]eset buffer')
+        map('n', '<leader>hS', gitsigns.stage_buffer, '[H]unk [S]tage entire buffer')
+        map('n', '<leader>hR', gitsigns.reset_buffer, '[H]unk [R]eset entire buffer')
         -- Preview
         map('n', '<leader>hp', gitsigns.preview_hunk, '[H]unk [P]review')
         map('n', '<leader>hi', gitsigns.preview_hunk_inline, '[H]unk preview [I]nline')
@@ -63,7 +64,7 @@ return {
 
         -- Toggles
         map('n', '<leader>tb', gitsigns.toggle_current_line_blame, '[T]oggle [B]lame (inline)')
-        map('n', '<leader>td', gitsigns.toggle_deleted, '[T]oggle [D]eleted lines')
+        map('n', '<leader>td', gitsigns.toggle_word_diff, '[T]oggle Word [D]iff')
 
         -- Text object
         map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', '[I]nner [H]unk')
