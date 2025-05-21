@@ -52,6 +52,8 @@ map('<C-h>', '<C-w><C-h>', 'Move focus to the left window')
 map('<C-l>', '<C-w><C-l>', 'Move focus to the right window')
 map('<C-j>', '<C-w><C-j>', 'Move focus to the lower window')
 map('<C-k>', '<C-w><C-k>', 'Move focus to the upper window')
+-- Focus in on a specific file (by opening a new tab)
+map('<C-w>f', ':tab split<CR>', 'Focus (open current file in a tab)')
 
 -- Quick toggles
 -- map('<leader>tl', ':set list!<CR>', '[T]oggle [L]ist' )

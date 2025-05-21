@@ -93,6 +93,8 @@ Note: most of these work even if you continue holding `Ctrl` for the 2nd key, e.
 - `<C-w><DIRECTION>`: Move the current window all the way to `<DIRECTION>` (only `HJKL`)
 - `<C-w>q`: Close the current window (also: `:quit`)
 - `<C-w>o`: Close all but the current window (also: `:only`)
+- `<C-w>u`: Undo closing a window (provided by `AndrewRadev/undoquit.vim`)
+- `<C-w>f`: Alias for `:tab split` (open current window in new tab) (custom)
 - `<C-w>w`: Move to the previous window (move left/up), loop to last window if already at first
 - `<C-w>t`: Move to the top-left/first window
 - `<C-w>b`: Move to the bottom-right/last window
