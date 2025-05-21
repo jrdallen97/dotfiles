@@ -13,40 +13,42 @@ return {
       -- Use fzf as the default nvim select UI
       fzf.register_ui_select()
 
-      local map = vim.keymap.set
+      local map = function(keys, func, desc, mode)
+        mode = mode or 'n'
+        vim.keymap.set(mode, keys, func, { desc = desc })
+      end
 
       -- Misc
-      map('n', '<leader><leader>', fzf.buffers, { desc = '[ ] Find existing buffers' })
-      map('n', '<leader>/', fzf.grep_curbuf, { desc = '[/] search in current buffer' })
-      map('n', '<leader>sr', fzf.resume, { desc = '[S]earch [R]esume' })
-      map('n', '<leader>ss', fzf.builtin, { desc = '[S]earch [S]each commands' })
-      map('n', '<leader>gs', fzf.git_status, { desc = '[Git] [S]tatus' })
+      map('<leader><leader>', fzf.buffers, '[ ] Find existing buffers')
+      map('<leader>/', fzf.grep_curbuf, '[/] search in current buffer')
+      map('<leader>sr', fzf.resume, '[S]earch [R]esume')
+      map('<leader>ss', fzf.builtin, '[S]earch [S]each commands')
+      map('<leader>gs', fzf.git_status, '[Git] [S]tatus')
+      -- Search within my nvim config
+      map('<leader>sv', function()
+        fzf.live_grep { cwd = vim.fn.stdpath 'config' }
+      end, '[S]earch [V]im config')
 
       -- Vim stuff
-      map('n', '<leader>se', fzf.diagnostics_document, { desc = '[S]earch [E]rrors (diagnostics)' })
-      map('n', '<leader>sh', fzf.helptags, { desc = '[S]earch [H]elp' })
-      map('n', '<leader>sk', fzf.keymaps, { desc = '[S]earch [K]eymaps' })
+      map('<leader>se', fzf.diagnostics_document, '[S]earch [E]rrors (diagnostics)')
+      map('<leader>sh', fzf.helptags, '[S]earch [H]elp')
+      map('<leader>sk', fzf.keymaps, '[S]earch [K]eymaps')
 
       -- Basic search
-      map('n', '<leader>sf', fzf.files, { desc = '[S]earch [F]iles' })
-      map('n', '<leader>sg', fzf.live_grep, { desc = '[S]earch by [G]rep' })
-      map('n', '<leader>so', fzf.oldfiles, { desc = '[S]earch [O]ldfiles' })
-      map('n', '<leader>sd', function()
+      map('<leader>sf', fzf.files, '[S]earch [F]iles')
+      map('<leader>sg', fzf.live_grep, '[S]earch by [G]rep')
+      map('<leader>so', fzf.oldfiles, '[S]earch [O]ldfiles')
+      map('<leader>sd', function()
         fzf.files {
           cmd = 'fd -t=d',
           winopts = { preview = { hidden = true } },
         }
-      end, { desc = '[S]earch [D]irectories' })
+      end, '[S]earch [D]irectories')
 
       -- Search for current word/visual selection
-      map('n', '<leader>sw', fzf.grep_cword, { desc = '[S]earch [W]ord under cursor' })
-      map('n', '<leader>sW', fzf.grep_cWORD, { desc = '[S]earch [W]ORD under cursor' })
-      map('v', '<leader>sv', fzf.grep_visual, { desc = '[S]earch [V]isual selection' })
-
-      -- Search within my nvim config
-      map('n', '<leader>sv', function()
-        fzf.live_grep { cwd = vim.fn.stdpath 'config' }
-      end, { desc = '[S]earch [V]im config' })
+      map('<leader>sw', fzf.grep_cword, '[S]earch [W]ord under cursor')
+      map('<leader>sW', fzf.grep_cWORD, '[S]earch [W]ORD under cursor')
+      map('<leader>s', fzf.grep_visual, '[S]earch visual selection', 'v')
     end,
   },
 }

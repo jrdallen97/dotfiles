@@ -106,16 +106,23 @@ return {
       -- Whether to print session path after action
       verbose = { read = true, write = true, delete = true },
     }
-    -- Add a command to easily save/create a new session
+
+    -- Save/create session
     vim.api.nvim_create_user_command('Save', function(opts)
       MiniSessions.write(opts.args)
-    end, { nargs = 1, desc = 'mini.sessions: Save session' })
+    end, { nargs = 1, desc = 'mini.sessions: Save/create session' })
+    -- Resume most recent session
     vim.api.nvim_create_user_command('Resume', function()
       MiniSessions.read(MiniSessions.get_latest())
     end, { nargs = 0, desc = 'mini.sessions: Resume most recent session' })
-    vim.api.nvim_create_user_command('Sessions', function()
-      MiniSessions.select()
+    -- Select a session to load
+    vim.api.nvim_create_user_command('Load', function()
+      MiniSessions.select 'read'
     end, { nargs = 0, desc = 'mini.sessions: Select session' })
+    -- Select a session to delete
+    vim.api.nvim_create_user_command('RmSession', function()
+      MiniSessions.select 'delete'
+    end, { nargs = 0, desc = 'mini.sessions: Delete session' })
 
     -- ... and there is more!
     --  Check out: https://github.com/echasnovski/mini.nvim

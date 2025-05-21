@@ -91,6 +91,7 @@ Note: most of these work even if you continue holding `Ctrl` for the 2nd key, e.
 - `<C-w>v`: `:vsp[lit]`
 - `<C-w><direction>`: Move to the window in `<direction>` (`<Up>`, `k`, etc)
 - `<C-w><DIRECTION>`: Move the current window all the way to `<DIRECTION>` (only `HJKL`)
+- `<C-w>q`: Close the current window (also: `:quit`)
 - `<C-w>o`: Close all but the current window (also: `:only`)
 - `<C-w>w`: Move to the previous window (move left/up), loop to last window if already at first
 - `<C-w>t`: Move to the top-left/first window
@@ -228,7 +229,7 @@ Extended by `neovim/nvim-lspconfig` (amongst others.)
 Extended keybinds:
 
 - `K`:     Hover information
-- `<C-k>`: (Normal/Insert) Hover information
+- `<C-k>`: (Insert) Hover information
 - `<C-s>`: (Normal/Insert) Signature help
 - `gd`: Goto definition
 - `gr`: Goto references (telescope)
@@ -283,7 +284,26 @@ Provided by `ibhagwan/fzf-lua`
 
 Shortcuts:
 
-- `<leader><leader>`: Switch buffers
+- Misc
+    - `<leader><leader>`: Switch buffers
+    - `<leader>/`:  Search in current buffer
+    - `<leader>sr`: Resume previous search
+    - `<leader>ss`: Search built-in search commands
+    - `<leader>gs`: Git status
+    - `<leader>sv`: Search within vim config
+- Vim stuff
+    - `<leader>se`: Search error diagnostics
+    - `<leader>sh`: Search vim help
+    - `<leader>sk`: Search keymaps
+- Basic search
+    - `<leader>sf`: Search files
+    - `<leader>sg`: Search by grep
+    - `<leader>so`: Search oldfiles (recently opened files)
+    - `<leader>sd`: Search directories
+- Search for current word/visual selection:
+    - `<leader>sw`: Search for word under cursor
+    - `<leader>sW`: Search for WORD under cursor
+    - `<leader>s`:  Search for current visual selection
 
 Inside fzf:
 
@@ -428,4 +448,5 @@ From within fugitive:
     - Once a session is active (e.g. after load or save), it will be autosaved
     - `:Save <name>`: Save the current session as `<name>`
     - `:Resume`: Result the most recent session
-    - `:Sessions`: Fuzzy-select a session to load
+    - `:Load`: Fuzzy-select a session to load
+    - `:RmSession`: Fuzzy-select a session to load
