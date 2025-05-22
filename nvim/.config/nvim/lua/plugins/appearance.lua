@@ -10,11 +10,13 @@ return {
         flavour = 'macchiato',
         dim_inactive = {
           enabled = true,
+          percentage = 0.2,
         },
         integrations = {
           blink_cmp = true,
           which_key = true,
           fzf = true,
+          fidget = true,
         },
       }
       vim.cmd.colorscheme 'catppuccin'
