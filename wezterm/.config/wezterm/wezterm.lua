@@ -27,8 +27,32 @@ config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
 config.enable_scroll_bar = true
 config.scrollback_lines = 100000
 
+-- Nightly-only features
+if wezterm.version > '20240203-110809-5046fc22' then
+  config.show_close_tab_button_in_tabs = false
+end
+
 -- By default wezterm uses a weird fake fullscreen mode
 config.native_macos_fullscreen_mode = true
+
+-- Spawn new tab to the right of current tab (rather than at the end)
+-- https://github.com/wez/wezterm/issues/909
+local new_tab = wezterm.action_callback(function(win, pane)
+  local mux_win = win:mux_window()
+  for _, item in ipairs(mux_win:tabs_with_info()) do
+    if item.is_active then
+      mux_win:spawn_tab {}
+      win:perform_action(wezterm.action.MoveTab(item.index + 1), pane)
+      return
+    end
+  end
+end)
+
+-- Bind custom keybinds
+config.keys = {
+  { key = 't', mods = 'CMD', action = new_tab },
+  { key = 't', mods = 'CTRL|SHIFT', action = new_tab },
+}
 
 -- Windows-specific settings
 if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
