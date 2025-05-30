@@ -11,6 +11,12 @@ return {
       view_options = {
         -- Show files and directories that start with "."
         show_hidden = true,
+
+        -- This function defines what will never be shown, even when `show_hidden` is set
+        is_always_hidden = function(name, bufnr)
+          -- Hide '..' because it's annoying to have to move the cursor down every time I change directory
+          return name == '..'
+        end,
       },
     }
 
