@@ -35,7 +35,16 @@ return {
         },
       },
       highlight = {
+        -- Don't highlight the characters either side of the keyword
+        keyword = 'bg',
+        -- Don't require a colon after keyword, but do require at least one space
+        pattern = [[.*<(KEYWORDS):?\s]],
+        -- Also highlight TODOs outside comments (useful for markdown, for example)
         comments_only = false,
+      },
+      search = {
+        -- Also remove the colon here
+        pattern = [[\b(KEYWORDS):?\s+]],
       },
     },
     keys = {

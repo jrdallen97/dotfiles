@@ -92,6 +92,7 @@ Note: most of these work even if you continue holding `Ctrl` for the 2nd key, e.
 - `<C-direction>`:    Move to the window in `<direction>` (only `hjkl`) (_custom_)
 - `<C-w><direction>`: Move to the window in `<direction>` (`<Up>`, `k`, etc)
 - `<C-w><DIRECTION>`: Move the current window all the way to `<DIRECTION>` (only `HJKL`)
+- `<C-w>x`: Swap current window with the next window
 - `<C-w>q`: Close the current window (also: `:quit`)
 - `<C-w>o`: Close all but the current window (also: `:only`)
 - `<C-w>u`: Undo closing a window (provided by `AndrewRadev/undoquit.vim`)
