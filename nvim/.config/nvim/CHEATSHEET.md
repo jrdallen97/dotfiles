@@ -303,6 +303,7 @@ Shortcuts:
     - `<leader>sg`: Search by grep
     - `<leader>so`: Search oldfiles (recently opened files)
     - `<leader>sd`: Search directories
+    - `<leader>sb`: Search in open buffers
 - Search for current word/visual selection:
     - `<leader>sw`: Search for word under cursor
     - `<leader>sW`: Search for WORD under cursor

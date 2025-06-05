@@ -87,6 +87,6 @@ end, { desc = 'Switch to dark colorscheme' })
 
 -- Easily switch to a light colorscheme
 vim.api.nvim_create_user_command('Light', function()
-  vim.cmd.colorscheme 'everforest'
+  vim.cmd.colorscheme 'bamboo'
   vim.o.bg = 'light'
 end, { desc = 'Switch to light colorscheme' })

@@ -38,6 +38,7 @@ return {
       map('<leader>sf', fzf.files, '[S]earch [F]iles')
       map('<leader>sg', fzf.live_grep, '[S]earch by [G]rep')
       map('<leader>so', fzf.oldfiles, '[S]earch [O]ldfiles')
+      map('<leader>sb', fzf.lines, '[S]earch in open [B]uffers')
       map('<leader>sd', function()
         fzf.files {
           cmd = 'fd -t=d',

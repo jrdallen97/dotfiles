@@ -107,22 +107,27 @@ return {
       verbose = { read = true, write = true, delete = true },
     }
 
+    local cmd = vim.api.nvim_create_user_command
     -- Save/create session
-    vim.api.nvim_create_user_command('Save', function(opts)
+    cmd('Save', function(opts)
       MiniSessions.write(opts.args)
     end, { nargs = 1, desc = 'mini.sessions: Save/create session' })
     -- Resume most recent session
-    vim.api.nvim_create_user_command('Resume', function()
+    cmd('Resume', function()
       MiniSessions.read(MiniSessions.get_latest())
     end, { nargs = 0, desc = 'mini.sessions: Resume most recent session' })
     -- Select a session to load
-    vim.api.nvim_create_user_command('Load', function()
+    cmd('Load', function()
       MiniSessions.select 'read'
     end, { nargs = 0, desc = 'mini.sessions: Select session' })
     -- Select a session to delete
-    vim.api.nvim_create_user_command('RmSession', function()
+    cmd('RmSession', function()
       MiniSessions.select 'delete'
     end, { nargs = 0, desc = 'mini.sessions: Delete session' })
+
+    -- Set up terminal background synchronization
+    -- (prevents black borders if terminal size isn't perfectly aligned)
+    require('mini.misc').setup_termbg_sync()
 
     -- ... and there is more!
     --  Check out: https://github.com/echasnovski/mini.nvim
