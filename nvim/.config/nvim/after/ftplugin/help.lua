@@ -1,0 +1,2 @@
+-- Open help in a vsplit by default
+vim.cmd 'autocmd BufWinEnter <buffer> wincmd L'

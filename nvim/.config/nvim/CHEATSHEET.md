@@ -83,6 +83,20 @@ Spell:
 - `zw`:  Mark word as wrong (add to wrong word list)
 - `zug`: Undo `zg`/`zw`, remove word from spellfile
 
+### Useful commands
+
+- Cool little helpers to run a command across lots of files:
+    - `:cdo {cmd}`:   Run `{cmd}` in all files listed in the quickfix list
+    - `:bufdo {cmd}`: Run `{cmd}` in all buffers
+    - `:windo {cmd}`: Run `{cmd}` in all windows in the current tab
+    - `:argdo {cmd}`: Run `{cmd}` in all files in argument list
+    - `:tabdo {cmd}`: Run `{cmd}` in all tabs
+- `:%s/pattern/replacement`: Replace `pattern` with `replacement` on all lines in file
+    - `:s` would do this same for current line only
+    - add `/g` to replace all instances (i.e. if there are multiple on the same line)
+    - add `/c` to prompt for confirmation before replacing each match
+    - use `:bufdo %s/...` to run this in all open buffers (then `:wa` to save them all)
+
 ### Window commands
 
 Note: most of these work even if you continue holding `Ctrl` for the 2nd key, e.g. `<C-w><C-o>`.
