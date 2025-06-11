@@ -130,7 +130,7 @@ local set-title() {
 }
 
 # Will be run before every prompt draw
-prompt_precmd() {
+local prompt_precmd() {
   PROMPT_CMD_STATUS=$? # Save exit code as it may be wiped by the logic below
 
   set-title "$(short-pwd): zsh"
@@ -141,7 +141,7 @@ prompt_precmd() {
   fi
 }
 # Will be run before every command is executed
-prompt_preexec() {
+local prompt_preexec() {
   setopt extended_glob
 
   PROMPT_CMD_START=$(date +%s)
@@ -156,50 +156,75 @@ prompt_preexec() {
 [[ -z ${precmd_functions[(re)prompt_precmd]} ]] && precmd_functions+=(prompt_precmd)
 [[ -z ${preexec_function[(re)prompt_preexec]} ]] && preexec_functions+=(prompt_preexec)
 
-set-prompt() {
-  local dir="%B%F{51}$(short-pwd)%f%b "
-
-  # TODO: consider changing this to use vcs_info?
-  local branch
-  local PROMPT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
-  if [[ $PROMPT_BRANCH != "" ]]; then
-    branch="%B%F{226}$PROMPT_BRANCH%f%b "
-  fi
-
-  local venv
-  if [[ $VIRTUAL_ENV != "" ]]; then
-    venv="%B%F{033}$(basename $VIRTUAL_ENV)%f%b "
-  fi
-
-  local exitcode
-  if [[ $PROMPT_CMD_STATUS -gt 0 ]]; then
-    exitcode="%(?..exit %B%F{160}$PROMPT_CMD_STATUS%f%b )"
-  fi
-
-  local duration
-  if [[ $PROMPT_CMD_DURATION -ge 2 ]]; then
-    # Work out seconds first
-    local formatted="$((PROMPT_CMD_DURATION%60))s"
-    # Then add the minutes if there are any
-    local m=$((PROMPT_CMD_DURATION/60%60))
-    [[ $m > 0 ]] && formatted="${m}m $formatted"
-    # Then add the hours if there are any
-    local h=$((PROMPT_CMD_DURATION/60/60))
-    [[ $h > 0 ]] && formatted="${h}h $formatted"
-    # Finally, format it nicely
-    duration="took %B%F{226}${formatted}%f%b "
-  fi
-
-  local jobstring
-  local jobcount=$#jobstates
-  if [[ $jobcount -gt 0 ]]; then
-    jobstring="[%B%F{135}$jobcount%f%b] "
-  fi
-
+local set-prompt() {
   local newline=$'\n'
   local character='%F{46}%(!.#.❯)%f '
 
-  PROMPT="$dir$branch$venv$exitcode$duration$jobstring$newline$character"
+  # Only render timestamp on subsequent renders
+  local timestamp
+
+  # Cache most of the prompt so we don't have to re-calculate it when adding the timestamp
+  if [[ -v PROMPT_CACHE ]]; then
+    # If the cache already exists, just add the timestamp
+    timestamp='%F{245}[%D{%H:%M:%S}]%f '
+  else
+    local dir="%B%F{51}$(short-pwd)%f%b "
+
+    # TODO: consider changing this to use vcs_info?
+    local branch
+    local PROMPT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+    if [[ $PROMPT_BRANCH != "" ]]; then
+      branch="%B%F{226}$PROMPT_BRANCH%f%b "
+    fi
+
+    local venv
+    if [[ $VIRTUAL_ENV != "" ]]; then
+      venv="%B%F{033}$(basename $VIRTUAL_ENV)%f%b "
+    fi
+
+    local exitcode
+    if [[ $PROMPT_CMD_STATUS -gt 0 ]]; then
+      exitcode="%(?..exit %B%F{160}$PROMPT_CMD_STATUS%f%b )"
+    fi
+
+    local duration
+    if [[ $PROMPT_CMD_DURATION -ge 2 ]]; then
+      # Work out seconds first
+      local formatted="$((PROMPT_CMD_DURATION%60))s"
+      # Then add the minutes if there are any
+      local m=$((PROMPT_CMD_DURATION/60%60))
+      [[ $m > 0 ]] && formatted="${m}m $formatted"
+      # Then add the hours if there are any
+      local h=$((PROMPT_CMD_DURATION/60/60))
+      [[ $h > 0 ]] && formatted="${h}h $formatted"
+      # Finally, format it nicely
+      duration="took %B%F{226}${formatted}%f%b "
+    fi
+
+    local jobstring
+    local jobcount=$#jobstates
+    if [[ $jobcount -gt 0 ]]; then
+      jobstring="[%B%F{135}$jobcount%f%b] "
+    fi
+
+    PROMPT_CACHE="$dir$branch$venv$exitcode$duration$jobstring"
+  fi
+
+  PROMPT="$PROMPT_CACHE$timestamp$newline$character"
 }
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd set-prompt
+
+# Redraw the prompt before running a command
+local reset-prompt-and-accept-line() {
+  # Redraw the prompt to add timestamp
+  set-prompt
+  zle reset-prompt
+  # Clear the cache so the next one draws normally
+  unset PROMPT_CACHE
+
+  # Note the . meaning the built-in accept-line
+  zle .accept-line
+}
+# Override the built-in accept-line with our version
+zle -N accept-line reset-prompt-and-accept-line
