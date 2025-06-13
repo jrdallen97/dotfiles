@@ -55,6 +55,11 @@ map('<C-k>', '<C-w><C-k>', 'Move focus to the upper window')
 -- A couple of bindings to focus in on a specific file
 map('<C-w>t', ':tab split<CR>', 'Duplicate window into a new tab')
 map('<C-w>f', '<C-w>_<C-w>|', 'Focus window (maximise height & width)')
+-- Move windows around more easily
+map('<C-w><S-Left>', '<C-w>H', 'Move window to far left')
+map('<C-w><S-Down>', '<C-w>J', 'Move window to far bottom')
+map('<C-w><S-Up>', '<C-w>K', 'Move window to far top')
+map('<C-w><S-Right>', '<C-w>L', 'Move window to far right')
 
 -- Quick toggles
 -- map('<leader>tl', ':set list!<CR>', '[T]oggle [L]ist' )
