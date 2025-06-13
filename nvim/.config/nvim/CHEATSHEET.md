@@ -47,6 +47,14 @@ Not gonna list all the basics here...
 - `[<Space>`: Insert newline above cursor
 - `]<Space>`: Insert newline below cursor
 
+Increment/decrement:
+
+- `<C-a>`: Increment
+- `<C-x>`: Decrement
+- Extended by `monaqa/dial.nvim` to support dates, booleans, etc (user-extensible).
+- Also works in visual mode
+    - Using `g<C-a>`/`g<C-x>` in visual mode will increment each line an additional time (useful for making lists) (accepts a count)
+
 ### Misc
 
 Movement:
