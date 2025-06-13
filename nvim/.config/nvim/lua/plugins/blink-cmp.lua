@@ -78,6 +78,15 @@ return {
       -- By default, you may press `<c-space>` to show the documentation.
       -- Optionally, set `auto_show = true` to show the documentation after a delay.
       documentation = { auto_show = true, auto_show_delay_ms = 0 },
+
+      list = {
+        selection = {
+          -- Automatically highlight the first suggestion
+          preselect = true,
+          -- Don't automatically insert suggestions and you scroll the list
+          auto_insert = false,
+        },
+      },
     },
 
     sources = {
