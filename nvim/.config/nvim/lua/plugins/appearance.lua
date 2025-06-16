@@ -28,17 +28,9 @@ return {
     'ribru17/bamboo.nvim',
     lazy = false,
     priority = 1000,
-    opts = { dim_inactive = true },
-  },
-
-  {
-    -- 🌲 Comfortable & Pleasant Color Scheme for Vim
-    'sainnhe/everforest',
-    lazy = false,
-    priority = 1000,
-    config = function()
-      vim.g.everforest_background = 'hard'
-    end,
+    opts = {
+      dim_inactive = true,
+    },
   },
 
   {
