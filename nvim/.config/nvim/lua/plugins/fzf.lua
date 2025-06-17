@@ -23,7 +23,7 @@ return {
       map('<leader>/', fzf.grep_curbuf, '[/] search in current buffer')
       map('<leader>sr', fzf.resume, '[S]earch [R]esume')
       map('<leader>ss', fzf.builtin, '[S]earch [S]each commands')
-      map('<leader>gs', fzf.git_status, '[Git] [S]tatus')
+      map('<leader>gs', fzf.git_status, '[G]it [S]tatus')
       -- Search within my nvim config
       map('<leader>sv', function()
         fzf.live_grep { cwd = vim.fn.stdpath 'config' }

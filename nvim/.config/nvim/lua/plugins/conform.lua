@@ -1,3 +1,19 @@
+-- User command to enable/disable autoformatting per-buffer
+vim.api.nvim_create_user_command('ToggleFormat', function()
+  vim.b.disable_autoformat = not vim.b.disable_autoformat
+  print('Auto-format ' .. (vim.b.disable_autoformat and 'disabled' or 'enabled') .. ' (buffer)')
+end, { desc = 'Toggle autoformat-on-save (buffer)' })
+
+-- User command to enable/disable autoformatting globally
+vim.api.nvim_create_user_command('ToggleFormatGlobal', function()
+  vim.g.disable_autoformat = not vim.g.disable_autoformat
+  print('Auto-format ' .. (vim.g.disable_autoformat and 'disabled' or 'enabled') .. ' (global)')
+end, { desc = 'Toggle autoformat-on-save (global)' })
+
+-- Also add a keymap to do it more easily!
+vim.keymap.set('n', '<leader>tf', ':ToggleFormat<cr>', { desc = '[T]oggle Auto [F]ormat (buffer)' })
+vim.keymap.set('n', '<leader>tF', ':ToggleFormatGlobal<cr>', { desc = '[T]oggle Auto [F]ormat (global)' })
+
 -- Helper to allow stop_after_first behaviour for a subset of formatters
 ---@param bufnr integer
 ---@param ... string
@@ -17,27 +33,6 @@ end
 local js = function(bufnr)
   return { 'eslint_d', first(bufnr, 'prettierd', 'prettier') }
 end
-
--- Helper to more easily toggle autoformat
----@param v boolean
----@param scope string
-local function toggleFormat(v, scope)
-  print('Auto-format ' .. (v and 'enabled' or 'disabled') .. ' (' .. scope .. ')')
-  return not v
-end
-
--- Add a command to globally enable/disable autoformatting
-vim.api.nvim_create_user_command('ToggleFormatGlobal', function()
-  vim.g.disable_autoformat = toggleFormat(vim.g.disable_autoformat, 'global')
-end, { desc = 'Toggle autoformat-on-save (global)' })
-
--- And another for doing it per-buffer
-vim.api.nvim_create_user_command('ToggleFormat', function()
-  vim.b.disable_autoformat = toggleFormat(vim.b.disable_autoformat, 'buffer')
-end, { desc = 'Toggle autoformat-on-save (buffer)' })
-
--- Also add a keymap to do it more easily!
-vim.keymap.set('n', '<leader>tf', ':ToggleFormat<cr>', { desc = '[T]oggle Auto[F]ormat (buffer)' })
 
 return {
   -- Autoformat

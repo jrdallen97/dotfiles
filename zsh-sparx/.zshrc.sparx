@@ -40,8 +40,8 @@ changemonkey() {(cd "$CLOUDPATH" && python3 tools/release/change_monkey.py "$@")
 prodperms() {kdev prod-perms ${@:-k8s}}
 
 # Client helpers
-tp2() {(cd "$CLOUDPATH/js/apps/tpclient2"; pnpm ${@:-dev-test2})}
-sw2() {(cd "$CLOUDPATH/js/apps/swclient2"; pnpm ${@:-dev-test2})}
+tp2() {(cd "$CLOUDPATH/js/apps/tpclient2"; pnpm ${@:-dev-test2-single-domain})}
+sw2() {(cd "$CLOUDPATH/js/apps/swclient2"; pnpm ${@:-dev-test2-single-domain})}
 mat() {(cd "$CLOUDPATH/js/apps/maths"; pnpm ${@:-dev-test2})}
 rdr() {(cd "$CLOUDPATH/js/apps/reader"; pnpm ${@:-dev-test2})}
 sci() {(cd "$CLOUDPATH/js/apps/science"; pnpm ${@:-dev-test2})}
