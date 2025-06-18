@@ -117,9 +117,7 @@ return {
     fuzzy = {
       implementation = 'prefer_rust_with_warning',
       -- Disable typo resistance to reduce spam
-      max_typos = function()
-        return 0
-      end,
+      max_typos = 0,
       sorts = {
         -- Deprioritise emmet suggestions bc they're really annoying!
         function(a, b)
