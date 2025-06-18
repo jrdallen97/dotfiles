@@ -51,7 +51,7 @@ return {
       local to = up and 1 or line_count
       if opts.continue then
         from = up and line_count or 1
-        to = up and pos[1] + 1 or pos[1] - 1
+        to = pos[1]
       end
 
       for l = from, to, up and -1 or 1 do
