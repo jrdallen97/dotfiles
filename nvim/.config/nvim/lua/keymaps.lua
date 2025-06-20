@@ -61,6 +61,18 @@ map('<C-w><S-Down>', '<C-w>J', 'Move window to far bottom')
 map('<C-w><S-Up>', '<C-w>K', 'Move window to far top')
 map('<C-w><S-Right>', '<C-w>L', 'Move window to far right')
 
+-- Easily switch tabs
+map('<leader>1', '1gt', 'Go to tab #1')
+map('<leader>2', '2gt', 'Go to tab #2')
+map('<leader>3', '3gt', 'Go to tab #3')
+map('<leader>4', '4gt', 'Go to tab #4')
+map('<leader>5', '5gt', 'Go to tab #5')
+map('<leader>6', '6gt', 'Go to tab #6')
+map('<leader>7', '7gt', 'Go to tab #7')
+map('<leader>8', '8gt', 'Go to tab #8')
+map('<leader>9', '9gt', 'Go to tab #9')
+map('<leader>0', ':tablast<cr>', 'Go to last tab')
+
 -- Quick toggles
 -- map('<leader>tl', ':set list!<CR>', '[T]oggle [L]ist' )
 map('<leader>tw', ':set wrap!<CR>', '[T]oggle [W]rap')
