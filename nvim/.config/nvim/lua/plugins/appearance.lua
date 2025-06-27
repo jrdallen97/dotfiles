@@ -18,6 +18,14 @@ return {
           fzf = true,
           fidget = true,
         },
+        highlight_overrides = {
+          macchiato = function()
+            return {
+              -- Override column colour using the colour for CursorLine
+              ColorColumn = { bg = '#303347' },
+            }
+          end,
+        },
       }
       vim.cmd.colorscheme 'catppuccin'
     end,

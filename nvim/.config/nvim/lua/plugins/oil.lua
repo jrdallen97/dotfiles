@@ -10,9 +10,11 @@ return {
         default_file_explorer = true,
         -- Skip the confirmation popup for simple operations (:help oil.skip_confirm_for_simple_edits)
         skip_confirm_for_simple_edits = true,
+        -- Keep the cursor on the filename column only
+        constrain_cursor = 'name',
 
         view_options = {
-          -- Show files and directories that start with "."
+          -- Show hidden files and directories by default
           show_hidden = true,
 
           -- This function defines what will never be shown, even when `show_hidden` is set
@@ -29,11 +31,15 @@ return {
             callback = function()
               detail = not detail
               if detail then
-                require('oil').set_columns { 'icon', 'permissions', 'size', 'mtime' }
+                require('oil').set_columns { 'mtime', 'permissions', 'size', 'icon' }
               else
                 require('oil').set_columns { 'icon' }
               end
             end,
+          },
+          ['gh'] = {
+            desc = 'Toggle hidden files',
+            callback = require('oil').toggle_hidden,
           },
 
           -- Helpers to call fzf from the current oil directory

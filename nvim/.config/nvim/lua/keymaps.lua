@@ -11,14 +11,14 @@ map('<leader>ev', ':tabe ~/.config/nvim/lua<CR>', '[E]dit [V]im settings')
 map('<leader>ec', ':tabe ~/.config/nvim/CHEATSHEET.md<CR>', '[E]dit [C]heatsheet')
 
 -- Notes
-map('<leader>en', ':tabe ~/notes/<CR>', '[E]dit [N]otes')
+-- map('<leader>en', ':tabe ~/notes/<CR>', '[E]dit [N]otes')
 -- map(
 --   '<leader>ed',
 --   -- Open today's daily note, open TODOs in a split, change back to the first split.
 --   ':exec "tabe ~/notes/diary/".strftime("%F").".md"<CR>:sp ~/notes/diary/TODO.md<CR><C-w><C-k>',
 --   '[E]dit [D]aily note'
 -- )
-map('<leader>et', ':tabe ~/notes/diary/TODO.md<CR>', '[E]dit [T]odo list')
+-- map('<leader>et', ':tabe ~/notes/diary/TODO.md<CR>', '[E]dit [T]odo list')
 
 -- Easily run executable files
 map('<leader>rr', ':w<CR>:!%:p<CR>', '[RR]un current file (shebang)')
@@ -76,6 +76,12 @@ map('<leader>0', ':tablast<cr>', 'Go to last tab')
 -- Quick toggles
 -- map('<leader>tl', ':set list!<CR>', '[T]oggle [L]ist' )
 map('<leader>tw', ':set wrap!<CR>', '[T]oggle [W]rap')
+map('<leader>tr', function()
+  vim.o.colorcolumn = vim.o.colorcolumn == '' and '100' or ''
+end, '[T]oggle [R]uler')
+map('<leader>te', function()
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+end, '[T]oggle [E]rrors (diagnostics)')
 
 -- Move lines up & down easily
 -- E.g. ":m '>+1<CR>gv" = Move selection down, reindent & reselect

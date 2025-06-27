@@ -1,23 +1,28 @@
 # Vim cheatsheet
 
+NOTE: I'm not gonna list all the basics here, just the stuff that's useful for me
+
 <!-- mtoc-start -->
 
-- [Misc](CHEATSHEET#Misc)
+- [Personal](CHEATSHEET#Personal)
+- [Built-in](CHEATSHEET#Built-in)
     - [Launch options](CHEATSHEET#Launch options)
     - [Help](CHEATSHEET#Help)
-- [Built-in](CHEATSHEET#Built-in)
     - [Editing](CHEATSHEET#Editing)
     - [Misc](CHEATSHEET#Misc)
-    - [Window commands](CHEATSHEET#Window commands)
     - [Jumps](CHEATSHEET#Jumps)
+    - [Commands](CHEATSHEET#Commands)
+    - [Settings](CHEATSHEET#Settings)
+    - [Window commands](CHEATSHEET#Window commands)
     - [Folds](CHEATSHEET#Folds)
-    - [Quickfix list](CHEATSHEET#Quickfix list)
+    - [Quickfix](CHEATSHEET#Quickfix)
     - [netrw](CHEATSHEET#netrw)
 - [Plugins](CHEATSHEET#Plugins)
     - [LSP](CHEATSHEET#LSP)
     - [Diagnostics](CHEATSHEET#Diagnostics)
     - [Autocompletion](CHEATSHEET#Autocompletion)
     - [Fzf](CHEATSHEET#Fzf)
+    - [Oil](CHEATSHEET#Oil)
     - [Comments](CHEATSHEET#Comments)
     - [Git](CHEATSHEET#Git)
         - [Fugitive](CHEATSHEET#Fugitive)
@@ -25,7 +30,27 @@
 
 <!-- mtoc-end -->
 
-## Misc
+## Personal
+
+My own stuff...
+
+- `<leader>{n}`: Switch to tab number `{n}`
+- `<leader>rr` :  Save & run current file (using shebang)
+- `<leader>rt` :  Save & run current file with `time` (using shebang)
+- `:Dark`      : Switch to my preferred dark-mode colourscheme
+- `:Light`     : Switch to my preferred light-mode colourscheme
+
+Toggles:
+
+- `<leader>tw`: Toggle wrap
+- `<leader>tr`: Toggle ruler (default to col 100, use `:set cc=<n>` otherwise)
+
+Shortcuts:
+
+- `<leader>ev`: Open Vim settings in a new tab
+- `<leader>ec`: Open Vim cheatsheet in a new tab
+
+## Built-in
 
 ### Launch options
 
@@ -36,13 +61,9 @@
 
 ### Help
 
-- `<C-]>`: Jump to definition (e.g. open help)
-
-## Built-in
+- `<C-]>`: Jump to definition (e.g. open help or follow help link)
 
 ### Editing
-
-Not gonna list all the basics here...
 
 - `[<Space>`: Insert newline above cursor
 - `]<Space>`: Insert newline below cursor
@@ -91,7 +112,23 @@ Spell:
 - `zw`:  Mark word as wrong (add to wrong word list)
 - `zug`: Undo `zg`/`zw`, remove word from spellfile
 
-### Useful commands
+### Jumps
+
+`:h jump-motions`
+
+Jumps tend to be cursor movements that move your cursor multiple lines. When you jump, your previous position is remembered.
+
+Note: scrolling (e.g. `<C-d>`) is not a jump.
+
+- `:ju[mps]`: List jumps in current window
+- `<C-o>`: Previous cursor position in jump list (i.e. not a motion)
+- `<C-i>`: Next cursor position in jump list
+- `%`:     Jump to matching bracket
+- `H`:     Jump the cursor to the top of the screen (**h**igh)
+- `M`:     Jump the cursor to the middle of the screen (**m**iddle)
+- `L`:     Jump the cursor to the bottom of the screen (**l**ow)
+
+### Commands
 
 - Cool little helpers to run a command across lots of files:
     - `:cdo {cmd}`:   Run `{cmd}` in all files listed in the quickfix list
@@ -104,6 +141,10 @@ Spell:
     - add `/g` to replace all instances (i.e. if there are multiple on the same line)
     - add `/c` to prompt for confirmation before replacing each match
     - use `:bufdo %s/...` to run this in all open buffers (then `:wa` to save them all)
+
+### Settings
+
+- `:set cc=100`: Show an indent guide on column 100
 
 ### Window commands
 
@@ -135,22 +176,6 @@ Also, for tabs:
 - `:tabe[dit]`:  Open a file in a new tab
 - `:tabc[lose]`: Close current tab
 
-### Jumps
-
-`:h jump-motions`
-
-Jumps tend to be cursor movements that move your cursor multiple lines. When you jump, your previous position is remembered.
-
-Note: scrolling (e.g. `<C-d>`) is not a jump.
-
-- `:ju[mps]`: List jumps in current window
-- `<C-o>`: Previous cursor position in jump list (i.e. not a motion)
-- `<C-i>`: Next cursor position in jump list
-- `%`:     Jump to matching bracket
-- `H`:     Jump the cursor to the top of the screen (**h**igh)
-- `M`:     Jump the cursor to the middle of the screen (**m**iddle)
-- `L`:     Jump the cursor to the bottom of the screen (**l**ow)
-
 ### Folds
 
 `:h folds`
@@ -172,7 +197,7 @@ Note: scrolling (e.g. `<C-d>`) is not a jump.
 - `:set foldlevel/fdl`: Get/set the foldlevel of the current buffer
     - e.g. `:set fdl=5`: Fold entire file at depth 5. Now you can use `zm`/`zr` to increase/decrease folding.
 
-### Quickfix list
+### Quickfix
 
 A special buffer for showing a list of locations/files e.g as the results of a search.
 
@@ -209,6 +234,8 @@ TODO: not yet ported over
 - `<leader>cl`: `:clast`
 
 ### netrw
+
+NOTE: I've replaced this with Oil
 
 - `I`: Toggle help
 - `o`: Open in horizontal split
@@ -340,6 +367,7 @@ Inside fzf:
 - `<F4>`: Toggle preview (only in `builtin` previewer)
 - `<M-g>`: Jump to first result
 - `<M-G>`: Jump to last result
+- `<M-Backspace>`: Delete to start of prompt
 - Opening files/selections:
     - `<Enter>`: Open OR send selected to quickfix
     - `<C-v>`: Open in vertical split(s)
@@ -351,7 +379,7 @@ Inside fzf:
     - `<M-Q>`: Send selection to loclist
 - Scroll preview:
     - `<S-Up>`:     Scroll preview up (page)
-    - `<M-S-Up>`  : Scroll preview up (line)
+    - `<M-S-Up>`:   Scroll preview up (line)
     - `<S-Down>`:   Scroll preview down (page)
     - `<M-S-Down>`: Scroll preview down (page)
     - `<S-Left>`:   Reset preview
@@ -360,6 +388,15 @@ Inside fzf:
     - `<M-h>`: Toggle hidden
     - `<M-f>`: Toggle follow (?)
 
+### Oil
+
+Provided by `stevearc/oil.nvim`.
+
+A netrw replacement that lets you browse and edit the filesystem as if it was a regular buffer.
+
+- `gd`: Toggle file details (e.g. size, permissions, last modified)
+- `gh`: Toggle hidden files
+
 ### Comments
 
 Provided by `numToStr/Comment.nvim`.
@@ -367,7 +404,18 @@ Provided by `numToStr/Comment.nvim`.
 Provides some handy shortcuts for commenting/uncommenting blocks of code. Some of this functionality is now built-in, but this plugin extends and improves it.
 
 - `gcc`: Toggle comment on line
-- `gc` (visual): Toggle comment on selected line(s)
+- `gc` (visual): Toggle comment on selected line(s)/region(s)
+
+Also: `folke/todo-comments.nvim`.
+
+- Provides colouring & keybinds for working with various types of comment, including:
+    - TODO
+    - NOTE (also INFO)
+    - WARN (also WARNING)
+    - FIX (also BUG, FIXME, ISSUE)
+    - And more!
+- `[t`: Previous TODO/other comment
+- `]t`: Next TODO/other comment
 
 ### Git
 
