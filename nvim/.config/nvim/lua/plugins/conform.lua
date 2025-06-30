@@ -14,6 +14,10 @@ end, { desc = 'Toggle autoformat-on-save (global)' })
 vim.keymap.set('n', '<leader>tf', ':ToggleFormat<cr>', { desc = '[T]oggle Auto [F]ormat (buffer)' })
 vim.keymap.set('n', '<leader>tF', ':ToggleFormatGlobal<cr>', { desc = '[T]oggle Auto [F]ormat (global)' })
 
+vim.api.nvim_create_user_command('Format', function()
+  require('conform').format { async = true, lsp_format = 'fallback' }
+end, { desc = 'Format buffer' })
+
 -- Helper to allow stop_after_first behaviour for a subset of formatters
 ---@param bufnr integer
 ---@param ... string
@@ -40,14 +44,7 @@ return {
   event = { 'BufWritePre' },
   cmd = { 'ConformInfo' },
   keys = {
-    {
-      '<leader>f',
-      function()
-        require('conform').format { async = true, lsp_format = 'fallback' }
-      end,
-      mode = '',
-      desc = '[F]ormat buffer',
-    },
+    { '<leader>F', ':Format<cr>', mode = '', desc = '[F]ormat buffer' },
   },
   opts = {
     notify_on_error = false,
@@ -78,6 +75,8 @@ return {
       javascriptreact = js,
       typescript = js,
       typescriptreact = js,
+
+      go = { 'gofmt', 'goimports' },
 
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },

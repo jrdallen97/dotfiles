@@ -249,6 +249,7 @@ return {
         -- Backend
         'gopls',
         'golangci-lint',
+        'goimports',
 
         -- Frontend
         'ts_ls',

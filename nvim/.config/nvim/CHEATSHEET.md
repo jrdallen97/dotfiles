@@ -19,6 +19,7 @@ NOTE: I'm not gonna list all the basics here, just the stuff that's useful for m
     - [netrw](CHEATSHEET#netrw)
 - [Plugins](CHEATSHEET#Plugins)
     - [LSP](CHEATSHEET#LSP)
+    - [Formatting](CHEATSHEET#Formatting)
     - [Diagnostics](CHEATSHEET#Diagnostics)
     - [Autocompletion](CHEATSHEET#Autocompletion)
     - [Fzf](CHEATSHEET#Fzf)
@@ -301,6 +302,14 @@ Extended keybinds:
 Currently disabled:
 
 - `gD`: Goto declaration (some LSPs don't implement this)
+
+### Formatting
+
+Provided by `stevearc/conform.nvim`.
+
+- `<leader>F`:  `:Format` current file
+- `<leader>tf`: `:ToggleFormat` (current buffer)
+- `<leader>tF`: `:ToggleFormatGlobal`
 
 ### Diagnostics
 
