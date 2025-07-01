@@ -278,7 +278,7 @@ Built-in keybinds:
 - `gra`: Code actions
 - `gO`:  Document symbols
 
-Extended by `neovim/nvim-lspconfig` (amongst others.)
+Extended by `neovim/nvim-lspconfig` (among others).
 
 Extended keybinds:
 
@@ -346,27 +346,33 @@ Provided by `ibhagwan/fzf-lua`
 
 Shortcuts:
 
-- Misc
+- Misc:
     - `<leader><leader>`: Switch buffers
     - `<leader>/`:  Search in current buffer
-    - `<leader>sr`: Resume previous search
-    - `<leader>ss`: Search built-in search commands
     - `<leader>gs`: Git status
-    - `<leader>sv`: Search within vim config
-- Vim stuff
-    - `<leader>se`: Search error diagnostics
-    - `<leader>sh`: Search vim help
-    - `<leader>sk`: Search keymaps
-- Basic search
-    - `<leader>sf`: Search files
-    - `<leader>sg`: Search by grep
-    - `<leader>so`: Search oldfiles (recently opened files)
-    - `<leader>sd`: Search directories
+    - `<leader>sr`: Resume previous search
+    - `<leader>fr`: Resume previous search
+- Find files (or directories!):
+    - `<leader>ff`: Find file
+    - `<leader>fo`: Find oldfile (recently opened files)
+    - `<leader>fd`: Find directory
+- Search for strings (lines, contents, etc):
+    - `<leader>ss`: Search for string/by grep
+    - `<leader>sg`: Search for string/by grep
     - `<leader>sb`: Search in open buffers
+    - `<leader>sk`: Search keymaps
+    - `<leader>sh`: Search vim help
+    - `<leader>sc`: Search built-in search commands
+    - `<leader>se`: Search for errors/diagnostics in current file
 - Search for current word/visual selection:
     - `<leader>sw`: Search for word under cursor
     - `<leader>sW`: Search for WORD under cursor
     - `<leader>s`:  Search for current visual selection
+- Personal shortcuts:
+    - `<leader>fv`: Find vim config file
+    - `<leader>sv`: Search vim config
+    - `<leader>fn`: Find note
+    - `<leader>sn`: Search notes
 
 Inside fzf:
 
