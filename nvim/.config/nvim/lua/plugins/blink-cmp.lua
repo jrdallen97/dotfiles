@@ -2,7 +2,10 @@ return {
   -- Autocompletion
   'saghen/blink.cmp',
   event = 'VimEnter',
-  version = '1.*',
+  -- Use a release tag to download pre-built binaries
+  -- version = '1.*',
+  -- AND/OR build from source, requires nightly rust: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+  -- build = 'cargo build --release',
   dependencies = {
     -- Snippet Engine
     {
@@ -23,16 +26,27 @@ return {
         --    https://github.com/rafamadriz/friendly-snippets
         'rafamadriz/friendly-snippets',
       },
-      opts = {},
       config = function()
+        local ls = require 'luasnip'
+
+        vim.keymap.set({ 'i', 's' }, '<C-m>', function()
+          if ls.choice_active() then
+            ls.change_choice(1)
+          end
+        end, { silent = true, 'Cycle snippet choices' })
+
         -- Enable js snippets in ts/react
-        require('luasnip').filetype_extend('javascript', {
+        ls.filetype_extend('javascript', {
           'javascriptreact',
           'typescript',
           'typescriptreact',
         })
 
-        require('luasnip.loaders.from_vscode').lazy_load()
+        -- Load friendly-snippets
+        require('luasnip.loaders.from_vscode').lazy_load { exclude = { 'go' } }
+
+        -- Load my custom snippets (defined in `~/.config/nvim/snippets`)
+        require('luasnip.loaders.from_snipmate').lazy_load()
       end,
     },
     'folke/lazydev.nvim',
@@ -63,6 +77,14 @@ return {
       --
       -- See :h blink-cmp-config-keymap for defining your own keymap
       preset = 'super-tab',
+
+      -- Unbind Tab for snippets since it's easy to hit accidentally
+      ['<Tab>'] = { 'select_and_accept', 'fallback' },
+      ['<S-Tab>'] = { 'fallback' },
+
+      -- Add some bindings for snippets
+      ['<C-n>'] = { 'snippet_forward', 'fallback' },
+      ['<C-p>'] = { 'snippet_backward', 'fallback' },
 
       -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
       --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
@@ -115,7 +137,11 @@ return {
     --
     -- See :h blink-cmp-config-fuzzy for more information
     fuzzy = {
-      implementation = 'prefer_rust_with_warning',
+      -- The rust implementation sometimes doesn't find exact matches.
+      -- Example: typing `tes` shows the `test` snippet but if I type the last `t` the suggestion
+      -- disappears and I can't expand the snippet.
+      -- The lua version doesn't seem to do this.
+      implementation = 'lua',
       -- Disable typo resistance to reduce spam
       max_typos = 0,
       sorts = {

@@ -1,0 +1,132 @@
+# Conditionals
+snippet if "if condition"
+	if $1 {
+		$0
+	}
+
+snippet iferr "if err != nil, return err"
+	if ${1:err} != nil {
+		return $0$1
+	}
+
+snippet ifok "if key in a map"
+	if ${1:value}, ok := ${2:map}[${3:key}]; ok {
+		$0
+	}
+
+snippet elif "else if"
+	else if $1 {
+		$0
+	}
+
+snippet el "else"
+	else {
+		$0
+	}
+
+
+# Logging
+snippet lf "log printf"
+	log.Printf("%${1:s}", ${2:var})
+
+snippet lp "log println"
+	log.Println("${1}")
+
+snippet pf "fmt.Printf()"
+	fmt.Printf("%${1:s}\n", ${2:var})
+
+snippet pl "fmt.Println()"
+	fmt.Println("${1:s}")
+
+snippet ps "fmt.Sprintf"
+	fmt.Sprintf("%${1:s}", ${2:var})
+
+snippet spi "spxlog.Info"
+	spxlog.Info(ctx, $1)
+
+snippet spif "spxlog.Infof"
+	spxlog.Infof(ctx, $1, $2)
+
+
+# Common shorthands
+snippet fun "function"
+	func ${1:funcName}(${2}) ${3:error} {
+		$0
+	}
+
+snippet fum "method"
+	func (${1:receiver} ${2:type}) ${3:funcName}(${4}) ${5:error} {
+		$0
+	}
+
+snippet st "struct"
+	type ${1:name} struct {
+		$0
+	}
+
+snippet ap "append"
+	append(${1:slice}, ${2:value})
+
+
+# Switch/case
+snippet switch "switch"
+	switch ${1:var} {
+	case ${2:value1}:
+		${3}
+	case ${4:value2}:
+		${5}
+	default:
+		${0}
+	}
+
+snippet case "case"
+	case ${1:value}:
+		$0
+
+
+# Loops
+snippet for "for loop"
+	for $1{
+		$0
+	}
+
+snippet fori "for int loop"
+	for ${2:i} := 0; $2 < ${1:count}; $2${3:++} {
+		$0
+	}
+
+snippet forr "for range loop"
+	for ${1:e} := range ${2:collection} {
+		$0
+	}
+
+
+# Tests
+snippet test "test function"
+	func Test${1:name}(t *testing.T) {
+		$0
+	}
+
+snippet testt "table test function"
+	func Test${1:name}(t *testing.T) {
+		tests := []struct {
+			name string
+		}{
+			{
+				name: "${2:test name}",
+			},
+		}
+
+		for _, test := range tests {
+			t.Run(test.name, func(t *testing.T) {
+				$0
+			})
+		}
+	}
+
+snippet bench "benchmark function"
+	func Benchmark${1:name}(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			${2}
+		}
+	}

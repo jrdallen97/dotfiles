@@ -326,19 +326,19 @@ Kinda built in, but also fed by LSP.
 
 ### Autocompletion
 
-Provided by `hrsh7th/nvim-cmp`.
+Provided by `saghen/blink.cmp`.
 
-- `<C-Space>`: Manually trigger completion
-- `<C-y>`:  Accept completion
 - `<Tab>`:  Accept completion
-- `<Down>`: Next item in list
-- `<C-n>`:  Next item in list
-- `<Up>`:   Previous item in list
-- `<C-p>`:  Previous item in list
-- `<C-u>`:  Scroll documentation window up
-- `<C-d>`:  Scroll documentation window down
-- `<C-l>`:  (after accepting snippet) Next location in snippet
-- `<C-h>`:  (after accepting snippet) Previous location in snippet
+- `<Down>`: Next suggestion
+- `<Up>`:   Previous suggestion
+- `<C-e>`:  Exit/cancel completion
+- `<C-n>`:  Next position in snippet
+- `<C-p>`:  Previous position in snippet
+- `<C-m>`:  Cycle snippet choices
+- `<C-b>`:  Scroll documentation up
+- `<C-f>`:  Scroll documentation down
+- `<C-k>`:  Toggle showing signature help
+- `<C-Space>`: Toggle showing documentation
 
 ### Fzf
 
