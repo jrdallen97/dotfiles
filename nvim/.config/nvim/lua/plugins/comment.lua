@@ -6,19 +6,31 @@ return {
     -- Smart and powerful comment plugin for neovim
     'numToStr/Comment.nvim',
     lazy = false,
-    opts = {
-      -- Store cursor position and line length before (un)commenting
-      pre_hook = function()
-        cursor_pos = vim.api.nvim_win_get_cursor(0)
-        before_len = string.len(vim.api.nvim_get_current_line())
-      end,
-      -- Use previous cursor position and new line length to offset cursor position accounting for commentstring
-      post_hook = function()
-        local after_len = string.len(vim.api.nvim_get_current_line())
-        cursor_pos[2] = cursor_pos[2] + after_len - before_len
-        vim.api.nvim_win_set_cursor(0, cursor_pos)
-      end,
+    dependencies = {
+      -- Neovim treesitter plugin for setting the commentstring based on the cursor location in a file
+      'JoosepAlviste/nvim-ts-context-commentstring',
     },
+    opts = function()
+      -- Use dynamic commentstring for better embedded language support (e.g. tsx)
+      local pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook()
+
+      return {
+        -- Store cursor position and line length before (un)commenting
+        pre_hook = function(ctx)
+          cursor_pos = vim.api.nvim_win_get_cursor(0)
+          before_len = string.len(vim.api.nvim_get_current_line())
+
+          return pre_hook(ctx)
+        end,
+
+        -- Use previous cursor position and new line length to offset cursor position accounting for commentstring
+        post_hook = function()
+          local after_len = string.len(vim.api.nvim_get_current_line())
+          cursor_pos[2] = cursor_pos[2] + after_len - before_len
+          vim.api.nvim_win_set_cursor(0, cursor_pos)
+        end,
+      }
+    end,
     keys = {
       {
         '<C-/>',
