@@ -16,7 +16,4 @@ return {
 
   -- Undo closing a split with `<C-w>u`
   'AndrewRadev/undoquit.vim',
-
-  -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
 }

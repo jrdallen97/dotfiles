@@ -33,7 +33,7 @@ return {
           if ls.choice_active() then
             ls.change_choice(1)
           end
-        end, { silent = true, 'Cycle snippet choices' })
+        end, { silent = true, desc = 'Cycle snippet choices' })
 
         -- Enable js snippets in ts/react
         ls.filetype_extend('javascript', {
@@ -161,7 +161,9 @@ return {
     -- Shows a signature help window while you type arguments for a function
     signature = { enabled = true },
 
-    -- Command-line mode feels kinda buggy atm
-    cmdline = { enabled = false },
+    cmdline = {
+      -- Command-line mode doesn't work well with super-tab keybinds
+      enabled = false,
+    },
   },
 }
