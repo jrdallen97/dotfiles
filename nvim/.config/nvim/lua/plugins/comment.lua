@@ -1,5 +1,4 @@
-local cursor_pos
-local before_len
+local cursor
 
 return {
   {
@@ -11,23 +10,24 @@ return {
       'JoosepAlviste/nvim-ts-context-commentstring',
     },
     opts = function()
-      -- Use dynamic commentstring for better embedded language support (e.g. tsx)
+      -- Use dynamic commentstring for better embedded language support in jsx & tsx
       local pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook()
 
       return {
-        -- Store cursor position and line length before (un)commenting
         pre_hook = function(ctx)
-          cursor_pos = vim.api.nvim_win_get_cursor(0)
-          before_len = string.len(vim.api.nvim_get_current_line())
+          -- Save cursor pos before modifying the line - otherwise we may accidentally move it twice if it was near the end of the line.
+          cursor = vim.api.nvim_win_get_cursor(0)
 
           return pre_hook(ctx)
         end,
 
-        -- Use previous cursor position and new line length to offset cursor position accounting for commentstring
-        post_hook = function()
-          local after_len = string.len(vim.api.nvim_get_current_line())
-          cursor_pos[2] = cursor_pos[2] + after_len - before_len
-          vim.api.nvim_win_set_cursor(0, cursor_pos)
+        post_hook = function(ctx)
+          -- Find the length of the prefix part of the commentstring
+          local offset = string.find(vim.bo.commentstring, '%s') * (ctx.cmode == 1 and 1 or -1)
+
+          -- Move cursor forwards/backward by prefix_length depending on if we're commenting/uncommenting
+          cursor[2] = cursor[2] + offset
+          vim.api.nvim_win_set_cursor(0, cursor)
         end,
       }
     end,
@@ -61,6 +61,8 @@ return {
         highlight = {
           -- Don't highlight the characters either side of the keyword
           keyword = 'bg',
+          -- Only highlight the line containing the keyword
+          multiline = false,
           -- These are vim regexes btw
           pattern = {
             -- Optional colon, require a space

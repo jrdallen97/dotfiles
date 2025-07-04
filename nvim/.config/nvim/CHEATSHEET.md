@@ -142,6 +142,10 @@ Note: scrolling (e.g. `<C-d>`) is not a jump.
     - add `/g` to replace all instances (i.e. if there are multiple on the same line)
     - add `/c` to prompt for confirmation before replacing each match
     - use `:bufdo %s/...` to run this in all open buffers (then `:wa` to save them all)
+- Diff mode
+    - `:difft[his]`: Mark the current window as part of the diff.
+    - `:diffo[ff]`:  Turn off diff mode for the current window.
+    - `:diffo[ff]!`: Turn off diff mode for all windows in the current tab.
 
 ### Settings
 
