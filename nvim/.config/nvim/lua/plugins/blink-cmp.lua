@@ -3,10 +3,12 @@ return {
   'saghen/blink.cmp',
   event = 'VimEnter',
   -- Use a release tag to download pre-built binaries
-  -- version = '1.*',
+  version = '1.*',
   -- AND/OR build from source, requires nightly rust: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
   -- build = 'cargo build --release',
   dependencies = {
+    'folke/lazydev.nvim',
+
     -- Snippet Engine
     {
       'L3MON4D3/LuaSnip',
@@ -42,14 +44,14 @@ return {
           'typescriptreact',
         })
 
-        -- Load friendly-snippets
-        require('luasnip.loaders.from_vscode').lazy_load { exclude = { 'go' } }
 
         -- Load my custom snippets (defined in `~/.config/nvim/snippets`)
         require('luasnip.loaders.from_snipmate').lazy_load()
+
+        -- Load friendly-snippets
+        require('luasnip.loaders.from_vscode').lazy_load { exclude = { 'go' } }
       end,
     },
-    'folke/lazydev.nvim',
   },
   --- @module 'blink.cmp'
   --- @type blink.cmp.Config
@@ -116,7 +118,7 @@ return {
       providers = {
         lsp = { score_offset = 2 },
         path = { score_offset = 10 },
-        snippets = { score_offset = 0 },
+        snippets = { score_offset = 0, max_items = 5 },
         buffer = { score_offset = -5 },
         lazydev = {
           name = 'LazyDev',
@@ -141,7 +143,7 @@ return {
       -- Example: typing `tes` shows the `test` snippet but if I type the last `t` the suggestion
       -- disappears and I can't expand the snippet.
       -- The lua version doesn't seem to do this.
-      implementation = 'lua',
+      implementation = 'prefer_rust',
       -- Disable typo resistance to reduce spam
       max_typos = 0,
       sorts = {
