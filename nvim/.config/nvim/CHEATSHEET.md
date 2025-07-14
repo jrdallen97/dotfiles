@@ -11,6 +11,7 @@ NOTE: I'm not gonna list all the basics here, just the stuff that's useful for m
     - [Editing](CHEATSHEET#Editing)
     - [Misc](CHEATSHEET#Misc)
     - [Jumps](CHEATSHEET#Jumps)
+    - [Marks](CHEATSHEET#Marks)
     - [Commands](CHEATSHEET#Commands)
     - [Settings](CHEATSHEET#Settings)
     - [Window commands](CHEATSHEET#Window commands)
@@ -81,11 +82,18 @@ Increment/decrement:
 
 Movement:
 
+- `(` / `)`:    Move backwards/forwards by sentence
+- `{` / `}`:    Move backwards/forwards by paragraph
+- `[\[` / `]]`: Move backwards/forwards by section
 - `*`:  Search for the word under the cursor
 - `#`:  Search for the word under the cursor (reverse)
 - `;`:  Repeat last f/e/etc movement
 - `,`:  Repeat last f/e/etc movement (reverse)
 - `ge`: Move to the end of the previous word
+- `gi`: Continue insert mode from its last position
+- `g;`: Move backwards in change list (e.g. insert, deletion, etc)
+- `g.`: Move forwards in change list (e.g. insert, deletion, etc)
+- `<C-6>`: Switch to the alternate file (usually the previously edited file) (also `<C-^>`)
 
 Scrolling:
 
@@ -128,6 +136,25 @@ Note: scrolling (e.g. `<C-d>`) is not a jump.
 - `H`:     Jump the cursor to the top of the screen (**h**igh)
 - `M`:     Jump the cursor to the middle of the screen (**m**iddle)
 - `L`:     Jump the cursor to the bottom of the screen (**l**ow)
+
+### Marks
+
+`:h mark-motions`
+
+Marks let you save cursor positions and easily jump back to them.
+
+- Lowercase marks are specific to the current buffer
+- Uppercase marks are global and can be used to jump between files.
+- `` m<mark> ``: Set mark
+- `` '<mark> ``: Jump to mark, with cursor at the start of the line
+- `` `<mark> ``: Jump to mark and restore marked cursor position
+
+There are also some special marks:
+
+- `.`: The position where the last change was made (e.g. text inserted or deleted)
+- `^`: The position where where we last left insert mode
+- `[`: The first character of previously yanked or changed text
+- `]`: The last character of previously yanked or changed text
 
 ### Commands
 

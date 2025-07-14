@@ -143,7 +143,7 @@ return {
       -- Example: typing `tes` shows the `test` snippet but if I type the last `t` the suggestion
       -- disappears and I can't expand the snippet.
       -- The lua version doesn't seem to do this.
-      implementation = 'prefer_rust',
+      implementation = 'prefer_rust_with_warning',
       -- Disable typo resistance to reduce spam
       max_typos = 0,
       sorts = {
