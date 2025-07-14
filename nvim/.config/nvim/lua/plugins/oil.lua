@@ -5,6 +5,13 @@ return {
     -- A vim-vinegar like file explorer that lets you edit your filesystem like a normal Neovim buffer.
     'stevearc/oil.nvim',
     config = function()
+      local sg = {
+        desc = '[S]earch by [G]rep (current directory)',
+        callback = function()
+          require('fzf-lua').live_grep { cwd = require('oil').get_current_dir() }
+        end,
+      }
+
       require('oil').setup {
         -- Replace netrw
         default_file_explorer = true,
@@ -22,6 +29,11 @@ return {
             -- Hide '..' because it's annoying to have to move the cursor down every time I change directory
             return name == '..'
           end,
+        },
+
+        lsp_file_methods = {
+          -- Autosave buffers that are updated with LSP willRenameFiles, unless they are already modified
+          autosave_changes = 'unmodified',
         },
 
         keymaps = {
@@ -44,17 +56,13 @@ return {
 
           -- Helpers to call fzf from the current oil directory
           ['<leader>sf'] = {
-            desc = '[S]earch [F]iles (current directory)',
+            desc = '[F]ind [F]iles (current directory)',
             callback = function()
               require('fzf-lua').files { cwd = require('oil').get_current_dir() }
             end,
           },
-          ['<leader>sg'] = {
-            desc = '[S]earch by [G]rep (current directory)',
-            callback = function()
-              require('fzf-lua').live_grep { cwd = require('oil').get_current_dir() }
-            end,
-          },
+          ['<leader>ss'] = sg,
+          ['<leader>sg'] = sg,
         },
       }
 

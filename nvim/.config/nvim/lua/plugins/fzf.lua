@@ -52,8 +52,8 @@ return {
       map('<leader>s',  fzf.grep_visual, '[S]earch visual selection', 'v')
 
       -- Search within my nvim config
-      map('<leader>fv', function() fzf.files { cwd = vim.fn.stdpath 'config' } end,     '[F]ind in [V]im config')
-      map('<leader>sv', function() fzf.live_grep { cwd = vim.fn.stdpath 'config' } end, '[S]earch in [V]im config')
+      map('<leader>fv', function() fzf.files { cwd = vim.fn.stdpath 'config' } end,     '[F]ind [V]im config')
+      map('<leader>sv', function() fzf.live_grep { cwd = vim.fn.stdpath 'config' } end, '[S]earch [V]im config')
 
       -- Search within my notes directory
       map('<leader>fn', function() fzf.files { cwd = '~/notes' } end,     '[F]ind [N]otes')
