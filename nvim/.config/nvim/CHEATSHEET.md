@@ -93,7 +93,7 @@ Movement:
 - `gi`: Continue insert mode from its last position
 - `g;`: Move backwards in change list (e.g. insert, deletion, etc)
 - `g.`: Move forwards in change list (e.g. insert, deletion, etc)
-- `<C-6>`: Switch to the alternate file (usually the previously edited file) (also `<C-^>`)
+- `<C-6>`: Switch to the alternate file (usually the previously edited file)
 
 Scrolling:
 
@@ -568,6 +568,7 @@ From within fugitive:
     - Session management
     - Once a session is active (e.g. after load or save), it will be autosaved
     - `:Save <name>`: Save the current session as `<name>`
-    - `:Resume`: Result the most recent session
+        - Use `:Save session.nvim` or `:SaveLocal` to create a local session
+    - `:Resume`: Resume the local session, or the most recent global session if none exists
     - `:Load`: Fuzzy-select a session to load
     - `:RmSession`: Fuzzy-select a session to load

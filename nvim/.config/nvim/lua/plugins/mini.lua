@@ -3,6 +3,9 @@ return {
   'echasnovski/mini.nvim',
   lazy = false,
   config = function()
+    local map = vim.keymap.set
+    local cmd = vim.api.nvim_create_user_command
+
     -- Better Around/Inside textobjects
     --
     -- Examples:
@@ -102,16 +105,23 @@ return {
     -- Session management (read, write, delete)
     require('mini.sessions').setup {
       -- Whether to read default session if Neovim opened without file arguments
-      autoread = false,
+      autoread = true,
+
+      -- File for local session
+      file = 'session.vim',
+
       -- Whether to print session path after action
       verbose = { read = true, write = true, delete = true },
     }
 
-    local cmd = vim.api.nvim_create_user_command
     -- Save/create session
     cmd('Save', function(opts)
-      MiniSessions.write(opts.args)
-    end, { nargs = 1, desc = 'mini.sessions: Save/create session' })
+      MiniSessions.write(opts.fargs[1])
+    end, { nargs = '?', desc = 'mini.sessions: Save/create session' })
+    -- Save/create local session
+    cmd('SaveLocal', function()
+      MiniSessions.write('session.vim', { force = true })
+    end, { nargs = 0, desc = 'mini.sessions: Save/create local session' })
     -- Resume most recent session
     cmd('Resume', function()
       MiniSessions.read(MiniSessions.get_latest())
@@ -119,11 +129,15 @@ return {
     -- Select a session to load
     cmd('Load', function()
       MiniSessions.select 'read'
-    end, { nargs = 0, desc = 'mini.sessions: Select session' })
+    end, { nargs = 0, desc = 'mini.sessions: Load session' })
     -- Select a session to delete
     cmd('RmSession', function()
       MiniSessions.select 'delete'
     end, { nargs = 0, desc = 'mini.sessions: Delete session' })
+
+    -- Also add some keybinds
+    map('n', '<leader>lr', ':Resume<cr>', { desc = 'mini.sessions: Resume most recent session' })
+    map('n', '<leader>ll', ':Load<cr>', { desc = 'mini.sessions: Load session' })
 
     -- Set up terminal background synchronization
     -- (prevents black borders if terminal size isn't perfectly aligned)
