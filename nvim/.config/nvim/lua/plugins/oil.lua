@@ -5,13 +5,6 @@ return {
     -- A vim-vinegar like file explorer that lets you edit your filesystem like a normal Neovim buffer.
     'stevearc/oil.nvim',
     config = function()
-      local sg = {
-        desc = '[S]earch by [G]rep (current directory)',
-        callback = function()
-          require('fzf-lua').live_grep { cwd = require('oil').get_current_dir() }
-        end,
-      }
-
       require('oil').setup {
         -- Replace netrw
         default_file_explorer = true,
@@ -55,14 +48,18 @@ return {
           },
 
           -- Helpers to call fzf from the current oil directory
-          ['<leader>sf'] = {
-            desc = '[F]ind [F]iles (current directory)',
+          ['<leader>fl'] = {
+            desc = '[F]ind [L]ocally (current directory)',
             callback = function()
-              require('fzf-lua').files { cwd = require('oil').get_current_dir() }
+              require('snacks.picker').files { cwd = require('oil').get_current_dir() }
             end,
           },
-          ['<leader>ss'] = sg,
-          ['<leader>sg'] = sg,
+          ['<leader>sl'] = {
+            desc = '[S]earch [L]ocally (current directory)',
+            callback = function()
+              require('snacks.picker').grep { cwd = require('oil').get_current_dir() }
+            end,
+          },
         },
       }
 

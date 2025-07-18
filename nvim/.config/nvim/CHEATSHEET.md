@@ -23,12 +23,21 @@ NOTE: I'm not gonna list all the basics here, just the stuff that's useful for m
     - [Formatting](CHEATSHEET#Formatting)
     - [Diagnostics](CHEATSHEET#Diagnostics)
     - [Autocompletion](CHEATSHEET#Autocompletion)
-    - [Fzf](CHEATSHEET#Fzf)
     - [Oil](CHEATSHEET#Oil)
     - [Comments](CHEATSHEET#Comments)
     - [Git](CHEATSHEET#Git)
         - [Fugitive](CHEATSHEET#Fugitive)
+    - [Snacks](CHEATSHEET#Snacks)
+        - [Snacks.picker](CHEATSHEET#Snacks.picker)
     - [Mini](CHEATSHEET#Mini)
+        - [Mini.surround](CHEATSHEET#Mini.surround)
+        - [Mini.splitjoin](CHEATSHEET#Mini.splitjoin)
+        - [Mini.move](CHEATSHEET#Mini.move)
+        - [Mini.operators](CHEATSHEET#Mini.operators)
+        - [Mini.bracketed](CHEATSHEET#Mini.bracketed)
+        - [Mini.trailspace](CHEATSHEET#Mini.trailspace)
+        - [Mini.indentscope](CHEATSHEET#Mini.indentscope)
+        - [Mini.sessions](CHEATSHEET#Mini.sessions)
 
 <!-- mtoc-end -->
 
@@ -51,6 +60,7 @@ Shortcuts:
 
 - `<leader>ev`: Open Vim settings in a new tab
 - `<leader>ec`: Open Vim cheatsheet in a new tab
+- `<leader>ec`: Open Vim spellfile in a new tab
 
 ## Built-in
 
@@ -69,6 +79,9 @@ Shortcuts:
 
 - `[<Space>`: Insert newline above cursor
 - `]<Space>`: Insert newline below cursor
+- `gu{motion}`: Make `{motion}` lowercase
+- `gU{motion}`: Make `{motion}` uppercase
+- `g~{motion}`: Invert case over `{motion}`
 
 Increment/decrement:
 
@@ -371,69 +384,6 @@ Provided by `saghen/blink.cmp`.
 - `<C-k>`:  Toggle showing signature help
 - `<C-Space>`: Toggle showing documentation
 
-### Fzf
-
-Provided by `ibhagwan/fzf-lua`
-
-Shortcuts:
-
-- Misc:
-    - `<leader><leader>`: Switch buffers
-    - `<leader>/`:  Search in current buffer
-    - `<leader>gs`: Git status
-    - `<leader>sr`: Resume previous search
-    - `<leader>fr`: Resume previous search
-- Find files (or directories!):
-    - `<leader>ff`: Find file
-    - `<leader>fo`: Find oldfile (recently opened files)
-    - `<leader>fd`: Find directory
-- Search for strings (lines, contents, etc):
-    - `<leader>ss`: Search for string/by grep
-    - `<leader>sg`: Search for string/by grep
-    - `<leader>sb`: Search in open buffers
-    - `<leader>sk`: Search keymaps
-    - `<leader>sh`: Search vim help
-    - `<leader>sc`: Search built-in search commands
-    - `<leader>se`: Search for errors/diagnostics in current file
-- Search for current word/visual selection:
-    - `<leader>sw`: Search for word under cursor
-    - `<leader>sW`: Search for WORD under cursor
-    - `<leader>s`:  Search for current visual selection
-- Personal shortcuts:
-    - `<leader>fv`: Find vim config file
-    - `<leader>sv`: Search vim config
-    - `<leader>fn`: Find note
-    - `<leader>sn`: Search notes
-
-Inside fzf:
-
-- `<F1>`: Toggle help
-- `<F2>`: Toggle fullscreen
-- `<F3>`: Toggle line wrap (only in `builtin` previewer)
-- `<F4>`: Toggle preview (only in `builtin` previewer)
-- `<M-g>`: Jump to first result
-- `<M-G>`: Jump to last result
-- `<M-Backspace>`: Delete to start of prompt
-- Opening files/selections:
-    - `<Enter>`: Open OR send selected to quickfix
-    - `<C-v>`: Open in vertical split(s)
-    - `<C-s>`: Open in horizontal split(s)
-    - `<C-t>`: Open in new tab
-    - `<Tab>`: Toggle selected
-    - `<M-a>`: Toggle select-all
-    - `<M-q>`: Send selection to quickfix
-    - `<M-Q>`: Send selection to loclist
-- Scroll preview:
-    - `<S-Up>`:     Scroll preview up (page)
-    - `<M-S-Up>`:   Scroll preview up (line)
-    - `<S-Down>`:   Scroll preview down (page)
-    - `<M-S-Down>`: Scroll preview down (page)
-    - `<S-Left>`:   Reset preview
-- Toggle settings:
-    - `<M-i>`: Toggle ignore
-    - `<M-h>`: Toggle hidden
-    - `<M-f>`: Toggle follow (?)
-
 ### Oil
 
 Provided by `stevearc/oil.nvim`.
@@ -519,30 +469,121 @@ From within fugitive:
 - `U`: Unstage all
 - `X`: Discard file/hunk
 
+### Snacks
+
+Provided by `folke/snacks.nvim`
+
+#### Snacks.picker
+
+Shortcuts:
+
+- Misc:
+    - `<leader><leader>`: Switch buffers
+    - `<leader>/`:  Search in current buffer
+    - `<leader>gs`: Git status
+    - `<leader>fr`: Resume previous search
+    - `<leader>sr`: Resume previous search
+- Search help (these also accept the last character uppercase for ease of typing):
+    - `<leader>Hh`: Help: Help
+    - `<leader>Hc`: Help: Commands
+    - `<leader>Hk`: Help: Keybinds
+    - `<leader>Hp`: Help: Pickers
+- Find files (or directories!):
+    - `<leader>ff`: Find: Files
+    - `<leader>fl`: Find: Locally (current directory - only from within Oil)
+    - `<leader>fo`: Find: Oldfiles (recently opened files)
+    - `<leader>fd`: Find: Directories
+- Search for strings (lines, contents, etc):
+    - `<leader>ss`: Search: for String/by Grep
+    - `<leader>sg`: Search: for String/by Grep
+    - `<leader>sl`: Search: Locally (current directory - only from within Oil)
+    - `<leader>sb`: Search: within open Buffers
+    - `<leader>sd`: Search: for Diagnostics (current file)
+    - `<leader>sD`: Search: for Diagnostics (global)
+    - `<leader>se`: Search: for Errors (current file)
+    - `<leader>sE`: Search: for Errors (global)
+- Search for current word/visual selection:
+    - `<leader>sw`: Search for word under cursor
+    - `<leader>s`:  Search for current visual selection
+- Personal shortcuts:
+    - `<leader>fv`: Find vim config
+    - `<leader>sv`: Search vim config
+    - `<leader>fn`: Find note
+    - `<leader>sn`: Search notes
+
+Picker shortcuts:
+
+- Note: most of these work in Normal & Insert mode unless specified
+- `<C-/>`: Toggle help
+- `<CR>`:  Confirm
+- `<C-t>`: Open in new tab
+- `<C-s>`: Open in new split
+- `<C-v>`: Open in new vsplit
+- `<C-c>`: Cancel/close picker
+- `<C-b>`: Scroll preview down
+- `<C-f>`: Scroll preview up
+- `<Tab>`:   Select & move to next
+- `<S-Tab>`: Select & move to previous
+- `<C-a>`:   Select all (toggle)
+- `<C-q>`:   Send selected to quickfix
+- Normal mode bindings:
+    - `?`:     Toggle help
+    - `a`:     Refocus input
+    - `i`:     Refocus input
+    - `q`:     Cancel/close picker
+    - `<Esc>`: Cancel/close picker
+- Toggles:
+    - `<M-h>`: Toggle hidden
+    - `<M-i>`: Toggle ignored
+    - `<M-m>`: Toggle maximised
+    - `<M-p>`: Toggle preview
+
 ### Mini
 
-- `mini.surround`:
-    - Add/delete/replace surroundings (brackets, quotes, etc.)
-    - `sa`: Add surrounding
-    - `sr`: Replace surrounding
-    - `sd`: Delete surrounding
-- `mini.splitjoin`:
-    - `gS`: Split if arguments are on single line, join otherwise (also works on visual selection to disambiguate)
-- `mini.move`:
-    - `<M-direction>`: Move current line/selection in direction (works in normal, visual & visual line modes)
-- `mini.operators`:
-    - `g=`: Evaluate selected (e.g. `1+1` -> `2`)
-    - `gs`: Sort selected
-    - `gm`: Multiply (duplicate) selected
-        - `gmm`: Multiply (duplicate) current line
-    - More?
-- `mini.bracketed`:
-    - Go forward/backward with square brackets (similar to `tpope/vim-unimpaired`)
-    - All bindings have the same format:
-        - `[x`: prev x
-        - `]x`: next x
-        - `[X`: first x
-        - `]X`: last x
+Provided by `echasnovski/mini.nvim`.
+
+A collection of various small independent plugins/modules.
+
+#### Mini.surround
+
+Add/delete/replace surroundings (brackets, quotes, etc.)
+
+- `sa`: Add surrounding
+- `sr`: Replace surrounding
+- `sd`: Delete surrounding
+
+#### Mini.splitjoin
+
+Split if arguments are on single line, join otherwise (also works on visual selection to disambiguate).
+
+- `gS`: Split/join
+
+#### Mini.move
+
+Move current line/selection in direction (works in normal, visual & visual line modes).
+
+- `<M-direction>`: Move
+
+#### Mini.operators
+
+Adds various text editing operators.
+
+- `g=`: Evaluate selected (e.g. `1+1` -> `2`)
+- `gs`: Sort selected
+- `gm`: Multiply (duplicate) selected
+    - `gmm`: Multiply (duplicate) current line
+- More?
+
+#### Mini.bracketed
+
+Go forward/backward with square brackets (similar to `tpope/vim-unimpaired`).
+
+- All bindings have the same format:
+    - `[x`: prev x
+    - `]x`: next x
+    - `[X`: first x
+    - `]X`: last x
+- Suffixes:
     - `b`: Buffer (now built-in)
     - `c`: Comment block
     - `d`: Diagnostic (now built-in)
@@ -554,21 +595,35 @@ From within fugitive:
     - `q`: Quickfix list (now built-in)
     - `w`: Window (current tab)
     - `x`: Conflict
-    - I've disabled a few:
-        - `t`: Treesitter node or parent
-        - `u`: Undo state (???)
-        - `y`: Yank (???)
-- `mini.trailspace`:
-    - Highlights trailing whitespace
-    - `:TrimWhitespace`: Trim trailing whitespace
-- `mini.indentscope`:
-    - Visualize and work with indent scope
-    - Adds `i` textobject for indents (e.g. `]i`, `cii`, `vai`)
-- `mini.sessions`:
-    - Session management
-    - Once a session is active (e.g. after load or save), it will be autosaved
-    - `:Save <name>`: Save the current session as `<name>`
-        - Use `:Save session.nvim` or `:SaveLocal` to create a local session
-    - `:Resume`: Resume the local session, or the most recent global session if none exists
-    - `:Load`: Fuzzy-select a session to load
-    - `:RmSession`: Fuzzy-select a session to load
+- I've disabled a few suffixes that weren't useful or conflicted with other keybinds:
+    - `t`: Treesitter node or parent
+    - `u`: Undo state (???)
+    - `y`: Yank (???)
+
+#### Mini.trailspace
+
+Highlights trailing whitespace.
+
+- `:TrimWhitespace`: Trim trailing whitespace
+
+#### Mini.indentscope
+
+Visualize and work with indent scope.
+
+- Adds `i` textobject for indents (e.g. `]i`, `cii`, `vai`)
+
+#### Mini.sessions
+
+Session management.
+
+- Will auto-load the local or most recent session if vim is invoked with no other options.
+- Once a session is active (e.g. after load or save), it will be autosaved.
+- Commands:
+    - `:Save <name>`: Create session `<name>`, or manually save the current if called with no arguments
+    - `:SaveLocal`:   Create local session; the same as `:Save session.nvim`
+    - `:Resume`:      Resume the local session, or the most recent global session if none exists
+    - `:Load`:        Fuzzy-select a session to load
+    - `:RmSession`:   Fuzzy-select a session to delete
+- Keybinds:
+    - `<leader>lr`: `:Resume`
+    - `<leader>ll`: `:Load`
