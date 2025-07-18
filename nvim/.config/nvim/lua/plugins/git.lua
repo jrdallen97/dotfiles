@@ -13,61 +13,53 @@ return {
           })
         end
 
+        local nav_hunk = function(direction)
+          gitsigns.nav_hunk(direction, { target = 'all' })
+        end
+        local blame_line = function()
+          gitsigns.blame_line { full = true }
+        end
+        local diffthis_previous = function()
+          gitsigns.diffthis '~1'
+        end
+        local setqflist_all = function()
+          ---@diagnostic disable-next-line: param-type-mismatch
+          gitsigns.setqflist 'all'
+        end
+
+        -- stylua: ignore start
+
         -- Navigation
         -- Using `h` for 'hunk'. Avoiding `c` since it conflicts with `mini.bracketed`.
-        -- Next hunk
-        map('n', ']h', function()
-          if vim.wo.diff then
-            vim.cmd.normal { ']c', bang = true }
-          else
-            gitsigns.nav_hunk('next', { target = 'all' })
-          end
-        end, 'Next hunk')
-        -- Prev hunk
-        map('n', '[h', function()
-          if vim.wo.diff then
-            vim.cmd.normal { '[c', bang = true }
-          else
-            gitsigns.nav_hunk('prev', { target = 'all' })
-          end
-        end, 'Prev hunk')
-        -- Also add a version for first/last hunk
-        map('n', ']H', function()
-          gitsigns.nav_hunk('last', { target = 'all' })
-        end, 'Last Hunk')
-        map('n', '[H', function()
-          gitsigns.nav_hunk('first', { target = 'all' })
-        end, 'First Hunk')
+        map('n', ']h', function() nav_hunk('next')  end, 'Next hunk')
+        map('n', '[h', function() nav_hunk('prev')  end, 'Prev hunk')
+        map('n', ']H', function() nav_hunk('last')  end, 'Last Hunk')
+        map('n', '[H', function() nav_hunk('first') end, 'First Hunk')
 
-        -- Stage/reset
-        map({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>', '[H]unk [S]tage (toggle)')
-        map({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<CR>', '[H]unk [R]eset')
-        map('n', '<leader>hS', gitsigns.stage_buffer, '[H]unk [S]tage entire buffer')
-        map('n', '<leader>hR', gitsigns.reset_buffer, '[H]unk [R]eset entire buffer')
-        -- Preview
-        map('n', '<leader>hp', gitsigns.preview_hunk, '[H]unk [P]review')
-        map('n', '<leader>hi', gitsigns.preview_hunk_inline, '[H]unk preview [I]nline')
+        -- Staging
+        local nv = {'n', 'v'}
+        map(nv,  '<leader>hs', gitsigns.stage_hunk,          '[S]tage hunk (toggle)')
+        map(nv,  '<leader>hr', gitsigns.reset_hunk,          '[R]eset hunk')
+        map('n', '<leader>hS', gitsigns.stage_buffer,        '[S]tage entire buffer')
+        map('n', '<leader>hR', gitsigns.reset_buffer,        '[R]eset entire buffer')
+        map('n', '<leader>hp', gitsigns.preview_hunk_inline, '[P]review hunk (inline)')
         -- Blame
-        map('n', '<leader>hb', function()
-          gitsigns.blame_line { full = true }
-        end, '[B]lame line')
+        map('n', '<leader>hb', blame_line, '[B]lame line')
         -- Diff
-        map('n', '<leader>hd', gitsigns.diffthis, '[D]iff')
-        map('n', '<leader>hD', function()
-          gitsigns.diffthis '~'
-        end, '[D]iff vs. previous commit (~)')
+        map('n', '<leader>hd', gitsigns.diffthis, '[D]iff file')
+        map('n', '<leader>hD', diffthis_previous, '[D]iff file vs. previous commit')
         -- Quickfix
-        map('n', '<leader>hQ', function()
-          gitsigns.setqflist 'all'
-        end, 'Send [H]unks to [Q]uickfix (all files)')
         map('n', '<leader>hq', gitsigns.setqflist, 'Send [H]unks to [Q]uickfix (current buffer)')
+        map('n', '<leader>hQ', setqflist_all,      'Send [H]unks to [Q]uickfix (all files)')
 
         -- Toggles
         map('n', '<leader>tb', gitsigns.toggle_current_line_blame, '[T]oggle [B]lame (inline)')
-        map('n', '<leader>td', gitsigns.toggle_word_diff, '[T]oggle Word [D]iff')
+        map('n', '<leader>td', gitsigns.toggle_word_diff,          '[T]oggle Word [D]iff')
 
         -- Text object
-        map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', '[I]nner [H]unk')
+        map({'o', 'x'}, 'ih', gitsigns.select_hunk, '[I]nner [H]unk')
+
+        -- stylua: ignore end
       end,
     },
   },
@@ -77,11 +69,13 @@ return {
     'tpope/vim-fugitive',
     lazy = false,
     keys = {
-      { '<leader>gg', '<cmd>tab G<cr>', desc = '[G]it Open Fugitive' },
-      { '<leader>gb', '<cmd>Git blame<cr>', desc = '[G]it [B]lame' },
+      -- stylua: ignore start
+      { '<leader>gg', '<cmd>tab G<cr>',      desc = '[G]it Open Fugitive' },
+      { '<leader>gb', '<cmd>Git blame<cr>',  desc = '[G]it [B]lame' },
       { '<leader>gc', '<cmd>Git commit<cr>', desc = '[G]it [C]ommit' },
-      { '<leader>gp', '<cmd>Git push<cr>', desc = '[G]it [P]ush' },
-      { '<leader>gl', '<cmd>Git pull<cr>', desc = '[G]it Pul[L]' },
+      { '<leader>gp', '<cmd>Git push<cr>',   desc = '[G]it [P]ush' },
+      { '<leader>gl', '<cmd>Git pull<cr>',   desc = '[G]it Pul[L]' },
+      -- stylua: ignore end
     },
   },
 }

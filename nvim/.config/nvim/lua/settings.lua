@@ -6,56 +6,56 @@ local opt = vim.opt
 
 -- NOTE: For more options, see `:help option-list`
 
--- Disable formatting for basic settings so I can line them up nicely:
--- stylua: ignore
-do
-  -- General
-  o.undofile   = true -- Enable persistent undo (see also `:h undodir`)
-  o.mouse      = 'a'  -- Enable mouse for all available modes
-  o.updatetime = 100  -- Decrease update time
-  o.timeoutlen = 500  -- Decrease mapped sequence wait time
-  o.confirm    = true -- Ask whether you want to save when running commands like `:q` or `:e`
+-- stylua: ignore start
 
-  -- Appearance
-  o.number        = true    -- Show line numbers
-  o.cursorline    = true    -- Highlight current line
-  o.cursorcolumn  = false   -- Highlight current column (dynamically controlled via autocmd below)
-  o.showmode      = false   -- Don't show mode in command line
-  o.signcolumn    = 'yes'   -- Always show sign column (otherwise it will shift text)
-  o.scrolloff     = 5       -- Number of visible lines to keep above and below the cursor
-  o.sidescrolloff = 5       -- Number of visible columns to keep left and right of the cursor
-  o.fillchars     = 'eob: ' -- Don't show `~` outside of buffer
-  o.list          = true    -- Show certain hidden characters
-  opt.listchars   = {       -- Make hidden characters display nicely
-    tab   = '» ',
-    trail = '·',
-    nbsp  = '␣',
-  }
+-- General
+o.undofile   = true -- Enable persistent undo (see also `:h undodir`)
+o.mouse      = 'a'  -- Enable mouse for all available modes
+o.updatetime = 100  -- Decrease update time
+o.timeoutlen = 500  -- Decrease mapped sequence wait time
+o.confirm    = true -- Ask whether you want to save when running commands like `:q` or `:e`
 
-  -- Wrapping
-  o.wrap        = true -- Enable line wrapping by default
-  o.linebreak   = true -- Wrap long lines at 'breakat'
-  o.breakindent = true -- Indent wrapped lines to match line start
+-- Appearance
+o.number        = true    -- Show line numbers
+o.cursorline    = true    -- Highlight current line
+o.cursorcolumn  = false   -- Highlight current column (dynamically controlled via autocmd below)
+o.showmode      = false   -- Don't show mode in command line
+o.signcolumn    = 'yes'   -- Always show sign column (otherwise it will shift text)
+o.scrolloff     = 5       -- Number of visible lines to keep above and below the cursor
+o.sidescrolloff = 5       -- Number of visible columns to keep left and right of the cursor
+o.fillchars     = 'eob: ' -- Don't show `~` outside of buffer
+o.list          = true    -- Show certain hidden characters
+opt.listchars   = {       -- Make hidden characters display nicely
+  tab   = '» ',
+  trail = '·',
+  nbsp  = '␣',
+}
 
-  -- Splits
-  o.splitbelow = true -- Horizontal splits will be below
-  o.splitright = true -- Vertical splits will be to the right
+-- Wrapping
+o.wrap        = true -- Enable line wrapping by default
+o.linebreak   = true -- Wrap long lines at 'breakat'
+o.breakindent = true -- Indent wrapped lines to match line start
 
-  -- Search/Replace
-  o.ignorecase  = true    -- Ignore case when searching (unless you include `\C` in search)
-  o.incsearch   = true    -- Show search results while typing
-  o.infercase   = true    -- Infer letter cases for a richer built-in keyword completion
-  o.smartcase   = true    -- Don't ignore case when searching if pattern has upper case
-  o.smartindent = true    -- Make indenting smart
-  o.hlsearch    = true    -- Highlight all matches when searching
-  o.inccommand  = 'split' -- Preview substitutions as you type
+-- Splits
+o.splitbelow = true -- Horizontal splits will be below
+o.splitright = true -- Vertical splits will be to the right
 
-  -- Folds
-  o.foldtext       = ''     -- Show the first line of the fold as-is
-  o.foldlevelstart = 99     -- Don't fold anything by default
-  o.foldmethod     = 'expr' -- Enable treesitter-based code folding by default
-  o.foldexpr       = 'v:lua.vim.treesitter.foldexpr()'
-end
+-- Search/Replace
+o.ignorecase  = true    -- Ignore case when searching (unless you include `\C` in search)
+o.incsearch   = true    -- Show search results while typing
+o.infercase   = true    -- Infer letter cases for a richer built-in keyword completion
+o.smartcase   = true    -- Don't ignore case when searching if pattern has upper case
+o.smartindent = true    -- Make indenting smart
+o.hlsearch    = true    -- Highlight all matches when searching
+o.inccommand  = 'split' -- Preview substitutions as you type
+
+-- Folds
+o.foldtext       = ''     -- Show the first line of the fold as-is
+o.foldlevelstart = 99     -- Don't fold anything by default
+o.foldmethod     = 'expr' -- Enable treesitter-based code folding by default
+o.foldexpr       = 'v:lua.vim.treesitter.foldexpr()'
+
+-- stylua: ignore end
 
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
@@ -97,28 +97,28 @@ vim.api.nvim_create_autocmd('WinLeave', {
 })
 
 -- Disable slow features when opening big files
--- Most of these seem fine, but I've left them commented out so they're easy to re-enable
+-- Most of these seem unnecessary, but I've left them commented out so they're easy to re-enable
 vim.cmd [[
-function BigFileStuff()
-  echo("Big file, disabling slow features")
+  function BigFileStuff()
+    echo("Big file, disabling slow features")
 
-  " if exists(':TSBufDisable')
-  "   exec 'TSBufDisable autotag'
-  "   exec 'TSBufDisable highlight'
-  "   " etc...
-  " endif
+    " if exists(':TSBufDisable')
+    "   exec 'TSBufDisable autotag'
+    "   exec 'TSBufDisable highlight'
+    "   " etc...
+    " endif
 
-  setlocal foldmethod=manual
-  " syntax off
-  " filetype off
-  " setlocal noundofile
-  " setlocal noswapfile
-  " setlocal noloadplugins
-endfunction
+    setlocal foldmethod=manual
+    " syntax off
+    " filetype off
+    " setlocal noundofile
+    " setlocal noswapfile
+    " setlocal noloadplugins
+  endfunction
 
-augroup BigFileDisable
-  autocmd!
-  " Run for files bigger than 10MB
-  autocmd BufWinEnter * if getfsize(expand("%")) > 10 * 1024 * 1024 | exec BigFileStuff() | endif
-augroup END
+  augroup BigFileDisable
+    autocmd!
+    " Run for files bigger than 10MB
+    autocmd BufWinEnter * if getfsize(expand("%")) > 10 * 1024 * 1024 | exec BigFileStuff() | endif
+  augroup END
 ]]

@@ -60,7 +60,7 @@ Shortcuts:
 
 - `<leader>ev`: Open Vim settings in a new tab
 - `<leader>ec`: Open Vim cheatsheet in a new tab
-- `<leader>ec`: Open Vim spellfile in a new tab
+- `<leader>es`: Open Vim spellfile in a new tab
 
 ## Built-in
 
@@ -204,12 +204,12 @@ Note: most of these work even if you continue holding `Ctrl` for the 2nd key, e.
 - `<C-w>q`: Close the current window (also: `:quit`)
 - `<C-w>o`: Close all but the current window (also: `:only`)
 - `<C-w>u`: Undo closing a window (provided by `AndrewRadev/undoquit.vim`)
-- `<C-w>t`: Alias for `:tab split` (open current window in new tab) (_custom_)
+- `<C-w>t`: Open current window in new tab (alias for `:tab split`) (_custom_)
 - `<C-w>T`: Move current window to new tab
 - `<C-w>w`: Move to the previous window (move left/up), loop to last window if already at first
 - `<C-w>p`: Move to the most recently accessed window
 - `<C-w>=`: Equalise splits/make all windows the same size
-- `<C-w>f`: Focus current window (aliased to `<C-w>_<C-w>|`) (_custom_)
+- `<C-w>f`: Focus current window (maximise height & width) (_custom_)
 - `<C-w>_`: Maximise height of current window
 - `<C-w>|`: Maximise width of current window
 
@@ -423,12 +423,10 @@ Provided by `lewis6991/gitsigns.nvim`.
 - `[H`: First hunk
 - Staging:
     - `<leader>hs`: Stage hunk (toggle) (also works in visual mode)
-    - `<leader>hS`: Stage all hunks in file
-    - `<leader>hu`: Undo stage hunk
     - `<leader>hr`: Reset hunk
-    - `<leader>hR`: Reset all hunks in file
-    - `<leader>hp`: Preview current hunk
-    - `<leader>hi`: Preview current hunk (inline)
+    - `<leader>hS`: Stage entire file
+    - `<leader>hR`: Reset all unstaged hunks in file
+    - `<leader>hp`: Preview current hunk (inline)
     - `<leader>hq`: Send hunks to quickfix (buffer)
     - `<leader>hQ`: Send hunks to quickfix (all files)
 - Blame
@@ -449,7 +447,7 @@ Text object:
 
 Provided by `tpope/vim-fugitive`.
 
-- `:G`: Open fugitive in a split
+- `:G`:         Open fugitive in a split
 - `:tab G`:     Open fugitive in a new tab
 - `<leader>gg`: Open fugitive in a new tab
 - `<leader>gs`: Git status (telescope)

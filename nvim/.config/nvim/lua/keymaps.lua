@@ -6,59 +6,56 @@ local map = function(keys, func, desc, mode)
   vim.keymap.set(mode, keys, func, { desc = desc })
 end
 
--- Jump to vim settings
-map('<leader>ev', ':tabe ~/.config/nvim/lua<CR>', '[E]dit [V]im settings')
-map('<leader>ec', ':tabe ~/.config/nvim/CHEATSHEET.md<CR>', '[E]dit [C]heatsheet')
-map('<leader>es', ':tabe ~/.config/nvim/spell/en.utf-8.add<CR>', '[E]dit [S]pellfile')
+local setloclist_errors = function()
+  vim.diagnostic.setloclist { severity = { min = vim.diagnostic.severity.ERROR } }
+end
+local setqflist_errors = function()
+  vim.diagnostic.setqflist { severity = { min = vim.diagnostic.severity.ERROR } }
+end
+local toggle_ruler = function()
+  vim.o.colorcolumn = vim.o.colorcolumn == '' and '100' or ''
+end
+local toggle_errors = function()
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+end
 
--- Notes
--- map('<leader>en', ':tabe ~/notes/<CR>', '[E]dit [N]otes')
--- map(
---   '<leader>ed',
---   -- Open today's daily note, open TODOs in a split, change back to the first split.
---   ':exec "tabe ~/notes/diary/".strftime("%F").".md"<CR>:sp ~/notes/diary/TODO.md<CR><C-w><C-k>',
---   '[E]dit [D]aily note'
--- )
--- map('<leader>et', ':tabe ~/notes/diary/TODO.md<CR>', '[E]dit [T]odo list')
+-- stylua: ignore start
+
+-- Jump to vim settings
+map('<leader>ev', ':tabe ~/.config/nvim/lua<CR>',                '[E]dit [V]im settings')
+map('<leader>ec', ':tabe ~/.config/nvim/CHEATSHEET.md<CR>',      '[E]dit [C]heatsheet')
+map('<leader>es', ':tabe ~/.config/nvim/spell/en.utf-8.add<CR>', '[E]dit [S]pellfile')
 
 -- Easily run executable files
 map('<leader>rr', ':w<CR>:!%:p<CR>', '[RR]un current file (shebang)')
 map('<leader>rt', ':w<CR>:!time %:p<CR>', '[R]un & [T]ime current file (shebang)')
 
 -- Diagnostic keymaps
+map('<leader>l', setloclist_errors,         'Open diagnostic [L]ocation list (errors only)')
 map('<leader>L', vim.diagnostic.setloclist, 'Open diagnostic [L]ocation list (all diagnostics)')
-map('<leader>Q', vim.diagnostic.setqflist, 'Open diagnostic [Q]uickfix list (all diagnostics)')
-map('<leader>l', function()
-  vim.diagnostic.setloclist { severity = { min = vim.diagnostic.severity.ERROR } }
-end, 'Open diagnostic [L]ocation list (errors only)')
-map('<leader>q', function()
-  vim.diagnostic.setqflist { severity = { min = vim.diagnostic.severity.ERROR } }
-end, 'Open diagnostic [Q]uickfix list (errors only)')
+map('<leader>q', setqflist_errors,          'Open diagnostic [Q]uickfix list (errors only)')
+map('<leader>Q', vim.diagnostic.setqflist,  'Open diagnostic [Q]uickfix list (all diagnostics)')
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 map('<Esc>', '<cmd>nohlsearch<CR>')
 
--- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
--- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
--- is not what someone will guess without a bit more experience.
---
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
+-- Exit terminal mode with a sane shortcut. Otherwise, you normally need to press <C-\><C-n>.
+-- NOTE: This won't work in all terminal emulators/tmux/etc.
 map('<Esc><Esc>', '<C-\\><C-n>', 'Exit terminal mode', 't')
 
 -- Use CTRL+<hjkl> to switch between windows
 --  See `:help wincmd` for a list of all window commands
-map('<C-h>', '<C-w><C-h>', 'Move focus to the left window')
-map('<C-l>', '<C-w><C-l>', 'Move focus to the right window')
-map('<C-j>', '<C-w><C-j>', 'Move focus to the lower window')
-map('<C-k>', '<C-w><C-k>', 'Move focus to the upper window')
--- A couple of bindings to focus in on a specific file
+map('<C-h>', '<C-w>h', 'Go to the left window')
+map('<C-l>', '<C-w>l', 'Go to the right window')
+map('<C-j>', '<C-w>j', 'Go to the lower window')
+map('<C-k>', '<C-w>k', 'Go to the upper window')
+-- Focus in on a specific file
 map('<C-w>t', ':tab split<CR>', 'Duplicate window into a new tab')
-map('<C-w>f', '<C-w>_<C-w>|', 'Focus window (maximise height & width)')
+map('<C-w>f', '<C-w>_<C-w>|',   'Focus window (maximise height & width)')
 -- Move windows around more easily
-map('<C-w><S-Left>', '<C-w>H', 'Move window to far left')
-map('<C-w><S-Down>', '<C-w>J', 'Move window to far bottom')
-map('<C-w><S-Up>', '<C-w>K', 'Move window to far top')
+map('<C-w><S-Left>',  '<C-w>H', 'Move window to far left')
+map('<C-w><S-Down>',  '<C-w>J', 'Move window to far bottom')
+map('<C-w><S-Up>',    '<C-w>K', 'Move window to far top')
 map('<C-w><S-Right>', '<C-w>L', 'Move window to far right')
 
 -- Easily switch tabs
@@ -74,25 +71,15 @@ map('<leader>9', '9gt', 'Go to tab #9')
 map('<leader>0', ':tablast<cr>', 'Go to last tab')
 
 -- Quick toggles
--- map('<leader>tl', ':set list!<CR>', '[T]oggle [L]ist' )
 map('<leader>tw', ':set wrap!<CR>', '[T]oggle [W]rap')
-map('<leader>tr', function()
-  vim.o.colorcolumn = vim.o.colorcolumn == '' and '100' or ''
-end, '[T]oggle [R]uler')
-map('<leader>te', function()
-  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
-end, '[T]oggle [E]rrors (diagnostics)')
-
--- Move lines up & down easily
--- E.g. ":m '>+1<CR>gv" = Move selection down, reindent & reselect
--- map('<S-Down>', ":m '>+1<CR>gv", 'Move selection down', 'v' )
--- map('<S-Up>', ":m '<-2<CR>gv", 'Move selection up', 'v' )
+map('<leader>tr', toggle_ruler,     '[T]oggle [R]uler')
+map('<leader>te', toggle_errors,    '[T]oggle [E]rrors (diagnostics)')
 
 -- Reselect after changing indentation
 map('>', '>gv', 'Increase indentation & reselect', 'v')
 map('<', '<gv', 'Decrease indentation & reselect', 'v')
--- map('<S-Right>', '>gv', 'Increase indentation & reselect', 'v')
--- map('<S-Left>', '<gv', 'Decrease indentation & reselect', 'v')
+
+-- stylua: ignore end
 
 -- If foldlevel is at 99 (default), reset it with zR before running zm
 vim.keymap.set('n', 'zm', function()
