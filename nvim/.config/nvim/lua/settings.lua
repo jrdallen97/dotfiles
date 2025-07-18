@@ -1,9 +1,9 @@
 -- Get or set options (`:h vim.o`)
 local o = vim.o
 -- Like `vim.o` but with a special interface for interacting with lists & maps (`:h vim.opt`)
---  See `:help lua-options`
---  and `:help lua-options-guide`
+-- See `:h lua-options` and `:h lua-options-guide`
 local opt = vim.opt
+
 -- NOTE: For more options, see `:help option-list`
 
 -- Disable formatting for basic settings so I can line them up nicely:
@@ -19,6 +19,7 @@ do
   -- Appearance
   o.number        = true    -- Show line numbers
   o.cursorline    = true    -- Highlight current line
+  o.cursorcolumn  = false   -- Highlight current column (dynamically controlled via autocmd below)
   o.showmode      = false   -- Don't show mode in command line
   o.signcolumn    = 'yes'   -- Always show sign column (otherwise it will shift text)
   o.scrolloff     = 5       -- Number of visible lines to keep above and below the cursor
@@ -26,9 +27,9 @@ do
   o.fillchars     = 'eob: ' -- Don't show `~` outside of buffer
   o.list          = true    -- Show certain hidden characters
   opt.listchars   = {       -- Make hidden characters display nicely
-    tab = '» ',
+    tab   = '» ',
     trail = '·',
-    nbsp = '␣',
+    nbsp  = '␣',
   }
 
   -- Wrapping
@@ -75,6 +76,23 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
   callback = function()
     vim.hl.on_yank { timeout = 250 }
+  end,
+})
+
+-- Automatically disable cursorcolumn for non-active buffers
+local g = vim.api.nvim_create_augroup('hide-cursorcolumn', { clear = true })
+vim.api.nvim_create_autocmd('WinEnter', {
+  desc = 'Enable cursorcolumn on entering a buffer',
+  group = g,
+  callback = function()
+    o.cursorcolumn = true
+  end,
+})
+vim.api.nvim_create_autocmd('WinLeave', {
+  desc = 'Disable cursorcolumn on leaving a buffer',
+  group = g,
+  callback = function()
+    o.cursorcolumn = false
   end,
 })
 

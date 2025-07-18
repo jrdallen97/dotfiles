@@ -9,6 +9,7 @@ end
 -- Jump to vim settings
 map('<leader>ev', ':tabe ~/.config/nvim/lua<CR>', '[E]dit [V]im settings')
 map('<leader>ec', ':tabe ~/.config/nvim/CHEATSHEET.md<CR>', '[E]dit [C]heatsheet')
+map('<leader>es', ':tabe ~/.config/nvim/spell/en.utf-8.add<CR>', '[E]dit [S]pellfile')
 
 -- Notes
 -- map('<leader>en', ':tabe ~/notes/<CR>', '[E]dit [N]otes')
@@ -27,7 +28,6 @@ map('<leader>rt', ':w<CR>:!time %:p<CR>', '[R]un & [T]ime current file (shebang)
 -- Diagnostic keymaps
 map('<leader>L', vim.diagnostic.setloclist, 'Open diagnostic [L]ocation list (all diagnostics)')
 map('<leader>Q', vim.diagnostic.setqflist, 'Open diagnostic [Q]uickfix list (all diagnostics)')
--- Less busy diagnostic keymaps
 map('<leader>l', function()
   vim.diagnostic.setloclist { severity = { min = vim.diagnostic.severity.ERROR } }
 end, 'Open diagnostic [L]ocation list (errors only)')
