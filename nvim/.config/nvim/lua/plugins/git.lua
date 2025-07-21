@@ -20,6 +20,7 @@ return {
           gitsigns.blame_line { full = true }
         end
         local diffthis_previous = function()
+          ---@diagnostic disable-next-line: param-type-mismatch
           gitsigns.diffthis '~1'
         end
         local setqflist_all = function()

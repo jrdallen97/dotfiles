@@ -1,3 +1,16 @@
+-- Custom cursor location to also show virtual columns when applicable
+-- https://github.com/nvim-lualine/lualine.nvim/issues/1276#issuecomment-2400374924b
+local location = function()
+  local line = vim.fn.line '.'
+  local ccol = vim.fn.charcol '.'
+  local vcol = vim.fn.virtcol '.'
+  if ccol == vcol then
+    return string.format('%3d:%-2d', line, ccol)
+  else
+    return string.format('%3d:%d:~%-2d', line, ccol, vcol)
+  end
+end
+
 return {
   {
     -- Soothing pastel colourscheme
@@ -74,11 +87,12 @@ return {
           { 'fileformat', padding = { left = 1, right = 2 } },
         },
         lualine_y = { 'progress' },
-        lualine_z = { 'location' },
+        lualine_z = { location },
       },
       inactive_sections = {
         lualine_b = { 'diff', 'diagnostics' },
         lualine_c = { 'filename' },
+        lualine_z = { location },
       },
       winbar = {
         lualine_c = {
@@ -94,7 +108,7 @@ return {
   },
 
   {
-    -- A simple statusline with icons
+    -- A simple tabline with icons
     'crispgm/nvim-tabline',
     opts = {
       show_index = true,
