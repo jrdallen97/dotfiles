@@ -95,45 +95,45 @@ return {
 
     -- Misc
     map('<leader><leader>', picker.buffers,    '[ ] Switch buffers')
-    map('<leader>/',        picker.lines,      '[/] Search in current buffer')
+    map('<leader>/',        picker.smart,      '[/] Smart finder')
     map('<leader>gs',       picker.git_status, '[G]it [S]tatus')
-    map('<leader>fr',       picker.resume,     '[F]ind: [R]esume')
-    map('<leader>sr',       picker.resume,     '[S]earch: [R]esume')
+    map('<leader>fr',       picker.resume,     '[R]esume')
+    map('<leader>sr',       picker.resume,     '[R]esume')
 
     -- Search [H]elp
-    map({'<leader>Hh', '<leader>HH'}, picker.help,     '[H]elp: [H]elp')
-    map({'<leader>Hc', '<leader>HC'}, picker.commands, '[H]elp: [C]ommands')
-    map({'<leader>Hk', '<leader>HK'}, picker.keymaps,  '[H]elp: [K]eybinds')
-    map({'<leader>Hp', '<leader>HP'}, picker.pickers,  '[H]elp: [P]ickers')
+    map({'<leader>Hh', '<leader>HH'}, picker.help,     '[H]elp')
+    map({'<leader>Hc', '<leader>HC'}, picker.commands, '[C]ommands')
+    map({'<leader>Hk', '<leader>HK'}, picker.keymaps,  '[K]eybinds')
+    map({'<leader>Hp', '<leader>HP'}, picker.pickers,  '[P]ickers')
 
     -- [F]ind files (or directories!)
-    map('<leader>ff', files,         '[F]ind: [F]iles')
-    map('<leader>fo', picker.recent, '[F]ind: [O]ldfiles')
-    map('<leader>fd', directories,   '[F]ind: [D]irectories')
+    map('<leader>ff', files,         '[F]iles')
+    map('<leader>fo', picker.recent, '[O]ldfiles')
+    map('<leader>fd', directories,   '[D]irectories')
 
     -- [S]earch for strings (lines, contents, etc)
-    map('<leader>ss', picker.grep,         '[S]earch: [S]tring')
-    map('<leader>sg', picker.grep,         '[S]earch: [G]rep')
-    map('<leader>sb', picker.grep_buffers, '[S]earch: within open [B]uffers')
+    map('<leader>ss', picker.grep,         '[S]tring')
+    map('<leader>sg', picker.grep,         '[G]rep')
+    map('<leader>sl', picker.lines,        '[L]ines in current buffer')
+    map('<leader>sb', picker.grep_buffers, 'Within open [B]uffers')
 
     -- [S]earch for diagnostics/errors
-    map('<leader>sd', picker.diagnostics_buffer, '[S]earch: [D]iagnostics (buffer)')
-    map('<leader>sD', picker.diagnostics,        '[S]earch: [D]iagnostics (global)')
-    map('<leader>se', errors_buffer,             '[S]earch: [E]rrors (buffer)')
-    map('<leader>sE', errors,                    '[S]earch: [E]rrors (global)')
+    map('<leader>sd', picker.diagnostics_buffer, '[D]iagnostics (buffer)')
+    map('<leader>sD', picker.diagnostics,        '[D]iagnostics (global)')
+    map('<leader>se', errors_buffer,             '[E]rrors (buffer)')
+    map('<leader>sE', errors,                    '[E]rrors (global)')
 
     -- [S]earch for current word/visual selection
-    map('<leader>sw', picker.grep_word, '[S]earch: current [W]ord', { 'n', 'x' })
-    map('<leader>s',  picker.grep_word, '[S]earch: current visual selection', 'v')
+    map('<leader>sw', picker.grep_word, 'Current [W]ord', { 'n', 'x' })
 
     -- [S]earch/[F]ind within my nvim config
     local config = vim.fn.stdpath 'config'
-    map('<leader>fv', function() picker.files { cwd = config } end, '[F]ind: [V]im config')
-    map('<leader>sv', function() picker.grep  { cwd = config } end, '[S]earch: [V]im config')
+    map('<leader>fv', function() picker.files { cwd = config } end, '[V]im config')
+    map('<leader>sv', function() picker.grep  { cwd = config } end, '[V]im config')
 
     -- [S]earch/[F]ind within my notes directory
-    map('<leader>fn', function() picker.files { cwd = '~/notes' } end, '[F]ind: [N]otes')
-    map('<leader>sn', function() picker.grep  { cwd = '~/notes' } end, '[S]earch: [N]otes')
+    map('<leader>fn', function() picker.files { cwd = '~/notes' } end, '[N]otes')
+    map('<leader>sn', function() picker.grep  { cwd = '~/notes' } end, '[N]otes')
 
     -- stylua: ignore end
   end,

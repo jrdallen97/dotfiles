@@ -28,16 +28,16 @@ NOTE: I'm not gonna list all the basics here, just the stuff that's useful for m
     - [Git](CHEATSHEET#Git)
         - [Fugitive](CHEATSHEET#Fugitive)
     - [Snacks](CHEATSHEET#Snacks)
-        - [Snacks.picker](CHEATSHEET#Snacks.picker)
+        - [Snacks-picker](CHEATSHEET#Snacks-picker)
     - [Mini](CHEATSHEET#Mini)
-        - [Mini.surround](CHEATSHEET#Mini.surround)
-        - [Mini.splitjoin](CHEATSHEET#Mini.splitjoin)
-        - [Mini.move](CHEATSHEET#Mini.move)
-        - [Mini.operators](CHEATSHEET#Mini.operators)
-        - [Mini.bracketed](CHEATSHEET#Mini.bracketed)
-        - [Mini.trailspace](CHEATSHEET#Mini.trailspace)
-        - [Mini.indentscope](CHEATSHEET#Mini.indentscope)
-        - [Mini.sessions](CHEATSHEET#Mini.sessions)
+        - [Mini-surround](CHEATSHEET#Mini-surround)
+        - [Mini-splitjoin](CHEATSHEET#Mini-splitjoin)
+        - [Mini-move](CHEATSHEET#Mini-move)
+        - [Mini-operators](CHEATSHEET#Mini-operators)
+        - [Mini-bracketed](CHEATSHEET#Mini-bracketed)
+        - [Mini-trailspace](CHEATSHEET#Mini-trailspace)
+        - [Mini-indentscope](CHEATSHEET#Mini-indentscope)
+        - [Mini-sessions](CHEATSHEET#Mini-sessions)
 
 <!-- mtoc-end -->
 
@@ -265,7 +265,7 @@ Keybinds:
 The location list also behaves similarly but only stores locations for the current buffer.
 The commands to use it are the same, replacing the first `c` with `l` (e.g. `:lopen`, `]l`).
 
-`mini.bracketed` provides `q` for `:cn`/`:cp` and `Q` for `:cfir`/`:cla`, or `l`/`L` for the location list.
+[[#Mini-bracketed]] provides `q` & `l` bindings for easy quickfix/location list navigation.
 
 Handy shortcuts:
 
@@ -471,13 +471,13 @@ From within fugitive:
 
 Provided by `folke/snacks.nvim`
 
-#### Snacks.picker
+#### Snacks-picker
 
 Shortcuts:
 
 - Misc:
     - `<leader><leader>`: Switch buffers
-    - `<leader>/`:  Search in current buffer
+    - `<leader>/`:  Smart finder
     - `<leader>gs`: Git status
     - `<leader>fr`: Resume previous search
     - `<leader>sr`: Resume previous search
@@ -488,21 +488,21 @@ Shortcuts:
     - `<leader>Hp`: Help: Pickers
 - Find files (or directories!):
     - `<leader>ff`: Find: Files
-    - `<leader>fl`: Find: Locally (current directory - only from within Oil)
     - `<leader>fo`: Find: Oldfiles (recently opened files)
     - `<leader>fd`: Find: Directories
+    - `<leader>fl`: Find: Local (current directory - only from within Oil)
 - Search for strings (lines, contents, etc):
     - `<leader>ss`: Search: for String/by Grep
     - `<leader>sg`: Search: for String/by Grep
-    - `<leader>sl`: Search: Locally (current directory - only from within Oil)
     - `<leader>sb`: Search: within open Buffers
+    - `<leader>sl`: Search: Local (current directory - only from within Oil)
+- Search for diagnostics/errors:
     - `<leader>sd`: Search: for Diagnostics (current file)
     - `<leader>sD`: Search: for Diagnostics (global)
     - `<leader>se`: Search: for Errors (current file)
     - `<leader>sE`: Search: for Errors (global)
 - Search for current word/visual selection:
-    - `<leader>sw`: Search for word under cursor
-    - `<leader>s`:  Search for current visual selection
+    - `<leader>sw`: Search for word under cursor/visual selection
 - Personal shortcuts:
     - `<leader>fv`: Find vim config
     - `<leader>sv`: Search vim config
@@ -542,7 +542,7 @@ Provided by `echasnovski/mini.nvim`.
 
 A collection of various small independent plugins/modules.
 
-#### Mini.surround
+#### Mini-surround
 
 Add/delete/replace surroundings (brackets, quotes, etc.)
 
@@ -550,19 +550,19 @@ Add/delete/replace surroundings (brackets, quotes, etc.)
 - `sr`: Replace surrounding
 - `sd`: Delete surrounding
 
-#### Mini.splitjoin
+#### Mini-splitjoin
 
 Split if arguments are on single line, join otherwise (also works on visual selection to disambiguate).
 
 - `gS`: Split/join
 
-#### Mini.move
+#### Mini-move
 
 Move current line/selection in direction (works in normal, visual & visual line modes).
 
 - `<M-direction>`: Move
 
-#### Mini.operators
+#### Mini-operators
 
 Adds various text editing operators.
 
@@ -572,7 +572,7 @@ Adds various text editing operators.
     - `gmm`: Multiply (duplicate) current line
 - More?
 
-#### Mini.bracketed
+#### Mini-bracketed
 
 Go forward/backward with square brackets (similar to `tpope/vim-unimpaired`).
 
@@ -598,19 +598,19 @@ Go forward/backward with square brackets (similar to `tpope/vim-unimpaired`).
     - `u`: Undo state (???)
     - `y`: Yank (???)
 
-#### Mini.trailspace
+#### Mini-trailspace
 
 Highlights trailing whitespace.
 
 - `:TrimWhitespace`: Trim trailing whitespace
 
-#### Mini.indentscope
+#### Mini-indentscope
 
 Visualize and work with indent scope.
 
 - Adds `i` textobject for indents (e.g. `]i`, `cii`, `vai`)
 
-#### Mini.sessions
+#### Mini-sessions
 
 Session management.
 

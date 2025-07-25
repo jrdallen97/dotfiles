@@ -49,13 +49,13 @@ return {
 
           -- Helpers to call fzf from the current oil directory
           ['<leader>fl'] = {
-            desc = '[F]ind [L]ocally (current directory)',
+            desc = '[L]ocal (current directory)',
             callback = function()
               require('snacks.picker').files { cwd = require('oil').get_current_dir() }
             end,
           },
           ['<leader>sl'] = {
-            desc = '[S]earch [L]ocally (current directory)',
+            desc = '[L]ocal (current directory)',
             callback = function()
               require('snacks.picker').grep { cwd = require('oil').get_current_dir() }
             end,
