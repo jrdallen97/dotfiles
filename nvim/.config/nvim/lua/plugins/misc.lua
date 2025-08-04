@@ -1,7 +1,4 @@
 return {
-  -- Improvements to netrw. Press `I` to toggle the help back on!
-  -- 'tpope/vim-vinegar',
-
   {
     -- Automatic indentation style detection for Neovim
     'nmac427/guess-indent.nvim',

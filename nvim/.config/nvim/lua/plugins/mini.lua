@@ -102,10 +102,18 @@ return {
       symbol = '▎',
     }
 
+    -- Fast and flexible start screen
+    require('mini.starter').setup {
+      header = '',
+
+      -- Remove `-` so I can easily get into Oil
+      query_updaters = 'abcdefghijklmnopqrstuvwxyz0123456789_.',
+    }
+
     -- Session management (read, write, delete)
     require('mini.sessions').setup {
       -- Whether to read default session if Neovim opened without file arguments
-      autoread = true,
+      autoread = false,
 
       -- File for local session
       file = 'session.vim',
