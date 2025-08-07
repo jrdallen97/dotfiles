@@ -24,17 +24,15 @@ return {
           end,
         },
 
-        buf_options = {
-          -- Wipe oil buffers on hide so they don't interfere with the jumplist (<C-o>, <C-p>, etc)
-          bufhidden = 'wipe',
-        },
-
         lsp_file_methods = {
           -- Autosave buffers that are updated with LSP willRenameFiles, unless they are already modified
           autosave_changes = 'unmodified',
         },
 
         keymaps = {
+          -- Disable preview keybind (conflicts with previous buffer)
+          ['<C-p>'] = false,
+
           -- Quick toggle to show file details (:h oil-columns)
           ['gd'] = {
             desc = 'Toggle file detail view',
