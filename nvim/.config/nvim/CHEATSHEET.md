@@ -25,6 +25,7 @@ NOTE: I'm not gonna list all the basics here, just the stuff that's useful for m
     - [Autocompletion](CHEATSHEET#Autocompletion)
     - [Oil](CHEATSHEET#Oil)
     - [Comments](CHEATSHEET#Comments)
+    - [Markdown](CHEATSHEET#Markdown)
     - [Git](CHEATSHEET#Git)
         - [Fugitive](CHEATSHEET#Fugitive)
     - [Snacks](CHEATSHEET#Snacks)
@@ -88,8 +89,8 @@ Increment/decrement:
 - `<C-a>`: Increment
 - `<C-x>`: Decrement
 - Extended by `monaqa/dial.nvim` to support dates, booleans, etc (user-extensible).
-- Also works in visual mode
-    - Using `g<C-a>`/`g<C-x>` in visual mode will increment each line an additional time (useful for making lists) (accepts a count)
+- Also works in VISUAL mode
+- Using `g<C-a>`/`g<C-x>` in VISUAL mode will increment each line an additional time (useful for making lists) (accepts a count)
 
 ### Misc
 
@@ -122,7 +123,7 @@ Copy/paste:
 
 - `p`: Paste after the cursor
 - `P`: Paste before the cursor
-- Visual mode:
+- VISUAL mode:
     - `p`: Paste over selection and yank previous contents
     - `P`: Paste over selection without yanking previous contents
         - This is especially useful when using something like `vi"` to select an entire string, for example.
@@ -315,7 +316,7 @@ Getting into netrw:
 Built-in keybinds:
 
 - `K`:     Hover information
-- `<C-s>`: (Insert) Signature help
+- `<C-s>`: (INSERT) Signature help
 - `grr`: Goto references
 - `gri`: Goto implementation
 - `grn`: Rename symbol
@@ -327,8 +328,8 @@ Extended by `neovim/nvim-lspconfig` (among others).
 Extended keybinds:
 
 - `K`:     Hover information
-- `<C-k>`: (Insert) Hover information
-- `<C-s>`: (Normal/Insert) Signature help
+- `<C-k>`: (INSERT) Hover information
+- `<C-s>`: (NORMAL/INSERT) Signature help
 - `gd`: Goto definition
 - `gr`: Goto references (telescope)
 - `gI`: Goto implementation (telescope)
@@ -400,7 +401,7 @@ Provided by `numToStr/Comment.nvim`.
 Provides some handy shortcuts for commenting/uncommenting blocks of code. Some of this functionality is now built-in, but this plugin extends and improves it.
 
 - `gcc`: Toggle comment on line
-- `gc` (visual): Toggle comment on selected line(s)/region(s)
+- `gc` (VISUAL): Toggle comment on selected line(s)/region(s)
 
 Also: `folke/todo-comments.nvim`.
 
@@ -413,6 +414,20 @@ Also: `folke/todo-comments.nvim`.
 - `[t`: Previous TODO/other comment
 - `]t`: Next TODO/other comment
 
+### Markdown
+
+Provided by `hedyhli/markdown-toc.nvim`:
+
+- `:Mtoc`: Update existing table of contents, or generate one at the cursor position
+
+Provided by `roodolv/markdown-toggle.nvim`:
+
+- Lists automatically continue when using `o`/`O` in NORMAL mode or `<CR>` in INSERT mode
+- `<M-x>`: Toggle checkbox (NORMAL/VISUAL)
+- `<M-u>`: Toggle unordered list (NORMAL/VISUAL)
+- `<M-o>`: Toggle ordered list (NORMAL/VISUAL)
+- `<M-q>`: Toggle quote (NORMAL/VISUAL)
+
 ### Git
 
 Provided by `lewis6991/gitsigns.nvim`.
@@ -422,7 +437,7 @@ Provided by `lewis6991/gitsigns.nvim`.
 - `]H`: Last hunk
 - `[H`: First hunk
 - Staging:
-    - `<leader>hs`: Stage hunk (toggle) (also works in visual mode)
+    - `<leader>hs`: Stage hunk (toggle) (NORMAL/VISUAL)
     - `<leader>hr`: Reset hunk
     - `<leader>hS`: Stage entire file
     - `<leader>hR`: Reset all unstaged hunks in file
@@ -511,7 +526,7 @@ Shortcuts:
 
 Picker shortcuts:
 
-- Note: most of these work in Normal & Insert mode unless specified
+- Note: most of these work in NORMAL & INSERT mode unless specified
 - `<C-/>`: Toggle help
 - `<CR>`:  Confirm
 - `<C-t>`: Open in new tab
@@ -524,7 +539,7 @@ Picker shortcuts:
 - `<S-Tab>`: Select & move to previous
 - `<C-a>`:   Select all (toggle)
 - `<C-q>`:   Send selected to quickfix
-- Normal mode bindings:
+- NORMAL mode bindings:
     - `?`:     Toggle help
     - `a`:     Refocus input
     - `i`:     Refocus input
@@ -558,7 +573,7 @@ Split if arguments are on single line, join otherwise (also works on visual sele
 
 #### Mini-move
 
-Move current line/selection in direction (works in normal, visual & visual line modes).
+Move current line/selection in direction (NORMAL/VISUAL).
 
 - `<M-direction>`: Move
 
