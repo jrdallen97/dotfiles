@@ -92,7 +92,7 @@ return {
       inactive_sections = {
         lualine_b = { 'diff', 'diagnostics' },
         lualine_c = { 'filename' },
-        lualine_z = { location },
+        lualine_x = { location },
       },
       winbar = {
         lualine_c = {

@@ -49,18 +49,21 @@ return {
     -- Move any selection in any direction
     require('mini.move').setup {
       mappings = {
-        -- Default mapping (`<M-hjkl>`) doesn't work on mac bc meta is intercepted
+        -- Move visual selection
         left = '<M-Left>',
         right = '<M-Right>',
         up = '<M-Up>',
         down = '<M-Down>',
-
-        line_left = '<M-Left>',
-        line_right = '<M-Right>',
-        line_up = '<M-Up>',
-        line_down = '<M-Down>',
       },
     }
+    -- Also add normal/insert mode bindings
+    -- stylua: ignore start
+    local move = require('mini.move').move_line
+    map({'n', 'i'}, '<M-Left>',  function() move 'left'  end, { desc = 'Move current line left' })
+    map({'n', 'i'}, '<M-Right>', function() move 'right' end, { desc = 'Move current line right' })
+    map({'n', 'i'}, '<M-Up>',    function() move 'up'    end, { desc = 'Move current line up' })
+    map({'n', 'i'}, '<M-Down>',  function() move 'down'  end, { desc = 'Move current line down' })
+    -- stylua: ignore end
 
     -- Text edit operators (e.g. evaluate text, duplicate text)
     require('mini.operators').setup {
@@ -103,11 +106,18 @@ return {
     }
 
     -- Fast and flexible start screen
-    require('mini.starter').setup {
+    local starter = require 'mini.starter'
+    starter.setup {
       header = '',
 
       -- Remove `-` so I can easily get into Oil
       query_updaters = 'abcdefghijklmnopqrstuvwxyz0123456789_.',
+
+      items = {
+        starter.sections.sessions(5, true),
+        starter.sections.recent_files(10, true),
+        starter.sections.builtin_actions(),
+      },
     }
 
     -- Session management (read, write, delete)
