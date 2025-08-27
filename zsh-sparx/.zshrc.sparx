@@ -53,8 +53,10 @@ curman() {(cd "$CLOUDPATH/js/apps/curman"; pnpm ${@:-dev-test2})}
 curriculum() {(cd "$CLOUDPATH/js/apps/curriculum"; pnpm ${@:-dev})}
 
 # DB connection
-alias sparx-db-test2='cloud-sql-proxy sparx-web-test:europe-west1:test-general-2019-12 -p 5432'
-alias sparx-db-prod='cloud-sql-proxy sparx-production:europe-west1:databases -p 5433'
+alias test2-db-general='cloud-sql-proxy sparx-web-test:europe-west1:test-general-2019-12 -p 5432'
+alias test2-db-maths='cloud-sql-proxy sparx-web-test:europe-west1:mathsdb -p 5433'
+alias prod-db-general='cloud-sql-proxy sparx-production:europe-west1:databases -p 5434'
+alias prod-db-maths='cloud-sql-proxy sparx-production:europe-west1:mathsdb -p 5435'
 
 # Fix horrible BSD rubbish
 alias cut='gcut'
