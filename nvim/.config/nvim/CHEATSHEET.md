@@ -427,6 +427,13 @@ Provided by `roodolv/markdown-toggle.nvim`:
 - `<M-u>`: Toggle unordered list (NORMAL/VISUAL)
 - `<M-o>`: Toggle ordered list (NORMAL/VISUAL)
 - `<M-q>`: Toggle quote (NORMAL/VISUAL)
+- `<M-h>`: Toggle heading (NORMAL/VISUAL)
+
+Provided by `gaoDean/autolist.nvim`:
+
+- `<CR>`:  Toggle checkbox & move to next line (NORMAL)
+- `<M-r>`: Recalculate ordered list numbering
+- Deleting list items automatically recalculates numbering
 
 ### Git
 
@@ -451,7 +458,7 @@ Provided by `lewis6991/gitsigns.nvim`.
     - `<leader>hD`: Diff current file vs previous commit (`~`)
 - Toggles
     - `<leader>tb`: Toggle inline blame
-    - `<leader>td`: Toggle showing deleted lines
+    - `<leader>td`: Toggle word diff
 
 Text object:
 - `ih`: inner hunk, e.g.
