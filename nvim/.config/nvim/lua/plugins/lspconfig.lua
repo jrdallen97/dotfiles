@@ -182,7 +182,8 @@ return {
         },
       }
 
-      -- Language server configuration.
+      -- Language server configuration. Note that this is just configuration; servers listed here
+      -- will not be automatically installed (see ensure_installed below).
       --
       --  Add any additional override configuration in the following table. Available keys are:
       --  - cmd (table): Override the default command used to start the server
@@ -229,8 +230,6 @@ return {
         },
       }
 
-      -- Ensure the servers and tools above are installed
-      --
       -- To check the current status of installed tools and/or manually install
       -- other tools, you can run
       --    :Mason
@@ -240,29 +239,35 @@ return {
       -- `mason` had to be setup earlier: to configure its options see the
       -- `dependencies` table for `nvim-lspconfig` above.
       --
-      -- You can add other tools here that you want Mason to install
-      -- for you, so that they are available from within Neovim.
-      local ensure_installed = vim.tbl_keys(servers or {})
-      vim.list_extend(ensure_installed, {
+      -- You can add tools here that you want Mason to install for you, so that
+      -- they are available from within Neovim.
+      local ensure_installed = {
         -- Core
+        'lua_ls',
         'stylua', -- Used to format lua code
         'bashls',
 
-        -- Backend
-        'gopls',
-        'golangci-lint',
-        'goimports',
-
-        -- Frontend
-        'eslint',
-        'eslint_d',
-        'prettierd',
-        'emmet_language_server',
-        'cssls',
-
+        -- Other
         'markdown_oxide',
-        'pyright',
-      })
+        'ruff',
+      }
+      if vim.g.work_config then
+        vim.list_extend(ensure_installed, {
+          -- Backend
+          'gopls',
+          'golangci-lint',
+          'goimports',
+
+          -- Frontend
+          'ts_ls',
+          'eslint',
+          'eslint_d',
+          'prettierd',
+          'emmet_language_server',
+          'cssls',
+          'tailwindcss',
+        })
+      end
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       -- Either merge all additional server configs from the `servers.mason` and `servers.others` tables

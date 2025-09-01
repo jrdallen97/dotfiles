@@ -26,6 +26,10 @@ map('<leader>ev', ':tabe ~/.config/nvim/lua<CR>',                '[E]dit [V]im s
 map('<leader>ec', ':tabe ~/.config/nvim/CHEATSHEET.md<CR>',      '[E]dit [C]heatsheet')
 map('<leader>es', ':tabe ~/.config/nvim/spell/en.utf-8.add<CR>', '[E]dit [S]pellfile')
 
+if vim.g.work_config then
+  map('<leader>eg', ':tabe ~/code/CloudExperiments/scratch/main.go<CR>', '[E]dit [G]o scratch')
+end
+
 -- Easily run executable files
 map('<leader>rr', ':w<CR>:!%:p<CR>', '[RR]un current file (shebang)')
 map('<leader>rt', ':w<CR>:!time %:p<CR>', '[R]un & [T]ime current file (shebang)')

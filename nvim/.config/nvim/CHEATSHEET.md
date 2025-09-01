@@ -146,6 +146,7 @@ Note: scrolling (e.g. `<C-d>`) is not a jump.
 - `:ju[mps]`: List jumps in current window
 - `<C-o>`: Previous cursor position in jump list (i.e. not a motion)
 - `<C-i>`: Next cursor position in jump list
+- `<C-t>`: Previous position in tag stack (e.g. set when using `gd` to goto definition)
 - `%`:     Jump to matching bracket
 - `H`:     Jump the cursor to the top of the screen (**h**igh)
 - `M`:     Jump the cursor to the middle of the screen (**m**iddle)
