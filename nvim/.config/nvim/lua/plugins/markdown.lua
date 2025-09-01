@@ -5,7 +5,8 @@ local function get_file_name()
   return file_name:sub(0, #file_name - 3)
 end
 
-local markdown_types = { 'markdown', 'text', 'tex', 'plaintex', 'norg' }
+local markdown_types = { 'markdown', 'markdown.mdx', 'text', 'tex', 'plaintex', 'norg' }
+local markdown_augroup = vim.api.nvim_create_augroup('markdown-keybinds', {})
 
 return {
   {
@@ -55,28 +56,36 @@ return {
         })
       end
 
-      -- stylua: ignore start
+      -- Create keybinds in an autocmd so they're properly attached to all buffers
+      vim.api.nvim_create_autocmd('FileType', {
+        desc = 'markdown-toggle.nvim keymaps',
+        pattern = markdown_types,
+        group = markdown_augroup,
+        callback = function()
+          -- stylua: ignore start
 
-      -- Autolist
-      map(false, "n", "O",    mt.autolist_up,   'New bullet above')
-      map(false, "n", "o",    mt.autolist_down, 'New bullet below')
-      map(false, "i", "<CR>", mt.autolist_cr,   'New bullet below')
+          -- Autolist
+          map(false, "n", "O",    mt.autolist_up,   'New bullet above')
+          map(false, "n", "o",    mt.autolist_down, 'New bullet below')
+          map(false, "i", "<CR>", mt.autolist_cr,   'New bullet below')
 
-      -- NORMAL
-      map(true, 'n', '<M-x>', mt.checkbox_dot, 'Toggle checkbox')
-      map(true, 'n', '<M-u>', mt.list_dot,     'Toggle unordered list')
-      map(true, 'n', '<M-o>', mt.olist_dot,    'Toggle ordered list')
-      map(true, 'n', '<M-q>', mt.quote_dot,    'Toggle quote')
-      map(true, 'n', '<M-h>', mt.heading_dot,  'Toggle heading')
+          -- NORMAL
+          map(true, 'n', '<M-x>', mt.checkbox_dot, 'Toggle checkbox')
+          map(true, 'n', '<M-u>', mt.list_dot,     'Toggle unordered list')
+          map(true, 'n', '<M-o>', mt.olist_dot,    'Toggle ordered list')
+          map(true, 'n', '<M-q>', mt.quote_dot,    'Toggle quote')
+          map(true, 'n', '<M-h>', mt.heading_dot,  'Toggle heading')
 
-      -- VISUAL
-      map(false, 'x', '<M-x>', mt.checkbox, 'Toggle checkbox')
-      map(false, 'x', '<M-u>', mt.list,     'Toggle unordered list')
-      map(false, 'x', '<M-o>', mt.olist,    'Toggle ordered list')
-      map(false, 'x', '<M-q>', mt.quote,    'Toggle quote')
-      map(false, 'x', '<M-h>', mt.heading,  'Toggle heading')
+          -- VISUAL
+          map(false, 'x', '<M-x>', mt.checkbox, 'Toggle checkbox')
+          map(false, 'x', '<M-u>', mt.list,     'Toggle unordered list')
+          map(false, 'x', '<M-o>', mt.olist,    'Toggle ordered list')
+          map(false, 'x', '<M-q>', mt.quote,    'Toggle quote')
+          map(false, 'x', '<M-h>', mt.heading,  'Toggle heading')
 
-      -- stylua: ignore end
+          -- stylua: ignore end
+        end,
+      })
     end,
   },
 
@@ -91,15 +100,23 @@ return {
         vim.keymap.set(mode, keys, func, { buffer = 0, desc = desc })
       end
 
-      -- Toggle checkbox w/ enter
-      map('n', '<CR>', '<cmd>AutolistToggleCheckbox<cr><cr>', 'Toggle checkbox')
+      -- Create keybinds in an autocmd so they're properly attached to all buffers
+      vim.api.nvim_create_autocmd('FileType', {
+        desc = 'autolist.nvim keymaps',
+        pattern = markdown_types,
+        group = markdown_augroup,
+        callback = function()
+          -- Toggle checkbox w/ enter
+          map('n', '<CR>', '<cmd>AutolistToggleCheckbox<cr><cr>', 'Toggle checkbox')
 
-      -- Automatically recalculate list numbering when deleting items
-      map('n', 'dd', 'dd<cmd>AutolistRecalculate<cr>', 'Delete line & recalculate list')
-      map('v', 'd', 'd<cmd>AutolistRecalculate<cr>', 'Delete selection & recalculate list')
+          -- Automatically recalculate list numbering when deleting items
+          map('n', 'dd', 'dd<cmd>AutolistRecalculate<cr>', 'Delete line & recalculate list')
+          map('v', 'd', 'd<cmd>AutolistRecalculate<cr>', 'Delete selection & recalculate list')
 
-      -- Manually recalculate list numbering
-      map('n', '<M-r>', '<cmd>AutolistRecalculate<cr>', 'Recalculate list')
+          -- Manually recalculate list numbering
+          map('n', '<M-r>', '<cmd>AutolistRecalculate<cr>', 'Recalculate list')
+        end,
+      })
     end,
   },
 }
