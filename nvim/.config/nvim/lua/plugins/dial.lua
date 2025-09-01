@@ -40,17 +40,15 @@ return {
         },
       }
 
+      local map = function(lhs, rhs, desc)
+        return vim.keymap.set({ 'n', 'x' }, lhs, rhs, { desc = 'Dial: ' .. desc })
+      end
+
       -- Register keybinds
-      vim.cmd [[
-        nmap  <C-a>  <Plug>(dial-increment)
-        nmap  <C-x>  <Plug>(dial-decrement)
-        nmap g<C-a> g<Plug>(dial-increment)
-        nmap g<C-x> g<Plug>(dial-decrement)
-        vmap  <C-a>  <Plug>(dial-increment)
-        vmap  <C-x>  <Plug>(dial-decrement)
-        vmap g<C-a> g<Plug>(dial-increment)
-        vmap g<C-x> g<Plug>(dial-decrement)
-      ]]
+      map('<C-a>', '<Plug>(dial-increment)', 'Increment')
+      map('<C-x>', '<Plug>(dial-decrement)', 'Decrement')
+      map('g<C-a>', '<Plug>(dial-g-increment)', 'gIncrement')
+      map('g<C-x>', '<Plug>(dial-g-decrement)', 'gDecrement')
     end,
   },
 }
