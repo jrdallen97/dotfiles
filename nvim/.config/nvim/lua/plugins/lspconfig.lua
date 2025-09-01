@@ -182,28 +182,18 @@ return {
         },
       }
 
-      -- Enable the following language servers
-      --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
+      -- Language server configuration.
       --
-      --  Add any additional override configuration in the following tables. Available keys are:
+      --  Add any additional override configuration in the following table. Available keys are:
       --  - cmd (table): Override the default command used to start the server
       --  - filetypes (table): Override the default list of associated filetypes for the server
       --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+      --
+      -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
+      ---@type table<string, vim.lsp.Config>
       local servers = {
-        -- clangd = {},
-        -- gopls = {},
-        -- pyright = {},
-        -- rust_analyzer = {},
-        -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-        --
-        -- Some languages (like typescript) have entire language plugins that can be useful:
-        --    https://github.com/pmizio/typescript-tools.nvim
-        --
-        -- But for many setups, the LSP (`ts_ls`) will work just fine
-
-        -- Core
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -219,13 +209,22 @@ return {
           },
         },
 
+        ts_ls = {
+          root_dir = function(bufnr, on_dir)
+            -- Override lspconfig's "monorepo support" bc it just doesn't work
+            local root_markers = { 'tsconfig.json', 'package.json', 'jsconfig.json', '.git' }
+            local project_root = vim.fs.root(bufnr, { root_markers })
+            return on_dir(project_root)
+          end,
+        },
+
         tailwindcss = {
           hovers = true,
           suggestions = true,
-          root_dir = function(fname)
-            -- Disable for files without a tailwind config
-            local root_pattern = require('lspconfig.util').root_pattern('tailwind.config.cjs', 'tailwind.config.js', 'postcss.config.js')
-            return root_pattern(fname)
+          root_dir = function(bufnr, on_dir)
+            local root_markers = { 'tailwind.config.cjs', 'tailwind.config.js', 'postcss.config.js' }
+            local project_root = vim.fs.root(bufnr, { root_markers })
+            return on_dir(project_root)
           end,
         },
       }
@@ -255,7 +254,6 @@ return {
         'goimports',
 
         -- Frontend
-        'ts_ls',
         'eslint',
         'eslint_d',
         'prettierd',
@@ -267,17 +265,25 @@ return {
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
+      -- Either merge all additional server configs from the `servers.mason` and `servers.others` tables
+      -- to the default language server configs as provided by nvim-lspconfig or
+      -- define a custom server config that's unavailable on nvim-lspconfig.
+      for server, config in pairs(servers) do
+        if not vim.tbl_isempty(config) then
+          vim.lsp.config(server, config)
+        end
+      end
+
+      -- After configuring our language servers, we now enable them
       require('mason-lspconfig').setup {
         ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-        automatic_installation = false,
-        handlers = {
-          function(server_name)
-            local config = servers[server_name] or {}
-            vim.lsp.config(server_name, config)
-            vim.lsp.enable(server_name)
-          end,
-        },
+        automatic_enable = true, -- automatically run vim.lsp.enable() for all servers that are installed via Mason
       }
+
+      -- Manually run vim.lsp.enable for all language servers that are *not* installed via Mason
+      -- if not vim.tbl_isempty(servers.others) then
+      --   vim.lsp.enable(vim.tbl_keys(servers.others))
+      -- end
     end,
   },
 }
