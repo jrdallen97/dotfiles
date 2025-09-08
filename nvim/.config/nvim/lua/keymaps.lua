@@ -26,7 +26,7 @@ map('<leader>ev', ':tabe ~/.config/nvim/lua<CR>',                '[E]dit [V]im s
 map('<leader>ec', ':tabe ~/.config/nvim/CHEATSHEET.md<CR>',      '[E]dit [C]heatsheet')
 map('<leader>es', ':tabe ~/.config/nvim/spell/en.utf-8.add<CR>', '[E]dit [S]pellfile')
 
-if vim.g.work_config then
+if vim.g.work_profile then
   map('<leader>eg', ':tabe ~/code/CloudExperiments/scratch/main.go<CR>', '[E]dit [G]o scratch')
 end
 

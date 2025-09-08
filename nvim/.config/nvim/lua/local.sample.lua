@@ -4,4 +4,4 @@
 vim.g.have_nerd_font = false
 
 -- Set to true to auto-install stuff needed for work (e.g. frontend tools)
-vim.g.work_config = false
+vim.g.work_profile = false

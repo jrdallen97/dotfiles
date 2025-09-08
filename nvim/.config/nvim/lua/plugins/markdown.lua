@@ -109,10 +109,6 @@ return {
           -- Toggle checkbox w/ enter
           map('n', '<CR>', '<cmd>AutolistToggleCheckbox<cr><cr>', 'Toggle checkbox')
 
-          -- Automatically recalculate list numbering when deleting items
-          map('n', 'dd', 'dd<cmd>AutolistRecalculate<cr>', 'Delete line & recalculate list')
-          map('v', 'd', 'd<cmd>AutolistRecalculate<cr>', 'Delete selection & recalculate list')
-
           -- Manually recalculate list numbering
           map('n', '<M-r>', '<cmd>AutolistRecalculate<cr>', 'Recalculate list')
         end,

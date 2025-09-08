@@ -251,7 +251,7 @@ return {
         'markdown_oxide',
         'ruff',
       }
-      if vim.g.work_config then
+      if vim.g.work_profile then
         vim.list_extend(ensure_installed, {
           -- Backend
           'gopls',
