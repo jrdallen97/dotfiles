@@ -12,12 +12,6 @@ end
 local setqflist_errors = function()
   vim.diagnostic.setqflist { severity = { min = vim.diagnostic.severity.ERROR } }
 end
-local toggle_ruler = function()
-  vim.o.colorcolumn = vim.o.colorcolumn == '' and '100' or ''
-end
-local toggle_errors = function()
-  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
-end
 
 -- stylua: ignore start
 
@@ -74,11 +68,6 @@ map('<leader>8', '8gt', 'Go to tab #8')
 map('<leader>9', '9gt', 'Go to tab #9')
 map('<leader>0', ':tablast<cr>', 'Go to last tab')
 
--- Quick toggles
-map('<leader>tw', ':set wrap!<CR>', '[T]oggle [W]rap')
-map('<leader>tr', toggle_ruler,     '[T]oggle [R]uler')
-map('<leader>te', toggle_errors,    '[T]oggle [E]rrors (diagnostics)')
-
 -- Reselect after changing indentation
 map('>', '>gv', 'Increase indentation & reselect', 'v')
 map('<', '<gv', 'Decrease indentation & reselect', 'v')
@@ -93,14 +82,5 @@ vim.keymap.set('n', 'zm', function()
   return 'zm'
 end, { expr = true })
 
--- Easily switch to a dark colorscheme
-vim.api.nvim_create_user_command('Dark', function()
-  vim.cmd.colorscheme 'catppuccin'
-  vim.o.bg = 'dark'
-end, { desc = 'Switch to dark colorscheme' })
-
--- Easily switch to a light colorscheme
-vim.api.nvim_create_user_command('Light', function()
-  vim.cmd.colorscheme 'bamboo'
-  vim.o.bg = 'light'
-end, { desc = 'Switch to light colorscheme' })
+-- I often accidentally type `:Qa` when I mean `:qa`
+vim.api.nvim_create_user_command('Qa', 'qa', {})

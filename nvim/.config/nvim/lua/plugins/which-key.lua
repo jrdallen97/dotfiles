@@ -54,16 +54,16 @@ return {
 
     -- Document existing key chains
     spec = {
-      { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
-      { '<leader>e', group = '[E]dit' },
-      { '<leader>g', group = '[G]it' },
-      { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
-      { '<leader>t', group = '[T]oggle' },
+      { '<leader>c', group = 'Code', mode = { 'n', 'x' } },
+      { '<leader>e', group = 'Edit' },
+      { '<leader>g', group = 'Git' },
+      { '<leader>h', group = 'Git Hunk', mode = { 'n', 'v' } },
+      { '<leader>t', group = 'Toggle' },
 
       -- Snacks.picker
-      { '<leader>f', group = '[F]ind' },
-      { '<leader>s', group = '[S]earch' },
-      { '<leader>H', group = '[H]elp' },
+      { '<leader>f', group = 'Find' },
+      { '<leader>s', group = 'Search' },
+      { '<leader>H', group = 'Help' },
     },
   },
 }

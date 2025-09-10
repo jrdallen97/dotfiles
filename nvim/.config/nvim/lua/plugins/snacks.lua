@@ -3,56 +3,62 @@ return {
   'folke/snacks.nvim',
   priority = 100,
   lazy = false,
-
-  -- Two important keymaps to use while in a picker are:
-  --  - Insert mode: <c-/>
-  --  - Normal mode: ?
-  --
-  -- This opens a window that shows you all of the keymaps for the current
-  -- Snacks picker. This is really useful to discover what snacks-picker can
-  -- do as well as how to actually do it!
-  config = function()
-    -- [[ Configure Snacks Pickers ]]
+  opts = {
+    -- A modern fuzzy-finder to navigate the Neovim universe
     -- See `:help snacks-picker` and `:help snacks-picker-setup`
-    require('snacks').setup {
-      picker = {
-        -- Replace `vim.ui.select` with the snacks picker
-        ui_select = true,
+    picker = {
+      -- Replace `vim.ui.select` with the snacks picker
+      ui_select = true,
 
-        layout = {
-          -- Default to fullscreen (can still be overridden by source or at call level)
-          fullscreen = true,
-        },
+      layout = {
+        -- Default to fullscreen (can still be overridden by source or at call level)
+        fullscreen = true,
+      },
 
-        sources = {
-          buffers = { current = true },
-          files = { hidden = true },
-          grep = { hidden = true },
-          grep_word = { hidden = true },
-        },
+      -- Tweak the default settings for each source
+      sources = {
+        buffers = { current = true },
+        files = { hidden = true },
+        grep = { hidden = true },
+        grep_word = { hidden = true },
+      },
 
-        win = {
-          input = {
-            keys = {
-              ['<C-c>'] = { 'cancel', mode = { 'n', 'i' } },
-              ['<C-/>'] = { 'toggle_help_input', mode = { 'n', 'i' } },
-            },
+      win = {
+        input = {
+          keys = {
+            ['<C-c>'] = { 'cancel', mode = { 'n', 'i' } },
+            ['<C-/>'] = { 'toggle_help_input', mode = { 'n', 'i' } },
           },
-        },
-
-        formatters = {
-          file = {
-            -- Increase file path max length
-            truncate = 75,
-          },
-        },
-
-        debug = {
-          scores = false,
         },
       },
-    }
 
+      formatters = {
+        file = {
+          -- Increase file path max length
+          truncate = 100,
+          -- Show filename before the path to ensure it's always visible
+          filename_first = true,
+        },
+      },
+
+      debug = {
+        scores = false,
+      },
+    },
+
+    -- Toggle keymaps integrated with which-key icons/colors
+    toggle = {
+      -- Override which-key descriptions to use a static "Toggle" prefix (rather than Enable/Disable)
+      wk_desc = { enabled = 'Toggle ', disabled = 'Toggle ' },
+    },
+
+    -- A pretty notification provider
+    notifier = {},
+  },
+  config = function(_, opts)
+    require('snacks').setup(opts)
+
+    -- Set up picker
     local picker = require 'snacks.picker'
 
     local map = function(keys, func, desc, mode)
@@ -151,5 +157,63 @@ return {
       self.win = vim.api.nvim_get_current_win()
       return self
     end
+
+    -- Set up toggle
+    local toggle = require 'snacks.toggle'
+
+    -- Simple toggles
+    toggle.option('wrap', { name = 'Wrap' }):map '<leader>tw'
+    toggle.diagnostics({ name = 'Errors (diagnostics)' }):map '<leader>te'
+
+    -- stylua: ignore start
+
+    -- Toggle ruler
+    toggle.new({
+      id = 'ruler',
+      name = 'Ruler',
+      get = function()
+        return vim.o.colorcolumn ~= ''
+      end,
+      set = function(enabled)
+        vim.o.colorcolumn = enabled and '100' or ''
+      end,
+    }):map '<leader>tr'
+
+    -- Easily switch between light & dark mode
+    toggle.new({
+      id = 'light-mode',
+      name = 'Light mode',
+      get = function()
+        return vim.o.bg == 'light'
+      end,
+      set = function(enabled)
+        vim.cmd.colorscheme(enabled and 'bamboo' or 'catppuccin')
+        vim.o.bg = enabled and 'light' or 'dark'
+      end,
+    }):map '<leader>tl'
+
+    -- Auto-format
+    toggle.new({
+      id = 'format-on-save-buffer',
+      name = 'Format-on-save (buffer)',
+      get = function()
+        return not vim.b.disable_autoformat
+      end,
+      set = function(disabled)
+        vim.b.disable_autoformat = not disabled
+      end,
+    }):map '<leader>tf'
+    toggle.new({
+      id = 'format-on-save-global',
+      name = 'Format-on-save (global)',
+      get = function()
+        return not vim.g.disable_autoformat
+      end,
+      set = function(disabled)
+        vim.g.disable_autoformat = not disabled
+      end,
+    }):map '<leader>tF'
+
+    -- stylua: ignore end
   end,
 }

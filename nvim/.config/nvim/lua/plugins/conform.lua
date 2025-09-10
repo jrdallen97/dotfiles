@@ -1,19 +1,4 @@
--- User command to enable/disable autoformatting per-buffer
-vim.api.nvim_create_user_command('ToggleFormat', function()
-  vim.b.disable_autoformat = not vim.b.disable_autoformat
-  print('Auto-format ' .. (vim.b.disable_autoformat and 'disabled' or 'enabled') .. ' (buffer)')
-end, { desc = 'Toggle autoformat-on-save (buffer)' })
-
--- User command to enable/disable autoformatting globally
-vim.api.nvim_create_user_command('ToggleFormatGlobal', function()
-  vim.g.disable_autoformat = not vim.g.disable_autoformat
-  print('Auto-format ' .. (vim.g.disable_autoformat and 'disabled' or 'enabled') .. ' (global)')
-end, { desc = 'Toggle autoformat-on-save (global)' })
-
--- Also add a keymap to do it more easily!
-vim.keymap.set('n', '<leader>tf', ':ToggleFormat<cr>', { desc = '[T]oggle Auto [F]ormat (buffer)' })
-vim.keymap.set('n', '<leader>tF', ':ToggleFormatGlobal<cr>', { desc = '[T]oggle Auto [F]ormat (global)' })
-
+-- Command to manually trigger formatting
 vim.api.nvim_create_user_command('Format', function()
   require('conform').format { async = true, lsp_format = 'fallback' }
 end, { desc = 'Format buffer' })

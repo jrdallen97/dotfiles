@@ -5,6 +5,8 @@ return {
     opts = {
       on_attach = function(bufnr)
         local gitsigns = require 'gitsigns'
+        local config = require('gitsigns.config').config
+        local toggle = require 'snacks.toggle'
 
         local function map(mode, lhs, rhs, desc)
           vim.keymap.set(mode, lhs, rhs, {
@@ -54,8 +56,18 @@ return {
         map('n', '<leader>hQ', setqflist_all,      'Send [H]unks to [Q]uickfix (all files)')
 
         -- Toggles
-        map('n', '<leader>tb', gitsigns.toggle_current_line_blame, '[T]oggle [B]lame (inline)')
-        map('n', '<leader>td', gitsigns.toggle_word_diff,          '[T]oggle Word [D]iff')
+        toggle.new({
+          id = 'git_blame',
+          name = 'Git Blame (inline)',
+          get = function() return config.current_line_blame end,
+          set = gitsigns.toggle_current_line_blame,
+        }):map '<leader>tb'
+        toggle.new({
+          id = 'git_word_diff',
+          name = 'Git Word Diff',
+          get = function() return config.word_diff end,
+          set = gitsigns.toggle_word_diff,
+        }):map '<leader>td'
 
         -- Text object
         map({'o', 'x'}, 'ih', gitsigns.select_hunk, '[I]nner [H]unk')
