@@ -30,7 +30,6 @@ return {
         find_left = '', -- Find surrounding (to the left)
         highlight = '', -- Highlight surrounding
         replace = 'cs', -- Replace surrounding
-        update_n_lines = '', -- Update `n_lines`
         suffix_last = '', -- Suffix to search with "prev" method
         suffix_next = '', -- Suffix to search with "next" method
       },
@@ -84,6 +83,11 @@ return {
     require('mini.icons').setup {
       style = vim.g.have_nerd_font and 'glyph' or 'ascii',
     }
+
+    -- Highlight other occurrences of word under cursor
+    require('mini.cursorword').setup()
+    -- Don't highlight the actual word under the cursor
+    vim.api.nvim_set_hl(0, 'MiniCursorwordCurrent', {})
 
     -- Visualize and work with indent scope
     require('mini.indentscope').setup {
