@@ -123,6 +123,9 @@ return {
         starter.sections.builtin_actions(),
       },
     }
+    vim.api.nvim_create_user_command('Start', function()
+      MiniStarter.open()
+    end, {})
 
     -- Session management (read, write, delete)
     require('mini.sessions').setup {
@@ -148,18 +151,50 @@ return {
     cmd('Resume', function()
       MiniSessions.read(MiniSessions.get_latest())
     end, { nargs = 0, desc = 'mini.sessions: Resume most recent session' })
-    -- Select a session to load
-    cmd('Load', function()
-      MiniSessions.select 'read'
+    -- Load session (or delete with `<C-x>`)
+    cmd('Sessions', function()
+      Snacks.picker {
+        title = 'Sessions',
+        finder = function()
+          local items = {}
+          for _, item in pairs(MiniSessions.detected or {}) do
+            table.insert(items, {
+              name = item.name,
+              type = item.type,
+              text = string.format('%s (%s)', item.name, item.type),
+            })
+          end
+          table.sort(items, function(a, b)
+            return a.type == b.type and a.name < b.name or a.type == 'local'
+          end)
+          return items
+        end,
+        format = 'text',
+        layout = { hidden = { 'preview' } },
+        confirm = function(_, item)
+          MiniSessions.read(item.name)
+        end,
+        actions = {
+          delete_session = function(picker, item)
+            MiniSessions.delete(item.name)
+            -- Refresh items
+            picker:find { refresh = true }
+          end,
+        },
+        win = {
+          input = {
+            keys = {
+              ['<C-x>'] = { 'delete_session', mode = { 'n', 'i' } },
+            },
+          },
+          list = {
+            keys = {
+              ['<C-x>'] = { 'delete_session', mode = { 'n', 'i' } },
+            },
+          },
+        },
+      }
     end, { nargs = 0, desc = 'mini.sessions: Load session' })
-    -- Select a session to delete
-    cmd('RmSession', function()
-      MiniSessions.select 'delete'
-    end, { nargs = 0, desc = 'mini.sessions: Delete session' })
-
-    -- Also add some keybinds
-    map('n', '<leader>lr', ':Resume<cr>', { desc = 'mini.sessions: Resume most recent session' })
-    map('n', '<leader>ll', ':Load<cr>', { desc = 'mini.sessions: Load session' })
 
     -- Set up terminal background synchronization
     -- (prevents black borders if terminal size isn't perfectly aligned)
