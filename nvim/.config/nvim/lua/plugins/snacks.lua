@@ -53,7 +53,9 @@ return {
     },
 
     -- A pretty notification provider
-    notifier = {},
+    notifier = {
+      timeout = 5000,
+    },
   },
   config = function(_, opts)
     require('snacks').setup(opts)
@@ -215,5 +217,11 @@ return {
     }):map '<leader>tF'
 
     -- stylua: ignore end
+
+    -- Set up notifier
+    local notifier = require 'snacks.notifier'
+    vim.api.nvim_create_user_command('Notifications', notifier.show_history, {
+      desc = 'Show notification history',
+    })
   end,
 }
