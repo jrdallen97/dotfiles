@@ -126,7 +126,10 @@ return {
 
           -- The following code creates a keymap to toggle inlay hints in your
           -- code, if the language server you are using supports them
-          if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
+          if
+            client
+            and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf)
+          then
             require('snacks.toggle').inlay_hints():map '<leader>th'
           end
         end,
@@ -189,7 +192,11 @@ return {
           hovers = true,
           suggestions = true,
           root_dir = function(bufnr, on_dir)
-            local root_markers = { 'tailwind.config.cjs', 'tailwind.config.js', 'postcss.config.js' }
+            local root_markers = {
+              'tailwind.config.cjs',
+              'tailwind.config.js',
+              'postcss.config.js',
+            }
             local project_root = vim.fs.root(bufnr, { root_markers })
             return on_dir(project_root)
           end,

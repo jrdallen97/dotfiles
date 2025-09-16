@@ -29,7 +29,7 @@ return {
   event = { 'BufWritePre' },
   cmd = { 'ConformInfo' },
   keys = {
-    { '<leader>F', ':Format<cr>', mode = '', desc = '[F]ormat buffer' },
+    { '<leader>F', '<cmd>Format<cr>', desc = 'Format buffer' },
   },
   opts = {
     notify_on_error = false,

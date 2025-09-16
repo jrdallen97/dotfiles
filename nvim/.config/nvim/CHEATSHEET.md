@@ -312,6 +312,16 @@ Getting into netrw:
 
 ## Plugins
 
+### Lazy
+
+Provided by `folke/lazy.nvim`.
+
+- `<CR>`: Plugin details
+- `]]`: Next plugin
+- `[[`: Prev plugin
+- `d`:  Show diff for commit
+- `K`:  Open links/git commits in browser
+
 ### LSP
 
 Built-in keybinds:

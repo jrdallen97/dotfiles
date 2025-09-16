@@ -25,8 +25,8 @@ if vim.g.work_profile then
 end
 
 -- Easily run executable files
-map('<leader>rr', ':w<CR>:!%:p<CR>', '[RR]un current file (shebang)')
-map('<leader>rt', ':w<CR>:!time %:p<CR>', '[R]un & [T]ime current file (shebang)')
+map('<leader>rr', ':w<CR>:!%:p<CR>',      'Run current file (shebang)')
+map('<leader>rt', ':w<CR>:!time %:p<CR>', 'Time current file (shebang)')
 
 -- Diagnostic keymaps
 map('<leader>l', setloclist_errors,         'Open diagnostic [L]ocation list (errors only)')
@@ -76,10 +76,7 @@ map('<', '<gv', 'Decrease indentation & reselect', 'v')
 
 -- If foldlevel is at 99 (default), reset it with zR before running zm
 vim.keymap.set('n', 'zm', function()
-  if vim.o.foldlevel == 99 then
-    return 'zRzm'
-  end
-  return 'zm'
+  return vim.o.foldlevel == 99 and 'zRzm' or 'zm'
 end, { expr = true })
 
 -- I often accidentally type `:Qa` when I mean `:qa`

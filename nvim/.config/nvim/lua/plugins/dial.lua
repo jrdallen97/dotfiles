@@ -23,7 +23,15 @@ return {
 
           -- Days of the week
           augend.constant.new {
-            elements = { 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' },
+            elements = {
+              'Monday',
+              'Tuesday',
+              'Wednesday',
+              'Thursday',
+              'Friday',
+              'Saturday',
+              'Sunday',
+            },
             word = true,
             cyclic = true,
             preserve_case = true,

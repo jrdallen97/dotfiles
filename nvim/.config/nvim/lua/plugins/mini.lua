@@ -2,6 +2,7 @@ return {
   -- Collection of various small independent plugins/modules
   'nvim-mini/mini.nvim',
   lazy = false,
+  priority = 90,
   config = function()
     local map = vim.keymap.set
     local cmd = vim.api.nvim_create_user_command
@@ -38,9 +39,7 @@ return {
     -- Work with trailing whitespace
     require('mini.trailspace').setup()
     -- Add a command to easily trim whitespace
-    vim.api.nvim_create_user_command('TrimWhitespace', function()
-      MiniTrailspace.trim()
-    end, {})
+    cmd('TrimWhitespace', MiniTrailspace.trim, { desc = 'Trim whitespace' })
 
     -- Split and join arguments
     require('mini.splitjoin').setup()
@@ -57,7 +56,7 @@ return {
     }
     -- Also add normal/insert mode bindings
     -- stylua: ignore start
-    local move = require('mini.move').move_line
+    local move = MiniMove.move_line
     map({'n', 'i'}, '<M-Left>',  function() move 'left'  end, { desc = 'Move current line left' })
     map({'n', 'i'}, '<M-Right>', function() move 'right' end, { desc = 'Move current line right' })
     map({'n', 'i'}, '<M-Up>',    function() move 'up'    end, { desc = 'Move current line up' })
@@ -123,9 +122,7 @@ return {
         starter.sections.builtin_actions(),
       },
     }
-    vim.api.nvim_create_user_command('Start', function()
-      MiniStarter.open()
-    end, {})
+    cmd('Start', starter.open, { desc = 'Open start screen' })
 
     -- Session management (read, write, delete)
     require('mini.sessions').setup {
@@ -153,7 +150,7 @@ return {
     end, { nargs = 0, desc = 'mini.sessions: Resume most recent session' })
     -- Load session (or delete with `<C-x>`)
     cmd('Sessions', function()
-      Snacks.picker {
+      require 'snacks.picker' {
         title = 'Sessions',
         finder = function()
           local items = {}
@@ -194,7 +191,7 @@ return {
           },
         },
       }
-    end, { nargs = 0, desc = 'mini.sessions: Load session' })
+    end, { nargs = 0, desc = 'mini.sessions: List sessions' })
 
     -- Set up terminal background synchronization
     -- (prevents black borders if terminal size isn't perfectly aligned)

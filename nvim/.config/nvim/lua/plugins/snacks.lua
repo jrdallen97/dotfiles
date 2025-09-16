@@ -60,9 +60,7 @@ return {
   config = function(_, opts)
     require('snacks').setup(opts)
 
-    -- Set up picker
-    local picker = require 'snacks.picker'
-
+    local cmd = vim.api.nvim_create_user_command
     local map = function(keys, func, desc, mode)
       mode = mode or 'n'
       -- Allow binding the same func to multiple keys
@@ -74,154 +72,159 @@ return {
       end
     end
 
-    -- Add shorthands for some longer picker invocations
-    local errors_buffer = function()
-      picker.diagnostics_buffer { severity = 'ERROR' }
-    end
-    local errors = function()
-      picker.diagnostics { severity = 'ERROR' }
-    end
-    local files = function()
-      picker.smart {
-        multi = { 'files' },
-      }
-    end
-    local directories = function()
-      picker.files {
-        cmd = 'fd',
-        args = { '--type', 'd' },
-        transform = function(item)
-          -- Filter out non-directories since the it always adds `--type f` -_-
-          return vim.fn.isdirectory(item.file) == 1
-        end,
-        layout = { hidden = { 'preview' } },
-      }
-    end
+    -- Set up picker
+    do
+      local picker = Snacks.picker
 
-    -- See `:h snacks-pickers-sources`
-    -- stylua: ignore start
+      -- Add shorthands for some longer picker invocations
+      local errors_buffer = function()
+        picker.diagnostics_buffer { severity = 'ERROR' }
+      end
+      local errors = function()
+        picker.diagnostics { severity = 'ERROR' }
+      end
+      local files = function()
+        picker.smart {
+          multi = { 'files' },
+        }
+      end
+      local directories = function()
+        picker.files {
+          cmd = 'fd',
+          args = { '--type', 'd' },
+          transform = function(item)
+            -- Filter out non-directories since the it always adds `--type f` -_-
+            return vim.fn.isdirectory(item.file) == 1
+          end,
+          layout = { hidden = { 'preview' } },
+          -- TODO: Add keybind to chain into another search?
+        }
+      end
 
-    -- Misc
-    map('<leader><leader>', picker.buffers,    '[ ] Switch buffers')
-    map('<leader>/',        picker.smart,      '[/] Smart finder')
-    map('<leader>gs',       picker.git_status, '[G]it [S]tatus')
-    map('<leader>fr',       picker.resume,     '[R]esume')
-    map('<leader>sr',       picker.resume,     '[R]esume')
+      -- See `:h snacks-pickers-sources`
+      -- stylua: ignore start
 
-    -- Search [H]elp
-    map({'<leader>Hh', '<leader>HH'}, picker.help,     '[H]elp')
-    map({'<leader>Hc', '<leader>HC'}, picker.commands, '[C]ommands')
-    map({'<leader>Hk', '<leader>HK'}, picker.keymaps,  '[K]eybinds')
-    map({'<leader>Hp', '<leader>HP'}, picker.pickers,  '[P]ickers')
+      -- Misc
+      map('<leader><leader>', picker.buffers,    '[ ] Switch buffers')
+      map('<leader>/',        picker.smart,      '[/] Smart finder')
+      map('<leader>gs',       picker.git_status, '[G]it [S]tatus')
+      map('<leader>fr',       picker.resume,     '[R]esume')
+      map('<leader>sr',       picker.resume,     '[R]esume')
 
-    -- [F]ind files (or directories!)
-    map('<leader>ff', files,         '[F]iles')
-    map('<leader>fo', picker.recent, '[O]ldfiles')
-    map('<leader>fd', directories,   '[D]irectories')
+      -- Search [H]elp
+      map({'<leader>Hh', '<leader>HH'}, picker.help,     '[H]elp')
+      map({'<leader>Hc', '<leader>HC'}, picker.commands, '[C]ommands')
+      map({'<leader>Hk', '<leader>HK'}, picker.keymaps,  '[K]eybinds')
+      map({'<leader>Hp', '<leader>HP'}, picker.pickers,  '[P]ickers')
 
-    -- [S]earch for strings (lines, contents, etc)
-    map('<leader>ss', picker.grep,         '[S]tring')
-    map('<leader>sg', picker.grep,         '[G]rep')
-    map('<leader>sl', picker.lines,        '[L]ines in current buffer')
-    map('<leader>sb', picker.grep_buffers, 'Within open [B]uffers')
+      -- [F]ind files (or directories!)
+      map('<leader>ff', files,         '[F]iles')
+      map('<leader>fo', picker.recent, '[O]ldfiles')
+      map('<leader>fd', directories,   '[D]irectories')
 
-    -- [S]earch for diagnostics/errors
-    map('<leader>sd', picker.diagnostics_buffer, '[D]iagnostics (buffer)')
-    map('<leader>sD', picker.diagnostics,        '[D]iagnostics (global)')
-    map('<leader>se', errors_buffer,             '[E]rrors (buffer)')
-    map('<leader>sE', errors,                    '[E]rrors (global)')
+      -- [S]earch for strings (lines, contents, etc)
+      map('<leader>ss', picker.grep,         '[S]tring')
+      map('<leader>sg', picker.grep,         '[G]rep')
+      map('<leader>sl', picker.lines,        '[L]ines in current buffer')
+      map('<leader>sb', picker.grep_buffers, 'Within open [B]uffers')
 
-    -- [S]earch for current word/visual selection
-    map('<leader>sw', picker.grep_word, 'Current [W]ord', { 'n', 'x' })
+      -- [S]earch for diagnostics/errors
+      map('<leader>sd', picker.diagnostics_buffer, '[D]iagnostics (buffer)')
+      map('<leader>sD', picker.diagnostics,        '[D]iagnostics (global)')
+      map('<leader>se', errors_buffer,             '[E]rrors (buffer)')
+      map('<leader>sE', errors,                    '[E]rrors (global)')
 
-    -- [S]earch/[F]ind within my nvim config
-    local config = vim.fn.stdpath 'config'
-    map('<leader>fv', function() picker.files { cwd = config } end, '[V]im config')
-    map('<leader>sv', function() picker.grep  { cwd = config } end, '[V]im config')
+      -- [S]earch for current word/visual selection
+      map('<leader>sw', picker.grep_word, 'Current [W]ord', { 'n', 'x' })
 
-    -- [S]earch/[F]ind within my notes directory
-    map('<leader>fn', function() picker.files { cwd = '~/notes' } end, '[N]otes')
-    map('<leader>sn', function() picker.grep  { cwd = '~/notes' } end, '[N]otes')
+      -- [S]earch/[F]ind within my nvim config
+      local config = vim.fn.stdpath 'config'
+      map('<leader>fv', function() picker.files { cwd = config } end, '[V]im config')
+      map('<leader>sv', function() picker.grep  { cwd = config } end, '[V]im config')
 
-    -- stylua: ignore end
+      -- [S]earch/[F]ind within my notes directory
+      map('<leader>fn', function() picker.files { cwd = '~/notes' } end, '[N]otes')
+      map('<leader>sn', function() picker.grep  { cwd = '~/notes' } end, '[N]otes')
 
-    -- Fix bug where snacks.picker opens files in the wrong window
-    -- https://github.com/folke/snacks.nvim/pull/2012
-    local M = require 'snacks.picker.core.main'
-    M.new = function(opts)
-      opts = vim.tbl_extend('force', {
-        float = false,
-        file = true,
-        current = false,
-      }, opts or {})
-      local self = setmetatable({}, M)
-      self.opts = opts
-      self.win = vim.api.nvim_get_current_win()
-      return self
+      -- stylua: ignore end
+
+      -- Fix bug where snacks.picker opens files in the wrong window
+      -- https://github.com/folke/snacks.nvim/pull/2012
+      local M = require 'snacks.picker.core.main'
+      M.new = function(opts)
+        opts = vim.tbl_extend('force', {
+          float = false,
+          file = true,
+          current = false,
+        }, opts or {})
+        local self = setmetatable({}, M)
+        self.opts = opts
+        self.win = vim.api.nvim_get_current_win()
+        return self
+      end
     end
 
     -- Set up toggle
-    local toggle = require 'snacks.toggle'
+    do
+      local t = Snacks.toggle
 
-    -- Simple toggles
-    toggle.option('wrap', { name = 'Wrap' }):map '<leader>tw'
-    toggle.diagnostics({ name = 'Errors (diagnostics)' }):map '<leader>te'
+      -- Simple toggles
+      t.option('wrap', { name = 'Wrap' }):map '<leader>tw'
+      t.diagnostics({ name = 'Errors (diagnostics)' }):map '<leader>te'
 
-    -- stylua: ignore start
+      -- stylua: ignore start
 
-    -- Toggle ruler
-    toggle.new({
-      id = 'ruler',
-      name = 'Ruler',
-      get = function()
-        return vim.o.colorcolumn ~= ''
-      end,
-      set = function(enabled)
-        vim.o.colorcolumn = enabled and '100' or ''
-      end,
-    }):map '<leader>tr'
+      -- Toggle ruler
+      t.new({
+        id = 'ruler',
+        name = 'Ruler',
+        get = function()
+          return vim.o.colorcolumn ~= ''
+        end,
+        set = function(enabled)
+          vim.o.colorcolumn = enabled and '100' or ''
+        end,
+      }):map '<leader>tr'
 
-    -- Easily switch between light & dark mode
-    toggle.new({
-      id = 'light-mode',
-      name = 'Light mode',
-      get = function()
-        return vim.o.bg == 'light'
-      end,
-      set = function(enabled)
-        vim.cmd.colorscheme(enabled and 'bamboo' or 'catppuccin')
-        vim.o.bg = enabled and 'light' or 'dark'
-      end,
-    }):map '<leader>tl'
+      -- Easily switch between light & dark mode
+      t.new({
+        id = 'light-mode',
+        name = 'Light mode',
+        get = function()
+          return vim.o.bg == 'light'
+        end,
+        set = function(enabled)
+          vim.cmd.colorscheme(enabled and 'bamboo' or 'catppuccin')
+          vim.o.bg = enabled and 'light' or 'dark'
+        end,
+      }):map '<leader>tl'
 
-    -- Auto-format
-    toggle.new({
-      id = 'format-on-save-buffer',
-      name = 'Format-on-save (buffer)',
-      get = function()
-        return not vim.b.disable_autoformat
-      end,
-      set = function(disabled)
-        vim.b.disable_autoformat = not disabled
-      end,
-    }):map '<leader>tf'
-    toggle.new({
-      id = 'format-on-save-global',
-      name = 'Format-on-save (global)',
-      get = function()
-        return not vim.g.disable_autoformat
-      end,
-      set = function(disabled)
-        vim.g.disable_autoformat = not disabled
-      end,
-    }):map '<leader>tF'
+      -- Auto-format
+      t.new({
+        id = 'format-on-save-buffer',
+        name = 'Format-on-save (buffer)',
+        get = function()
+          return not vim.b.disable_autoformat
+        end,
+        set = function(disabled)
+          vim.b.disable_autoformat = not disabled
+        end,
+      }):map '<leader>tf'
+      t.new({
+        id = 'format-on-save-global',
+        name = 'Format-on-save (global)',
+        get = function()
+          return not vim.g.disable_autoformat
+        end,
+        set = function(disabled)
+          vim.g.disable_autoformat = not disabled
+        end,
+      }):map '<leader>tF'
 
-    -- stylua: ignore end
+      -- stylua: ignore end
+    end
 
     -- Set up notifier
-    local notifier = require 'snacks.notifier'
-    vim.api.nvim_create_user_command('Notifications', notifier.show_history, {
-      desc = 'Show notification history',
-    })
+    cmd('Notifications', Snacks.notifier.show_history, { desc = 'Show notification history' })
   end,
 }

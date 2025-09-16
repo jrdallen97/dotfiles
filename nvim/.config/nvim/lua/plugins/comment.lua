@@ -11,7 +11,8 @@ return {
     },
     opts = function()
       -- Use dynamic commentstring for better embedded language support in jsx & tsx
-      local pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook()
+      local pre_hook =
+        require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook()
 
       return {
         pre_hook = function(ctx)
@@ -107,7 +108,10 @@ return {
           local ok, start, _, kw = pcall(highlight.match, line)
 
           if ok and start then
-            if config.options.highlight.comments_only and highlight.is_comment(buf, l - 1, start) == false then
+            if
+              config.options.highlight.comments_only
+              and highlight.is_comment(buf, l - 1, start) == false
+            then
               kw = nil
             end
           end
