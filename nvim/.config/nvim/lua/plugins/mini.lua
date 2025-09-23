@@ -122,7 +122,9 @@ return {
         starter.sections.builtin_actions(),
       },
     }
-    cmd('Start', starter.open, { desc = 'Open start screen' })
+    cmd('Start', function()
+      starter.open()
+    end, { desc = 'Open start screen' })
 
     -- Session management (read, write, delete)
     require('mini.sessions').setup {

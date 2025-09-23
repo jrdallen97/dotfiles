@@ -186,6 +186,7 @@ There are also some special marks:
     - use `:bufdo %s/...` to run this in all open buffers (then `:wa` to save them all)
 - Diff mode
     - `:difft[his]`: Mark the current window as part of the diff.
+        - `:windo diffthis`: Applies the above for all windows in the current tab.
     - `:diffo[ff]`:  Turn off diff mode for the current window.
     - `:diffo[ff]!`: Turn off diff mode for all windows in the current tab.
 

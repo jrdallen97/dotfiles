@@ -83,11 +83,6 @@ return {
       local errors = function()
         picker.diagnostics { severity = 'ERROR' }
       end
-      local files = function()
-        picker.smart {
-          multi = { 'files' },
-        }
-      end
       local directories = function()
         picker.files {
           cmd = 'fd',
@@ -118,7 +113,7 @@ return {
       map({'<leader>Hp', '<leader>HP'}, picker.pickers,  '[P]ickers')
 
       -- [F]ind files (or directories!)
-      map('<leader>ff', files,         '[F]iles')
+      map('<leader>ff', picker.files,  '[F]iles')
       map('<leader>fo', picker.recent, '[O]ldfiles')
       map('<leader>fd', directories,   '[D]irectories')
 
