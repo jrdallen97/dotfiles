@@ -212,7 +212,7 @@ return {
     -- Disable indentscope in certain buffers
     vim.api.nvim_create_autocmd('FileType', {
       pattern = {
-        'fzf',
+        'grug-far',
         'help',
         'lazy',
         'mason',

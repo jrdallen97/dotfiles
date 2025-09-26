@@ -28,6 +28,8 @@ return {
           keys = {
             ['<C-c>'] = { 'cancel', mode = { 'n', 'i' } },
             ['<C-/>'] = { 'toggle_help_input', mode = { 'n', 'i' } },
+            ['<PageUp>'] = { 'list_scroll_up', mode = { 'n', 'i' } },
+            ['<PageDown>'] = { 'list_scroll_down', mode = { 'n', 'i' } },
           },
         },
       },

@@ -56,6 +56,10 @@ return {
   --- @module 'blink.cmp'
   --- @type blink.cmp.Config
   opts = {
+    enabled = function()
+      return not vim.tbl_contains({ 'grug-far' }, vim.bo.filetype)
+    end,
+
     keymap = {
       -- 'default' (recommended) for mappings similar to built-in completions
       --   <c-y> to accept ([y]es) the completion.

@@ -19,6 +19,7 @@ NOTE: I'm not gonna list all the basics here, just the stuff that's useful for m
     - [Quickfix](CHEATSHEET#Quickfix)
     - [netrw](CHEATSHEET#netrw)
 - [Plugins](CHEATSHEET#Plugins)
+    - [Lazy](CHEATSHEET#Lazy)
     - [LSP](CHEATSHEET#LSP)
     - [Formatting](CHEATSHEET#Formatting)
     - [Diagnostics](CHEATSHEET#Diagnostics)
@@ -28,6 +29,7 @@ NOTE: I'm not gonna list all the basics here, just the stuff that's useful for m
     - [Markdown](CHEATSHEET#Markdown)
     - [Git](CHEATSHEET#Git)
         - [Fugitive](CHEATSHEET#Fugitive)
+    - [Grug-far](CHEATSHEET#Grug-far)
     - [Snacks](CHEATSHEET#Snacks)
         - [Snacks-picker](CHEATSHEET#Snacks-picker)
     - [Mini](CHEATSHEET#Mini)
@@ -501,9 +503,18 @@ From within fugitive:
 - `U`: Unstage all
 - `X`: Discard file/hunk
 
+### Grug-far
+
+Provided by `MagicDuck/grug-far.nvim`.
+
+Find and replace plugin for neovim.
+
+- `:GrugFar`:       Find and replace (uses any visual selection as the search string)
+- `:GrugFarWithin`: Find and replace within the current visual selection
+
 ### Snacks
 
-Provided by `folke/snacks.nvim`
+Provided by `folke/snacks.nvim`.
 
 #### Snacks-picker
 
