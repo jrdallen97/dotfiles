@@ -8,6 +8,7 @@ return {
   -- build = 'cargo build --release',
   dependencies = {
     'folke/lazydev.nvim',
+    'giuxtaposition/blink-cmp-copilot',
 
     -- Snippet Engine
     {
@@ -118,7 +119,7 @@ return {
     },
 
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' },
+      default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev', 'copilot' },
       providers = {
         lsp = { score_offset = 2 },
         path = { score_offset = 10 },
@@ -129,6 +130,13 @@ return {
           module = 'lazydev.integrations.blink',
           -- Make lazydev completions top priority
           score_offset = 100,
+        },
+        copilot = {
+          name = 'copilot',
+          module = 'blink-cmp-copilot',
+          enabled = vim.g.work_profile,
+          score_offset = 100,
+          async = true,
         },
       },
     },

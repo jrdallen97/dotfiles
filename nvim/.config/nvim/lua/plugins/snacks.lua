@@ -218,6 +218,18 @@ return {
         end,
       }):map '<leader>tF'
 
+      -- Next edit suggestions
+      t.new({
+        id = 'nes-global',
+        name = 'Next edit suggestions (global)',
+        get = function()
+          return not vim.g.disable_nes
+        end,
+        set = function(disabled)
+          vim.g.disable_nes = not disabled
+        end,
+      }):map '<leader>tn'
+
       -- stylua: ignore end
     end
 
