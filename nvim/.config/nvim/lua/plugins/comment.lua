@@ -138,10 +138,10 @@ return {
 
       vim.keymap.set('n', ']t', function()
         jump(false)
-      end, { desc = 'Next [T]odo comment' })
+      end, { desc = 'Next Todo' })
       vim.keymap.set('n', '[t', function()
         jump(true)
-      end, { desc = 'Previous [T]odo comment' })
+      end, { desc = 'Previous Todo' })
     end,
   },
 }

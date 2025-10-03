@@ -102,46 +102,47 @@ return {
       -- stylua: ignore start
 
       -- Misc
-      map('<leader><leader>', picker.buffers,    '[ ] Switch buffers')
-      map('<leader>/',        picker.smart,      '[/] Smart finder')
-      map('<leader>gs',       picker.git_status, '[G]it [S]tatus')
-      map('<leader>fr',       picker.resume,     '[R]esume')
-      map('<leader>sr',       picker.resume,     '[R]esume')
+      map('<leader><leader>', picker.buffers,    'Switch buffers')
+      map('<leader>/',        picker.smart,      'Smart finder')
+      map('<leader>gs',       picker.git_status, 'Git Status')
+      map('<leader>fr',       picker.resume,     'Resume')
+      map('<leader>sr',       picker.resume,     'Resume')
 
-      -- Search [H]elp
-      map({'<leader>Hh', '<leader>HH'}, picker.help,     '[H]elp')
-      map({'<leader>Hc', '<leader>HC'}, picker.commands, '[C]ommands')
-      map({'<leader>Hk', '<leader>HK'}, picker.keymaps,  '[K]eybinds')
-      map({'<leader>Hp', '<leader>HP'}, picker.pickers,  '[P]ickers')
+      -- Search Help
+      map({'<leader>Hh', '<leader>HH'}, picker.help,     'Help')
+      map({'<leader>Hc', '<leader>HC'}, picker.commands, 'Commands')
+      map({'<leader>Hk', '<leader>HK'}, picker.keymaps,  'Keybinds')
+      map({'<leader>Hp', '<leader>HP'}, picker.pickers,  'Pickers')
 
-      -- [F]ind files (or directories!)
-      map('<leader>ff', picker.files,  '[F]iles')
-      map('<leader>fo', picker.recent, '[O]ldfiles')
-      map('<leader>fd', directories,   '[D]irectories')
+      -- Find files (or directories!)
+      map('<leader>ff', picker.files,  'Files')
+      map('<leader>fo', picker.recent, 'Oldfiles')
+      map('<leader>fd', directories,   'Directories')
+      map('<leader>fs', picker.smart,  'Smart finder')
 
-      -- [S]earch for strings (lines, contents, etc)
-      map('<leader>ss', picker.grep,         '[S]tring')
-      map('<leader>sg', picker.grep,         '[G]rep')
-      map('<leader>sl', picker.lines,        '[L]ines in current buffer')
-      map('<leader>sb', picker.grep_buffers, 'Within open [B]uffers')
+      -- Search for strings (lines, contents, etc)
+      map('<leader>ss', picker.grep,         'String')
+      map('<leader>sg', picker.grep,         'Grep')
+      map('<leader>sl', picker.lines,        'Lines in current buffer')
+      map('<leader>sb', picker.grep_buffers, 'Lines in all buffers')
 
-      -- [S]earch for diagnostics/errors
-      map('<leader>sd', picker.diagnostics_buffer, '[D]iagnostics (buffer)')
-      map('<leader>sD', picker.diagnostics,        '[D]iagnostics (global)')
-      map('<leader>se', errors_buffer,             '[E]rrors (buffer)')
-      map('<leader>sE', errors,                    '[E]rrors (global)')
+      -- Search for diagnostics/errors
+      map('<leader>sd', picker.diagnostics_buffer, 'Diagnostics (buffer)')
+      map('<leader>sD', picker.diagnostics,        'Diagnostics (global)')
+      map('<leader>se', errors_buffer,             'Errors (buffer)')
+      map('<leader>sE', errors,                    'Errors (global)')
 
-      -- [S]earch for current word/visual selection
-      map('<leader>sw', picker.grep_word, 'Current [W]ord', { 'n', 'x' })
+      -- Search for current word/visual selection
+      map('<leader>sw', picker.grep_word, 'Current Word', { 'n', 'x' })
 
-      -- [S]earch/[F]ind within my nvim config
+      -- Search/Find within my nvim config
       local config = vim.fn.stdpath 'config'
-      map('<leader>fv', function() picker.files { cwd = config } end, '[V]im config')
-      map('<leader>sv', function() picker.grep  { cwd = config } end, '[V]im config')
+      map('<leader>fv', function() picker.files { cwd = config } end, 'Vim config')
+      map('<leader>sv', function() picker.grep  { cwd = config } end, 'Vim config')
 
-      -- [S]earch/[F]ind within my notes directory
-      map('<leader>fn', function() picker.files { cwd = '~/notes' } end, '[N]otes')
-      map('<leader>sn', function() picker.grep  { cwd = '~/notes' } end, '[N]otes')
+      -- Search/Find within my notes directory
+      map('<leader>fn', function() picker.files { cwd = '~/notes' } end, 'Notes')
+      map('<leader>sn', function() picker.grep  { cwd = '~/notes' } end, 'Notes')
 
       -- stylua: ignore end
 

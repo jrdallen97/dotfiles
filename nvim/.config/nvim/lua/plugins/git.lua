@@ -41,19 +41,19 @@ return {
 
         -- Staging
         local nv = {'n', 'v'}
-        map(nv,  '<leader>hs', gitsigns.stage_hunk,          '[S]tage hunk (toggle)')
-        map(nv,  '<leader>hr', gitsigns.reset_hunk,          '[R]eset hunk')
-        map('n', '<leader>hS', gitsigns.stage_buffer,        '[S]tage entire buffer')
-        map('n', '<leader>hR', gitsigns.reset_buffer,        '[R]eset entire buffer')
-        map('n', '<leader>hp', gitsigns.preview_hunk_inline, '[P]review hunk (inline)')
+        map(nv,  '<leader>hs', gitsigns.stage_hunk,          'Stage hunk (toggle)')
+        map(nv,  '<leader>hr', gitsigns.reset_hunk,          'Reset hunk')
+        map('n', '<leader>hS', gitsigns.stage_buffer,        'Stage entire buffer')
+        map('n', '<leader>hR', gitsigns.reset_buffer,        'Reset entire buffer')
+        map('n', '<leader>hp', gitsigns.preview_hunk_inline, 'Preview hunk (inline)')
         -- Blame
-        map('n', '<leader>hb', blame_line, '[B]lame line')
+        map('n', '<leader>hb', blame_line, 'Blame line')
         -- Diff
-        map('n', '<leader>hd', gitsigns.diffthis, '[D]iff file')
-        map('n', '<leader>hD', diffthis_previous, '[D]iff file vs. previous commit')
+        map('n', '<leader>hd', gitsigns.diffthis, 'Diff file')
+        map('n', '<leader>hD', diffthis_previous, 'Diff file vs. previous commit')
         -- Quickfix
-        map('n', '<leader>hq', gitsigns.setqflist, 'Send [H]unks to [Q]uickfix (current buffer)')
-        map('n', '<leader>hQ', setqflist_all,      'Send [H]unks to [Q]uickfix (all files)')
+        map('n', '<leader>hq', gitsigns.setqflist, 'Send Hunks to Quickfix (current buffer)')
+        map('n', '<leader>hQ', setqflist_all,      'Send Hunks to Quickfix (all files)')
 
         -- Toggles
         toggle.new({
@@ -70,7 +70,7 @@ return {
         }):map '<leader>td'
 
         -- Text object
-        map({'o', 'x'}, 'ih', gitsigns.select_hunk, '[I]nner [H]unk')
+        map({'o', 'x'}, 'ih', gitsigns.select_hunk, 'Inner Hunk')
 
         -- stylua: ignore end
       end,
@@ -83,11 +83,11 @@ return {
     lazy = false,
     keys = {
       -- stylua: ignore start
-      { '<leader>gg', '<cmd>tab G<cr>',      desc = '[G]it Open Fugitive' },
-      { '<leader>gb', '<cmd>Git blame<cr>',  desc = '[G]it [B]lame' },
-      { '<leader>gc', '<cmd>Git commit<cr>', desc = '[G]it [C]ommit' },
-      { '<leader>gp', '<cmd>Git push<cr>',   desc = '[G]it [P]ush' },
-      { '<leader>gl', '<cmd>Git pull<cr>',   desc = '[G]it Pul[L]' },
+      { '<leader>gg', '<cmd>tab G<cr>',      desc = 'Git Open Fugitive' },
+      { '<leader>gb', '<cmd>Git blame<cr>',  desc = 'Git Blame' },
+      { '<leader>gc', '<cmd>Git commit<cr>', desc = 'Git Commit' },
+      { '<leader>gp', '<cmd>Git push<cr>',   desc = 'Git Push' },
+      { '<leader>gl', '<cmd>Git pull<cr>',   desc = 'Git Pull' },
       -- stylua: ignore end
     },
   },

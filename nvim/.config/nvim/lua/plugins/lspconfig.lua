@@ -80,27 +80,27 @@ return {
           -- Jump to the definition of the word under your cursor.
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
-          map('gd', picker.lsp_definitions, '[G]oto [D]efinition')
+          map('gd', picker.lsp_definitions, 'Goto Definition')
 
           -- Find references for the word under your cursor.
-          map('gr', picker.lsp_references, '[G]oto [R]eferences')
+          map('gr', picker.lsp_references, 'Goto References')
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
-          map('gI', picker.lsp_implementations, '[G]oto [I]mplementation')
+          map('gI', picker.lsp_implementations, 'Goto Implementation')
 
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
-          map('gD', picker.lsp_definitions, '[G]oto Type [D]efinition')
+          map('gD', picker.lsp_definitions, 'Goto Type Definition')
 
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
-          map('gO', picker.lsp_symbols, 'Open Document Symbols ([O]utline)')
+          map('gO', picker.lsp_symbols, 'Open Document Symbols (Outline)')
 
           -- Fuzzy find all the symbols in your current workspace.
           --  Similar to document symbols, except searches over your entire project.
-          map('gW', picker.lsp_workspace_symbols, 'Open [W]orkspace Symbols')
+          map('gW', picker.lsp_workspace_symbols, 'Open Workspace Symbols')
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.

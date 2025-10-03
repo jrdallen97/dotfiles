@@ -215,6 +215,7 @@ return {
         'grug-far',
         'help',
         'lazy',
+        'markdown',
         'mason',
         'neo-tree',
         'trouble',
