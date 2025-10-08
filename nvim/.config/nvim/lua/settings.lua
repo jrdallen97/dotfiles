@@ -1,7 +1,7 @@
 -- Get or set options (`:h vim.o`)
 local o = vim.o
 -- Like `vim.o` but with a special interface for interacting with lists & maps (`:h vim.opt`)
--- See `:h lua-options` and `:h lua-options-guide`
+-- See `:h lua-options` and `:h lua-guide-options`
 local opt = vim.opt
 
 -- NOTE: For more options, see `:help option-list`
@@ -23,6 +23,7 @@ o.showmode      = false   -- Don't show mode in command line
 o.signcolumn    = 'yes'   -- Always show sign column (otherwise it will shift text)
 o.scrolloff     = 5       -- Number of visible lines to keep above and below the cursor
 o.sidescrolloff = 5       -- Number of visible columns to keep left and right of the cursor
+o.smoothscroll  = true    -- Make scrolling use screen lines
 o.fillchars     = 'eob: ' -- Don't show `~` outside of buffer
 o.list          = true    -- Show certain hidden characters
 opt.listchars   = {       -- Make hidden characters display nicely
@@ -76,6 +77,19 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
   callback = function()
     vim.hl.on_yank { timeout = 250 }
+  end,
+})
+
+-- Auto-create missing dirs when saving a file
+vim.api.nvim_create_autocmd('BufWritePre', {
+  desc = 'Auto-create missing dirs when saving a file',
+  group = vim.api.nvim_create_augroup('kickstart-auto-create-dir', { clear = true }),
+  pattern = '*',
+  callback = function()
+    local dir = vim.fn.expand '<afile>:p:h'
+    if vim.fn.isdirectory(dir) == 0 then
+      vim.fn.mkdir(dir, 'p')
+    end
   end,
 })
 

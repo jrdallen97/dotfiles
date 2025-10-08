@@ -66,7 +66,7 @@ return {
         cli.toggle { focus = true }
       end, { desc = 'Sidekick Toggle CLI' })
       map({ 'n', 'v' }, '<leader>ap', function()
-        cli.select_prompt()
+        cli.prompt()
       end, { desc = 'Sidekick Ask Prompt' })
 
       map({ 'n', 'v' }, '<leader>ac', function()

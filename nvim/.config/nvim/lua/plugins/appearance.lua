@@ -27,9 +27,10 @@ return {
         },
         integrations = {
           blink_cmp = true,
-          which_key = true,
-          fzf = true,
           fidget = true,
+          fzf = true,
+          grug_far = true,
+          which_key = true,
         },
         highlight_overrides = {
           macchiato = function()

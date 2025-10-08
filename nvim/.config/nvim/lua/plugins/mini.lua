@@ -35,6 +35,8 @@ return {
         suffix_next = '', -- Suffix to search with "next" method
       },
     }
+    -- Don't change builtin `s` binding!
+    vim.api.nvim_del_keymap('n', 's')
 
     -- Work with trailing whitespace
     require('mini.trailspace').setup()

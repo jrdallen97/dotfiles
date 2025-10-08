@@ -134,8 +134,13 @@ return {
         copilot = {
           name = 'copilot',
           module = 'blink-cmp-copilot',
-          enabled = vim.g.work_profile,
-          score_offset = 100,
+          enabled = function()
+            if not vim.g.work_profile then
+              return false
+            end
+            return vim.g.disable_autosuggestions ~= true
+          end,
+          score_offset = 20,
           async = true,
         },
       },

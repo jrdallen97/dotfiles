@@ -219,6 +219,18 @@ return {
         end,
       }):map '<leader>tF'
 
+      -- Autosuggestions
+      t.new({
+        id = 'autosuggestions',
+        name = 'Autosuggestions (global)',
+        get = function()
+          return not vim.g.disable_autosuggestions
+        end,
+        set = function(disabled)
+          vim.g.disable_autosuggestions = not disabled
+        end,
+      }):map '<leader>ta'
+
       -- Next edit suggestions
       t.new({
         id = 'nes-global',
