@@ -16,23 +16,27 @@ return {
     require('mini.ai').setup { n_lines = 500 }
 
     -- Add/delete/replace surroundings (brackets, quotes, etc.)
-    --
-    -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-    -- - sd'   - [S]urround [D]elete [']quotes
-    -- - sr)'  - [S]urround [R]eplace [)] [']
     require('mini.surround').setup {
       -- Override mappings to be more like tpope/vim-surround
       -- The defaults conflict with the standard vim `s` (remove char & enter insert mode)
       mappings = {
-        -- Custom: disable some of the default bindings
         add = 'ss', -- Add surrounding in Normal and Visual modes
         delete = 'ds', -- Delete surrounding
+        replace = 'cs', -- Replace surrounding
+
+        -- Turn off the bindings I never use
         find = '', -- Find surrounding (to the right)
         find_left = '', -- Find surrounding (to the left)
         highlight = '', -- Highlight surrounding
-        replace = 'cs', -- Replace surrounding
         suffix_last = '', -- Suffix to search with "prev" method
         suffix_next = '', -- Suffix to search with "next" method
+      },
+      custom_surroundings = {
+        -- Markdown bold
+        ['B'] = {
+          input = { '%*%*().-()%*%*' },
+          output = { left = '**', right = '**' },
+        },
       },
     }
     -- Don't change builtin `s` binding!
@@ -48,12 +52,13 @@ return {
 
     -- Move any selection in any direction
     require('mini.move').setup {
+      -- stylua: ignore
       mappings = {
         -- Move visual selection
-        left = '<M-Left>',
+        left =  '<M-Left>',
         right = '<M-Right>',
-        up = '<M-Up>',
-        down = '<M-Down>',
+        up =    '<M-Up>',
+        down =  '<M-Down>',
       },
     }
     -- Also add normal/insert mode bindings

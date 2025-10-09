@@ -138,7 +138,7 @@ return {
             if not vim.g.work_profile then
               return false
             end
-            return vim.g.disable_autosuggestions ~= true
+            return vim.g.disable_autosuggestions ~= true and vim.b.disable_autosuggestions ~= true
           end,
           score_offset = 20,
           async = true,

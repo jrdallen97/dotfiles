@@ -23,7 +23,8 @@ return {
         flavour = 'macchiato',
         dim_inactive = {
           enabled = true,
-          percentage = 0.2,
+          shade = 'dark',
+          percentage = 0.1,
         },
         integrations = {
           blink_cmp = true,

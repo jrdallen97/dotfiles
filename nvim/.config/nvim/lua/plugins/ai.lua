@@ -27,9 +27,11 @@ return {
 
       sidekick.setup {
         nes = {
-          -- enabled = false,
           enabled = function()
-            return not vim.g.disable_nes and not vim.b.disable_nes
+            if not vim.g.work_profile then
+              return false
+            end
+            return vim.g.disable_nes ~= true and vim.b.disable_nes ~= true
           end,
 
           diff = {
@@ -58,26 +60,32 @@ return {
         end
       end, { expr = true, desc = 'Goto/Apply Next Edit Suggestion' })
 
+      -- Toggle CLI
       map({ 'n', 'x', 'i', 't' }, '<c-.>', function()
         cli.toggle()
-      end, { desc = 'Sidekick Switch Focus' })
+      end, { desc = 'Sidekick: Toggle CLI' })
 
+      -- Pick CLI
       map({ 'n', 'v' }, '<leader>aa', function()
-        cli.toggle { focus = true }
-      end, { desc = 'Sidekick Toggle CLI' })
+        cli.select()
+      end, { desc = 'Sidekick: Select CLI' })
+
+      -- Select & send preset prompts
       map({ 'n', 'v' }, '<leader>ap', function()
         cli.prompt()
-      end, { desc = 'Sidekick Ask Prompt' })
-
-      map({ 'n', 'v' }, '<leader>ac', function()
-        cli.toggle { name = 'copilot', focus = true }
-      end, { desc = 'Sidekick Copilot Toggle' })
-      map({ 'n', 'v' }, '<leader>ag', function()
-        cli.toggle { name = 'gemini', focus = true }
-      end, { desc = 'Sidekick Gemini Toggle' })
-      map({ 'n', 'v' }, '<leader>ax', function()
-        cli.toggle { name = 'codex', focus = true }
-      end, { desc = 'Sidekick Codex Toggle' })
+      end, { desc = 'Sidekick: Prompt' })
+      -- Send current file path w/ line and cursor position, or line range for visual selection
+      map({ 'n', 'v' }, '<leader>at', function()
+        cli.send { msg = '{this}' }
+      end, { desc = 'Sidekick: This' })
+      -- Send selected code snippet
+      map({ 'n', 'v' }, '<leader>av', function()
+        cli.send { msg = '{selection}' }
+      end, { desc = 'Sidekick: Visual Selection' })
+      -- Send current file path
+      map({ 'n', 'v' }, '<leader>af', function()
+        cli.send { msg = '{file}' }
+      end, { desc = 'Sidekick: File' })
     end,
   },
 }

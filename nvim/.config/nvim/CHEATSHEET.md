@@ -85,6 +85,10 @@ Shortcuts:
 - `gu{motion}`: Make `{motion}` lowercase
 - `gU{motion}`: Make `{motion}` uppercase
 - `g~{motion}`: Invert case over `{motion}`
+- Repeated letters make it apply to the current line, e.g.:
+    - `guu`
+    - `gUU`
+    - `g~~`
 
 Increment/decrement:
 
@@ -583,7 +587,7 @@ Picker shortcuts:
 
 ### Mini
 
-Provided by `echasnovski/mini.nvim`.
+Provided by `nvim-mini/mini.nvim`.
 
 A collection of various small independent plugins/modules.
 
@@ -591,9 +595,16 @@ A collection of various small independent plugins/modules.
 
 Add/delete/replace surroundings (brackets, quotes, etc.)
 
-- `sa`: Add surrounding
-- `sr`: Replace surrounding
-- `sd`: Delete surrounding
+- `ss`: Add surrounding
+    - Special characters for surround:
+        - `B`: Markdown bold (_custom_)
+        - `t`: HTML tag
+        - `f`: Function call; wraps the motion as a call to the give function
+        - `?`: Interactive; prompts separately for the opening/closing character(s) (multiple chars allowed)
+    - Accepts a count to surround with repeated characters
+    - `cstt`: Replace surrounding HTML tag with a different one
+- `cs`: Change surrounding
+- `ds`: Delete surrounding
 
 #### Mini-splitjoin
 
@@ -603,7 +614,7 @@ Split if arguments are on single line, join otherwise (also works on visual sele
 
 #### Mini-move
 
-Move current line/selection in direction (NORMAL/VISUAL).
+Move current line/selection in direction (NORMAL/INSERT/VISUAL).
 
 - `<M-direction>`: Move
 
@@ -659,14 +670,10 @@ Visualize and work with indent scope.
 
 Session management.
 
-- Will auto-load the local or most recent session if vim is invoked with no other options.
+- `mini.starter` will show a list of available sessions on startup.
 - Once a session is active (e.g. after load or save), it will be autosaved.
 - Commands:
     - `:Save <name>`: Create session `<name>`, or manually save the current if called with no arguments
     - `:SaveLocal`:   Create local session; the same as `:Save session.nvim`
     - `:Resume`:      Resume the local session, or the most recent global session if none exists
-    - `:Load`:        Fuzzy-select a session to load
-    - `:RmSession`:   Fuzzy-select a session to delete
-- Keybinds:
-    - `<leader>lr`: `:Resume`
-    - `<leader>ll`: `:Load`
+    - `:Sessions`:    Fuzzy-find sessions (`<C-x>` to delete)

@@ -169,6 +169,7 @@ return {
       -- Simple toggles
       t.option('wrap', { name = 'Wrap' }):map '<leader>tw'
       t.diagnostics({ name = 'Errors (diagnostics)' }):map '<leader>te'
+      t.option('spell', { name = 'Spell' }):map '<leader>ts'
 
       -- stylua: ignore start
 
@@ -222,6 +223,16 @@ return {
       -- Autosuggestions
       t.new({
         id = 'autosuggestions',
+        name = 'Autosuggestions (buffer)',
+        get = function()
+          return not vim.b.disable_autosuggestions
+        end,
+        set = function(disabled)
+          vim.b.disable_autosuggestions = not disabled
+        end,
+      }):map '<leader>ta'
+      t.new({
+        id = 'autosuggestions',
         name = 'Autosuggestions (global)',
         get = function()
           return not vim.g.disable_autosuggestions
@@ -229,9 +240,19 @@ return {
         set = function(disabled)
           vim.g.disable_autosuggestions = not disabled
         end,
-      }):map '<leader>ta'
+      }):map '<leader>tA'
 
       -- Next edit suggestions
+      t.new({
+        id = 'nes-buffer',
+        name = 'Next edit suggestions (buffer)',
+        get = function()
+          return not vim.b.disable_nes
+        end,
+        set = function(disabled)
+          vim.b.disable_nes = not disabled
+        end,
+      }):map '<leader>tn'
       t.new({
         id = 'nes-global',
         name = 'Next edit suggestions (global)',
@@ -241,7 +262,7 @@ return {
         set = function(disabled)
           vim.g.disable_nes = not disabled
         end,
-      }):map '<leader>tn'
+      }):map '<leader>tN'
 
       -- stylua: ignore end
     end

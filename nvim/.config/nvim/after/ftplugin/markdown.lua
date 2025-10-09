@@ -1,4 +1,5 @@
-vim.opt_local.spell = true
+vim.o.spell = true
+vim.b.disable_autosuggestions = true
 
 -- Override default indentation
 vim.bo.autoindent = true
