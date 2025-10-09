@@ -42,11 +42,24 @@ export LESS='-RiF --mouse --wheel-lines=3'
 ZCOMET_PATH="$HOME/.zcomet/bin/zcomet.zsh"
 if [[ ! -f $ZCOMET_PATH ]]; then
   git clone --depth=1 https://github.com/agkozak/zcomet.git $HOME/.zcomet/bin
+  # Don't trigger an auto-update during initial installation
+  touch ~/.zcomet/update
 fi
 
 # Load plugins
 if [[ -r $ZCOMET_PATH ]]; then
   source $ZCOMET_PATH
+
+  # Automatically update if we haven't run one for a while
+  # The `(Nm-7)` is a glob:
+  # - `N` makes a missing match expand to nothing instead of the literal pattern
+  # - `mw-2` only matches the file if its modification time is within 2 weeks
+  ZCOMET_LAST_UPDATE=(~/.zcomet/update(Nmw-2))
+  if [[ -z $ZCOMET_LAST_UPDATE ]]; then
+    zcomet self-update
+    zcomet update
+    touch ~/.zcomet/update
+  fi
 
   zcomet load "agkozak/zsh-z"
 
