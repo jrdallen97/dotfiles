@@ -1,3 +1,18 @@
+-- Reverse string & flip paired brackets
+local mirror = function(s)
+  s = s:reverse()
+  local chars = {
+    ['%('] = ')',
+    ['%['] = ']',
+    ['%{'] = '}',
+    ['%<'] = '>',
+  }
+  for a, b in pairs(chars) do
+    s = s:gsub(a, b)
+  end
+  return s
+end
+
 return {
   -- Collection of various small independent plugins/modules
   'nvim-mini/mini.nvim',
@@ -32,10 +47,50 @@ return {
         suffix_next = '', -- Suffix to search with "next" method
       },
       custom_surroundings = {
+        -- Allow generic string surrounds
+        s = {
+          input = function()
+            local s = vim.pesc(MiniSurround.user_input 'Enter surrounding string' or '')
+            if not s then
+              return nil
+            end
+            return { s .. '().-()' .. s }
+          end,
+          output = function()
+            local s = MiniSurround.user_input 'Enter surrounding string'
+            if not s or s == '' then
+              return nil
+            end
+            return { left = s, right = s }
+          end,
+        },
+        -- Allow generic mirrored string surrounds
+        m = {
+          input = function()
+            local s = MiniSurround.user_input 'Enter left string (will be mirrored to right)'
+            if not s or s == '' then
+              return nil
+            end
+            return { vim.pesc(s) .. '().-()' .. vim.pesc(mirror(s)) }
+          end,
+          output = function()
+            local s = MiniSurround.user_input 'Enter left string (will be mirrored to right)'
+            if not s or s == '' then
+              return nil
+            end
+            return { left = s, right = mirror(s) }
+          end,
+        },
+
         -- Markdown bold
-        ['B'] = {
+        B = {
           input = { '%*%*().-()%*%*' },
           output = { left = '**', right = '**' },
+        },
+        -- Markdown hyperlink
+        h = {
+          input = { '%[().-()%]%(.*%)' },
+          output = { left = '[', right = ']()' },
         },
       },
     }

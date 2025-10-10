@@ -4,7 +4,7 @@ export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/go/bin
 
 # Turn on zsh history file
-HISTFILE=~/.zsh_history
+HISTFILE=$HOME/.zsh_history
 HISTSIZE=100000
 SAVEHIST=$HISTSIZE
 setopt EXTENDED_HISTORY # Use the timestamp format
@@ -43,7 +43,7 @@ ZCOMET_PATH="$HOME/.zcomet/bin/zcomet.zsh"
 if [[ ! -f $ZCOMET_PATH ]]; then
   git clone --depth=1 https://github.com/agkozak/zcomet.git $HOME/.zcomet/bin
   # Don't trigger an auto-update during initial installation
-  touch ~/.zcomet/update
+  touch $HOME/.zcomet/update
 fi
 
 # Load plugins
@@ -54,11 +54,11 @@ if [[ -r $ZCOMET_PATH ]]; then
   # The `(Nm-7)` is a glob:
   # - `N` makes a missing match expand to nothing instead of the literal pattern
   # - `mw-2` only matches the file if its modification time is within 2 weeks
-  ZCOMET_LAST_UPDATE=(~/.zcomet/update(Nmw-2))
+  ZCOMET_LAST_UPDATE=($HOME/.zcomet/update(Nmw-2))
   if [[ -z $ZCOMET_LAST_UPDATE ]]; then
     zcomet self-update
     zcomet update
-    touch ~/.zcomet/update
+    touch $HOME/.zcomet/update
   fi
 
   zcomet load "agkozak/zsh-z"
@@ -111,7 +111,7 @@ if command -v rg >/dev/null; then
   export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden'
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 fi
-[[ -r ~/.fzf.zsh ]] && source ~/.fzf.zsh
+[[ -r $HOME/.fzf.zsh ]] && source $HOME/.fzf.zsh
 
 
 

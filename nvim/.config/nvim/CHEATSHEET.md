@@ -598,6 +598,9 @@ Add/delete/replace surroundings (brackets, quotes, etc.)
 - `ss`: Add surrounding
     - Special characters for surround:
         - `B`: Markdown bold (_custom_)
+        - `h`: Markdown hyperlink (_custom_)
+        - `s`: Generic string (_custom_)
+        - `m`: Mirrored string (e.g. `{[` would be mirrored to `]}`) (_custom_)
         - `t`: HTML tag
         - `f`: Function call; wraps the motion as a call to the give function
         - `?`: Interactive; prompts separately for the opening/closing character(s) (multiple chars allowed)
