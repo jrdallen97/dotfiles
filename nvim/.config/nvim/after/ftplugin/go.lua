@@ -10,5 +10,5 @@ end
 -- stylua: ignore start
 
 -- Override run commands for go scripts
-map('<leader>rr', ':w<cr>:!go run %<cr>',      'Go: Run current file')
-map('<leader>rt', ':w<cr>:!time go run %<cr>', 'Go: Time current file')
+map('<leader>rr', ':w<cr>:!go run %<cr>',      'Go: Run file')
+map('<leader>rt', ':w<cr>:!time go run %<cr>', 'Go: Time file')

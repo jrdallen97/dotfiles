@@ -180,7 +180,10 @@ There are also some special marks:
 ### Commands
 
 - Cool little helpers to run a command across lots of files:
-    - `:cdo {cmd}`:   Run `{cmd}` in all files listed in the quickfix list
+    - `:cdo {cmd}`:   Run `{cmd}` in for each entry in the quickfix list
+    - `:cfdo {cmd}`:  Run `{cmd}` in for every file in the quickfix list
+    - `:ldo {cmd}`:   Run `{cmd}` in for each entry in the location list
+    - `:lfdo {cmd}`:  Run `{cmd}` in for every file in the quickfix list
     - `:bufdo {cmd}`: Run `{cmd}` in all buffers
     - `:windo {cmd}`: Run `{cmd}` in all windows in the current tab
     - `:argdo {cmd}`: Run `{cmd}` in all files in argument list

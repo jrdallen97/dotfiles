@@ -5,8 +5,8 @@ end
 -- stylua: ignore start
 
 -- Override run commands for rust scripts
-map('<leader>rr', ':w<cr>:!rust-script %:p<cr>',      'Rust: Run current file')
-map('<leader>rt', ':w<cr>:!time rust-script %:p<cr>', 'Rust: Time current file')
+map('<leader>rr', ':w<cr>:!rust-script %:p<cr>',      'Rust: Run file')
+map('<leader>rt', ':w<cr>:!time rust-script %:p<cr>', 'Rust: Time file')
 
 -- Add some extra bindings for running with cargo
 map('<leader>rf', ':w<cr>:!cargo run -r --bin %:t:r<cr>',       'Cargo: Run file')
