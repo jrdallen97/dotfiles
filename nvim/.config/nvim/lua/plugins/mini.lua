@@ -89,8 +89,11 @@ return {
         },
         -- Markdown hyperlink
         h = {
-          input = { '%[().-()%]%(.*%)' },
-          output = { left = '[', right = ']()' },
+          input = { '%[().-()%]%(.-%)' },
+          output = function()
+            local link = MiniSurround.user_input 'Link: '
+            return { left = '[', right = '](' .. link .. ')' }
+          end,
         },
       },
     }

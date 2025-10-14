@@ -193,11 +193,19 @@ There are also some special marks:
     - add `/g` to replace all instances (i.e. if there are multiple on the same line)
     - add `/c` to prompt for confirmation before replacing each match
     - use `:bufdo %s/...` to run this in all open buffers (then `:wa` to save them all)
+- `:vim[grep] /pattern/ {file(s)}`: Search for a pattern and put results in the quickfix list
+    - use `%` for the current file
+    - a pattern of `//` will reuse the last search pattern
+    - if the slashes are omitted then the pattern will be whitespace separated instead
+    - `:lv[imgrep]` is the same but using the location list
+    - `:vimgrepa[dd]`/`:lvimgrepa[dd]` will append to the list rather than replacing it
 - Diff mode
     - `:difft[his]`: Mark the current window as part of the diff.
         - `:windo diffthis`: Applies the above for all windows in the current tab.
     - `:diffo[ff]`:  Turn off diff mode for the current window.
     - `:diffo[ff]!`: Turn off diff mode for all windows in the current tab.
+- Use `<C-v>` to type literal escape characters
+    - `<C-v><Esc>` outputs a literal escape character ``, which can be used with commands e.g. `:norm`
 
 ### Settings
 
