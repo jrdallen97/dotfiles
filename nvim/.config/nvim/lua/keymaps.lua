@@ -81,3 +81,4 @@ end, { expr = true })
 
 -- I often accidentally type `:Qa` when I mean `:qa`
 vim.api.nvim_create_user_command('Qa', 'qa', {})
+vim.api.nvim_create_user_command('Wa', 'wa', {})

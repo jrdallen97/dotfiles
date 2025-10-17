@@ -211,10 +211,6 @@ return {
     cmd('SaveLocal', function()
       MiniSessions.write('session.vim', { force = true })
     end, { nargs = 0, desc = 'mini.sessions: Save/create local session' })
-    -- Resume most recent session
-    cmd('Resume', function()
-      MiniSessions.read(MiniSessions.get_latest())
-    end, { nargs = 0, desc = 'mini.sessions: Resume most recent session' })
     -- Load session (or delete with `<C-x>`)
     cmd('Sessions', function()
       require 'snacks.picker' {
@@ -263,9 +259,6 @@ return {
     -- Set up terminal background synchronization
     -- (prevents black borders if terminal size isn't perfectly aligned)
     require('mini.misc').setup_termbg_sync()
-
-    -- ... and there is more!
-    --  Check out: https://github.com/echasnovski/mini.nvim
   end,
   init = function()
     -- Make 'mini.icons' pretend to be 'nvim-web-devicons'

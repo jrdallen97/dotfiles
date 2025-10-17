@@ -26,20 +26,20 @@ snippet el "else"
 
 
 # Logging
-snippet lf "log printf"
-	log.Printf("%${1:s}", ${2:var})
+snippet lf "log.Printf"
+	log.Printf("${1}", ${2:var})
 
-snippet lp "log println"
+snippet lp "log.Println"
 	log.Println("${1}")
 
-snippet pf "fmt.Printf()"
-	fmt.Printf("%${1:s}\n", ${2:var})
+snippet ff "fmt.Printf"
+	fmt.Printf("${1}\n", ${2:var})
 
-snippet pl "fmt.Println()"
-	fmt.Println("${1:s}")
+snippet fp "fmt.Println"
+	fmt.Println($0)
 
-snippet ps "fmt.Sprintf"
-	fmt.Sprintf("%${1:s}", ${2:var})
+snippet fs "fmt.Sprintf"
+	fmt.Sprintf("${1}", ${2:var})
 
 snippet spi "spxlog.Info"
 	spxlog.Info(ctx, $1)
@@ -70,17 +70,15 @@ snippet ap "append"
 
 # Switch/case
 snippet switch "switch"
-	switch ${1:var} {
-	case ${2:value1}:
-		${3}
-	case ${4:value2}:
-		${5}
+	switch $1 {
+	case $2:
+		$3
 	default:
-		${0}
+		$0
 	}
 
 snippet case "case"
-	case ${1:value}:
+	case $1:
 		$0
 
 
