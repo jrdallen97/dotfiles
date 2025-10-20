@@ -86,6 +86,9 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   group = vim.api.nvim_create_augroup('kickstart-auto-create-dir', { clear = true }),
   pattern = '*',
   callback = function()
+    if vim.o.filetype == 'oil' then
+      return
+    end
     local dir = vim.fn.expand '<afile>:p:h'
     if vim.fn.isdirectory(dir) == 0 then
       vim.fn.mkdir(dir, 'p')
