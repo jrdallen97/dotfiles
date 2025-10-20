@@ -4,6 +4,11 @@ return {
   priority = 100,
   lazy = false,
   opts = {
+    -- A file explorer for snacks (actually a picker in disguise)
+    explorer = {
+      replace_netrw = false,
+    },
+
     -- A modern fuzzy-finder to navigate the Neovim universe
     -- See `:help snacks-picker` and `:help snacks-picker-setup`
     picker = {
@@ -21,6 +26,11 @@ return {
         files = { hidden = true },
         grep = { hidden = true },
         grep_word = { hidden = true },
+        explorer = {
+          hidden = true,
+          auto_close = true,
+          layout = { fullscreen = false },
+        },
       },
 
       win = {
@@ -177,21 +187,15 @@ return {
       t.new({
         id = 'ruler',
         name = 'Ruler',
-        get = function()
-          return vim.o.colorcolumn ~= ''
-        end,
-        set = function(enabled)
-          vim.o.colorcolumn = enabled and '100' or ''
-        end,
+        get = function()        return vim.o.colorcolumn ~= ''              end,
+        set = function(enabled) vim.o.colorcolumn = enabled and '100' or '' end,
       }):map '<leader>tr'
 
       -- Easily switch between light & dark mode
       t.new({
         id = 'light-mode',
         name = 'Light mode',
-        get = function()
-          return vim.o.bg == 'light'
-        end,
+        get = function() return vim.o.bg == 'light' end,
         set = function(enabled)
           vim.cmd.colorscheme(enabled and 'bamboo' or 'catppuccin')
           vim.o.bg = enabled and 'light' or 'dark'
@@ -202,72 +206,55 @@ return {
       t.new({
         id = 'format-on-save-buffer',
         name = 'Format-on-save (buffer)',
-        get = function()
-          return not vim.b.disable_autoformat
-        end,
-        set = function(disabled)
-          vim.b.disable_autoformat = not disabled
-        end,
+        get = function()         return not vim.b.disable_autoformat     end,
+        set = function(disabled) vim.b.disable_autoformat = not disabled end,
       }):map '<leader>tf'
       t.new({
         id = 'format-on-save-global',
         name = 'Format-on-save (global)',
-        get = function()
-          return not vim.g.disable_autoformat
-        end,
-        set = function(disabled)
-          vim.g.disable_autoformat = not disabled
-        end,
+        get = function()         return not vim.g.disable_autoformat     end,
+        set = function(disabled) vim.g.disable_autoformat = not disabled end,
       }):map '<leader>tF'
 
       -- Autosuggestions
       t.new({
         id = 'autosuggestions',
         name = 'Autosuggestions (buffer)',
-        get = function()
-          return not vim.b.disable_autosuggestions
-        end,
-        set = function(disabled)
-          vim.b.disable_autosuggestions = not disabled
-        end,
+        get = function()         return not vim.b.disable_autosuggestions     end,
+        set = function(disabled) vim.b.disable_autosuggestions = not disabled end,
       }):map '<leader>ta'
       t.new({
         id = 'autosuggestions',
         name = 'Autosuggestions (global)',
-        get = function()
-          return not vim.g.disable_autosuggestions
-        end,
-        set = function(disabled)
-          vim.g.disable_autosuggestions = not disabled
-        end,
+        get = function()         return not vim.g.disable_autosuggestions     end,
+        set = function(disabled) vim.g.disable_autosuggestions = not disabled end,
       }):map '<leader>tA'
 
       -- Next edit suggestions
       t.new({
         id = 'nes-buffer',
         name = 'Next edit suggestions (buffer)',
-        get = function()
-          return not vim.b.disable_nes
-        end,
-        set = function(disabled)
-          vim.b.disable_nes = not disabled
-        end,
+        get = function()         return not vim.b.disable_nes     end,
+        set = function(disabled) vim.b.disable_nes = not disabled end,
       }):map '<leader>tn'
       t.new({
         id = 'nes-global',
         name = 'Next edit suggestions (global)',
-        get = function()
-          return not vim.g.disable_nes
-        end,
-        set = function(disabled)
-          vim.g.disable_nes = not disabled
-        end,
+        get = function()         return not vim.g.disable_nes     end,
+        set = function(disabled) vim.g.disable_nes = not disabled end,
       }):map '<leader>tN'
 
       -- stylua: ignore end
     end
 
     -- Set up notifier
-    cmd('Notifications', Snacks.notifier.show_history, { desc = 'Show notification history' })
+    cmd(
+      'Notifications',
+      '<cmd>lua Snacks.notifier.show_history()<cr>',
+      { desc = 'Show notification history' }
+    )
+
+    -- Set up explorer
+    map('\\', '<cmd>lua Snacks.explorer()<cr>', 'File Explorer')
   end,
 }

@@ -596,6 +596,31 @@ Picker shortcuts:
     - `<M-m>`: Toggle maximised
     - `<M-p>`: Toggle preview
 
+#### Snacks explorer
+
+Shortcuts:
+
+- `\`: Toggle file explorer
+
+Picker shortcuts:
+
+- `r`: Rename
+- `c`: Copy
+- `p`: Paste
+- `o`: Open (system)
+- `m`: Move selected to dir under cursor
+- `<Tab>`: Toggle selected
+- `<C-c>`: Change directory here (`cd`)
+- `<BS>` : Show parent directory (does not `cd`)
+- `H`: Toggle hidden
+- `I`: Toggle ignored
+- `Z`: Collapse all
+- `]g`/`[g`: Next/prev file with git changes (new/modified)
+- `]d`/`[d`: Next/prev file with diagnostics (any)
+- `]w`/`[w`: Next/prev file with diagnostics (warn)
+- `]e`/`[e`: Next/prev file with diagnostics (error)
+- `<C-t>`: Open terminal here
+
 ### Mini
 
 Provided by `nvim-mini/mini.nvim`.
