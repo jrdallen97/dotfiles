@@ -25,8 +25,8 @@ if vim.g.work_profile then
 end
 
 -- Easily run executable files
-map('<leader>rr', ':w<CR>:!%:p<CR>',      'Run current file (shebang)')
-map('<leader>rt', ':w<CR>:!time %:p<CR>', 'Time current file (shebang)')
+map('<leader>rs',  ':w<CR>:!%:p<CR>',      'Shebang: Run file')
+map('<leader>rts', ':w<CR>:!time %:p<CR>', 'Shebang: Time file')
 
 -- Diagnostic keymaps
 map('<leader>l', setloclist_errors,         'Open diagnostic [L]ocation list (errors only)')

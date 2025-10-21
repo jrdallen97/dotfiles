@@ -58,6 +58,8 @@ return {
       { '<leader>e', group = 'Edit' },
       { '<leader>g', group = 'Git' },
       { '<leader>t', group = 'Toggle' },
+      { '<leader>r', group = 'Run' },
+      { '<leader>R', group = 'Test' },
 
       -- Snacks.picker
       { '<leader>f', group = 'Find' },
