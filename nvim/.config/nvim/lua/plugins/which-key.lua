@@ -57,7 +57,6 @@ return {
       { '<leader>c', group = 'Code', mode = { 'n', 'x' } },
       { '<leader>e', group = 'Edit' },
       { '<leader>g', group = 'Git' },
-      { '<leader>h', group = 'Git Hunk', mode = { 'n', 'v' } },
       { '<leader>t', group = 'Toggle' },
 
       -- Snacks.picker

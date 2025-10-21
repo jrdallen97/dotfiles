@@ -28,11 +28,14 @@ NOTE: I'm not gonna list all the basics here, just the stuff that's useful for m
     - [Comments](CHEATSHEET#Comments)
     - [Markdown](CHEATSHEET#Markdown)
     - [Git](CHEATSHEET#Git)
-        - [Fugitive](CHEATSHEET#Fugitive)
     - [Grug-far](CHEATSHEET#Grug-far)
     - [Snacks](CHEATSHEET#Snacks)
         - [Snacks-picker](CHEATSHEET#Snacks-picker)
+        - [Snacks explorer](CHEATSHEET#Snacks explorer)
+        - [Snacks gitbrowse](CHEATSHEET#Snacks gitbrowse)
+        - [Snacks notifier](CHEATSHEET#Snacks notifier)
     - [Mini](CHEATSHEET#Mini)
+        - [Mini-diff](CHEATSHEET#Mini-diff)
         - [Mini-surround](CHEATSHEET#Mini-surround)
         - [Mini-splitjoin](CHEATSHEET#Mini-splitjoin)
         - [Mini-move](CHEATSHEET#Mini-move)
@@ -466,48 +469,25 @@ Provided by `gaoDean/autolist.nvim`:
 
 ### Git
 
-Provided by `lewis6991/gitsigns.nvim`.
-
-- `]h`: Next hunk
-- `[h`: Prev hunk
-- `]H`: Last hunk
-- `[H`: First hunk
-- Staging:
-    - `<leader>hs`: Stage hunk (toggle) (NORMAL/VISUAL)
-    - `<leader>hr`: Reset hunk
-    - `<leader>hS`: Stage entire file
-    - `<leader>hR`: Reset all unstaged hunks in file
-    - `<leader>hp`: Preview current hunk (inline)
-    - `<leader>hq`: Send hunks to quickfix (buffer)
-    - `<leader>hQ`: Send hunks to quickfix (all files)
-- Blame
-    - `<leader>hb`: Blame current line
-- Diff
-    - `<leader>hd`: Diff current file
-    - `<leader>hD`: Diff current file vs previous commit (`~`)
-- Toggles
-    - `<leader>tb`: Toggle inline blame
-    - `<leader>td`: Toggle word diff
-
-Text object:
-- `ih`: inner hunk, e.g.
-    - `vih`: Select all changes in a hunk
-    - `dih`: Delete all changes in a hunk
-
-#### Fugitive
-
 Provided by `tpope/vim-fugitive`.
 
-- `:G`:         Open fugitive in a split
-- `:tab G`:     Open fugitive in a new tab
+- `:Git`: Open fugitive
+- `:Git {cmd}`: Run git command
 - `<leader>gg`: Open fugitive in a new tab
-- `<leader>gs`: Git status (telescope)
+- `<leader>gs`: Git status - [[#Snacks-picker]]
+- `<leader>go`: Git diff overlay - [[#Mini-diff]]
+- `<leader>gd`: Git diff vs. head
+- `<leader>gD`: Git diff vs. previous commit
 - `<leader>gb`: Git blame
 - `<leader>gc`: Git commit
 - `<leader>gp`: Git push
 - `<leader>gl`: Git pull
+- `ghs`: Stage hunk/selection (NORMAL/VISUAL) - [[#Mini-diff]]
+- `ghr`: Restore hunk/selection (NORMAL/VISUAL) - [[#Mini-diff]]
+- `ghS`: Stage entire buffer
+- `ghR`: Restore entire buffer
 
-From within fugitive:
+Within fugitive:
 
 - `]]`: Next section
 - `[[`: Previous section
@@ -621,11 +601,35 @@ Picker shortcuts:
 - `]e`/`[e`: Next/prev file with diagnostics (error)
 - `<C-t>`: Open terminal here
 
+#### Snacks gitbrowse
+
+Commands:
+
+- `:GitBrowse`: Open current file in browser
+
+#### Snacks notifier
+
+Commands:
+
+- `:Notifications`: Notification history
+
 ### Mini
 
 Provided by `nvim-mini/mini.nvim`.
 
 A collection of various small independent plugins/modules.
+
+#### Mini-diff
+
+Work with diff hunks.
+
+- `<leader>go`: Toggle diff overlay
+- `ghs`: Apply/stage hunk (either current hunk or visual selection) (NORMAL/VISUAL)
+- `ghr`: Reset hunk (either current hunk or visual selection) (NORMAL/VISUAL)
+- Text operators:
+    - `ih`: In hunk
+- Examples:
+    - `yih`: Yank entire hunk
 
 #### Mini-surround
 
@@ -639,7 +643,7 @@ Add/delete/replace surroundings (brackets, quotes, etc.)
         - `m`: Mirrored string (e.g. `{[` would be mirrored to `]}`) (_custom_)
         - `t`: HTML tag
         - `f`: Function call; wraps the motion as a call to the give function
-        - `?`: Interactive; prompts separately for the opening/closing character(s) (multiple chars allowed)
+        - `?`: Interactive; prompts separately for the opening/closing string
     - Accepts a count to surround with repeated characters
     - `cstt`: Replace surrounding HTML tag with a different one
 - `cs`: Change surrounding

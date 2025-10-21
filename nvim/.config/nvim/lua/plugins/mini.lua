@@ -256,6 +256,35 @@ return {
       }
     end, { nargs = 0, desc = 'mini.sessions: List sessions' })
 
+    -- Work with diff hunks
+    require('mini.diff').setup {
+      mappings = {
+        -- Unbind these & use custom mappings instead
+        apply = '',
+        reset = '',
+
+        -- More typical textobject
+        textobject = 'ih',
+      },
+      options = {
+        -- Wrap around the end of file during hunk navigation
+        wrap_goto = true,
+      },
+    }
+    map('n', '<leader>go', MiniDiff.toggle_overlay, { desc = 'Diff Overlay' })
+    -- stylua: ignore
+    do
+      local diff = function(action, motion)
+        return function()
+          return MiniDiff.operator(action) .. (motion or '')
+        end
+      end
+      map('n', 'ghs', diff('apply', 'ih'), { expr = true, remap = true, desc = 'Stage' })
+      map('x', 'ghs', diff('apply'),       { expr = true, remap = true, desc = 'Stage Selection' })
+      map('n', 'ghr', diff('reset', 'ih'), { expr = true, remap = true, desc = 'Restore' })
+      map('x', 'ghr', diff('reset'),       { expr = true, remap = true, desc = 'Restore Selection' })
+    end
+
     -- Set up terminal background synchronization
     -- (prevents black borders if terminal size isn't perfectly aligned)
     require('mini.misc').setup_termbg_sync()

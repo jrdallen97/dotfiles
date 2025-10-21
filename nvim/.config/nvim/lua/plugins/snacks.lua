@@ -58,6 +58,9 @@ return {
       },
     },
 
+    -- Open the repo of the active file in the browser (e.g., GitHub)
+    gitbrowse = {},
+
     -- Toggle keymaps integrated with which-key icons/colors
     toggle = {
       -- Override which-key descriptions to use a static "Toggle" prefix (rather than Enable/Disable)
@@ -72,7 +75,9 @@ return {
   config = function(_, opts)
     require('snacks').setup(opts)
 
-    local cmd = vim.api.nvim_create_user_command
+    local cmd = function(cmd, func, desc)
+      vim.api.nvim_create_user_command(cmd, func, { desc = desc })
+    end
     local map = function(keys, func, desc, mode)
       mode = mode or 'n'
       -- Allow binding the same func to multiple keys
@@ -114,7 +119,7 @@ return {
       -- Misc
       map('<leader><leader>', picker.buffers,    'Switch buffers')
       map('<leader>/',        picker.smart,      'Smart finder')
-      map('<leader>gs',       picker.git_status, 'Git Status')
+      map('<leader>gs',       picker.git_status, 'Status')
       map('<leader>fr',       picker.resume,     'Resume')
       map('<leader>sr',       picker.resume,     'Resume')
 
@@ -247,12 +252,11 @@ return {
       -- stylua: ignore end
     end
 
+    -- Set up Git browse
+    cmd('GitBrowse', 'lua Snacks.gitbrowse()', 'Open file in browser')
+
     -- Set up notifier
-    cmd(
-      'Notifications',
-      '<cmd>lua Snacks.notifier.show_history()<cr>',
-      { desc = 'Show notification history' }
-    )
+    cmd('Notifications', 'lua Snacks.notifier.show_history()', 'Notification history')
 
     -- Set up explorer
     map('\\', '<cmd>lua Snacks.explorer()<cr>', 'File Explorer')
