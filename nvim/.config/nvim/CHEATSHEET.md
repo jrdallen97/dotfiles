@@ -52,15 +52,16 @@ NOTE: I'm not gonna list all the basics here, just the stuff that's useful for m
 My own stuff...
 
 - `<leader>{n}`: Switch to tab number `{n}`
-- `<leader>rr` :  Save & run current file (using shebang)
-- `<leader>rt` :  Save & run current file with `time` (using shebang)
-- `:Dark`      : Switch to my preferred dark-mode colourscheme
-- `:Light`     : Switch to my preferred light-mode colourscheme
+- `<leader>rs`:  Save & run current file (using shebang)
+- `<leader>rts`: Save & time running current file (using shebang)
 
 Toggles:
 
 - `<leader>tw`: Toggle wrap
+- `<leader>ts`: Toggle spellcheck
+- `<leader>td`: Toggle diagnostics
 - `<leader>tr`: Toggle ruler (default to col 100, use `:set cc=<n>` otherwise)
+- `<leader>tl`: Toggle light mode
 
 Shortcuts:
 
@@ -144,6 +145,17 @@ Spell:
 - `zw`:  Mark word as wrong (add to wrong word list)
 - `zug`: Undo `zg`/`zw`, remove word from spellfile
 
+Modes (as used in mappings):
+
+- `n`: Normal mode
+- `i`: Insert mode
+- `x`: Visual mode only
+- `s`: Select mode only (like visual mode but typing replaces the selection)
+- `v`: Visual and select mode
+- `t`: Terminal mode
+- `c`: Command-line mode
+- `o`: Operator-pending mode
+
 ### Jumps
 
 `:h jump-motions`
@@ -157,9 +169,9 @@ Note: scrolling (e.g. `<C-d>`) is not a jump.
 - `<C-i>`: Next cursor position in jump list
 - `<C-t>`: Previous position in tag stack (e.g. set when using `gd` to goto definition)
 - `%`:     Jump to matching bracket
-- `H`:     Jump the cursor to the top of the screen (**h**igh)
-- `M`:     Jump the cursor to the middle of the screen (**m**iddle)
-- `L`:     Jump the cursor to the bottom of the screen (**l**ow)
+- `H`:     Jump the cursor to the top of the screen (Home)
+- `M`:     Jump the cursor to the middle of the screen (Middle)
+- `L`:     Jump the cursor to the bottom of the screen (Last)
 
 ### Marks
 
@@ -521,11 +533,11 @@ Shortcuts:
     - `<leader>gs`: Git status
     - `<leader>fr`: Resume previous search
     - `<leader>sr`: Resume previous search
-- Search help (these also accept the last character uppercase for ease of typing):
-    - `<leader>Hh`: Help: Help
-    - `<leader>Hc`: Help: Commands
-    - `<leader>Hk`: Help: Keybinds
-    - `<leader>Hp`: Help: Pickers
+- Search help:
+    - `<leader>hh`: Help: Help
+    - `<leader>hc`: Help: Commands
+    - `<leader>hk`: Help: Keybinds
+    - `<leader>hp`: Help: Pickers
 - Find files (or directories!):
     - `<leader>ff`: Find: Files
     - `<leader>fo`: Find: Oldfiles (recently opened files)

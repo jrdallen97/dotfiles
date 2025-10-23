@@ -28,9 +28,6 @@ return {
       sidekick.setup {
         nes = {
           enabled = function()
-            if not vim.g.work_profile then
-              return false
-            end
             return vim.g.disable_nes ~= true and vim.b.disable_nes ~= true
           end,
 
@@ -51,41 +48,35 @@ return {
         },
       }
 
-      local map = vim.keymap.set
+      local map = function(mode, keys, func, desc, opts)
+        opts = opts or {}
+        opts.desc = 'Sidekick: ' .. desc
+        vim.keymap.set(mode, keys, func, opts)
+      end
 
       -- Jump to next suggestion OR apply it OR fallback to <tab>
       map('n', '<Tab>', function()
-        if not sidekick.nes_jump_or_apply() then
-          return '<Tab>' -- fallback to normal tab
-        end
-      end, { expr = true, desc = 'Goto/Apply Next Edit Suggestion' })
+        return sidekick.nes_jump_or_apply() and '' or '<Tab>'
+      end, 'Goto/Apply Next Edit Suggestion', { expr = true })
 
-      -- Toggle CLI
-      map({ 'n', 'x', 'i', 't' }, '<c-.>', function()
-        cli.toggle()
-      end, { desc = 'Sidekick: Toggle CLI' })
+      -- stylua: ignore start
 
-      -- Pick CLI
-      map({ 'n', 'v' }, '<leader>aa', function()
-        cli.select()
-      end, { desc = 'Sidekick: Select CLI' })
+      map({ 'n', 'x', 't' }, '<c-.>', function() cli.toggle() end, 'Toggle CLI')
+      map({ 'n', 'x' }, '<leader>aa', function() cli.select() end, 'Select CLI')
+      map({ 'n', 'x' }, '<leader>ap', function() cli.prompt() end, 'Prompt')
 
-      -- Select & send preset prompts
-      map({ 'n', 'v' }, '<leader>ap', function()
-        cli.prompt()
-      end, { desc = 'Sidekick: Prompt' })
-      -- Send current file path w/ line and cursor position, or line range for visual selection
-      map({ 'n', 'v' }, '<leader>at', function()
-        cli.send { msg = '{this}' }
-      end, { desc = 'Sidekick: This' })
-      -- Send selected code snippet
-      map({ 'n', 'v' }, '<leader>av', function()
-        cli.send { msg = '{selection}' }
-      end, { desc = 'Sidekick: Visual Selection' })
+      local send = function(msg)
+        return function() cli.send { msg = msg } end
+      end
+
       -- Send current file path
-      map({ 'n', 'v' }, '<leader>af', function()
-        cli.send { msg = '{file}' }
-      end, { desc = 'Sidekick: File' })
+      map({ 'n', 'x' }, '<leader>af', send '{file}',      'Send File')
+      -- Send current file path w/ cursor position, or line range for visual selection
+      map({ 'n', 'x' }, '<leader>at', send '{this}',      'Send file & position')
+      -- Send selection as code snippet
+      map({ 'x' },      '<leader>av', send '{selection}', 'Send visual selection')
+
+      -- stylua: ignore end
     end,
   },
 }

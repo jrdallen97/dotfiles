@@ -78,15 +78,8 @@ return {
     local cmd = function(cmd, func, desc)
       vim.api.nvim_create_user_command(cmd, func, { desc = desc })
     end
-    local map = function(keys, func, desc, mode)
-      mode = mode or 'n'
-      -- Allow binding the same func to multiple keys
-      if type(keys) == 'string' then
-        keys = { keys }
-      end
-      for _, key in ipairs(keys) do
-        vim.keymap.set(mode, key, func, { desc = desc })
-      end
+    local map = function(key, func, desc, mode)
+      vim.keymap.set(mode or 'n', key, func, { desc = desc })
     end
 
     -- Set up picker
@@ -124,10 +117,10 @@ return {
       map('<leader>sr',       picker.resume,     'Resume')
 
       -- Search Help
-      map({'<leader>Hh', '<leader>HH'}, picker.help,     'Help')
-      map({'<leader>Hc', '<leader>HC'}, picker.commands, 'Commands')
-      map({'<leader>Hk', '<leader>HK'}, picker.keymaps,  'Keybinds')
-      map({'<leader>Hp', '<leader>HP'}, picker.pickers,  'Pickers')
+      map('<leader>hh', picker.help,     'Help')
+      map('<leader>hc', picker.commands, 'Commands')
+      map('<leader>hk', picker.keymaps,  'Keybinds')
+      map('<leader>hp', picker.pickers,  'Pickers')
 
       -- Find files (or directories!)
       map('<leader>ff', picker.files,  'Files')
@@ -160,46 +153,26 @@ return {
       map('<leader>sn', function() picker.grep  { cwd = '~/notes' } end, 'Notes')
 
       -- stylua: ignore end
-
-      -- Fix bug where snacks.picker opens files in the wrong window
-      -- https://github.com/folke/snacks.nvim/pull/2012
-      local M = require 'snacks.picker.core.main'
-      M.new = function(opts)
-        opts = vim.tbl_extend('force', {
-          float = false,
-          file = true,
-          current = false,
-        }, opts or {})
-        local self = setmetatable({}, M)
-        self.opts = opts
-        self.win = vim.api.nvim_get_current_win()
-        return self
-      end
     end
 
     -- Set up toggle
+    -- stylua: ignore
     do
-      local t = Snacks.toggle
-
       -- Simple toggles
-      t.option('wrap', { name = 'Wrap' }):map '<leader>tw'
-      t.diagnostics({ name = 'Errors (diagnostics)' }):map '<leader>te'
-      t.option('spell', { name = 'Spell' }):map '<leader>ts'
+      Snacks.toggle.option('wrap' ):map '<leader>tw'
+      Snacks.toggle.option('spell'):map '<leader>ts'
+      Snacks.toggle.diagnostics(  ):map '<leader>td'
 
-      -- stylua: ignore start
-
-      -- Toggle ruler
-      t.new({
-        id = 'ruler',
-        name = 'Ruler',
+      -- Toggle ruler (use `:set cc=` for values other than 100)
+      Snacks.toggle.new({
+        name = 'ruler',
         get = function()        return vim.o.colorcolumn ~= ''              end,
         set = function(enabled) vim.o.colorcolumn = enabled and '100' or '' end,
       }):map '<leader>tr'
 
       -- Easily switch between light & dark mode
-      t.new({
-        id = 'light-mode',
-        name = 'Light mode',
+      Snacks.toggle.new({
+        name = 'light mode',
         get = function() return vim.o.bg == 'light' end,
         set = function(enabled)
           vim.cmd.colorscheme(enabled and 'bamboo' or 'catppuccin')
@@ -207,49 +180,27 @@ return {
         end,
       }):map '<leader>tl'
 
+      -- Helper for disable toggles
+      local disable = function(name, var, buffer)
+        local v = buffer and vim.b or vim.g
+        return Snacks.toggle.new({
+          name = name .. (buffer and ' (buffer)' or ' (global)'),
+          get = function()         return not v[var]     end,
+          set = function(disabled) v[var] = not disabled end,
+        })
+      end
+
       -- Auto-format
-      t.new({
-        id = 'format-on-save-buffer',
-        name = 'Format-on-save (buffer)',
-        get = function()         return not vim.b.disable_autoformat     end,
-        set = function(disabled) vim.b.disable_autoformat = not disabled end,
-      }):map '<leader>tf'
-      t.new({
-        id = 'format-on-save-global',
-        name = 'Format-on-save (global)',
-        get = function()         return not vim.g.disable_autoformat     end,
-        set = function(disabled) vim.g.disable_autoformat = not disabled end,
-      }):map '<leader>tF'
+      disable('autoformat', 'disable_autoformat', true ):map '<leader>tf'
+      disable('autoformat', 'disable_autoformat', false):map '<leader>tF'
 
       -- Autosuggestions
-      t.new({
-        id = 'autosuggestions',
-        name = 'Autosuggestions (buffer)',
-        get = function()         return not vim.b.disable_autosuggestions     end,
-        set = function(disabled) vim.b.disable_autosuggestions = not disabled end,
-      }):map '<leader>ta'
-      t.new({
-        id = 'autosuggestions',
-        name = 'Autosuggestions (global)',
-        get = function()         return not vim.g.disable_autosuggestions     end,
-        set = function(disabled) vim.g.disable_autosuggestions = not disabled end,
-      }):map '<leader>tA'
+      disable('autosuggestions', 'disable_autosuggestions', true ):map '<leader>ta'
+      disable('autosuggestions', 'disable_autosuggestions', false):map '<leader>tA'
 
       -- Next edit suggestions
-      t.new({
-        id = 'nes-buffer',
-        name = 'Next edit suggestions (buffer)',
-        get = function()         return not vim.b.disable_nes     end,
-        set = function(disabled) vim.b.disable_nes = not disabled end,
-      }):map '<leader>tn'
-      t.new({
-        id = 'nes-global',
-        name = 'Next edit suggestions (global)',
-        get = function()         return not vim.g.disable_nes     end,
-        set = function(disabled) vim.g.disable_nes = not disabled end,
-      }):map '<leader>tN'
-
-      -- stylua: ignore end
+      disable('next edit suggestions', 'disable_nes', true ):map '<leader>tn'
+      disable('next edit suggestions', 'disable_nes', false):map '<leader>tN'
     end
 
     -- Set up Git browse

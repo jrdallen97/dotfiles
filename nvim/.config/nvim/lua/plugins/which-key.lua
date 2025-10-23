@@ -64,7 +64,7 @@ return {
       -- Snacks.picker
       { '<leader>f', group = 'Find' },
       { '<leader>s', group = 'Search' },
-      { '<leader>H', group = 'Help' },
+      { '<leader>h', group = 'Help' },
     },
   },
 }
