@@ -274,15 +274,17 @@ return {
     map('n', '<leader>go', MiniDiff.toggle_overlay, { desc = 'Diff Overlay' })
     -- stylua: ignore
     do
-      local diff = function(action, motion)
+      local diff = function(action, s)
         return function()
-          return MiniDiff.operator(action) .. (motion or '')
+          return string.format(s, MiniDiff.operator(action))
         end
       end
-      map('n', 'ghs', diff('apply', 'ih'), { expr = true, remap = true, desc = 'Stage' })
-      map('x', 'ghs', diff('apply'),       { expr = true, remap = true, desc = 'Stage Selection' })
-      map('n', 'ghr', diff('reset', 'ih'), { expr = true, remap = true, desc = 'Restore' })
-      map('x', 'ghr', diff('reset'),       { expr = true, remap = true, desc = 'Restore Selection' })
+      map('n', 'ghs', diff('apply', '%sih'      ), { expr = true, remap = true, desc = 'Stage Hunk' })
+      map('x', 'ghs', diff('apply', '%s'        ), { expr = true, remap = true, desc = 'Stage Selection' })
+      map('n', 'ghS', diff('apply', 'go%sG<C-o>'), { expr = true, remap = true, desc = 'Stage File' })
+      map('n', 'ghr', diff('reset', '%sih'      ), { expr = true, remap = true, desc = 'Restore Hunk' })
+      map('x', 'ghr', diff('reset', '%s'        ), { expr = true, remap = true, desc = 'Restore Selection' })
+      map('n', 'ghR', diff('reset', 'go%sG<C-o>'), { expr = true, remap = true, desc = 'Restore File' })
     end
 
     -- Set up terminal background synchronization
