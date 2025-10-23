@@ -168,6 +168,7 @@ alias glgo='git log --oneline --decorate'
 # git merge
 alias gm='git merge'
 alias gmd='git merge $(git_default_branch)'
+alias gmod='git merge origin/$(git_default_branch)'
 # git push
 alias gp='git push'
 alias gpforce='git push --force-with-lease'
