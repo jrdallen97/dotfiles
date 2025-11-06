@@ -130,4 +130,7 @@ return {
       },
     },
   },
+
+  -- Rainbow delimiters for Neovim with Treesitter
+  'HiPhish/rainbow-delimiters.nvim',
 }

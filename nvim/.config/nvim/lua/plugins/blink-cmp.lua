@@ -38,19 +38,14 @@ return {
           end
         end, { silent = true, desc = 'Cycle snippet choices' })
 
-        -- Enable js snippets in ts/react
-        ls.filetype_extend('javascript', {
-          'javascriptreact',
-          'typescript',
-          'typescriptreact',
-        })
-
-
         -- Load my custom snippets (defined in `~/.config/nvim/snippets`)
         require('luasnip.loaders.from_snipmate').lazy_load()
 
         -- Load friendly-snippets
-        require('luasnip.loaders.from_vscode').lazy_load { exclude = { 'go' } }
+        require('luasnip.loaders.from_vscode').lazy_load {
+          -- Skip languages that I have custom snippets for
+          exclude = { 'go' },
+        }
       end,
     },
   },
