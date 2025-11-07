@@ -163,6 +163,12 @@ return {
       Snacks.toggle.option('spell'):map '<leader>ts'
       Snacks.toggle.diagnostics(  ):map '<leader>td'
 
+      -- Toggle conceallevel (use `:set cole=` for values other than 2)
+      Snacks.toggle.new({
+        name = 'conceal',
+        get = function()        return vim.o.conceallevel ~= 0          end,
+        set = function(enabled) vim.o.conceallevel = enabled and 2 or 0 end,
+      }):map '<leader>tc'
       -- Toggle ruler (use `:set cc=` for values other than 100)
       Snacks.toggle.new({
         name = 'ruler',

@@ -53,35 +53,31 @@ return {
         -- Allow generic string surrounds
         s = {
           input = function()
-            local s = vim.pesc(MiniSurround.user_input 'Enter surrounding string' or '')
-            if not s then
-              return nil
+            local s = MiniSurround.user_input 'Enter surrounding string'
+            if s and s ~= '' then
+              return { vim.pesc(s) .. '().-()' .. vim.pesc(s) }
             end
-            return { s .. '().-()' .. s }
           end,
           output = function()
             local s = MiniSurround.user_input 'Enter surrounding string'
-            if not s or s == '' then
-              return nil
+            if s and s ~= '' then
+              return { left = s, right = s }
             end
-            return { left = s, right = s }
           end,
         },
         -- Allow generic mirrored string surrounds
         m = {
           input = function()
             local s = MiniSurround.user_input 'Enter left string (will be mirrored to right)'
-            if not s or s == '' then
-              return nil
+            if s and s ~= '' then
+              return { vim.pesc(s) .. '().-()' .. vim.pesc(mirror(s)) }
             end
-            return { vim.pesc(s) .. '().-()' .. vim.pesc(mirror(s)) }
           end,
           output = function()
             local s = MiniSurround.user_input 'Enter left string (will be mirrored to right)'
-            if not s or s == '' then
-              return nil
+            if s and s ~= '' then
+              return { left = s, right = mirror(s) }
             end
-            return { left = s, right = mirror(s) }
           end,
         },
 
@@ -103,7 +99,7 @@ return {
     -- Don't change builtin `s` binding!
     vim.api.nvim_del_keymap('n', 's')
 
-    -- Work with trailing whitespace
+    -- Highlight and trim trailing whitespace
     require('mini.trailspace').setup()
     -- Add a command to easily trim whitespace
     cmd('TrimWhitespace', MiniTrailspace.trim, { desc = 'Trim whitespace' })

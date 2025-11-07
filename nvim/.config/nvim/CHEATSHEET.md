@@ -435,8 +435,8 @@ Provided by `stevearc/oil.nvim`.
 
 A netrw replacement that lets you browse and edit the filesystem as if it was a regular buffer.
 
-- `gd`: Toggle file details (e.g. size, permissions, last modified)
-- `gh`: Toggle hidden files
+- `<M-d>`: Toggle file details (e.g. size, permissions, last modified)
+- `<M-h>`: Toggle hidden files
 
 ### Comments
 

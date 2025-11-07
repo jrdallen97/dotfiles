@@ -34,7 +34,7 @@ return {
           ['<C-p>'] = false,
 
           -- Quick toggle to show file details (:h oil-columns)
-          ['gd'] = {
+          ['<M-d>'] = {
             desc = 'Toggle file detail view',
             callback = function()
               detail = not detail
@@ -45,7 +45,7 @@ return {
               end
             end,
           },
-          ['gh'] = {
+          ['<M-h>'] = {
             desc = 'Toggle hidden files',
             callback = require('oil').toggle_hidden,
           },
