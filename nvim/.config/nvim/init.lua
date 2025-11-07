@@ -8,6 +8,7 @@ vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = false
 
 require 'settings'
+require 'autocmds'
 
 -- Catch the error if `jam.local` doesn't exist
 local ok = pcall(require, 'local')

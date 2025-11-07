@@ -1,10 +1,10 @@
+-- NOTE: For more options, see `:help option-list`
+
 -- Get or set options (`:h vim.o`)
 local o = vim.o
 -- Like `vim.o` but with a special interface for interacting with lists & maps (`:h vim.opt`)
 -- See `:h lua-options` and `:h lua-guide-options`
 local opt = vim.opt
-
--- NOTE: For more options, see `:help option-list`
 
 -- stylua: ignore start
 
@@ -56,8 +56,6 @@ o.foldlevelstart = 99     -- Don't fold anything by default
 o.foldmethod     = 'expr' -- Enable treesitter-based code folding by default
 o.foldexpr       = 'v:lua.vim.treesitter.foldexpr()'
 
--- stylua: ignore end
-
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -65,77 +63,3 @@ o.foldexpr       = 'v:lua.vim.treesitter.foldexpr()'
 vim.schedule(function()
   o.clipboard = 'unnamedplus'
 end)
-
--- [[ Basic Autocommands ]]
---  See `:help lua-guide-autocommands`
-
--- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.hl.on_yank()`
-vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function()
-    vim.hl.on_yank { timeout = 250 }
-  end,
-})
-
--- Auto-create missing dirs when saving a file
-vim.api.nvim_create_autocmd('BufWritePre', {
-  desc = 'Auto-create missing dirs when saving a file',
-  group = vim.api.nvim_create_augroup('kickstart-auto-create-dir', { clear = true }),
-  pattern = '*',
-  callback = function()
-    if vim.o.filetype == 'oil' then
-      return
-    end
-    local dir = vim.fn.expand '<afile>:p:h'
-    if vim.fn.isdirectory(dir) == 0 then
-      vim.fn.mkdir(dir, 'p')
-    end
-  end,
-})
-
--- Automatically disable cursorcolumn for non-active buffers
-local g = vim.api.nvim_create_augroup('hide-cursorcolumn', { clear = true })
-vim.api.nvim_create_autocmd('WinEnter', {
-  desc = 'Enable cursorcolumn on entering a buffer',
-  group = g,
-  callback = function()
-    o.cursorcolumn = true
-  end,
-})
-vim.api.nvim_create_autocmd('WinLeave', {
-  desc = 'Disable cursorcolumn on leaving a buffer',
-  group = g,
-  callback = function()
-    o.cursorcolumn = false
-  end,
-})
-
--- Disable slow features when opening big files
--- Most of these seem unnecessary, but I've left them commented out so they're easy to re-enable
-vim.cmd [[
-  function BigFileStuff()
-    echo("Big file, disabling slow features")
-
-    " if exists(':TSBufDisable')
-    "   exec 'TSBufDisable autotag'
-    "   exec 'TSBufDisable highlight'
-    "   " etc...
-    " endif
-
-    setlocal foldmethod=manual
-    " syntax off
-    " filetype off
-    " setlocal noundofile
-    " setlocal noswapfile
-    " setlocal noloadplugins
-  endfunction
-
-  augroup BigFileDisable
-    autocmd!
-    " Run for files bigger than 10MB
-    autocmd BufWinEnter * if getfsize(expand("%")) > 10 * 1024 * 1024 | exec BigFileStuff() | endif
-  augroup END
-]]
