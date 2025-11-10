@@ -70,6 +70,9 @@ return {
     -- A pretty notification provider
     notifier = {
       timeout = 5000,
+
+      -- Don't group by level
+      sort = { 'added' },
     },
   },
   config = function(_, opts)

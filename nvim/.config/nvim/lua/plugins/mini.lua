@@ -129,8 +129,9 @@ return {
 
     -- Text edit operators (e.g. evaluate text, duplicate text)
     require('mini.operators').setup {
-      -- Disable exchange (default map conflicts with `gx` + it doesn't seem very useful)
-      exchange = { prefix = '' },
+      -- Default map conflicts with `gx` (open URL)
+      exchange = { prefix = '<leader>x' },
+      -- Default map conflicts with `gr` (goto references)
       replace = { prefix = '' },
     }
 
