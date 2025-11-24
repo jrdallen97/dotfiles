@@ -56,7 +56,10 @@ vim.api.nvim_create_autocmd('WinLeave', {
   desc = 'Disable cursor on leaving a buffer',
   callback = function()
     vim.o.cursorcolumn = false
-    vim.o.cursorline = false
+    -- Don't disable cursorline in diff mode
+    if not vim.wo.diff then
+      vim.o.cursorline = false
+    end
   end,
 })
 

@@ -20,6 +20,8 @@ kickstart
 laggy
 loclist
 mon
+mutex
+mutexes
 nvim
 onboarding
 pprof
