@@ -1,6 +1,7 @@
 # Random aliases
 alias vim='nvim'
 alias v='nvim'
+alias vd='nvim -d'
 alias :q='exit'
 alias beep="tput bel; sleep 0.3"
 alias prettypath='echo $PATH | sed "s/:/\n/g"'
@@ -176,6 +177,7 @@ alias gpforce2='git push --force'
 alias gpsup='git push -u origin $(git_current_branch)'
 # git rebase
 alias grb='git rebase'
+alias grod='git rebase -i origin/$(git_default_branch)'
 # git restore - discard unstaged changes
 alias grs='git restore'
 # git status
