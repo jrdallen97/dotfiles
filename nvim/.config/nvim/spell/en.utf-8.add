@@ -1,3 +1,4 @@
+PostgreSQL
 TODO
 TODOs
 UUID
@@ -24,6 +25,7 @@ mutex
 mutexes
 nvim
 onboarding
+postgres
 pprof
 quickfix
 rebase

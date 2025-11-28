@@ -9,7 +9,6 @@ return {
         default = {
           -- Numbers
           augend.integer.alias.decimal,
-          augend.constant.alias.bool,
 
           -- Letters
           augend.constant.alias.alpha,
@@ -21,7 +20,7 @@ return {
           augend.date.alias['%H:%M:%S'],
           augend.date.alias['%H:%M'],
 
-          -- Days of the week
+          -- Days of the week (not using the preset because I want it case-insensitive)
           augend.constant.new {
             elements = {
               'Monday',
@@ -43,8 +42,14 @@ return {
             preserve_case = true,
           },
 
+          -- Programming
+          augend.constant.alias.bool,
+          augend.constant.alias.Bool,
+
           -- Misc
           augend.semver.alias.semver,
+          augend.misc.alias.markdown_header,
+          augend.hexcolor.new { case = 'prefer_upper' },
         },
       }
 
