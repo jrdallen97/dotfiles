@@ -16,12 +16,12 @@ end
 -- stylua: ignore start
 
 -- Jump to vim settings
-map('<leader>ev', ':tabe ~/.config/nvim/lua<CR>',                '[E]dit [V]im settings')
-map('<leader>ec', ':tabe ~/.config/nvim/CHEATSHEET.md<CR>',      '[E]dit [C]heatsheet')
-map('<leader>es', ':tabe ~/.config/nvim/spell/en.utf-8.add<CR>', '[E]dit [S]pellfile')
+map('<leader>ev', ':tabe ~/.config/nvim/lua<CR>',                'Edit Vim settings')
+map('<leader>ec', ':tabe ~/.config/nvim/CHEATSHEET.md<CR>',      'Edit cheatsheet')
+map('<leader>es', ':tabe ~/.config/nvim/spell/en.utf-8.add<CR>', 'Edit spellfile')
 
 if vim.g.work_profile then
-  map('<leader>eg', ':tabe ~/code/CloudExperiments/scratch/main.go<CR>', '[E]dit [G]o scratch')
+  map('<leader>eg', ':tabe ~/code/CloudExperiments/scratch/main.go<CR>', 'Edit Go scratch file')
 end
 
 -- Easily run executable files
@@ -29,10 +29,10 @@ map('<leader>rs',  ':w<CR>:!%:p<CR>',      'Shebang: Run file')
 map('<leader>rts', ':w<CR>:!time %:p<CR>', 'Shebang: Time file')
 
 -- Diagnostic keymaps
-map('<leader>l', setloclist_errors,         'Open diagnostic [L]ocation list (errors only)')
-map('<leader>L', vim.diagnostic.setloclist, 'Open diagnostic [L]ocation list (all diagnostics)')
-map('<leader>q', setqflist_errors,          'Open diagnostic [Q]uickfix list (errors only)')
-map('<leader>Q', vim.diagnostic.setqflist,  'Open diagnostic [Q]uickfix list (all diagnostics)')
+map('<leader>l', setloclist_errors,         'Open diagnostic location list (errors only)')
+map('<leader>L', vim.diagnostic.setloclist, 'Open diagnostic location list (all diagnostics)')
+map('<leader>q', setqflist_errors,          'Open diagnostic quickfix list (errors only)')
+map('<leader>Q', vim.diagnostic.setqflist,  'Open diagnostic quickfix list (all diagnostics)')
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 map('<Esc>', '<cmd>nohlsearch<CR>')

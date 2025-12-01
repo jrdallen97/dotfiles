@@ -32,11 +32,11 @@ return {
       config = function()
         local ls = require 'luasnip'
 
-        vim.keymap.set({ 'i', 's' }, '<C-m>', function()
+        vim.keymap.set({ 'i', 's' }, '<C-e>', function()
           if ls.choice_active() then
             ls.change_choice(1)
           end
-        end, { silent = true, desc = 'Cycle snippet choices' })
+        end, { silent = true, desc = 'Cycle snippet choice' })
 
         -- Load my custom snippets (defined in `~/.config/nvim/snippets`)
         require('luasnip.loaders.from_snipmate').lazy_load()
