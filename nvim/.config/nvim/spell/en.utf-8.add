@@ -1,4 +1,6 @@
+Neovim
 PostgreSQL
+QoL
 TODO
 TODOs
 UUID
@@ -17,6 +19,8 @@ indentscope
 jumplist
 keybind
 keybinds
+keymap
+keymaps
 kickstart
 laggy
 loclist
@@ -29,6 +33,7 @@ postgres
 pprof
 quickfix
 rebase
+shorthands
 textobject
 textobjects
 thu

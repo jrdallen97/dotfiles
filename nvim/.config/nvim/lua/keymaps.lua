@@ -16,12 +16,12 @@ end
 -- stylua: ignore start
 
 -- Jump to vim settings
-map('<leader>ev', ':tabe ~/.config/nvim/lua<CR>',                'Edit Vim settings')
-map('<leader>ec', ':tabe ~/.config/nvim/CHEATSHEET.md<CR>',      'Edit cheatsheet')
-map('<leader>es', ':tabe ~/.config/nvim/spell/en.utf-8.add<CR>', 'Edit spellfile')
+map('<leader>ev', ':tabe ~/.config/nvim/lua<CR>',                'Vim settings')
+map('<leader>ec', ':tabe ~/.config/nvim/CHEATSHEET.md<CR>',      'Cheatsheet')
+map('<leader>es', ':tabe ~/.config/nvim/spell/en.utf-8.add<CR>', 'Spellfile')
 
 if vim.g.work_profile then
-  map('<leader>eg', ':tabe ~/code/CloudExperiments/scratch/main.go<CR>', 'Edit Go scratch file')
+  map('<leader>eg', ':tabe ~/code/CloudExperiments/scratch/main.go<CR>', 'Go scratch file')
 end
 
 -- Easily run executable files

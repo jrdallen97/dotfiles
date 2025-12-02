@@ -73,6 +73,7 @@ Shortcuts:
 
 ### Launch options
 
+- `{file[s]}`: Open with file[s] in the arglist (see [[#Commands]])
 - `-d`: Open in diff-mode
 - `-p`: Open a tab for each file passed
 - `-O`: Open a vertical split for each file passed
@@ -194,11 +195,19 @@ There are also some special marks:
 
 ### Commands
 
+- Argument list:
+    - `:ar[gs]`:           Print the arglist
+    - `:ar[gs] {arglist}`: Set the arglist
+    - `:arga[dd]`:         Add current buffer to the arglist
+    - `:arga[dd] {files}`: Add files to the arglist
+    - `:argded[upe]`:      Dedupe arglist
+    - `:argd[delete] {pattern}`: Delete files matching pattern from the arglist
+    - TIP: Use `:ar **/*.lua` to open all lua files in a project, then `:argd *` to wipe the arglist but leave all the buffers open
 - Cool little helpers to run a command across lots of files:
     - `:cdo {cmd}`:   Run `{cmd}` in for each entry in the quickfix list
     - `:cfdo {cmd}`:  Run `{cmd}` in for every file in the quickfix list
     - `:ldo {cmd}`:   Run `{cmd}` in for each entry in the location list
-    - `:lfdo {cmd}`:  Run `{cmd}` in for every file in the quickfix list
+    - `:lfdo {cmd}`:  Run `{cmd}` in for every file in the location list
     - `:bufdo {cmd}`: Run `{cmd}` in all buffers
     - `:windo {cmd}`: Run `{cmd}` in all windows in the current tab
     - `:argdo {cmd}`: Run `{cmd}` in all files in argument list

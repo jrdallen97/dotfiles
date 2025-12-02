@@ -20,6 +20,12 @@ return {
         fullscreen = true,
       },
 
+      main = {
+        -- Don't require the main window to be a file
+        -- This lets snacks open files into non-standard buffers (e.g. Oil buffers!)
+        file = false,
+      },
+
       -- Tweak the default settings for each source
       sources = {
         buffers = { current = true },
@@ -184,7 +190,7 @@ return {
         name = 'light mode',
         get = function() return vim.o.bg == 'light' end,
         set = function(enabled)
-          vim.cmd.colorscheme(enabled and 'bamboo' or 'catppuccin')
+          vim.cmd.colorscheme(enabled and 'minispring' or 'catppuccin')
           vim.o.bg = enabled and 'light' or 'dark'
         end,
       }):map '<leader>tl'
