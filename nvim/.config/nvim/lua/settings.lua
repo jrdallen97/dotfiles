@@ -18,9 +18,9 @@ o.confirm    = true -- Ask whether you want to save when running commands like `
 -- Appearance
 o.number        = true    -- Show line numbers
 o.cursorline    = true    -- Highlight current line
-o.cursorcolumn  = false   -- Highlight current column (dynamically controlled via autocmd below)
+o.cursorcolumn  = false   -- Highlight current column (dynamically controlled via autocmd)
 o.showmode      = false   -- Don't show mode in command line
-o.signcolumn    = 'yes'   -- Always show sign column (otherwise it will shift text)
+o.signcolumn    = 'auto'  -- Only show sign column when there's something to show
 o.scrolloff     = 5       -- Number of visible lines to keep above and below the cursor
 o.sidescrolloff = 5       -- Number of visible columns to keep left and right of the cursor
 o.smoothscroll  = true    -- Make scrolling use screen lines
@@ -57,9 +57,8 @@ o.foldmethod     = 'expr' -- Enable treesitter-based code folding by default
 o.foldexpr       = 'v:lua.vim.treesitter.foldexpr()'
 
 -- Sync clipboard between OS and Neovim.
---  Schedule the setting after `UiEnter` because it can increase startup-time.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
+-- Schedule the setting after `UIEnter` because it can increase startup-time.
+-- See `:h 'clipboard'`
 vim.schedule(function()
   o.clipboard = 'unnamedplus'
 end)
