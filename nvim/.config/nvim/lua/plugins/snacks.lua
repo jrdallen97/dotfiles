@@ -34,8 +34,15 @@ return {
         grep_word = { hidden = true },
         explorer = {
           hidden = true,
-          auto_close = true,
+          auto_close = false,
           layout = { fullscreen = false },
+        },
+        colorschemes = {
+          layout = {
+            preset = 'select',
+            hidden = {},
+            fullscreen = false,
+          },
         },
       },
 
@@ -130,6 +137,7 @@ return {
       map('<leader>hc', picker.commands, 'Commands')
       map('<leader>hk', picker.keymaps,  'Keybinds')
       map('<leader>hp', picker.pickers,  'Pickers')
+      map('<leader>ht', picker.colorschemes,  'Themes')
 
       -- Find files (or directories!)
       map('<leader>ff', picker.files,  'Files')
@@ -190,7 +198,7 @@ return {
         name = 'light mode',
         get = function() return vim.o.bg == 'light' end,
         set = function(enabled)
-          vim.cmd.colorscheme(enabled and 'minispring' or 'catppuccin')
+          vim.cmd.colorscheme(enabled and vim.g.light_scheme or vim.g.dark_scheme)
           vim.o.bg = enabled and 'light' or 'dark'
         end,
       }):map '<leader>tl'

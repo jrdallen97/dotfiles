@@ -1,5 +1,9 @@
 -- NOTE: For more options, see `:help option-list`
 
+-- Set preferred color schemes a global variables so they can be easily toggled
+vim.g.dark_scheme = 'nordfox'
+vim.g.light_scheme = 'minispring'
+
 -- Get or set options (`:h vim.o`)
 local o = vim.o
 -- Like `vim.o` but with a special interface for interacting with lists & maps (`:h vim.opt`)
