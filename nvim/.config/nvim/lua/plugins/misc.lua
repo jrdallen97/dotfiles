@@ -11,6 +11,29 @@ return {
     },
   },
 
+  {
+    'm4xshen/autoclose.nvim',
+    opts = {
+      options = {
+        -- Disable when cursor is immediately before an alphanumeric character or opening bracket
+        disable_when_touch = true,
+      },
+      keys = {
+        -- Disable for quotes (more annoying than helpful)
+        ["'"] = {},
+        ['"'] = {},
+      },
+    },
+  },
+
+  {
+    -- A simplistic vim plugin to close pairs when a keybind is pressed
+    'dhruvasagar/vim-pairify',
+    init = function()
+      vim.g.pairify_map = '<M-p>'
+    end,
+  },
+
   -- Undo closing a split with `<C-w>u`
   'AndrewRadev/undoquit.vim',
 

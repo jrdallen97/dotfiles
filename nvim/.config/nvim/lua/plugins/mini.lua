@@ -30,9 +30,6 @@ return {
     --  - ci'  - [C]hange [I]nside [']quote
     require('mini.ai').setup { n_lines = 500 }
 
-    -- Minimal and fast autopairs
-    require('mini.pairs').setup()
-
     -- Add/delete/replace surroundings (brackets, quotes, etc.)
     require('mini.surround').setup {
       -- Override mappings to be more like tpope/vim-surround
