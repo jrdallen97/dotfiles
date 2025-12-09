@@ -60,6 +60,7 @@ return {
       javascriptreact = js,
       typescript = js,
       typescriptreact = js,
+      json = { 'fixjson' },
 
       go = { 'gofmt', 'goimports' },
 

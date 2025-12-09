@@ -223,6 +223,7 @@ return {
         -- Other
         'markdown_oxide',
         'ruff',
+        'fixjson',
       }
       -- Only install these additional tools if work_profile is enabled
       if vim.g.work_profile then

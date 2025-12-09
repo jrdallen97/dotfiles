@@ -201,7 +201,7 @@ There are also some special marks:
     - `:arga[dd]`:         Add current buffer to the arglist
     - `:arga[dd] {files}`: Add files to the arglist
     - `:argded[upe]`:      Dedupe arglist
-    - `:argd[delete] {pattern}`: Delete files matching pattern from the arglist
+    - `:argd[elete] {pattern}`: Delete files matching pattern from the arglist
     - TIP: Use `:ar **/*.lua` to open all lua files in a project, then `:argd *` to wipe the arglist but leave all the buffers open
 - Cool little helpers to run a command across lots of files:
     - `:cdo {cmd}`:   Run `{cmd}` in for each entry in the quickfix list
