@@ -25,8 +25,8 @@ return {
             -- Override column colour using the colour for CursorLine
             ColorColumn = { bg = '#303347' },
 
-            -- Override cursor column using a colour somewhere between the background & cursor line
-            CursorColumn = { bg = '#2c2f45' },
+            -- Override cursor column to match cursor line
+            CursorColumn = { bg = '#303347' },
           }
         end,
       },

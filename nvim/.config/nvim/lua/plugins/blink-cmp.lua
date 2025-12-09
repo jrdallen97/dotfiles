@@ -4,40 +4,22 @@ return {
   event = 'VimEnter',
   -- Use a release tag to download pre-built binaries
   version = '1.*',
-  -- AND/OR build from source, requires nightly rust: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-  -- build = 'cargo build --release',
   dependencies = {
     'folke/lazydev.nvim',
     'giuxtaposition/blink-cmp-copilot',
-
-    -- Snippet Engine
     {
       'L3MON4D3/LuaSnip',
       version = '2.*',
       build = (function()
         -- Build Step is needed for regex support in snippets.
         -- This step is not supported in many windows environments.
-        -- Remove the below condition to re-enable on windows.
         if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
           return
         end
         return 'make install_jsregexp'
       end)(),
-      dependencies = {
-        -- `friendly-snippets` contains a variety of premade snippets.
-        --    See the README about individual language/framework/plugin snippets:
-        --    https://github.com/rafamadriz/friendly-snippets
-        'rafamadriz/friendly-snippets',
-      },
+      dependencies = { 'rafamadriz/friendly-snippets' },
       config = function()
-        local ls = require 'luasnip'
-
-        vim.keymap.set({ 'i', 's' }, '<C-e>', function()
-          if ls.choice_active() then
-            ls.change_choice(1)
-          end
-        end, { silent = true, desc = 'Cycle snippet choice' })
-
         -- Load my custom snippets (defined in `~/.config/nvim/snippets`)
         require('luasnip.loaders.from_snipmate').lazy_load()
 
@@ -85,17 +67,12 @@ return {
       ['<S-Tab>'] = { 'fallback' },
 
       -- Add some bindings for snippets
-      ['<M-]>'] = { 'snippet_forward', 'fallback' },
-      ['<M-[>'] = { 'snippet_backward', 'fallback' },
-
-      -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
-      --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
+      ['<C-l>'] = { 'snippet_forward', 'fallback' },
+      ['<C-h>'] = { 'snippet_backward', 'fallback' },
     },
 
     appearance = {
-      -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-      -- Adjusts spacing to ensure icons are aligned
-      nerd_font_variant = 'mono',
+      nerd_font_variant = 'normal',
     },
 
     completion = {
@@ -146,15 +123,8 @@ return {
     -- Blink.cmp includes an optional, recommended rust fuzzy matcher,
     -- which automatically downloads a prebuilt binary when enabled.
     --
-    -- By default, we use the Lua implementation instead, but you may enable
-    -- the rust implementation via `'prefer_rust_with_warning'`
-    --
     -- See :h blink-cmp-config-fuzzy for more information
     fuzzy = {
-      -- The rust implementation sometimes doesn't find exact matches.
-      -- Example: typing `tes` shows the `test` snippet but if I type the last `t` the suggestion
-      -- disappears and I can't expand the snippet.
-      -- The lua version doesn't seem to do this.
       implementation = 'prefer_rust_with_warning',
       -- Disable typo resistance to reduce spam
       max_typos = 0,

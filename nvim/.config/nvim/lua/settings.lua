@@ -1,7 +1,7 @@
 -- NOTE: For more options, see `:help option-list`
 
 -- Set preferred color schemes a global variables so they can be easily toggled
-vim.g.dark_scheme = 'nordfox'
+vim.g.dark_scheme = 'catppuccin'
 vim.g.light_scheme = 'minispring'
 
 -- Get or set options (`:h vim.o`)

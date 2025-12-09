@@ -67,7 +67,7 @@ return {
     'crispgm/nvim-tabline',
     opts = {
       show_index = true,
-      show_icon = true,
+      show_icon = vim.g.have_nerd_font,
       brackets = { ' ', '' },
     },
   },

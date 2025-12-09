@@ -1,3 +1,4 @@
+LSP
 Neovim
 PostgreSQL
 QoL
@@ -8,6 +9,7 @@ UUIDs
 cheatsheet
 colourscheme
 config
+deprioritise
 dotfiles
 filesystem
 fri
@@ -31,6 +33,7 @@ nvim
 onboarding
 postgres
 pprof
+prebuilt
 quickfix
 rebase
 shorthands
