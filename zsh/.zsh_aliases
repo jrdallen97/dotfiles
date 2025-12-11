@@ -2,6 +2,7 @@
 alias vim='nvim'
 alias v='nvim'
 alias vd='nvim -d'
+alias ve='nvim .'
 alias :q='exit'
 alias beep="tput bel; sleep 0.3"
 alias prettypath='echo $PATH | sed "s/:/\n/g"'
