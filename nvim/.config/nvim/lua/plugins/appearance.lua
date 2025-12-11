@@ -84,6 +84,18 @@ return {
     },
   },
 
-  -- Rainbow delimiters for Neovim with Treesitter
-  'HiPhish/rainbow-delimiters.nvim',
+  {
+    -- Rainbow delimiters for Neovim with Treesitter
+    'HiPhish/rainbow-delimiters.nvim',
+    init = function()
+      vim.g.rainbow_delimiters = {
+        -- Use fewer colors to reduce distraction (inspired by blink.pairs)
+        highlight = {
+          'RainbowDelimiterOrange',
+          'RainbowDelimiterViolet',
+          'RainbowDelimiterBlue',
+        },
+      }
+    end,
+  },
 }

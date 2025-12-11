@@ -12,18 +12,10 @@ return {
   },
 
   {
-    'm4xshen/autoclose.nvim',
-    opts = {
-      options = {
-        -- Disable when cursor is immediately before an alphanumeric character or opening bracket
-        disable_when_touch = true,
-      },
-      keys = {
-        -- Disable for quotes (more annoying than helpful)
-        ["'"] = {},
-        ['"'] = {},
-      },
-    },
+    -- A super powerful autopair plugin for Neovim that supports multiple characters
+    'windwp/nvim-autopairs',
+    event = 'InsertEnter',
+    opts = {},
   },
 
   {
