@@ -22,7 +22,7 @@ o.confirm    = true -- Ask whether you want to save when running commands like `
 -- Appearance
 o.number        = true    -- Show line numbers
 o.cursorline    = true    -- Highlight current line
-o.cursorcolumn  = false   -- Highlight current column (dynamically controlled via autocmd)
+o.cursorcolumn  = true    -- Highlight current column (dynamically controlled via autocmd)
 o.showmode      = false   -- Don't show mode in command line
 o.signcolumn    = 'auto'  -- Only show sign column when there's something to show
 o.scrolloff     = 5       -- Number of visible lines to keep above and below the cursor
