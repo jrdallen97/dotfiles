@@ -2,6 +2,10 @@ local wezterm = require 'wezterm'
 local config = wezterm.config_builder()
 
 config.color_scheme = 'iTerm2 Default'
+config.colors = {
+  cursor_fg = '#000000',
+  cursor_bg = '#ffffff',
+}
 
 -- Icons look better using the built-in fallback nerd font rather than an actual patched nerd font (idk why)
 config.font = wezterm.font 'Hack'
@@ -9,7 +13,7 @@ config.font_size = 15
 config.adjust_window_size_when_changing_font_size = false
 
 -- Make the cursor use inverted colours for better visibility (particularly for light colourschemes)
-config.force_reverse_video_cursor = true
+-- config.force_reverse_video_cursor = true
 
 -- Reduce padding
 config.window_padding = {
