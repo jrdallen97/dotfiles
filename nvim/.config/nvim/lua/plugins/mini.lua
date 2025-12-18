@@ -193,9 +193,6 @@ return {
       -- Whether to read default session if Neovim opened without file arguments
       autoread = false,
 
-      -- File for local session
-      file = 'session.vim',
-
       -- Whether to print session path after action
       verbose = { read = true, write = true, delete = true },
     }

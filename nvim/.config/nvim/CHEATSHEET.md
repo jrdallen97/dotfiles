@@ -9,6 +9,7 @@ NOTE: I'm not gonna list all the basics here, just the stuff that's useful for m
     - [Launch options](CHEATSHEET#Launch options)
     - [Help](CHEATSHEET#Help)
     - [Editing](CHEATSHEET#Editing)
+    - [Insert mode bindings](CHEATSHEET#Insert mode bindings)
     - [Misc](CHEATSHEET#Misc)
     - [Jumps](CHEATSHEET#Jumps)
     - [Marks](CHEATSHEET#Marks)
@@ -74,19 +75,24 @@ Shortcuts:
 ### Launch options
 
 - `{file[s]}`: Open with file[s] in the arglist (see [[#Commands]])
+- `+{number}`: Open file at line number
 - `-d`: Open in diff-mode
 - `-p`: Open a tab for each file passed
 - `-O`: Open a vertical split for each file passed
 - `-o`: Open a horizontal split for each file passed
+- `-R`: Open in read-only mode
+- `-M`: Open in very read-only mode (`nomodifiable nowrite`)
 
 ### Help
 
+- `:h index`: A list of all commands for all modes
 - `<C-]>`: Jump to definition (e.g. open help or follow help link)
 
 ### Editing
 
 - `[<Space>`: Insert newline above cursor
 - `]<Space>`: Insert newline below cursor
+- `J`/`:join`: Join lines (also works with a visual range)
 - `gu{motion}`: Make `{motion}` lowercase
 - `gU{motion}`: Make `{motion}` uppercase
 - `g~{motion}`: Invert case over `{motion}`
@@ -103,6 +109,14 @@ Increment/decrement:
 - Also works in VISUAL mode
 - Using `g<C-a>`/`g<C-x>` in VISUAL mode will increment each line an additional time (useful for making lists) (accepts a count)
 
+### Insert mode bindings
+
+- `<C-u>`: Delete all characters before the cursor (e.g. undo auto-comment continuation)
+- `<C-w>`: Delete word backwards
+- `<C-t>`: Increase indentation of current line
+- `<C-d>`: Decrease indentation of current line
+- `<C-v>`: Insert a character literally
+
 ### Misc
 
 Movement:
@@ -111,14 +125,21 @@ Movement:
 - `{` / `}`:    Move backwards/forwards by paragraph
 - `[\[` / `]]`: Move backwards/forwards by section
 - `*`:  Search for the word under the cursor
+- `g*`: Search for the word under the cursor (including results within other words)
 - `#`:  Search for the word under the cursor (reverse)
 - `;`:  Repeat last f/e/etc movement
 - `,`:  Repeat last f/e/etc movement (reverse)
 - `ge`: Move to the end of the previous word
 - `gi`: Continue insert mode from its last position
 - `g;`: Move backwards in change list (e.g. insert, deletion, etc)
-- `g.`: Move forwards in change list (e.g. insert, deletion, etc)
+- `g,`: Move forwards in change list (e.g. insert, deletion, etc)
 - `<C-6>`: Switch to the alternate file (usually the previously edited file)
+- `gj`: Move cursor down by screen line (also `g<Down>`)
+- `gk`: Move cursor up by screen line (also `g<Up>`)
+- `g0`: Jump to start of screen line (also `g<Home>`)
+- `g$`: Jump to end of screen line (also `g<End>`)
+- `gv`: Restore previous visual selection
+- `gn`: Jump to next search match and visually select it
 
 Scrolling:
 
@@ -126,6 +147,8 @@ Scrolling:
 - `<C-d>`: Scroll down half a page
 - `<C-b>`: Page up (also `<PageUp>` & `<S-Up`>)
 - `<C-f>`: Page down (also `<PageDown>` & `<S-Down`>)
+- `<C-y>`: Scroll up 1 line
+- `<C-e>`: Scroll down 1 line
 - `zt`:    Re-centre screen with the cursor at the top
 - `zz`:    Re-centre screen with the cursor in the middle
 - `zb`:    Re-centre screen with the cursor at the bottom
@@ -156,6 +179,16 @@ Modes (as used in mappings):
 - `t`: Terminal mode
 - `c`: Command-line mode
 - `o`: Operator-pending mode
+
+Undolist:
+
+- `:undol[ist]`: List the leafs in the undo tree
+- `g-`: Previous leaf in undo tree
+- `g+`: Next leaf in undo tree
+
+Random:
+
+- `ga`: Print the ascii value of the character under the cursor
 
 ### Jumps
 
@@ -230,6 +263,16 @@ There are also some special marks:
     - `:diffo[ff]!`: Turn off diff mode for all windows in the current tab.
 - Use `<C-v>` to type literal escape characters
     - `<C-v><Esc>` outputs a literal escape character ``, which can be used with commands e.g. `:norm`
+- Command-line window
+    - The command-line window lets you find previous commands/searches to edit or rerun them
+    - Opening the window:
+        - `q:`: Command history
+        - `q/`: Search history
+        - `q?`: Backwards search history (same list as `q/`)
+        - `<C-f>`: While already in the command line
+    - Within the window:
+        - `<CR>`:  Rerun the selected command
+        - `<C-c>`: Move the selected command to the command line and close the window
 
 ### Settings
 
@@ -245,7 +288,8 @@ Note: most of these work even if you continue holding `Ctrl` for the 2nd key, e.
 - `<C-w><direction>`: Move to the window in `<direction>` (`<Up>`, `k`, etc)
 - `<C-w><DIRECTION>`: Move the current window all the way to `<DIRECTION>` (only `HJKL` by default but I added maps for shift + arrow keys)
 - `<C-w>x`: Swap current window with the next window
-- `<C-w>q`: Close the current window (also: `:quit`)
+- `<C-w>c`: Close the current window (also: `:clo[se]`). Fails on the last window.
+- `<C-w>q`: Close the current window (also: `:q[uit]`). On the last window, quit vim.
 - `<C-w>o`: Close all but the current window (also: `:only`)
 - `<C-w>u`: Undo closing a window (provided by `AndrewRadev/undoquit.vim`)
 - `<C-w>t`: Open current window in new tab (alias for `:tab split`) (_custom_)
@@ -476,6 +520,7 @@ Provided by `hedyhli/markdown-toc.nvim`:
 Provided by `roodolv/markdown-toggle.nvim`:
 
 - Lists automatically continue when using `o`/`O` in NORMAL mode or `<CR>` in INSERT mode
+    - Use `<C-u>` to undo (see [[CHEATSHEET#Insert mode bindings]])
 - `<M-x>`: Toggle checkbox (NORMAL/VISUAL)
 - `<M-u>`: Toggle unordered list (NORMAL/VISUAL)
 - `<M-o>`: Toggle ordered list (NORMAL/VISUAL)
@@ -738,6 +783,6 @@ Session management.
 - Once a session is active (e.g. after load or save), it will be autosaved.
 - Commands:
     - `:Save <name>`: Create session `<name>`, or manually save the current if called with no arguments
-    - `:SaveLocal`:   Create local session; the same as `:Save session.nvim`
+    - `:SaveLocal`:   Create local session; the same as `:Save Session.nvim`
     - `:Resume`:      Resume the local session, or the most recent global session if none exists
     - `:Sessions`:    Fuzzy-find sessions (`<C-x>` to delete)
