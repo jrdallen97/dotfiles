@@ -228,6 +228,10 @@ There are also some special marks:
 
 ### Commands
 
+- `:g[lobal]/{pattern}/{cmd}`: Run ex command `{cmd}` on all lines matching `{pattern}`
+    - The default `{cmd}` is `p` (print)
+    - If no pattern is provided, the most recent search term is used instead
+    - Use `:v[global]`/`g[lobal]!` to run all lines that _don't_ match
 - Argument list:
     - `:ar[gs]`:           Print the arglist
     - `:ar[gs] {arglist}`: Set the arglist

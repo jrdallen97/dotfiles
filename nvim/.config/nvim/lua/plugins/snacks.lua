@@ -1,3 +1,18 @@
+-- Set the preview title to the full (relative) file path
+local set_preview_title = function(picker, item)
+  vim.schedule(function()
+    if item ~= nil then
+      picker.preview.win:set_title(vim.fn.fnamemodify(item.file, ':~:.'))
+    end
+  end)
+end
+
+local grep = {
+  hidden = true,
+  layout = { hidden = { 'preview' } },
+  on_change = set_preview_title,
+}
+
 return {
   -- 🍿 A collection of QoL plugins for Neovim
   'folke/snacks.nvim',
@@ -28,21 +43,27 @@ return {
 
       -- Tweak the default settings for each source
       sources = {
-        buffers = { current = true },
-        files = { hidden = true },
-        grep = { hidden = true },
-        grep_word = { hidden = true },
+        buffers = {
+          current = true,
+          on_change = set_preview_title,
+        },
+        files = {
+          hidden = true,
+          on_change = set_preview_title,
+        },
+        grep = grep,
+        grep_word = grep,
+        grep_buffers = grep,
         explorer = {
           hidden = true,
           auto_close = false,
           layout = { fullscreen = false },
         },
         colorschemes = {
-          layout = {
-            preset = 'select',
-            hidden = {},
-            fullscreen = false,
-          },
+          layout = { preset = 'select', fullscreen = false, hidden = {} },
+        },
+        icons = {
+          layout = { preset = 'select', fullscreen = false },
         },
       },
 
@@ -133,11 +154,12 @@ return {
       map('<leader>sr',       picker.resume,     'Resume')
 
       -- Search Help
-      map('<leader>hh', picker.help,     'Help')
-      map('<leader>hc', picker.commands, 'Commands')
-      map('<leader>hk', picker.keymaps,  'Keybinds')
-      map('<leader>hp', picker.pickers,  'Pickers')
-      map('<leader>ht', picker.colorschemes,  'Themes')
+      map('<leader>hh', picker.help,         'Help')
+      map('<leader>hc', picker.commands,     'Commands')
+      map('<leader>hk', picker.keymaps,      'Keybinds')
+      map('<leader>hp', picker.pickers,      'Pickers')
+      map('<leader>ht', picker.colorschemes, 'Themes')
+      map('<leader>hi', picker.icons,        'Icons')
 
       -- Find files (or directories!)
       map('<leader>ff', picker.files,  'Files')
