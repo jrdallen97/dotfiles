@@ -1,14 +1,26 @@
+# vim: ft=ghostty
 theme = iTerm2 Default
+
+# Font settings
 font-family = Hack Nerd Font Mono Regular
-font-size = 14
+font-size = 15
 font-feature = -liga
-adjust-cell-height = +5%
-adjust-cell-width = -5%
-window-width = 220
-window-height = 56
+
+# Default window size
+window-width = 247
+window-height = 59
+
+# Use neighbouring background color for padding
 window-padding-color = extend
-# Always show tabs
-# macos-titlebar-style = tabs
+
+# Snap to cell sizes
+window-step-resize = true
+
+# Fix crazy scrolling
+mouse-scroll-multiplier = 0.5
+
 shell-integration = zsh
-working-directory = /Users/jamesa/code/CloudExperiments
+#shell-integration-features = cursor,title
+
+working-directory = /Users/jamesallen/code/CloudExperiments
 window-inherit-working-directory = false
