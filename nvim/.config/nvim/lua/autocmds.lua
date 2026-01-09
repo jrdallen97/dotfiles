@@ -63,6 +63,21 @@ vim.api.nvim_create_autocmd('WinLeave', {
   end,
 })
 
+-- Dynamically update settings based on filetype.
+-- Useful for window-level settings that otherwise wouldn't be reset when switching buffers, e.g. signcolumn.
+vim.api.nvim_create_autocmd('BufWinEnter', {
+  group = vim.api.nvim_create_augroup('default-settings', { clear = true }),
+  callback = function()
+    if vim.tbl_contains({ 'markdown' }, vim.bo.filetype) then
+      -- Only show sign column when there's something to show
+      vim.wo.signcolumn = 'auto'
+    else
+      -- Always show sign column (otherwise it will shift text)
+      vim.wo.signcolumn = 'yes'
+    end
+  end,
+})
+
 -- Disable slow features when opening big files
 -- Most of these seem unnecessary, but I've left them commented out so they're easy to re-enable
 vim.cmd [[
