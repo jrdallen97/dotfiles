@@ -1,9 +1,0 @@
-#!/usr/bin/env zsh
-FORCE=0
-[[ "$1" = '-f' ]] && FORCE=1
-DOTFILES=$(cd "$(dirname "$0")" && pwd)
-source "$DOTFILES/helpers.zsh"
-
-if [[ ! -e "$CONFIG_DIR/nvim" || $FORCE -eq 1 ]]; then
-  ln -sfnv "$DOTFILES/nvim" "$CONFIG_DIR/nvim"
-fi
