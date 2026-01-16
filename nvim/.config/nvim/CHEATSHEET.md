@@ -18,6 +18,7 @@ NOTE: I'm not gonna list all the basics here, just the stuff that's useful for m
     - [Window commands](CHEATSHEET#Window commands)
     - [Folds](CHEATSHEET#Folds)
     - [Quickfix](CHEATSHEET#Quickfix)
+    - [Registers](CHEATSHEET#Registers)
     - [netrw](CHEATSHEET#netrw)
 - [Plugins](CHEATSHEET#Plugins)
     - [Lazy](CHEATSHEET#Lazy)
@@ -361,14 +362,41 @@ The commands to use it are the same, replacing the first `c` with `l` (e.g. `:lo
 
 Handy shortcuts:
 
-TODO: not yet ported over
-
 - `<leader>co`: `:copen`
 - `<leader>cc`: `:cclose`
 - `<leader>cn`: `:cnext`
 - `<leader>cp`: `:cprev`
 - `<leader>cf`: `:cfirst`
 - `<leader>cl`: `:clast`
+
+### Registers
+
+- `:reg[isters]`: Display the contents of all numbered/named registers
+- `"n`: Use register `n` for the next delete, yank or put
+- `"N`: Use register `N` for the next delete, yank or put, but append to the register rather than replacing it
+- `<C-r>n`: (INSERT/COMMAND) Insert register `n`
+- Certain registers have special meanings:
+    - `_`: Black hole register
+    - `"`: The unnamed register; holds the last thing you yanked _or_ deleted
+    - `0`: Holds the last thing you yanked
+    - `1`: Holds the last thing you deleted/changed
+    - `%`: Holds the current filename
+    - `#`: Holds the previous filename
+    - `:`: Holds the most recent command
+    - `.`: Holds the last inserted text
+
+### Marks
+
+- `` ma ``: Set mark `a`
+- `` `a ``: Jump to mark `a`
+- `` 'a ``: Jump to the start of line marked `a`
+- `:marks`: List marks
+- `:delm[arks] {marks}`: Delete the given marks
+- `:delm[arks]!`: Delete all marks for the current buffer
+- Types of mark:
+    - Lowercase marks: valid within one file
+    - Uppercase marks: valid across files
+    - Numbered marks: automatically set by the `shada` file, basically remember where you were when you closed vim
 
 ### netrw
 

@@ -223,6 +223,7 @@ return {
         -- Other
         'markdown_oxide',
         'ruff',
+        'basedpyright',
         'fixjson',
       }
       -- Only install these additional tools if work_profile is enabled

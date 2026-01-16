@@ -72,6 +72,14 @@ map('<leader>0', ':tablast<cr>', 'Go to last tab')
 map('>', '>gv', 'Increase indentation & reselect', 'v')
 map('<', '<gv', 'Decrease indentation & reselect', 'v')
 
+-- Quickfix helpers
+map('<leader>co', ':copen<CR>',  'Open the quickfix list window')
+map('<leader>cc', ':cclose<CR>', 'Close the quickfix list window')
+map('<leader>cn', ':cnext<CR>',  'Go to the next item on the list')
+map('<leader>cp', ':cprev<CR>',  'Go to the previous item on the list')
+map('<leader>cf', ':cfirst<CR>', 'Go to the first item on the list')
+map('<leader>cl', ':clast<CR>',  'Go to the last item on the list')
+
 -- stylua: ignore end
 
 -- If foldlevel is at 99 (default), reset it with zR before running zm
