@@ -6,4 +6,4 @@ source "$DOTFILES/helpers.zsh"
 
 FZF_DIR="$HOME/.fzf"
 pull_repo https://github.com/junegunn/fzf.git "$FZF_DIR"
-$FZF_DIR/install --all
+$FZF_DIR/install --bin

@@ -10,9 +10,6 @@ export PATH="$HOME/.local/share/mise/shims:$PATH"
 export PNPM_HOME="$HOME/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 
-# IntelliJ
-idea() { open -na "IntelliJ IDEA.app" --args "$@" }
-
 # Sparx
 export GOPATH="$HOME/go" # Used by a number of our scripts
 export GOBIN="$GOPATH/bin" # Manually override GOBIN (otherwise scripts end up in a weird mise folder)
@@ -65,10 +62,15 @@ alias cut='gcut'
 alias awk='gawk'
 alias sed='gsed'
 
-# Other
+# Random commands
+idea() { open -na "IntelliJ IDEA.app" --args "$@" }
+alias oc='opencode'
+alias loadavg="sysctl -n vm.loadavg"
+alias diff='diff --color=auto'
+
+# Python
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 alias activate='source ./venv/bin/activate'
-alias diff='diff --color=auto'
 
 # The next line updates PATH for the Google Cloud SDK.
 [[ -r "$HOME/google-cloud-sdk/path.zsh.inc" ]] && source "$HOME/google-cloud-sdk/path.zsh.inc"
