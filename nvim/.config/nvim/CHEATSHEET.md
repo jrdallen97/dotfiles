@@ -229,55 +229,87 @@ There are also some special marks:
 
 ### Commands
 
+Sorting;
+
+- `:sort`: Sort the current file/range
+- Options:
+    - `!`: Reverse order
+    - `i`: Case insensitive
+    - `n`: Numeric sort (using the first decimal on each line)
+    - `f`: Numeric sort (using the first float on each line)
+    - `u`: Deduplicate identical lines (equivalent to `:%!sort | uniq`)
+- Dedupe without sorting: `:%!awk '\!a[$0]++'`
+
+Run command on matching lines:
+
 - `:g[lobal]/{pattern}/{cmd}`: Run ex command `{cmd}` on all lines matching `{pattern}`
-    - The default `{cmd}` is `p` (print)
-    - If no pattern is provided, the most recent search term is used instead
-    - Use `:v[global]`/`g[lobal]!` to run all lines that _don't_ match
-- Argument list:
-    - `:ar[gs]`:           Print the arglist
-    - `:ar[gs] {arglist}`: Set the arglist
-    - `:arga[dd]`:         Add current buffer to the arglist
-    - `:arga[dd] {files}`: Add files to the arglist
-    - `:argded[upe]`:      Dedupe arglist
-    - `:argd[elete] {pattern}`: Delete files matching pattern from the arglist
-    - TIP: Use `:ar **/*.lua` to open all lua files in a project, then `:argd *` to wipe the arglist but leave all the buffers open
-- Cool little helpers to run a command across lots of files:
-    - `:cdo {cmd}`:   Run `{cmd}` in for each entry in the quickfix list
-    - `:cfdo {cmd}`:  Run `{cmd}` in for every file in the quickfix list
-    - `:ldo {cmd}`:   Run `{cmd}` in for each entry in the location list
-    - `:lfdo {cmd}`:  Run `{cmd}` in for every file in the location list
-    - `:bufdo {cmd}`: Run `{cmd}` in all buffers
-    - `:windo {cmd}`: Run `{cmd}` in all windows in the current tab
-    - `:argdo {cmd}`: Run `{cmd}` in all files in argument list
-    - `:tabdo {cmd}`: Run `{cmd}` in all tabs
-- `:%s/pattern/replacement`: Replace `pattern` with `replacement` on all lines in file
-    - `:s` would do this same for current line only
-    - add `/g` to replace all instances (i.e. if there are multiple on the same line)
-    - add `/c` to prompt for confirmation before replacing each match
-    - use `:bufdo %s/...` to run this in all open buffers (then `:wa` to save them all)
-- `:vim[grep] /pattern/ {file(s)}`: Search for a pattern and put results in the quickfix list
-    - use `%` for the current file
-    - a pattern of `//` will reuse the last search pattern
-    - if the slashes are omitted then the pattern will be whitespace separated instead
-    - `:lv[imgrep]` is the same but using the location list
-    - `:vimgrepa[dd]`/`:lvimgrepa[dd]` will append to the list rather than replacing it
-- Diff mode
-    - `:difft[his]`: Mark the current window as part of the diff.
-        - `:windo diffthis`: Applies the above for all windows in the current tab.
-    - `:diffo[ff]`:  Turn off diff mode for the current window.
-    - `:diffo[ff]!`: Turn off diff mode for all windows in the current tab.
-- Use `<C-v>` to type literal escape characters
-    - `<C-v><Esc>` outputs a literal escape character ``, which can be used with commands e.g. `:norm`
-- Command-line window
-    - The command-line window lets you find previous commands/searches to edit or rerun them
-    - Opening the window:
-        - `q:`: Command history
-        - `q/`: Search history
-        - `q?`: Backwards search history (same list as `q/`)
-        - `<C-f>`: While already in the command line
-    - Within the window:
-        - `<CR>`:  Rerun the selected command
-        - `<C-c>`: Move the selected command to the command line and close the window
+- If no pattern is provided (`:g//`), the most recent search term is used instead
+- Use `:v[global]`/`g[lobal]!` to run all lines that _don't_ match
+- Ex-commands:
+    - `p[rint]`:  Print line (default)
+    - `d[elete]`: Delete line
+
+Search/replace:
+
+- `:%s/pattern/replacement`: Replace `pattern` with `replacement` on all lines in file:
+- `:s` would do this same for current line only
+- add `/g` to replace all instances (i.e. if there are multiple on the same line)
+- add `/c` to prompt for confirmation before replacing each match
+- use `:bufdo %s/...` to run this in all open buffers (then `:wa` to save them all)
+
+`vimgrep`:
+
+- `:vim[grep] /pattern/ {file(s)}`: Search for a pattern and put results in the quickfix list:
+- use `%` for the current file
+- a pattern of `//` will reuse the last search pattern
+- if the slashes are omitted then the pattern will be whitespace separated instead
+- `:lv[imgrep]` is the same but using the location list
+- `:vimgrepa[dd]`/`:lvimgrepa[dd]` will append to the list rather than replacing it
+
+Diff mode:
+
+- `:difft[his]`: Mark the current window as part of the diff.
+    - `:windo diffthis`: Applies the above for all windows in the current tab.
+- `:diffo[ff]`:  Turn off diff mode for the current window.
+- `:diffo[ff]!`: Turn off diff mode for all windows in the current tab.
+
+Argument list:
+
+- `:ar[gs]`:           Print the arglist
+- `:ar[gs] {arglist}`: Set the arglist
+- `:arga[dd]`:         Add current buffer to the arglist
+- `:arga[dd] {files}`: Add files to the arglist
+- `:argded[upe]`:      Dedupe arglist
+- `:argd[elete] {pattern}`: Delete files matching pattern from the arglist
+- TIP: Use `:ar **/*.lua` to open all lua files in a project, then `:argd *` to wipe the arglist but leave all the buffers open
+
+Run a command across lots of files:
+
+- `:cdo {cmd}`:   Run `{cmd}` in for each entry in the quickfix list
+- `:cfdo {cmd}`:  Run `{cmd}` in for every file in the quickfix list
+- `:ldo {cmd}`:   Run `{cmd}` in for each entry in the location list
+- `:lfdo {cmd}`:  Run `{cmd}` in for every file in the location list
+- `:bufdo {cmd}`: Run `{cmd}` in all buffers
+- `:windo {cmd}`: Run `{cmd}` in all windows in the current tab
+- `:argdo {cmd}`: Run `{cmd}` in all files in argument list
+- `:tabdo {cmd}`: Run `{cmd}` in all tabs
+
+Command-line window:
+
+- The command-line window lets you find previous commands/searches to edit or rerun them
+- Opening the window:
+    - `q:`: Command history
+    - `q/`: Search history
+    - `q?`: Backwards search history (same list as `q/`)
+    - `<C-f>`: While already in the command line
+- Within the window:
+    - `<CR>`:  Rerun the selected command
+    - `<C-c>`: Move the selected command to the command line and close the window
+
+Misc:
+
+- Use `<C-v>` to type literal escape characters:
+- `<C-v><Esc>` outputs a literal escape character ``, which can be used with commands e.g. `:norm`
 
 ### Settings
 
@@ -624,6 +656,8 @@ Shortcuts:
     - `<leader>hc`: Help: Commands
     - `<leader>hk`: Help: Keybinds
     - `<leader>hp`: Help: Pickers
+    - `<leader>ht`: Help: Themes/colourschemes
+    - `<leader>hi`: Help: Icons/emojis
 - Find files (or directories!):
     - `<leader>ff`: Find: Files
     - `<leader>fo`: Find: Oldfiles (recently opened files)
@@ -632,8 +666,8 @@ Shortcuts:
 - Search for strings (lines, contents, etc):
     - `<leader>ss`: Search: for String/by Grep
     - `<leader>sg`: Search: for String/by Grep
-    - `<leader>sb`: Search: within open Buffers
     - `<leader>sl`: Search: Local (current directory - only from within Oil)
+    - `<leader>sb`: Search: within open Buffers
 - Search for diagnostics/errors:
     - `<leader>sd`: Search: for Diagnostics (current file)
     - `<leader>sD`: Search: for Diagnostics (global)
@@ -641,6 +675,7 @@ Shortcuts:
     - `<leader>sE`: Search: for Errors (global)
 - Search for current word/visual selection:
     - `<leader>sw`: Search for word under cursor/visual selection
+    - `<leader>sW`: Search for WORD under cursor/visual selection
 - Personal shortcuts:
     - `<leader>fv`: Find vim config
     - `<leader>sv`: Search vim config

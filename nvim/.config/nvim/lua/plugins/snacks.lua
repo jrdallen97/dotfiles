@@ -142,6 +142,13 @@ return {
           -- TODO: Add keybind to chain into another search?
         }
       end
+      local grep_WORD = function()
+        picker.grep_word {
+          search = function(p)
+            return p.visual and p.visual.text or vim.fn.expand '<cWORD>'
+          end,
+        }
+      end
 
       -- See `:h snacks-pickers-sources`
       -- stylua: ignore start
@@ -180,7 +187,8 @@ return {
       map('<leader>sE', errors,                    'Errors (global)')
 
       -- Search for current word/visual selection
-      map('<leader>sw', picker.grep_word, 'Current Word', { 'n', 'x' })
+      map('<leader>sw', picker.grep_word, 'Current word', { 'n', 'x' })
+      map('<leader>sW', grep_WORD,        'Current WORD', { 'n', 'x' })
 
       -- Search/Find within my nvim config
       local config = vim.fn.stdpath 'config'
