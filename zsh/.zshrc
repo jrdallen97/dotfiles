@@ -35,7 +35,7 @@ export LESS='-RiF --mouse --wheel-lines=3'
 [[ -r "$HOME/.zsh_aliases" ]] && source "$HOME/.zsh_aliases"
 # Load optional configs
 [[ -r "$HOME/.zshrc.sparx" ]] && source "$HOME/.zshrc.sparx"
-# Load local config (useful for storing secrets)
+# Load local config
 [[ -r "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
 
 # Install zcomet
