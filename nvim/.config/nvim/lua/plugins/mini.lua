@@ -160,6 +160,14 @@ return {
           unit = 'step',
         },
       },
+      mappings = {
+        -- I don't find any of the mappings useful
+        object_scope = '',
+        object_scope_with_border = '',
+        -- I prefer the mini.bracketed mappings for indentation
+        goto_top = '',
+        goto_bottom = '',
+      },
       options = {
         -- Ignore cursor column when calculating current scope
         -- indent_at_cursor = false,
@@ -294,6 +302,7 @@ return {
 
     -- Disable indentscope in certain buffers
     vim.api.nvim_create_autocmd('FileType', {
+      group = vim.api.nvim_create_augroup('mini', { clear = true }),
       pattern = {
         'grug-far',
         'help',
@@ -306,6 +315,25 @@ return {
       },
       callback = function()
         vim.b.miniindentscope_disable = true
+      end,
+    })
+
+    -- Disable indentscope in terminal buffers
+    vim.api.nvim_create_autocmd('TermOpen', {
+      group = 'mini',
+      callback = function()
+        vim.b.miniindentscope_disable = true
+      end,
+    })
+
+    -- Reset `]c` keymap in diff buffers
+    vim.api.nvim_create_autocmd({ 'OptionSet', 'UIEnter' }, {
+      group = 'mini',
+      callback = function()
+        if vim.wo.diff then
+          vim.keymap.set('n', '[c', '[c', { buffer = true, remap = true })
+          vim.keymap.set('n', ']c', ']c', { buffer = true, remap = true })
+        end
       end,
     })
   end,

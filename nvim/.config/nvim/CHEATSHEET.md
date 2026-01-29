@@ -816,6 +816,7 @@ Go forward/backward with square brackets (similar to `tpope/vim-unimpaired`).
 - Suffixes:
     - `b`: Buffer (now built-in)
     - `c`: Comment block
+        - In diff buffers, this jumps between changes instead (built-in)
     - `d`: Diagnostic (now built-in)
     - `f`: File on disk
     - `i`: Indentation change
@@ -835,12 +836,6 @@ Go forward/backward with square brackets (similar to `tpope/vim-unimpaired`).
 Highlights trailing whitespace.
 
 - `:TrimWhitespace`: Trim trailing whitespace
-
-#### Mini-indentscope
-
-Visualize and work with indent scope.
-
-- Adds `i` textobject for indents (e.g. `]i`, `cii`, `vai`)
 
 #### Mini-sessions
 
