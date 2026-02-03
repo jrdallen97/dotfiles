@@ -38,19 +38,4 @@ return {
       forward_key = '<C-n>',
     },
   },
-
-  {
-    -- A tiny but highly customizable floating terminal plugin
-    'ingur/floatty.nvim',
-    config = function()
-      local term = require('floatty').setup {
-        window = {
-          width = 1,
-          height = 0.4,
-          v_align = 'bottom',
-        },
-      }
-      vim.keymap.set({ 'n', 't' }, '<C-t>', term.toggle)
-    end,
-  },
 }

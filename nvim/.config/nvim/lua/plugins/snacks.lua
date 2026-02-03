@@ -101,6 +101,19 @@ return {
       wk_desc = { enabled = 'Toggle ', disabled = 'Toggle ' },
     },
 
+    -- Create and toggle terminal windows
+    terminal = {
+      win = {
+        position = 'float',
+        width = 0,
+        height = 0.5,
+        min_height = 25,
+        border = 'rounded',
+        backdrop = 80,
+        row = 0.99, -- Align to bottom
+      },
+    },
+
     -- A pretty notification provider
     notifier = {
       timeout = 5000,
@@ -255,6 +268,9 @@ return {
       disable('next edit suggestions', 'disable_nes', true ):map '<leader>tn'
       disable('next edit suggestions', 'disable_nes', false):map '<leader>tN'
     end
+
+    -- Set up terminal
+    map('<C-t>', Snacks.terminal.toggle, 'Toggle terminal', { 'n', 't' })
 
     -- Set up Git browse
     cmd('GitBrowse', 'lua Snacks.gitbrowse()', 'Open file in browser')
