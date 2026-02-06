@@ -6,7 +6,7 @@ vim.g.light_scheme = 'minispring'
 
 -- Get or set options (`:h vim.o`)
 local o = vim.o
--- Like `vim.o` but with a special interface for interacting with lists & maps (`:h vim.opt`)
+-- Like `vim.o` but with a special interface for interacting with tables (`:h vim.opt`)
 -- See `:h lua-options` and `:h lua-guide-options`
 local opt = vim.opt
 
@@ -15,8 +15,8 @@ local opt = vim.opt
 -- General
 o.undofile   = true -- Enable persistent undo (see also `:h undodir`)
 o.mouse      = 'a'  -- Enable mouse for all available modes
-o.updatetime = 100  -- Decrease update time
-o.timeoutlen = 500  -- Decrease mapped sequence wait time
+o.updatetime = 150  -- Time to wait before writing to swap file and triggering CursorHold
+o.timeoutlen = 500  -- Time to wait for a mapping to complete
 o.confirm    = true -- Ask whether you want to save when running commands like `:q` or `:e`
 
 -- Appearance

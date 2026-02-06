@@ -1,34 +1,18 @@
 return {
-  {
-    -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
-    -- used for completion, annotations and signatures of Neovim apis
-    'folke/lazydev.nvim',
-    ft = 'lua',
-    opts = {
-      library = {
-        -- Load luvit types when the `vim.uv` word is found
-        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
-      },
-    },
-  },
   -- Use treesitter to auto close and auto rename html tag
   { 'windwp/nvim-ts-autotag', opts = {} },
+
   {
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
     dependencies = {
-      -- Automatically install LSPs and related tools to stdpath for Neovim
-      -- Mason must be loaded before its dependents so we need to set it up here.
-      -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
+      -- Automatically install/enable LSPs and related tools
       { 'mason-org/mason.nvim', opts = {} },
       'mason-org/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
       { 'j-hui/fidget.nvim', opts = {} },
-
-      -- Allows extra capabilities provided by blink.cmp
-      'saghen/blink.cmp',
 
       {
         -- A simple way to run and visualize code actions with other picker plugins
@@ -38,17 +22,12 @@ return {
       },
     },
     config = function()
-      -- Brief aside: **What is LSP?**
-      --
-      -- LSP is an initialism you've probably heard, but might not understand what it is.
-      --
       -- LSP stands for Language Server Protocol. It's a protocol that helps editors
       -- and language tooling communicate in a standardized fashion.
       --
       -- In general, you have a "server" which is some tool built to understand a particular
       -- language (such as `gopls`, `lua_ls`, `rust_analyzer`, etc.). These Language Servers
-      -- (sometimes called LSP servers, but that's kind of like ATM Machine) are standalone
-      -- processes that communicate with some "client" - in this case, Neovim!
+      -- are standalone processes that communicate with some "client" - in this case, Neovim!
       --
       -- LSP provides Neovim with features like:
       --  - Go to definition
@@ -70,9 +49,15 @@ return {
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
-          local map = function(keys, func, desc, mode)
+          local function map(keys, func, desc, mode)
             mode = mode or 'n'
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+          end
+          local function hover()
+            vim.lsp.buf.hover { border = 'solid' }
+          end
+          local function signature_help()
+            vim.lsp.buf.signature_help { border = 'solid' }
           end
 
           local picker = require 'snacks.picker'
@@ -112,24 +97,20 @@ return {
 
           -- Opens a popup that displays documentation about the word under your cursor
           --  See `:help K` for why this keymap
-          map('K', vim.lsp.buf.hover, 'Hover Documentation')
-          map('<C-k>', vim.lsp.buf.hover, 'Hover Documentation', { 'i' })
+          map('K', hover, 'Hover Documentation')
+          map('<C-k>', hover, 'Hover Documentation', { 'n', 'i' })
 
           -- Opens a popup that displays signature help for the word under your cursor
-          map('<C-s>', vim.lsp.buf.signature_help, 'Signature Help', { 'n', 'i' })
+          map('<C-s>', signature_help, 'Signature Help', { 'n', 'i' })
 
-          -- WARN: This is not Goto Definition, this is Goto Declaration.
+          -- Goto Declaration. WARN: This is NOT Goto Definition.
           --  For example, in C this would take you to the header.
           -- map('gD', vim.lsp.buf.declaration, 'Goto Declaration')
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
 
-          -- The following code creates a keymap to toggle inlay hints in your
-          -- code, if the language server you are using supports them
-          if
-            client
-            and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf)
-          then
+          -- Create a keymap to toggle inlay hints (if the language server supports them)
+          if client and client:supports_method('textDocument/inlayHint', event.buf) then
             require('snacks.toggle').inlay_hints():map '<leader>th'
           end
         end,
@@ -139,7 +120,7 @@ return {
       -- See :help vim.diagnostic.Opts
       vim.diagnostic.config {
         severity_sort = true,
-        float = { border = 'rounded', source = 'if_many' },
+        float = { border = 'rounded', source = true },
         underline = { severity = vim.diagnostic.severity.ERROR },
         signs = vim.g.have_nerd_font and {
           text = {
@@ -149,20 +130,18 @@ return {
             [vim.diagnostic.severity.HINT] = '󰌶 ',
           },
         } or {},
-        virtual_text = {
-          enabled = true,
-        },
+        virtual_text = true,
       }
 
       -- Language server configuration. Note that this is just configuration; servers listed here
       -- will not be automatically installed (see ensure_installed below).
       --
-      --  Add any additional override configuration in the following table. Available keys are:
-      --  - cmd (table): Override the default command used to start the server
-      --  - filetypes (table): Override the default list of associated filetypes for the server
-      --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-      --  - settings (table): Override the default settings passed when initializing the server.
-      --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+      -- Add any additional override configuration in the following table. Available keys are:
+      -- - cmd (table): Override the default command used to start the server
+      -- - filetypes (table): Override the default list of associated filetypes for the server
+      -- - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
+      -- - settings (table): Override the default settings passed when initializing the server.
+      --   For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       --
       -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
       ---@type table<string, vim.lsp.Config>
@@ -170,11 +149,13 @@ return {
         lua_ls = {
           settings = {
             Lua = {
-              completion = {
-                callSnippet = 'Replace',
+              -- Make the server aware of Neovim runtime files
+              workspace = {
+                checkThirdParty = false,
+                library = {
+                  vim.env.VIMRUNTIME,
+                },
               },
-              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
             },
           },
         },
@@ -203,21 +184,13 @@ return {
         },
       }
 
-      -- To check the current status of installed tools and/or manually install
-      -- other tools, you can run
-      --    :Mason
-      --
-      -- You can press `g?` for help in this menu.
-      --
-      -- `mason` had to be setup earlier: to configure its options see the
-      -- `dependencies` table for `nvim-lspconfig` above.
-      --
-      -- You can add tools here that you want Mason to install for you, so that
-      -- they are available from within Neovim.
+      -- The tools listed below will be installed automatically.
+      -- To check the status of installed tools and/or manually install other
+      -- tools, you can run `:Mason`.
       local ensure_installed = {
         -- Core
         'lua_ls',
-        'stylua', -- Used to format lua code
+        'stylua',
         'bashls',
 
         -- Other
@@ -249,25 +222,15 @@ return {
       end
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-      -- Either merge all additional server configs from the `servers.mason` and `servers.others` tables
-      -- to the default language server configs as provided by nvim-lspconfig or
-      -- define a custom server config that's unavailable on nvim-lspconfig.
+      -- Apply any LSP config overrides as defined in the `servers` table above.
       for server, config in pairs(servers) do
         if not vim.tbl_isempty(config) then
           vim.lsp.config(server, config)
         end
       end
 
-      -- After configuring our language servers, we now enable them
-      require('mason-lspconfig').setup {
-        ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-        automatic_enable = true, -- automatically run vim.lsp.enable() for all servers that are installed via Mason
-      }
-
-      -- Manually run vim.lsp.enable for all language servers that are *not* installed via Mason
-      -- if not vim.tbl_isempty(servers.others) then
-      --   vim.lsp.enable(vim.tbl_keys(servers.others))
-      -- end
+      -- Automatically enable all LSP servers that are installed via Mason
+      require('mason-lspconfig').setup()
     end,
   },
 }

@@ -4,9 +4,10 @@ return {
   event = 'VimEnter',
   -- Use a release tag to download pre-built binaries
   version = '1.*',
+  priority = 50,
   dependencies = {
-    'folke/lazydev.nvim',
     'giuxtaposition/blink-cmp-copilot',
+    { 'folke/lazydev.nvim', opts = {} },
     {
       'L3MON4D3/LuaSnip',
       version = '2.*',

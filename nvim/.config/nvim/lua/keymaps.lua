@@ -1,15 +1,15 @@
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
-local map = function(keys, func, desc, mode)
+local function map(keys, func, desc, mode)
   mode = mode or 'n'
   vim.keymap.set(mode, keys, func, { desc = desc })
 end
 
-local setloclist_errors = function()
+local function setloclist_errors()
   vim.diagnostic.setloclist { severity = { min = vim.diagnostic.severity.ERROR } }
 end
-local setqflist_errors = function()
+local function setqflist_errors()
   vim.diagnostic.setqflist { severity = { min = vim.diagnostic.severity.ERROR } }
 end
 
@@ -29,12 +29,12 @@ map('<leader>rs',  ':w<CR>:!%:p<CR>',      'Shebang: Run file')
 map('<leader>rts', ':w<CR>:!time %:p<CR>', 'Shebang: Time file')
 
 -- Diagnostic keymaps
-map('<leader>l', setloclist_errors,         'Open diagnostic location list (errors only)')
-map('<leader>L', vim.diagnostic.setloclist, 'Open diagnostic location list (all diagnostics)')
-map('<leader>q', setqflist_errors,          'Open diagnostic quickfix list (errors only)')
-map('<leader>Q', vim.diagnostic.setqflist,  'Open diagnostic quickfix list (all diagnostics)')
+map('<leader>l', setloclist_errors,         'Send errors to loclist')
+map('<leader>L', vim.diagnostic.setloclist, 'Send all diagnostics to loclist')
+map('<leader>q', setqflist_errors,          'Send errors to qflist')
+map('<leader>Q', vim.diagnostic.setqflist,  'Send all diagnostics to qflist')
 
--- Clear highlights on search when pressing <Esc> in normal mode
+-- Clear search highlights when pressing <Esc> in normal mode
 map('<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Exit terminal mode with a sane shortcut. Otherwise, you normally need to press <C-\><C-n>.
