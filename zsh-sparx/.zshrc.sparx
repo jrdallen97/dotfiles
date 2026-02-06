@@ -32,25 +32,25 @@ changemonkey() {(cd "$CLOUDPATH" && python3 tools/release/change_monkey.py "$@")
 prodperms() {kdev prod-perms ${@:-k8s}}
 
 # Simple pnpm wrapper with custom handling
-_pnpm() {
+pnpm() {
   case $@ in
     if)
-      pnpm i --frozen-lockfile;;
+      command pnpm i --frozen-lockfile;;
     *)
-      pnpm $@;;
+      command pnpm $@;;
   esac
 }
 
 # Client helpers
-tp2() {(cd "$CLOUDPATH/js/apps/tpclient2"; _pnpm ${@:-dev:test2})}
-tp3() {(cd "$CLOUDPATH/js/apps/maths"; _pnpm ${@:-dev:test2})}
-sw2() {(cd "$CLOUDPATH/js/apps/swclient2"; _pnpm ${@:-dev:test2})}
-rdr() {(cd "$CLOUDPATH/js/apps/reader"; _pnpm ${@:-dev:test2})}
-sci() {(cd "$CLOUDPATH/js/apps/science"; _pnpm ${@:-dev:test2})}
-adm() {(cd "$CLOUDPATH/schools/admin-portal"; _pnpm ${@:-dev})}
+tp2() {(cd "$CLOUDPATH/js/apps/tpclient2"; pnpm ${@:-dev:test2})}
+tp3() {(cd "$CLOUDPATH/js/apps/maths"; pnpm ${@:-dev:test2})}
+sw2() {(cd "$CLOUDPATH/js/apps/swclient2"; pnpm ${@:-dev:test2})}
+rdr() {(cd "$CLOUDPATH/js/apps/reader"; pnpm ${@:-dev:test2})}
+sci() {(cd "$CLOUDPATH/js/apps/science"; pnpm ${@:-dev:test2})}
+adm() {(cd "$CLOUDPATH/schools/admin-portal"; pnpm ${@:-dev})}
 admpf() {orca pf clear && orca pf apply $CLOUDPATH/schools/admin-portal/orca.ports}
-curman() {(cd "$CLOUDPATH/js/apps/curman"; _pnpm ${@:-dev-test2})}
-curriculum() {(cd "$CLOUDPATH/js/apps/curriculum"; _pnpm ${@:-dev})}
+curman() {(cd "$CLOUDPATH/js/apps/curman"; pnpm ${@:-dev-test2})}
+curriculum() {(cd "$CLOUDPATH/js/apps/curriculum"; pnpm ${@:-dev})}
 
 # DB connection
 alias test2-db-general='cloud-sql-proxy sparx-web-test:europe-west1:test-general-2019-12 -p 5432'
