@@ -6,8 +6,8 @@ return {
   version = '1.*',
   priority = 50,
   dependencies = {
-    'giuxtaposition/blink-cmp-copilot',
     { 'folke/lazydev.nvim', opts = {} },
+    { 'giuxtaposition/blink-cmp-copilot', enabled = vim.g.work_profile },
     {
       'L3MON4D3/LuaSnip',
       version = '2.*',
@@ -40,27 +40,11 @@ return {
     end,
 
     keymap = {
-      -- 'default' (recommended) for mappings similar to built-in completions
-      --   <c-y> to accept ([y]es) the completion.
-      --    This will auto-import if your LSP supports it.
-      --    This will expand snippets if the LSP sent a snippet.
-      -- 'super-tab' for tab to accept
-      -- 'enter' for enter to accept
-      -- 'none' for no mappings
-      --
-      -- For an understanding of why the 'default' preset is recommended,
-      -- you will need to read `:help ins-completion`
-      --
-      -- No, but seriously. Please read `:help ins-completion`, it is really good!
-      --
-      -- All presets have the following mappings:
-      -- <tab>/<s-tab>: move to right/left of your snippet expansion
-      -- <c-space>: Open menu or open docs if already open
+      -- Use tab to accept suggestions. Also:
       -- <c-n>/<c-p> or <up>/<down>: Select next/previous item
       -- <c-e>: Hide menu
-      -- <c-k>: Toggle signature help
       --
-      -- See :h blink-cmp-config-keymap for defining your own keymap
+      -- See :h blink-cmp-config-keymap for possible commands
       preset = 'super-tab',
 
       -- Unbind Tab for snippets since it's easy to hit accidentally
@@ -77,8 +61,7 @@ return {
     },
 
     completion = {
-      -- By default, you may press `<c-space>` to show the documentation.
-      -- Optionally, set `auto_show = true` to show the documentation after a delay.
+      -- Automatically show documentation
       documentation = { auto_show = true, auto_show_delay_ms = 500 },
 
       list = {
@@ -92,7 +75,10 @@ return {
     },
 
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev', 'copilot' },
+      default = vim.list_extend(
+        { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' },
+        vim.g.work_profile and { 'copilot' } or {}
+      ),
       providers = {
         lsp = { score_offset = 2 },
         path = { score_offset = 10 },
@@ -146,9 +132,7 @@ return {
     -- Shows a signature help window while you type arguments for a function
     signature = { enabled = true },
 
-    cmdline = {
-      -- Command-line mode doesn't work well with super-tab keybinds
-      enabled = false,
-    },
+    -- Command-line mode doesn't work well with super-tab keybinds
+    cmdline = { enabled = false },
   },
 }

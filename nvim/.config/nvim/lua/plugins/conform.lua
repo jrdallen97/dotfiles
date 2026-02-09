@@ -19,7 +19,7 @@ local function first(bufnr, ...)
 end
 
 -- Shorthand for which formatters to use for all JS files
-local js = function(bufnr)
+local function js(bufnr)
   return { 'eslint_d', first(bufnr, 'prettierd', 'prettier') }
 end
 
@@ -33,6 +33,7 @@ return {
   },
   opts = {
     notify_on_error = false,
+
     -- Use format_after_save rather than format_on_save to make it async!
     format_after_save = function(bufnr)
       -- Disable with a global or buffer-local variable
@@ -40,19 +41,12 @@ return {
         return
       end
 
-      -- Disable "format_after_save lsp_fallback" for languages that don't
-      -- have a well standardized coding style. You can add additional
-      -- languages here or re-enable it for the disabled ones.
-      local disable_filetypes = { c = true, cpp = true }
-      if disable_filetypes[vim.bo[bufnr].filetype] then
-        return nil
-      else
-        return {
-          timeout_ms = 5000,
-          lsp_format = 'fallback',
-        }
-      end
+      return {
+        timeout_ms = 5000,
+        lsp_format = 'fallback',
+      }
     end,
+
     formatters_by_ft = {
       lua = { 'stylua' },
 
