@@ -1,11 +1,13 @@
 # Random aliases
-alias vim='nvim'
-alias v='nvim'
-alias vd='nvim -d'
-alias ve='nvim .'
 alias :q='exit'
 alias beep="tput bel; sleep 0.3"
 alias prettypath='echo $PATH | sed "s/:/\n/g"'
+
+# nvim
+alias v='nvim'
+alias vd='nvim -d'
+alias ve='nvim .'
+alias vrestore='nvim --headless "+Lazy! restore" +qa'
 
 # Rebind if installed
 command -v bat &>/dev/null && alias bat='bat -P'
