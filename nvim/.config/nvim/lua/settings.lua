@@ -19,6 +19,12 @@ o.updatetime = 150  -- Time to wait before writing to swap file and triggering C
 o.timeoutlen = 500  -- Time to wait for a mapping to complete
 o.confirm    = true -- Ask whether you want to save when running commands like `:q` or `:e`
 
+-- Defualt indentation settings (can be overridden by filetype or :GuessIndent)
+o.autoindent = true -- Copy indent from the current line when starting a new line
+o.tabstop    = 8    -- Default to 8 spaces per tab (recommended)
+o.shiftwidth = 2    -- The number of spaces to use for each indent step
+o.expandtab  = true -- Insert spaces rather than tabs (use `<C-v><Tab>` to get a literal tab)
+
 -- Appearance
 o.number        = true    -- Show line numbers
 o.cursorline    = true    -- Highlight current line

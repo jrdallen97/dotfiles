@@ -29,10 +29,6 @@ return {
     highlight = {
       -- Use tree-sitter for syntax highlighting
       enable = true,
-
-      -- Some languages depend on vim's regex highlighting system for indent rules.
-      -- If you are experiencing weird indenting issues, add the language to the list
-      -- below and disable tree-sitter based indentation.
       additional_vim_regex_highlighting = { 'ruby' },
     },
     indent = {
