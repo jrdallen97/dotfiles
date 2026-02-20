@@ -306,6 +306,10 @@ Command-line window:
     - `<CR>`:  Rerun the selected command
     - `<C-c>`: Move the selected command to the command line and close the window
 
+Lua:
+- `:lua`:       Run lua code
+- `:lua=`/`:=`: Run lua code and print return value (equivalent to `:lua vim.print(...)`)
+
 Misc:
 
 - Use `<C-v>` to type literal escape characters:
