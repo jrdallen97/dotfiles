@@ -78,29 +78,27 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
   end,
 })
 
--- Disable slow features when opening big files
--- Most of these seem unnecessary, but I've left them commented out so they're easy to re-enable
-vim.cmd [[
-  function BigFileStuff()
-    echo("Big file, disabling slow features")
+-- Automatically run :Big and :Huge for files exceeding certain sizes
+vim.api.nvim_create_autocmd('BufWinEnter', {
+  group = vim.api.nvim_create_augroup('bigfile', { clear = true }),
+  callback = function(ev)
+    vim.api.nvim_buf_call(ev.buf, function()
+      local size = vim.fn.getfsize(vim.api.nvim_buf_get_name(ev.buf))
+      if size <= vim.g.bigfile_size then
+        return
+      end
+      local huge = size > vim.g.hugefile_size
 
-    " if exists(':TSBufDisable')
-    "   exec 'TSBufDisable autotag'
-    "   exec 'TSBufDisable highlight'
-    "   " etc...
-    " endif
+      if huge then
+        -- :Huge doesn't work properly unless treesitter has already loaded
+        vim.defer_fn(function()
+          vim.cmd 'Huge'
+        end, 50)
+      else
+        vim.cmd 'Big'
+      end
 
-    setlocal foldmethod=manual
-    " syntax off
-    " filetype off
-    " setlocal noundofile
-    " setlocal noswapfile
-    " setlocal noloadplugins
-  endfunction
-
-  augroup BigFileDisable
-    autocmd!
-    " Run for files bigger than 10MB
-    autocmd BufWinEnter * if getfsize(expand("%")) > 10 * 1024 * 1024 | exec BigFileStuff() | endif
-  augroup END
-]]
+      vim.print((huge and 'Huge' or 'Big') .. ' file, disabling slow features')
+    end)
+  end,
+})

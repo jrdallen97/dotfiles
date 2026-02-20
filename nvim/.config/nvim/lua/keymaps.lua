@@ -121,3 +121,26 @@ vim.ui.open = function(path)
 
   return open(path)
 end
+
+-- Disable slow settings/features in big files
+-- NOTE: some features (e.g. `matchparen` & window settings) won't be re-enabled on switching buffers
+vim.api.nvim_create_user_command('Big', function()
+  -- Don't highlight matching brackets
+  vim.cmd 'NoMatchParen'
+  -- Disable treesitter-based folding
+  vim.wo.foldmethod = 'manual'
+  -- Disable plugins
+  vim.b.miniindentscope_disable = true
+end, {})
+
+-- Disable even more settings/features in huge files
+vim.api.nvim_create_user_command('Huge', function()
+  -- Run :Big first
+  vim.cmd 'Big'
+  -- Disable indent guides
+  vim.cmd 'IBLDisable'
+  -- Disable treesitter features
+  vim.cmd 'TSBufDisable highlight'
+  -- Disable syntax highlighting
+  vim.cmd.syntax 'off'
+end, {})

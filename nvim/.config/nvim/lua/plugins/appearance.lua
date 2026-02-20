@@ -95,6 +95,9 @@ return {
           'RainbowDelimiterViolet',
           'RainbowDelimiterBlue',
         },
+        condition = function(buf)
+          return vim.fn.getfsize(vim.api.nvim_buf_get_name(buf)) < vim.g.bigfile_size
+        end,
       }
     end,
   },
