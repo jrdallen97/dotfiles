@@ -26,7 +26,14 @@ alias kprod='kubectx prod'
 
 # Sparx commands
 alias kdev="$CLOUDPATH/kdev.sh"
-gen() {spxdev gen ${@:-gazelle}}
+gen() {
+  case $@ in
+    new)
+      (cd $CLOUDPATH/js/packages/api; pnpm run apigen);;
+    *)
+      spxdev gen ${@:-gazelle};;
+  esac
+}
 alias pf="orca pf"
 changemonkey() {(cd "$CLOUDPATH" && python3 tools/release/change_monkey.py "$@")}
 prodperms() {kdev prod-perms ${@:-k8s}}

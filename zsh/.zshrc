@@ -134,19 +134,20 @@ short-pwd() {
 # Helper to easily set the tab/window title
 # Takes current dir & (optionally) current command
 # Inspired by https://github.com/trystan2k/zsh-tab-title
-local set-title() {
-  if [[ $2 != "" ]]; then
-    2=": $2"
-  fi
-  print -Pn "\e]1;$1$2\a" # Tab title
-  print -Pn "\e]2;$1$2\a" # Window title
+set-title() {
+  # Add a colon between the parts if the second part is not empty
+  local title="$1${2+: }$2"
+  # Overriden by TITLE env var if set
+  title=${TITLE:-$title}
+  print -Pn "\e]1;$title\a" # Tab title
+  print -Pn "\e]2;$title\a" # Window title
 }
 
 # Will be run before every prompt draw
 local prompt_precmd() {
   PROMPT_CMD_STATUS=$? # Save exit code as it may be wiped by the logic below
 
-  set-title "$(short-pwd): zsh"
+  set-title "$(short-pwd)" zsh
 
   if (( ${+PROMPT_CMD_START} )); then
     ((PROMPT_CMD_DURATION = $(date +%s) - PROMPT_CMD_START))
