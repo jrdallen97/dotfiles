@@ -2,6 +2,11 @@ vim.bo.tabstop = 4
 vim.bo.shiftwidth = 4
 vim.bo.expandtab = false
 
+vim.b.minisplitjoin_config = {
+  -- Always add trailing commas for go code, otherwise you have to add them manually :(
+  split = { hooks_post = { MiniSplitjoin.gen_hook.add_trailing_separator() } },
+}
+
 local map = function(keys, func, desc)
   vim.keymap.set('n', keys, func, { desc = desc, buffer = true })
 end

@@ -19,6 +19,7 @@ NOTE: I'm not gonna list all the basics here, just the stuff that's useful for m
     - [Folds](CHEATSHEET#Folds)
     - [Quickfix](CHEATSHEET#Quickfix)
     - [Registers](CHEATSHEET#Registers)
+    - [Marks](CHEATSHEET#Marks)
     - [netrw](CHEATSHEET#netrw)
 - [Plugins](CHEATSHEET#Plugins)
     - [Lazy](CHEATSHEET#Lazy)
@@ -44,7 +45,6 @@ NOTE: I'm not gonna list all the basics here, just the stuff that's useful for m
         - [Mini-operators](CHEATSHEET#Mini-operators)
         - [Mini-bracketed](CHEATSHEET#Mini-bracketed)
         - [Mini-trailspace](CHEATSHEET#Mini-trailspace)
-        - [Mini-indentscope](CHEATSHEET#Mini-indentscope)
         - [Mini-sessions](CHEATSHEET#Mini-sessions)
 
 <!-- mtoc-end -->
