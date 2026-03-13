@@ -38,4 +38,23 @@ return {
       forward_key = '<C-n>',
     },
   },
+
+  {
+    -- A comfortable CSV/TSV editing plugin for Neovim
+    'hat0uma/csvview.nvim',
+    opts = {
+      view = {
+        -- Replace delimiters with a border character
+        display_mode = 'border',
+      },
+    },
+    init = function()
+      -- stylua: ignore
+      require('snacks.toggle').new({
+        name = 'csvview',
+        get = function() return vim.b.csvview_info ~= nil end,
+        set = function() vim.cmd 'CsvViewToggle'      end,
+      }):map '<leader>tv'
+    end,
+  },
 }
