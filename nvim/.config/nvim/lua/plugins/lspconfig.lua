@@ -146,20 +146,6 @@ return {
       -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
       ---@type table<string, vim.lsp.Config>
       local servers = {
-        lua_ls = {
-          settings = {
-            Lua = {
-              -- Make the server aware of Neovim runtime files
-              workspace = {
-                checkThirdParty = false,
-                library = {
-                  vim.env.VIMRUNTIME,
-                },
-              },
-            },
-          },
-        },
-
         ts_ls = {
           root_dir = function(bufnr, on_dir)
             -- Override lspconfig's "monorepo support" bc it just doesn't work
