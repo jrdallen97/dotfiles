@@ -663,15 +663,16 @@ Shortcuts:
     - `<leader>ht`: Help: Themes/colourschemes
     - `<leader>hi`: Help: Icons/emojis
 - Find files (or directories!):
-    - `<leader>ff`: Find: Files
-    - `<leader>fo`: Find: Oldfiles (recently opened files)
+    - `<leader>ff`: Find: Global (all files)
+    - `<leader>fl`: Find: Local (current dir)
+    - `<leader>fo`: Find: Oldfiles (recent files)
     - `<leader>fd`: Find: Directories
-    - `<leader>fl`: Find: Local (current directory - only from within Oil)
+    - `<leader>fs`: Find: Smart
 - Search for strings (lines, contents, etc):
-    - `<leader>ss`: Search: for String/by Grep
-    - `<leader>sg`: Search: for String/by Grep
-    - `<leader>sl`: Search: Local (current directory - only from within Oil)
-    - `<leader>sb`: Search: within open Buffers
+    - `<leader>ss`: Global (all files)
+    - `<leader>sl`: Local (current dir)
+    - `<leader>st`: This buffer
+    - `<leader>sb`: All buffers
 - Search for diagnostics/errors:
     - `<leader>sd`: Search: for Diagnostics (current file)
     - `<leader>sD`: Search: for Diagnostics (global)

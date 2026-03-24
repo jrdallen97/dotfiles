@@ -157,6 +157,12 @@ return {
           -- TODO: Add keybind to chain into another search?
         }
       end
+      local local_files = function()
+        picker.files { cwd = vim.fn.expand '%:p:h' }
+      end
+      local local_grep = function()
+        picker.grep { cwd = vim.fn.expand '%:p:h' }
+      end
       local grep_WORD = function()
         picker.grep_word {
           search = function(p)
@@ -184,16 +190,17 @@ return {
       map('<leader>hi', picker.icons,        'Icons')
 
       -- Find files (or directories!)
-      map('<leader>ff', picker.files,  'Files')
-      map('<leader>fo', picker.recent, 'Oldfiles')
+      map('<leader>ff', picker.files,  'Global (all files)')
+      map('<leader>fl', local_files,   'Local (current dir)')
+      map('<leader>fo', picker.recent, 'Oldfiles (recent files)')
       map('<leader>fd', directories,   'Directories')
-      map('<leader>fs', picker.smart,  'Smart finder')
+      map('<leader>fs', picker.smart,  'Smart')
 
       -- Search for strings (lines, contents, etc)
-      map('<leader>ss', picker.grep,         'String')
-      map('<leader>sg', picker.grep,         'Grep')
-      map('<leader>sl', picker.lines,        'Lines in current buffer')
-      map('<leader>sb', picker.grep_buffers, 'Lines in all buffers')
+      map('<leader>ss', picker.grep,         'Global (all files)')
+      map('<leader>sl', local_grep,          'Local (current dir)')
+      map('<leader>st', picker.lines,        'This buffer')
+      map('<leader>sb', picker.grep_buffers, 'All buffers')
 
       -- Search for diagnostics/errors
       map('<leader>sd', picker.diagnostics_buffer, 'Diagnostics (buffer)')
