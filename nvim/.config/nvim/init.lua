@@ -10,12 +10,12 @@ vim.g.have_nerd_font = false
 vim.g.bigfile_size = 100 * 1024 -- 100KiB
 vim.g.hugefile_size = 10 * 1024 * 1024 -- 10MiB
 
+-- Load config
 require 'settings'
 require 'autocmds'
 
--- Catch the error if `jam.local` doesn't exist
-local ok = pcall(require, 'local')
-if not ok then
+-- Catch the error if `local.lua` doesn't exist
+if not pcall(require, 'local') then
   print 'Warn: no `local.lua` file'
 end
 
@@ -64,3 +64,4 @@ vim.cmd.colorscheme(vim.g.dark_scheme)
 
 -- Load keymaps after lazy so I can add binds for plugins if I want to
 require 'keymaps'
+require 'usercmds'

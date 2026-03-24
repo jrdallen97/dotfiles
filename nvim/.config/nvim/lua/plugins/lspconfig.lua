@@ -121,7 +121,7 @@ return {
       vim.diagnostic.config {
         severity_sort = true,
         float = { border = 'rounded', source = true },
-        underline = { severity = vim.diagnostic.severity.ERROR },
+        underline = { severity = { min = vim.diagnostic.severity.WARN } },
         signs = vim.g.have_nerd_font and {
           text = {
             [vim.diagnostic.severity.ERROR] = '󰅚 ',
@@ -192,13 +192,13 @@ return {
           'gopls',
           'golangci-lint',
           'goimports',
+          'protols',
 
           -- Frontend
           'ts_ls',
           'eslint',
           'eslint_d',
           'prettierd',
-          'emmet_language_server',
           'cssls',
           'tailwindcss',
 

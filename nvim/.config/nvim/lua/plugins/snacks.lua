@@ -24,6 +24,9 @@ return {
       replace_netrw = false,
     },
 
+    -- Replace input prompts with a fancy modal (see `:h vim.ui.input`)
+    input = {},
+
     -- A modern fuzzy-finder to navigate the Neovim universe
     -- See `:help snacks-picker` and `:help snacks-picker-setup`
     picker = {
