@@ -5,6 +5,9 @@ export PATH="$HOME/.local/share/mise/shims:$PATH"
 export PNPM_HOME="$HOME/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 
+# Clean up homebrew downloads after a week (instead of the default 4 months)
+export HOMEBREW_CLEANUP_MAX_AGE_DAYS=7
+
 # Sparx
 export GOPATH="$HOME/go" # Used by a number of our scripts
 export GOBIN="$GOPATH/bin" # Manually override GOBIN (otherwise scripts end up in a weird mise folder)
@@ -37,7 +40,7 @@ gen() {
 alias pf="orca pf"
 changemonkey() {(cd "$CLOUDPATH" && python3 tools/release/change_monkey.py "$@")}
 prodperms() {kdev prod-perms ${@:-k8s}}
-db() {kdev prod-perms db $1 $2 james.allen@sparx.co.uk $3}
+alias db="kdev prod-perms db"
 
 # Simple pnpm wrapper with custom handling
 pnpm() {
@@ -78,10 +81,6 @@ idea() { open -na "IntelliJ IDEA.app" --args "$@" }
 alias oc='opencode'
 alias loadavg="sysctl -n vm.loadavg"
 alias diff='diff --color=auto'
-
-# Python
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-alias activate='source ./venv/bin/activate'
 
 # The next line updates PATH for the Google Cloud SDK.
 [[ -r "$HOME/google-cloud-sdk/path.zsh.inc" ]] && source "$HOME/google-cloud-sdk/path.zsh.inc"
