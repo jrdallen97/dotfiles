@@ -265,10 +265,6 @@ return {
       -- Autosuggestions
       disable('autosuggestions', 'disable_autosuggestions', true ):map '<leader>ta'
       disable('autosuggestions', 'disable_autosuggestions', false):map '<leader>tA'
-
-      -- Next edit suggestions
-      disable('next edit suggestions', 'disable_nes', true ):map '<leader>tn'
-      disable('next edit suggestions', 'disable_nes', false):map '<leader>tN'
     end
 
     -- Set up terminal
