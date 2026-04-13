@@ -201,9 +201,6 @@ return {
           'prettierd',
           'cssls',
           'tailwindcss',
-
-          -- AI
-          'copilot-language-server',
         })
       end
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }

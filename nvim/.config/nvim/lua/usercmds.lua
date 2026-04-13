@@ -5,6 +5,12 @@
 vim.api.nvim_create_user_command('Qa', 'qa', {})
 vim.api.nvim_create_user_command('Wa', 'wa', {})
 
+-- These used to be built-in to nvim-lspconfig
+vim.api.nvim_create_user_command('LspInfo', ':checkhealth vim.lsp', {})
+vim.api.nvim_create_user_command('LspLog', function()
+  vim.cmd('tabnew ' .. vim.lsp.log.get_filename())
+end, {})
+
 -- [[ Extend gx ]]
 
 -- Get github repo from cwd

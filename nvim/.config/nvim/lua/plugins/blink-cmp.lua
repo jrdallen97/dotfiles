@@ -7,7 +7,7 @@ return {
   priority = 50,
   dependencies = {
     { 'folke/lazydev.nvim', opts = {} },
-    { 'giuxtaposition/blink-cmp-copilot', enabled = vim.g.work_profile },
+    { 'fang2hou/blink-copilot', enabled = vim.g.work_profile },
     {
       'L3MON4D3/LuaSnip',
       version = '2.*',
@@ -92,7 +92,7 @@ return {
         },
         copilot = {
           name = 'copilot',
-          module = 'blink-cmp-copilot',
+          module = 'blink-copilot',
           enabled = function()
             if not vim.g.work_profile then
               return false

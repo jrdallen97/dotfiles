@@ -61,10 +61,8 @@ o.hlsearch    = true    -- Highlight all matches when searching
 o.inccommand  = 'split' -- Preview substitutions as you type
 
 -- Folds
-o.foldtext       = ''     -- Show the first line of the fold as-is
-o.foldlevelstart = 99     -- Don't fold anything by default
-o.foldmethod     = 'expr' -- Enable treesitter-based code folding by default
-o.foldexpr       = 'v:lua.vim.treesitter.foldexpr()'
+o.foldtext       = '' -- Show the first line of the fold as-is
+o.foldlevelstart = 99 -- Don't fold anything by default
 
 -- Sync clipboard between OS and Neovim.
 -- Schedule the setting after `UIEnter` because it can increase startup-time.
