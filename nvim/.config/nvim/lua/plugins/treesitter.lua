@@ -23,6 +23,25 @@ return {
       'vimdoc',
     }, vim.g.work_profile and { 'javascript', 'typescript', 'tsx' } or {}))
 
+    local function enable(buf, language)
+      -- Load parser if available, otherwise return early
+      if not vim.treesitter.language.add(language) then
+        return
+      end
+
+      -- Enable syntax highlighting and other treesitter features
+      vim.treesitter.start(buf, language)
+
+      -- Enable treesitter based folds (see `:help folds`)
+      vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+      vim.wo.foldmethod = 'expr'
+
+      -- Enable treesitter based indentation if available
+      if vim.treesitter.query.get(language, 'indent') ~= nil then
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      end
+    end
+
     local available_parsers = treesitter.get_available()
 
     -- Automatically install/load parsers and enable treesitter features
@@ -33,28 +52,17 @@ return {
           return
         end
 
-        -- Automatically install parsers
         local installed = vim.tbl_contains(treesitter.get_installed 'parsers', language)
-        if not installed and vim.tbl_contains(available_parsers, language) then
-          treesitter.install(language):wait()
-        end
 
-        -- Load parser if available, otherwise return early
-        if not vim.treesitter.language.add(language) then
+        -- Attempt to install any missing parsers and enable them asynchronously when done
+        if not installed and vim.tbl_contains(available_parsers, language) then
+          treesitter.install(language):await(function()
+            enable(args.buf, language)
+          end)
           return
         end
 
-        -- Enable syntax highlighting and other treesitter features
-        vim.treesitter.start(args.buf, language)
-
-        -- Enable treesitter based folds (see `:help folds`)
-        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-        vim.wo.foldmethod = 'expr'
-
-        -- Enable treesitter based indentation if available
-        if vim.treesitter.query.get(language, 'indent') ~= nil then
-          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-        end
+        enable(args.buf, language)
       end,
     })
   end,
