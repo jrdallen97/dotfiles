@@ -7,7 +7,7 @@ vim.g.maplocalleader = ' '
 -- Disable nerd font icons by default (can be overridden by `local.lua`)
 vim.g.have_nerd_font = false
 
-vim.g.bigfile_size = 100 * 1024 -- 100KiB
+vim.g.bigfile_size = 1 * 1024 * 1024 -- 1MiB
 vim.g.hugefile_size = 10 * 1024 * 1024 -- 10MiB
 
 -- Load config
