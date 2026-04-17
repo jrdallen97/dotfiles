@@ -143,10 +143,10 @@ return {
         picker.smart { multi = { 'buffers' } }
       end
       local errors_buffer = function()
-        picker.diagnostics_buffer { severity = 'ERROR' }
+        picker.diagnostics_buffer { severity = vim.diagnostic.severity.ERROR }
       end
       local errors = function()
-        picker.diagnostics { severity = 'ERROR' }
+        picker.diagnostics { severity = vim.diagnostic.severity.ERROR }
       end
       local directories = function()
         picker.files {
