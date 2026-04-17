@@ -46,6 +46,10 @@ return {
 
       -- Tweak the default settings for each source
       sources = {
+        buffers = {
+          current = false,
+          layout = { hidden = { 'preview' } },
+        },
         smart = {
           on_change = set_preview_title,
         },
@@ -139,9 +143,6 @@ return {
       local picker = Snacks.picker
 
       -- Add shorthands for some longer picker invocations
-      local buffers = function()
-        picker.smart { multi = { 'buffers' } }
-      end
       local errors_buffer = function()
         picker.diagnostics_buffer { severity = vim.diagnostic.severity.ERROR }
       end
@@ -178,7 +179,7 @@ return {
       -- stylua: ignore start
 
       -- Misc
-      map('<leader><leader>', buffers,           'Switch buffers')
+      map('<leader><leader>', picker.buffers,    'Switch buffers')
       map('<leader>/',        picker.smart,      'Smart finder (buffers, recents, files)')
       map('<leader>gs',       picker.git_status, 'Status')
       map('<leader>fr',       picker.resume,     'Resume')

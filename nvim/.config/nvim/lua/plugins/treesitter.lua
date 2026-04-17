@@ -37,7 +37,7 @@ return {
       vim.wo.foldmethod = 'expr'
 
       -- Enable treesitter based indentation if available
-      if vim.treesitter.query.get(language, 'indent') ~= nil then
+      if vim.treesitter.query.get(language, 'indents') ~= nil then
         vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
       end
     end
