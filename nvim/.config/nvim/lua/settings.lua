@@ -64,8 +64,12 @@ o.inccommand  = 'split' -- Preview substitutions as you type
 o.foldtext       = '' -- Show the first line of the fold as-is
 o.foldlevelstart = 99 -- Don't fold anything by default
 
--- Track the spellfile in git
-o.spellfile  = vim.fn.stdpath 'config' .. '/spell/en.utf-8.add'
+local function spellfile(name)
+  return vim.fn.stdpath 'config' .. '/spell/' .. name .. '.utf-8.add'
+end
+-- Track the main spellfile in git.
+-- Also add a local one is for machine-specific words (select with e.g. `2zg`).
+o.spellfile = spellfile('en') .. ',' .. spellfile('local')
 
 -- Sync clipboard between OS and Neovim.
 -- Schedule the setting after `UIEnter` because it can increase startup-time.

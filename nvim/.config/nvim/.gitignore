@@ -3,4 +3,5 @@ test.sh
 .luarc.json
 nvim
 spell/*.spl
+spell/local.utf-8.add
 lua/local.lua
