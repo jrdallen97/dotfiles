@@ -1,7 +1,10 @@
 # PATH
+export PATH=$HOME/.local/bin:$PATH
 export PATH=$PATH:$HOME/bin
-export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/go/bin
+
+# Mise
+export PATH="$HOME/.local/share/mise/shims:$PATH"
 
 # Turn on zsh history file
 HISTFILE=$HOME/.zsh_history
