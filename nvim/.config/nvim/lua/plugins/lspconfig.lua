@@ -180,7 +180,6 @@ return {
         'bashls',
 
         -- Other
-        'markdown_oxide',
         'ruff',
         'basedpyright',
         'fixjson',

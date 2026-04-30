@@ -63,8 +63,8 @@ vim.api.nvim_create_user_command('Huge', function()
   vim.cmd 'Big'
   -- Disable indent guides
   vim.cmd 'IBLDisable'
-  -- Disable treesitter features
-  vim.cmd 'TSBufDisable highlight'
+  -- TODO: Disable treesitter features
+  -- vim.cmd 'TSBufDisable highlight'
   -- Disable syntax highlighting
   vim.cmd.syntax 'off'
 end, {})
