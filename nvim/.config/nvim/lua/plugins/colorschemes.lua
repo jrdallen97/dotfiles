@@ -32,36 +32,4 @@ return {
       },
     },
   },
-
-  {
-    -- Warm Green Theme for Neovim and Beyond
-    'ribru17/bamboo.nvim',
-    lazy = false,
-    priority = 1000,
-    opts = {
-      dim_inactive = true,
-    },
-  },
-
-  {
-    -- A highly customizable theme
-    'EdenEast/nightfox.nvim',
-    lazy = false,
-    priority = 1000,
-    opts = {
-      options = {
-        dim_inactive = false,
-      },
-      groups = {
-        all = {
-          -- I prefer mini.nvim's default styles (just a simple underline)
-          MiniCursorword = {},
-        },
-        nordfox = {
-          -- Plain white so it doesn't clash git changed lines
-          CursorLineNr = { fg = '#ffffff' },
-        },
-      },
-    },
-  },
 }
