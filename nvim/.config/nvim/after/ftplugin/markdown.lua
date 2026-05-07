@@ -9,3 +9,6 @@ vim.b.disable_autosuggestions = true
 -- Override default indentation
 vim.bo.shiftwidth = 4
 vim.bo.expandtab = true
+
+-- Disable mini.move's auto-indentation bc it does weird stuff with lists
+vim.b.minimove_config = { options = { reindent_linewise = false } }
