@@ -76,6 +76,7 @@ alias sed='gsed'
 # Random commands
 idea() { open -na "IntelliJ IDEA.app" --args "$@" }
 alias oc='opencode'
+export OPENCODE_DISABLE_TERMINAL_TITLE=1
 alias loadavg="sysctl -n vm.loadavg"
 alias diff='diff --color=auto'
 
