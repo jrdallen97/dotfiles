@@ -183,6 +183,7 @@ return {
         'ruff',
         'basedpyright',
         'fixjson',
+        'marksman',
       }
       -- Only install these additional tools if work_profile is enabled
       if vim.g.work_profile then

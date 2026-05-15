@@ -4,48 +4,47 @@ NOTE: I'm not gonna list all the basics here, just the stuff that's useful for m
 
 <!-- mtoc-start -->
 
-- [Personal](CHEATSHEET#Personal)
-- [Built-in](CHEATSHEET#Built-in)
-    - [Launch options](CHEATSHEET#Launch options)
-    - [Help](CHEATSHEET#Help)
-    - [Editing](CHEATSHEET#Editing)
-    - [Insert mode bindings](CHEATSHEET#Insert mode bindings)
-    - [Misc](CHEATSHEET#Misc)
-    - [Jumps](CHEATSHEET#Jumps)
-    - [Marks](CHEATSHEET#Marks)
-    - [Commands](CHEATSHEET#Commands)
-    - [Settings](CHEATSHEET#Settings)
-    - [Window commands](CHEATSHEET#Window commands)
-    - [Folds](CHEATSHEET#Folds)
-    - [Quickfix](CHEATSHEET#Quickfix)
-    - [Registers](CHEATSHEET#Registers)
-    - [Marks](CHEATSHEET#Marks)
-    - [netrw](CHEATSHEET#netrw)
-- [Plugins](CHEATSHEET#Plugins)
-    - [Lazy](CHEATSHEET#Lazy)
-    - [LSP](CHEATSHEET#LSP)
-    - [Formatting](CHEATSHEET#Formatting)
-    - [Diagnostics](CHEATSHEET#Diagnostics)
-    - [Autocompletion](CHEATSHEET#Autocompletion)
-    - [Oil](CHEATSHEET#Oil)
-    - [Comments](CHEATSHEET#Comments)
-    - [Markdown](CHEATSHEET#Markdown)
-    - [Git](CHEATSHEET#Git)
-    - [Grug-far](CHEATSHEET#Grug-far)
-    - [Snacks](CHEATSHEET#Snacks)
-        - [Snacks-picker](CHEATSHEET#Snacks-picker)
-        - [Snacks explorer](CHEATSHEET#Snacks explorer)
-        - [Snacks gitbrowse](CHEATSHEET#Snacks gitbrowse)
-        - [Snacks notifier](CHEATSHEET#Snacks notifier)
-    - [Mini](CHEATSHEET#Mini)
-        - [Mini-diff](CHEATSHEET#Mini-diff)
-        - [Mini-surround](CHEATSHEET#Mini-surround)
-        - [Mini-splitjoin](CHEATSHEET#Mini-splitjoin)
-        - [Mini-move](CHEATSHEET#Mini-move)
-        - [Mini-operators](CHEATSHEET#Mini-operators)
-        - [Mini-bracketed](CHEATSHEET#Mini-bracketed)
-        - [Mini-trailspace](CHEATSHEET#Mini-trailspace)
-        - [Mini-sessions](CHEATSHEET#Mini-sessions)
+- [Personal](#personal)
+- [Built-in](#built-in)
+    - [Launch options](#launch-options)
+    - [Help](#help)
+    - [Editing](#editing)
+    - [Insert mode bindings](#insert-mode-bindings)
+    - [Misc](#misc)
+    - [Jumps](#jumps)
+    - [Marks](#marks)
+    - [Commands](#commands)
+    - [Settings](#settings)
+    - [Window commands](#window-commands)
+    - [Folds](#folds)
+    - [Quickfix](#quickfix)
+    - [Registers](#registers)
+    - [netrw](#netrw)
+- [Plugins](#plugins)
+    - [Lazy](#lazy)
+    - [LSP](#lsp)
+    - [Formatting](#formatting)
+    - [Diagnostics](#diagnostics)
+    - [Autocompletion](#autocompletion)
+    - [Oil](#oil)
+    - [Comments](#comments)
+    - [Markdown](#markdown)
+    - [Git](#git)
+    - [Grug-far](#grug-far)
+    - [Snacks](#snacks)
+        - [Snacks-picker](#snacks-picker)
+        - [Snacks explorer](#snacks-explorer)
+        - [Snacks gitbrowse](#snacks-gitbrowse)
+        - [Snacks notifier](#snacks-notifier)
+    - [Mini](#mini)
+        - [Mini-diff](#mini-diff)
+        - [Mini-surround](#mini-surround)
+        - [Mini-splitjoin](#mini-splitjoin)
+        - [Mini-move](#mini-move)
+        - [Mini-operators](#mini-operators)
+        - [Mini-bracketed](#mini-bracketed)
+        - [Mini-trailspace](#mini-trailspace)
+        - [Mini-sessions](#mini-sessions)
 
 <!-- mtoc-end -->
 
@@ -214,11 +213,16 @@ Note: scrolling (e.g. `<C-d>`) is not a jump.
 
 Marks let you save cursor positions and easily jump back to them.
 
-- Lowercase marks are specific to the current buffer
-- Uppercase marks are global and can be used to jump between files.
-- `` m<mark> ``: Set mark
-- `` '<mark> ``: Jump to mark, with cursor at the start of the line
-- `` `<mark> ``: Jump to mark and restore marked cursor position
+- Types of mark:
+    - `a-z`: Lowercase marks, valid within one file
+    - `A-Z`: Uppercase marks/file marks, valid between files
+    - `0-9`: Numbered marks, automatically set by the `shada` file (basically remember where you were when you closed vim)
+- ``  m<mark>  ``: Set mark
+- ``  '<mark>  ``: Jump to mark and position cursor at the start of the line
+- ``  `<mark>  ``: Jump to mark and restore marked cursor position
+- `:marks`: List marks
+- `:delm[arks] {marks}`: Delete the given marks
+- `:delm[arks]!`: Delete all marks for the current buffer
 
 There are also some special marks:
 
@@ -420,19 +424,6 @@ Handy shortcuts:
     - `#`: Holds the previous filename
     - `:`: Holds the most recent command
     - `.`: Holds the last inserted text
-
-### Marks
-
-- `` ma ``: Set mark `a`
-- `` `a ``: Jump to mark `a`
-- `` 'a ``: Jump to the start of line marked `a`
-- `:marks`: List marks
-- `:delm[arks] {marks}`: Delete the given marks
-- `:delm[arks]!`: Delete all marks for the current buffer
-- Types of mark:
-    - Lowercase marks: valid within one file
-    - Uppercase marks: valid across files
-    - Numbered marks: automatically set by the `shada` file, basically remember where you were when you closed vim
 
 ### netrw
 
