@@ -64,6 +64,16 @@ return {
       -- Automatically show documentation
       documentation = { auto_show = true, auto_show_delay_ms = 500 },
 
+      menu = {
+        draw = {
+          columns = {
+            { 'kind_icon' },
+            { 'label', 'label_description', gap = 1 },
+            { 'kind' },
+          },
+        },
+      },
+
       list = {
         selection = {
           -- Automatically highlight the first suggestion
