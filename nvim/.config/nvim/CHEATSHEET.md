@@ -186,6 +186,14 @@ Undolist:
 - `g-`: Previous leaf in undo tree
 - `g+`: Next leaf in undo tree
 
+Formatting:
+
+- `gq{motion}`: Format the line(s) that `{motion}` moves over
+- `gqq`: Format current line
+- `qg`: (VISUAL) Format visual selection
+- Configured by `formatoptions`/`fo`; see `:h fo-table`
+- Target line length is configured with `textwidth`/`tw` (default 79)
+
 Random:
 
 - `ga`: Print the ascii value of the character under the cursor

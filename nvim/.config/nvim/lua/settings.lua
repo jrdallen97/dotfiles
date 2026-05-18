@@ -51,6 +51,7 @@ opt.listchars   = {       -- Make hidden characters display nicely
 o.wrap        = true -- Enable line wrapping by default
 o.linebreak   = true -- Wrap long lines at 'breakat'
 o.breakindent = true -- Indent wrapped lines to match line start
+o.textwidth   = 100  -- Set default line length (used by `gq` and auto-formatting)
 
 -- Splits
 o.splitbelow = true -- Horizontal splits will be below

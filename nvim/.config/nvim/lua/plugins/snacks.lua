@@ -245,8 +245,8 @@ return {
       -- Toggle ruler (use `:set cc=` for values other than 100)
       Snacks.toggle.new({
         name = 'ruler',
-        get = function()        return vim.o.colorcolumn ~= ''              end,
-        set = function(enabled) vim.o.colorcolumn = enabled and '100' or '' end,
+        get = function()        return vim.o.colorcolumn ~= ''                     end,
+        set = function(enabled) vim.o.colorcolumn = enabled and '80,100,120' or '' end,
       }):map '<leader>tr'
 
       -- Easily switch between light & dark mode
