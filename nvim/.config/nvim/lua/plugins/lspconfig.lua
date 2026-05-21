@@ -183,7 +183,7 @@ return {
         'ruff',
         'basedpyright',
         'fixjson',
-        'marksman',
+        'markdown-oxide',
       }
       -- Only install these additional tools if work_profile is enabled
       if vim.g.work_profile then

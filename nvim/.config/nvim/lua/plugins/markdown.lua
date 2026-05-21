@@ -7,10 +7,15 @@ return {
     'hedyhli/markdown-toc.nvim',
     cmd = { 'Mtoc' }, -- Lazy load on "Mtoc" command
     opts = {
-      auto_update = false,
+      -- Disabling auto-update doesn't work, so instead use an event/pattern that will never be triggered
+      auto_update = {
+        events = { 'User' },
+        pattern = 'MtocAutoUpdateDisabled',
+      },
       toc_list = {
         markers = '-',
         indent_size = 4,
+        item_format_string = '${indent}${marker} [[#${name}]]',
       },
     },
   },

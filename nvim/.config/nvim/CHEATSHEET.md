@@ -4,47 +4,47 @@ NOTE: I'm not gonna list all the basics here, just the stuff that's useful for m
 
 <!-- mtoc-start -->
 
-- [Personal](#personal)
-- [Built-in](#built-in)
-    - [Launch options](#launch-options)
-    - [Help](#help)
-    - [Editing](#editing)
-    - [Insert mode bindings](#insert-mode-bindings)
-    - [Misc](#misc)
-    - [Jumps](#jumps)
-    - [Marks](#marks)
-    - [Commands](#commands)
-    - [Settings](#settings)
-    - [Window commands](#window-commands)
-    - [Folds](#folds)
-    - [Quickfix](#quickfix)
-    - [Registers](#registers)
-    - [netrw](#netrw)
-- [Plugins](#plugins)
-    - [Lazy](#lazy)
-    - [LSP](#lsp)
-    - [Formatting](#formatting)
-    - [Diagnostics](#diagnostics)
-    - [Autocompletion](#autocompletion)
-    - [Oil](#oil)
-    - [Comments](#comments)
-    - [Markdown](#markdown)
-    - [Git](#git)
-    - [Grug-far](#grug-far)
-    - [Snacks](#snacks)
-        - [Snacks-picker](#snacks-picker)
-        - [Snacks explorer](#snacks-explorer)
-        - [Snacks gitbrowse](#snacks-gitbrowse)
-        - [Snacks notifier](#snacks-notifier)
-    - [Mini](#mini)
-        - [Mini-diff](#mini-diff)
-        - [Mini-surround](#mini-surround)
-        - [Mini-splitjoin](#mini-splitjoin)
-        - [Mini-move](#mini-move)
-        - [Mini-operators](#mini-operators)
-        - [Mini-bracketed](#mini-bracketed)
-        - [Mini-trailspace](#mini-trailspace)
-        - [Mini-sessions](#mini-sessions)
+- [[#Personal]]
+- [[#Built-in]]
+    - [[#Launch options]]
+    - [[#Help]]
+    - [[#Editing]]
+    - [[#Insert mode bindings]]
+    - [[#Misc]]
+    - [[#Jumps]]
+    - [[#Marks]]
+    - [[#Commands]]
+    - [[#Settings]]
+    - [[#Window commands]]
+    - [[#Folds]]
+    - [[#Quickfix]]
+    - [[#Registers]]
+    - [[#netrw]]
+- [[#Plugins]]
+    - [[#Lazy]]
+    - [[#LSP]]
+    - [[#Formatting]]
+    - [[#Diagnostics]]
+    - [[#Autocompletion]]
+    - [[#Oil]]
+    - [[#Comments]]
+    - [[#Markdown]]
+    - [[#Git]]
+    - [[#Grug-far]]
+    - [[#Snacks]]
+        - [[#Snacks-picker]]
+        - [[#Snacks explorer]]
+        - [[#Snacks gitbrowse]]
+        - [[#Snacks notifier]]
+    - [[#Mini]]
+        - [[#Mini-diff]]
+        - [[#Mini-surround]]
+        - [[#Mini-splitjoin]]
+        - [[#Mini-move]]
+        - [[#Mini-operators]]
+        - [[#Mini-bracketed]]
+        - [[#Mini-trailspace]]
+        - [[#Mini-sessions]]
 
 <!-- mtoc-end -->
 
