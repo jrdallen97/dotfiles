@@ -51,7 +51,17 @@ opt.listchars   = {       -- Make hidden characters display nicely
 o.wrap        = true -- Enable line wrapping by default
 o.linebreak   = true -- Wrap long lines at 'breakat'
 o.breakindent = true -- Indent wrapped lines to match line start
-o.textwidth   = 100  -- Set default line length (used by `gq` and auto-formatting)
+o.textwidth   = 100  -- Set default line length for explicit formatting with `gq`
+
+-- Don't automatically wrap text or comments
+opt.formatoptions:remove { 't', 'c' }
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('formatoptions-no-auto-wrap', { clear = true }),
+  desc = "Don't automatically wrap text or comments",
+  callback = function()
+    vim.opt_local.formatoptions:remove { 't', 'c' }
+  end,
+})
 
 -- Splits
 o.splitbelow = true -- Horizontal splits will be below
