@@ -7,7 +7,14 @@ return {
   priority = 50,
   dependencies = {
     { 'folke/lazydev.nvim', opts = {} },
-    { 'fang2hou/blink-copilot', enabled = vim.g.work_profile },
+    {
+      'fang2hou/blink-copilot',
+      enabled = vim.g.work_profile,
+      opts = {
+        max_completions = 1,
+        max_attempts = 2,
+      },
+    },
     {
       'L3MON4D3/LuaSnip',
       version = '2.*',
@@ -109,7 +116,7 @@ return {
             end
             return vim.g.disable_autosuggestions ~= true and vim.b.disable_autosuggestions ~= true
           end,
-          score_offset = 20,
+          score_offset = 100,
           async = true,
         },
       },
