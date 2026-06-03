@@ -42,6 +42,7 @@ onboarding
 postgres
 pprof
 prebuilt
+pubsub
 quickfix
 rebase
 shorthands

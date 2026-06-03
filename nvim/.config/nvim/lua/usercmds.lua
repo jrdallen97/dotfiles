@@ -23,6 +23,10 @@ end
 -- Save original vim.ui.open
 local open = vim.ui.open
 
+local overrides = {
+  ['jrdallen97/notes'] = 'supersparks/CloudExperiments',
+}
+
 -- Extend gx to open GitHub PR links
 ---@diagnostic disable-next-line: duplicate-set-field
 vim.ui.open = function(path)
@@ -32,11 +36,7 @@ vim.ui.open = function(path)
   if pr_number then
     local repo = github_repo()
     if repo then
-      if repo == 'jrdallen97/notes' then
-        repo = 'supersparks/CloudExperiments'
-      end
-
-      open(('https://github.com/%s/pull/%s'):format(repo, pr_number))
+      open(('https://github.com/%s/pull/%s'):format(overrides[repo] or repo, pr_number))
       return
     end
   end

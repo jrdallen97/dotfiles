@@ -5,16 +5,31 @@ return {
     -- A vim-vinegar like file explorer that lets you edit your filesystem like a normal Neovim buffer.
     'stevearc/oil.nvim',
     config = function()
-      require('oil').setup {
-        -- Replace netrw
+      local oil = require 'oil'
+
+      -- Override default select to prevent it from following symlinks
+      local function select(desc, cmd, fallback_opts)
+        return {
+          desc = desc,
+          callback = function()
+            local entry = oil.get_cursor_entry()
+            local dir = oil.get_current_dir()
+
+            if entry and entry.type == 'link' and dir then
+              return vim.cmd[cmd](vim.fn.fnameescape(dir .. entry.name))
+            end
+
+            oil.select(fallback_opts)
+          end,
+        }
+      end
+
+      oil.setup {
         default_file_explorer = true,
-        -- Skip the confirmation popup for simple operations (:help oil.skip_confirm_for_simple_edits)
         skip_confirm_for_simple_edits = true,
-        -- Keep the cursor on the filename column only
         constrain_cursor = 'name',
 
         view_options = {
-          -- Show hidden files and directories by default
           show_hidden = true,
 
           -- This function defines what will never be shown, even when `show_hidden` is set
@@ -30,44 +45,40 @@ return {
         },
 
         keymaps = {
-          -- Disable preview keybind (conflicts with previous buffer)
-          ['<C-p>'] = false,
+          ['<CR>'] = select('Open entry', 'edit'),
+          ['<C-s>'] = select('Open entry in vertical split', 'vsplit', { vertical = true }),
+          ['<C-h>'] = select('Open entry in horizontal split', 'split', { horizontal = true }),
+          ['<C-t>'] = select('Open entry in new tab', 'tabedit', { tab = true }),
+          ['<M-h>'] = { 'actions.toggle_hidden', desc = 'Toggle hidden files' },
+          ['<C-p>'] = false, -- Conflicts with previous buffer keybind
 
           -- Quick toggle to show file details (:h oil-columns)
           ['<M-d>'] = {
             desc = 'Toggle file detail view',
             callback = function()
               detail = not detail
-              if detail then
-                require('oil').set_columns { 'mtime', 'permissions', 'size', 'icon' }
-              else
-                require('oil').set_columns { 'icon' }
-              end
+              oil.set_columns(detail and { 'mtime', 'permissions', 'size', 'icon' } or { 'icon' })
             end,
           },
-          ['<M-h>'] = {
-            desc = 'Toggle hidden files',
-            callback = require('oil').toggle_hidden,
-          },
 
-          -- Helpers to call fzf from the current oil directory
+          -- Helpers to call pickers from the current directory
           ['<leader>fl'] = {
             desc = 'Local (current directory)',
             callback = function()
-              require('snacks.picker').files { cwd = require('oil').get_current_dir() }
+              require('snacks.picker').files { cwd = oil.get_current_dir() }
             end,
           },
           ['<leader>sl'] = {
             desc = 'Local (current directory)',
             callback = function()
-              require('snacks.picker').grep { cwd = require('oil').get_current_dir() }
+              require('snacks.picker').grep { cwd = oil.get_current_dir() }
             end,
           },
         },
       }
 
       -- Mimic the vim-vinegar method of navigating to the parent directory of a file
-      vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
+      vim.keymap.set('n', '-', oil.open, { desc = 'Open parent directory' })
     end,
   },
 }
