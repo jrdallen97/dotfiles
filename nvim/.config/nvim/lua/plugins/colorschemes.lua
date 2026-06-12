@@ -20,13 +20,16 @@ return {
         which_key = true,
       },
       highlight_overrides = {
-        macchiato = function()
+        macchiato = function(colors)
           return {
             -- Override column colour using the colour for CursorLine
             ColorColumn = { bg = '#303347' },
 
             -- Override cursor column to match cursor line
             CursorColumn = { bg = '#303347' },
+
+            -- Underline markdown link labels so they look nicer when concealed
+            ['@markup.link.label.markdown_inline'] = { fg = colors.lavender, underline = true },
           }
         end,
       },

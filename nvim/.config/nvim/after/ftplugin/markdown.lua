@@ -2,6 +2,8 @@
 vim.opt_local.spell = true
 -- Don't check for proper capitalisation
 vim.opt_local.spellcapcheck = ''
+-- Set conceal by default to make md files more readable
+vim.opt_local.conceallevel = 2
 
 -- Disable copilot
 vim.b.disable_autosuggestions = true
