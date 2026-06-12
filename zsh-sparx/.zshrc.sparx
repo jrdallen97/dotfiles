@@ -58,7 +58,7 @@ sci() {(cd "$CLOUDPATH/js/apps/science"; pnpm ${@:-dev:test2})}
 adm() {(cd "$CLOUDPATH/schools/admin-portal"; pnpm ${@:-dev})}
 admpf() {orca pf clear && orca pf apply $CLOUDPATH/schools/admin-portal/orca.ports}
 curman() {(cd "$CLOUDPATH/js/apps/curman"; pnpm ${@:-dev-test2})}
-curriculum() {(cd "$CLOUDPATH/js/apps/curriculum"; pnpm ${@:-dev})}
+curriculum() {(cd "$CLOUDPATH/js/apps/curriculum"; pnpm ${@:-dev:test2})}
 
 # DB connection
 alias test2-db-general='cloud-sql-proxy -i sparx-web-test:europe-west1:test-general-2019-12 -p 5432'
