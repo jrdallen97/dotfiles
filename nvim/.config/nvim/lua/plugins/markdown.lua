@@ -29,7 +29,7 @@ return {
       ---@diagnostic disable-next-line: missing-fields
       mt.setup {
         -- Configure possible checkbox states
-        box_table = { 'x', '~' },
+        box_table = { 'x' },
         -- Use the above table when cycling/toggling checkboxes
         cycle_box_table = true,
         -- When cycling checkboxes, also include "no checkbox" as the first option

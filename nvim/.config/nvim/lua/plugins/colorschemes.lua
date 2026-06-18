@@ -28,8 +28,8 @@ return {
             -- Override cursor column to match cursor line
             CursorColumn = { bg = '#303347' },
 
-            -- Underline markdown link labels so they look nicer when concealed
-            ['@markup.link.label.markdown_inline'] = { fg = colors.lavender, underline = true },
+            -- Make markdown links look nicer when concealed
+            ['@markup.link.label.markdown_inline'] = { fg = colors.blue, underline = true },
           }
         end,
       },

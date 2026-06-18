@@ -12,6 +12,7 @@ cheatsheet
 colourscheme
 colourschemes
 config
+deadletter
 dedupe
 deduplicate
 dependabot
@@ -39,6 +40,7 @@ mon
 mutex
 mutexes
 nvim
+ok
 onboarding
 postgres
 pprof

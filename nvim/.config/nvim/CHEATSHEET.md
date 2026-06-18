@@ -661,6 +661,7 @@ Shortcuts:
     - `<leader>hp`: Help: Pickers
     - `<leader>ht`: Help: Themes/colourschemes
     - `<leader>hi`: Help: Icons/emojis
+    - `<leader>hu`: Help: Update check
 - Find files (or directories!):
     - `<leader>ff`: Find: Global (all files)
     - `<leader>fl`: Find: Local (current dir)

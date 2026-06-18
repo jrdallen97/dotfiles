@@ -15,11 +15,13 @@ end
 
 -- stylua: ignore start
 
+-- Lazy
+map('<leader>hu', ':Lazy check<CR>', 'Update check')
+
 -- Jump to vim settings
 map('<leader>ev', ':tabe ~/.config/nvim/lua<CR>',                'Vim settings')
 map('<leader>ec', ':tabe ~/.config/nvim/CHEATSHEET.md<CR>',      'Cheatsheet')
 map('<leader>es', ':tabe ~/.config/nvim/spell/en.utf-8.add<CR>', 'Spellfile')
-
 if vim.g.work_profile then
   map('<leader>eg', ':tabe ~/code/CloudExperiments/scratch/main.go<CR>', 'Go scratch file')
 end
