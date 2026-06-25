@@ -79,6 +79,12 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
   end,
 })
 
+-- Recompile spellfile on save
+vim.api.nvim_create_autocmd('BufWritePost', {
+  pattern = '*/spell/*.add',
+  command = 'silent! mkspell! <afile>',
+})
+
 -- Automatically run :Big and :Huge for files exceeding certain sizes
 vim.api.nvim_create_autocmd('BufWinEnter', {
   group = vim.api.nvim_create_augroup('bigfile', { clear = true }),

@@ -1,3 +1,4 @@
+DBs
 HW
 LSP
 Neovim
@@ -7,6 +8,7 @@ TODO
 TODOs
 UUID
 UUIDs
+WIP
 backend
 cheatsheet
 colourscheme
@@ -24,7 +26,9 @@ filesystem
 fri
 frontend
 fullscreen
+github
 grafana
+grpc
 hardcode
 homeworks
 indentscope
@@ -36,19 +40,24 @@ keymaps
 kickstart
 laggy
 loclist
+mise
 mon
 mutex
 mutexes
+npm
 nvim
 ok
 onboarding
 postgres
 pprof
 prebuilt
+prometheus
 pubsub
 quickfix
 rebase
+reloader
 shorthands
+spellfile
 textobject
 textobjects
 thu
@@ -70,5 +79,6 @@ v7
 v8
 v9
 vsplit
+wezterm
 whitespace
 zsh
