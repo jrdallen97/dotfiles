@@ -30,6 +30,18 @@ return {
     --  - ci'  - [C]hange [I]nside [']quote
     require('mini.ai').setup { n_lines = 500 }
 
+    -- Comment/uncomment lines
+    require('mini.comment').setup {
+      mappings = {
+        -- I use Comment.nvim for most of this already...
+        comment = '',
+        comment_line = '',
+        comment_visual = '',
+        -- I just wanted the textobject!
+        textobject = 'ic',
+      },
+    }
+
     -- Add/delete/replace surroundings (brackets, quotes, etc.)
     require('mini.surround').setup {
       -- Override mappings to be more like tpope/vim-surround
