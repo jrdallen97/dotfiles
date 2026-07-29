@@ -2,6 +2,9 @@
 export PNPM_HOME="$HOME/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 
+# opencode
+export PATH=/Users/jamesallen/.opencode/bin:$PATH
+
 # Clean up homebrew downloads after a week (instead of the default 4 months)
 export HOMEBREW_CLEANUP_MAX_AGE_DAYS=7
 
@@ -55,8 +58,8 @@ tp3() {(cd "$CLOUDPATH/js/apps/maths"; pnpm ${@:-dev:test2})}
 sw2() {(cd "$CLOUDPATH/js/apps/swclient2"; pnpm ${@:-dev:test2})}
 rdr() {(cd "$CLOUDPATH/js/apps/reader"; pnpm ${@:-dev:test2})}
 sci() {(cd "$CLOUDPATH/js/apps/science"; pnpm ${@:-dev:test2})}
-adm() {(cd "$CLOUDPATH/schools/admin-portal"; pnpm ${@:-dev})}
-admpf() {orca pf clear && orca pf apply $CLOUDPATH/schools/admin-portal/orca.ports}
+adm() {(cd "$CLOUDPATH/js/apps/admin-portal"; pnpm ${@:-dev})}
+admpf() {orca pf clear && orca pf apply $CLOUDPATH/js/apps/admin-portal/orca.ports}
 curman() {(cd "$CLOUDPATH/js/apps/curman"; pnpm ${@:-dev-test2})}
 curriculum() {(cd "$CLOUDPATH/js/apps/curriculum"; pnpm ${@:-dev:test2})}
 
