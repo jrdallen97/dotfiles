@@ -29,6 +29,7 @@ alias kprod='kubectx prod'
 
 # Sparx commands
 alias kdev="$CLOUDPATH/kdev.sh"
+alias grant="spxdev grant"
 gen() {
   case $@ in
     new)
@@ -39,7 +40,6 @@ gen() {
 }
 alias pf="orca pf"
 changemonkey() {(cd "$CLOUDPATH" && python3 tools/release/change_monkey.py "$@")}
-prodperms() {kdev prod-perms ${@:-k8s}}
 alias db="kdev prod-perms db"
 
 # Simple pnpm wrapper with custom handling

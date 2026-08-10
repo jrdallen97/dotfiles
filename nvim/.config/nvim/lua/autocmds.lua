@@ -18,15 +18,6 @@ vim.api.nvim_create_autocmd('VimResized', { command = 'wincmd =' })
 -- Reset cmdheight on switching tabs (I'm not sure why it grows sometimes)
 vim.api.nvim_create_autocmd('TabEnter', { command = 'set cmdheight=1' })
 
--- Syntax highlighting for .env files
-vim.api.nvim_create_autocmd('BufRead', {
-  group = vim.api.nvim_create_augroup('dotenv_ft', { clear = true }),
-  pattern = { '.env', '.env.*' },
-  callback = function()
-    vim.bo.filetype = 'dosini'
-  end,
-})
-
 -- Auto-create missing dirs when saving a file
 vim.api.nvim_create_autocmd('BufWritePre', {
   group = vim.api.nvim_create_augroup('auto-create-dir', { clear = true }),
