@@ -20,7 +20,7 @@ end
 
 -- Shorthand for which formatters to use for all JS files
 local function js(bufnr)
-  return { 'eslint_d', first(bufnr, 'prettierd', 'prettier') }
+  return { 'eslint_d', first(bufnr, 'oxfmt', 'prettierd', 'prettier') }
 end
 
 return {

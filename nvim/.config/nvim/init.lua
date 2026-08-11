@@ -38,6 +38,11 @@ require('lazy').setup('plugins', {
   change_detection = {
     notify = false, -- Disable annoying pop-up whenever you change any config files.
   },
+  performance = {
+    -- Keep `packpath` intact so the built-in `vim.pack` manager can find
+    -- plugins it installs under `stdpath('data')/site`.
+    reset_packpath = false,
+  },
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
     -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
@@ -58,6 +63,9 @@ require('lazy').setup('plugins', {
     },
   },
 })
+
+-- Load plugins managed by vim.pack
+require 'pack'
 
 -- Load colorscheme once it's installed
 vim.cmd.colorscheme(vim.g.dark_scheme)
