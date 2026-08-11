@@ -64,9 +64,6 @@ require('lazy').setup('plugins', {
   },
 })
 
--- Load plugins managed by vim.pack
-require 'pack'
-
 -- Load colorscheme once it's installed
 vim.cmd.colorscheme(vim.g.dark_scheme)
 

@@ -2,6 +2,7 @@
 vim.pack.add { 'https://github.com/chrisgrieser/nvim-spider' }
 
 local spider = require 'spider'
+
 spider.setup {
   skipInsignificantPunctuation = true,
   subwordMovement = true,

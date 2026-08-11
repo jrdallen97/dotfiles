@@ -1,15 +1,28 @@
 -- [[ User Commands ]]
 --  See `:help vim.api.nvim_create_user_command()`
+local map = function(name, cmd, opts)
+  opts = opts or {}
+  vim.api.nvim_create_user_command(name, cmd, opts)
+end
 
 -- I often accidentally type `:Qa` when I mean `:qa`
-vim.api.nvim_create_user_command('Qa', 'qa', {})
-vim.api.nvim_create_user_command('Wa', 'wa', {})
+map('Qa', 'qa')
+map('Wa', 'wa')
+map('Wq', 'wq')
+
+-- Helpers to make vim.pack more ergonomic
+map('PackUpdate', function()
+  vim.pack.update()
+end, { desc = 'Check for package updates' })
+map('PackRestore', function()
+  vim.pack.update(nil, { target = 'lockfile' })
+end, { desc = 'Restore installed packages to versions in lockfile' })
 
 -- These used to be built-in to nvim-lspconfig
-vim.api.nvim_create_user_command('LspInfo', ':checkhealth vim.lsp', {})
-vim.api.nvim_create_user_command('LspLog', function()
+map('LspInfo', ':checkhealth vim.lsp')
+map('LspLog', function()
   vim.cmd('tabnew ' .. vim.lsp.log.get_filename())
-end, {})
+end)
 
 -- [[ Extend gx ]]
 
@@ -48,15 +61,15 @@ end
 
 -- Disable slow settings/features in big files
 -- NOTE: some features (e.g. `matchparen` & window settings) won't be re-enabled on switching buffers
-vim.api.nvim_create_user_command('Big', function()
+map('Big', function()
   -- Disable treesitter-based folding
   vim.wo.foldmethod = 'indent'
   -- Disable plugins
   vim.b.miniindentscope_disable = true
-end, {})
+end)
 
 -- Disable even more settings/features in huge files
-vim.api.nvim_create_user_command('Huge', function()
+map('Huge', function()
   -- Don't highlight matching brackets
   vim.cmd 'NoMatchParen'
   -- Run :Big first
@@ -67,4 +80,4 @@ vim.api.nvim_create_user_command('Huge', function()
   -- vim.cmd 'TSBufDisable highlight'
   -- Disable syntax highlighting
   vim.cmd.syntax 'off'
-end, {})
+end)
