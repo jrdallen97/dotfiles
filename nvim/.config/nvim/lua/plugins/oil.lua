@@ -39,6 +39,9 @@ return {
           end,
         },
 
+        -- Make confirmation prompts stand out more
+        confirmation = { border = 'rounded' },
+
         lsp_file_methods = {
           -- Autosave buffers that are updated with LSP willRenameFiles, unless they are already modified
           autosave_changes = 'unmodified',
