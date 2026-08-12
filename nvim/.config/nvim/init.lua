@@ -18,9 +18,13 @@ if not pcall(require, 'local') then
 end
 
 vim.pack.add {
+  { src = 'https://github.com/HiPhish/rainbow-delimiters.nvim' },
   { src = 'https://github.com/catppuccin/nvim', name = 'catppuccin' },
   { src = 'https://github.com/chrisgrieser/nvim-spider' },
+  { src = 'https://github.com/crispgm/nvim-tabline' },
+  { src = 'https://github.com/lukas-reineke/indent-blankline.nvim' },
   { src = 'https://github.com/monaqa/dial.nvim' },
+  { src = 'https://github.com/nvim-lualine/lualine.nvim' },
   { src = 'https://github.com/nvim-mini/mini.nvim' },
 }
 
