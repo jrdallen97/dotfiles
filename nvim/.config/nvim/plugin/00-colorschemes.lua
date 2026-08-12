@@ -1,8 +1,4 @@
-vim.pack.add {
-  -- Soothing pastel colourscheme
-  { src = 'https://github.com/catppuccin/nvim', name = 'catppuccin' },
-}
-
+-- Soothing pastel colourscheme
 require('catppuccin').setup {
   flavour = 'macchiato',
   dim_inactive = {

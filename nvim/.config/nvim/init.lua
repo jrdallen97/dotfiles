@@ -12,11 +12,22 @@ vim.g.hugefile_size = 10 * 1024 * 1024 -- 10MiB
 
 -- Load config
 require 'settings'
-require 'autocmds'
-
 -- Catch the error if `local.lua` doesn't exist
 if not pcall(require, 'local') then
   print 'Warn: no `local.lua` file'
+end
+
+vim.pack.add {
+  { src = 'https://github.com/catppuccin/nvim', name = 'catppuccin' },
+  { src = 'https://github.com/chrisgrieser/nvim-spider' },
+  { src = 'https://github.com/monaqa/dial.nvim' },
+  { src = 'https://github.com/nvim-mini/mini.nvim' },
+}
+
+-- Make 'mini.icons' pretend to be 'nvim-web-devicons'
+package.preload['nvim-web-devicons'] = function()
+  require('mini.icons').mock_nvim_web_devicons()
+  return package.loaded['nvim-web-devicons']
 end
 
 -- [[ Install `lazy.nvim` plugin manager ]]
@@ -39,9 +50,9 @@ require('lazy').setup('plugins', {
     notify = false, -- Disable annoying pop-up whenever you change any config files.
   },
   performance = {
-    -- Keep `packpath` intact so the built-in `vim.pack` manager can find
-    -- plugins it installs under `stdpath('data')/site`.
+    -- Keep `packpath` and `runtimepath` intact for built-in `vim.pack` plugins.
     reset_packpath = false,
+    rtp = { reset = false },
   },
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
@@ -67,3 +78,4 @@ require('lazy').setup('plugins', {
 -- Load keymaps after lazy so I can add binds for plugins if I want to
 require 'keymaps'
 require 'usercmds'
+require 'autocmds'

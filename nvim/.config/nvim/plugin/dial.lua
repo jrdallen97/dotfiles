@@ -1,8 +1,6 @@
--- Enhanced increment/decrement plugin for Neovim
-vim.pack.add { 'https://github.com/monaqa/dial.nvim' }
-
 local augend = require 'dial.augend'
 
+-- Enhanced increment/decrement plugin for Neovim
 require('dial.config').augends:register_group {
   default = {
     -- Numbers
@@ -60,8 +58,3 @@ map('<C-a>', '<Plug>(dial-increment)', 'Increment')
 map('<C-x>', '<Plug>(dial-decrement)', 'Decrement')
 map('g<C-a>', '<Plug>(dial-g-increment)', 'gIncrement')
 map('g<C-x>', '<Plug>(dial-g-decrement)', 'gDecrement')
-
--- Load Dial's plugin script after startup so it defines the <Plug> targets.
-vim.schedule(function()
-  vim.cmd.packadd 'dial.nvim'
-end)
