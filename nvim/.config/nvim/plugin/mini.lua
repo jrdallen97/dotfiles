@@ -75,24 +75,6 @@ require('mini.cursorword').setup()
 -- Don't highlight the actual word under the cursor
 vim.api.nvim_set_hl(0, 'MiniCursorwordCurrent', {})
 
--- Fast and flexible start screen
-local starter = require 'mini.starter'
-starter.setup {
-  header = '',
-
-  -- Remove `-` so I can easily get into Oil
-  query_updaters = 'abcdefghijklmnopqrstuvwxyz0123456789_.',
-
-  items = {
-    starter.sections.sessions(5, true),
-    starter.sections.recent_files(10, true),
-    starter.sections.builtin_actions(),
-  },
-}
-vim.api.nvim_create_user_command('Start', function()
-  starter.open()
-end, { desc = 'Open start screen' })
-
 -- Set up terminal background synchronization
 -- (prevents black borders if terminal size isn't perfectly aligned)
 require('mini.misc').setup_termbg_sync()
