@@ -64,9 +64,6 @@ require('lazy').setup('plugins', {
   },
 })
 
--- Load colorscheme once it's installed
-vim.cmd.colorscheme(vim.g.dark_scheme)
-
 -- Load keymaps after lazy so I can add binds for plugins if I want to
 require 'keymaps'
 require 'usercmds'
