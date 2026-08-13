@@ -10,6 +10,23 @@ vim.g.have_nerd_font = false
 vim.g.bigfile_size = 1 * 1024 * 1024 -- 1MiB
 vim.g.hugefile_size = 10 * 1024 * 1024 -- 10MiB
 
+-- Run build steps whenever vim.pack installs or updates a plugin.
+vim.api.nvim_create_autocmd('PackChanged', {
+  callback = function(event)
+    if event.data.kind == 'delete' then
+      return
+    end
+
+    if event.data.spec.name == 'LuaSnip' then
+      -- Build step is needed for regex support in snippets.
+      -- This step is not supported in many windows environments.
+      if vim.fn.has 'win32' == 0 and vim.fn.executable 'make' == 1 then
+        vim.system({ 'make', 'install_jsregexp' }, { cwd = event.data.path })
+      end
+    end
+  end,
+})
+
 -- Load config
 require 'settings'
 -- Catch the error if `local.lua` doesn't exist
@@ -17,7 +34,15 @@ if not pcall(require, 'local') then
   print 'Warn: no `local.lua` file'
 end
 
+-- Install plugins
 vim.pack.add {
+  -- Completion
+  -- Using a release tag makes blink automatically download pre-built binaries
+  { src = 'https://github.com/saghen/blink.cmp', version = vim.version.range '1.x' },
+  { src = 'https://github.com/folke/lazydev.nvim' },
+  { src = 'https://github.com/L3MON4D3/LuaSnip', version = vim.version.range '2.x' },
+  { src = 'https://github.com/rafamadriz/friendly-snippets' },
+
   -- LSP
   { src = 'https://github.com/mason-org/mason.nvim' },
   { src = 'https://github.com/mason-org/mason-lspconfig.nvim' },
@@ -27,6 +52,7 @@ vim.pack.add {
   { src = 'https://github.com/nvim-lua/plenary.nvim' },
   { src = 'https://github.com/rachartier/tiny-code-action.nvim' },
 
+  -- Other
   { src = 'https://github.com/HiPhish/rainbow-delimiters.nvim' },
   { src = 'https://github.com/catppuccin/nvim', name = 'catppuccin' },
   { src = 'https://github.com/chrisgrieser/nvim-spider' },
@@ -37,6 +63,14 @@ vim.pack.add {
   { src = 'https://github.com/nvim-mini/mini.nvim' },
   { src = 'https://github.com/windwp/nvim-ts-autotag' },
 }
+
+-- Install additional plugins if `work_profile` is enabled
+if vim.g.work_profile then
+  vim.pack.add {
+    'https://github.com/zbirenbaum/copilot.lua',
+    'https://github.com/fang2hou/blink-copilot',
+  }
+end
 
 -- Make 'mini.icons' pretend to be 'nvim-web-devicons'
 package.preload['nvim-web-devicons'] = function()
