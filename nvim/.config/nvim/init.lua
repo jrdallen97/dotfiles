@@ -18,6 +18,15 @@ if not pcall(require, 'local') then
 end
 
 vim.pack.add {
+  -- LSP
+  { src = 'https://github.com/mason-org/mason.nvim' },
+  { src = 'https://github.com/mason-org/mason-lspconfig.nvim' },
+  { src = 'https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim' },
+  { src = 'https://github.com/neovim/nvim-lspconfig' },
+  { src = 'https://github.com/j-hui/fidget.nvim' },
+  { src = 'https://github.com/nvim-lua/plenary.nvim' },
+  { src = 'https://github.com/rachartier/tiny-code-action.nvim' },
+
   { src = 'https://github.com/HiPhish/rainbow-delimiters.nvim' },
   { src = 'https://github.com/catppuccin/nvim', name = 'catppuccin' },
   { src = 'https://github.com/chrisgrieser/nvim-spider' },
@@ -26,6 +35,7 @@ vim.pack.add {
   { src = 'https://github.com/monaqa/dial.nvim' },
   { src = 'https://github.com/nvim-lualine/lualine.nvim' },
   { src = 'https://github.com/nvim-mini/mini.nvim' },
+  { src = 'https://github.com/windwp/nvim-ts-autotag' },
 }
 
 -- Make 'mini.icons' pretend to be 'nvim-web-devicons'
