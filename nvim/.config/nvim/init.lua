@@ -57,11 +57,19 @@ vim.pack.add {
   { src = 'https://github.com/catppuccin/nvim', name = 'catppuccin' },
   { src = 'https://github.com/chrisgrieser/nvim-spider' },
   { src = 'https://github.com/crispgm/nvim-tabline' },
+  { src = 'https://github.com/folke/todo-comments.nvim' },
+  { src = 'https://github.com/folke/which-key.nvim' },
   { src = 'https://github.com/lukas-reineke/indent-blankline.nvim' },
   { src = 'https://github.com/monaqa/dial.nvim' },
   { src = 'https://github.com/nvim-lualine/lualine.nvim' },
   { src = 'https://github.com/nvim-mini/mini.nvim' },
+  { src = 'https://github.com/tpope/vim-fugitive' },
   { src = 'https://github.com/windwp/nvim-ts-autotag' },
+
+  -- And some that don't need any setup:
+
+  -- Undo closing a split with `<C-w>u`
+  { src = 'https://github.com/AndrewRadev/undoquit.vim' },
 }
 
 -- Install additional plugins if `work_profile` is enabled

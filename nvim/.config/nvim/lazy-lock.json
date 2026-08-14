@@ -11,11 +11,6 @@
   "nvim-autopairs": { "branch": "master", "commit": "7b9923abad60b903ece7c52940e1321d39eccc79" },
   "nvim-treesitter": { "branch": "main", "commit": "c9f9ed6c1892f629ea399f4ee7905f2686fa13f2" },
   "oil.nvim": { "branch": "master", "commit": "b73018b75affd13fa38e2fc94ef753b465f770d7" },
-  "plenary.nvim": { "branch": "master", "commit": "74b06c6c75e4eeb3108ec01852001636d85a932b" },
   "snacks.nvim": { "branch": "main", "commit": "882c996cf28183f4d63640de0b4c02ec886d01f2" },
-  "todo-comments.nvim": { "branch": "main", "commit": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668" },
-  "undoquit.vim": { "branch": "main", "commit": "96935cae0c04ab9c7384afe1d2537ce883672e8c" },
-  "vim-fugitive": { "branch": "master", "commit": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0" },
-  "vim-pairify": { "branch": "master", "commit": "119a5f9a56c472ec783be8e0aa34500c2bf19670" },
-  "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" }
+  "vim-pairify": { "branch": "master", "commit": "119a5f9a56c472ec783be8e0aa34500c2bf19670" }
 }

@@ -2,6 +2,7 @@
 require('mason').setup {}
 
 -- A simple way to run and visualize code actions with other picker plugins
+-- Depends on: `nvim-lua/plenary.nvim`
 require('tiny-code-action').setup { picker = 'snacks' }
 
 -- Useful status updates for LSP.

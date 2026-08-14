@@ -26,9 +26,6 @@ return {
     end,
   },
 
-  -- Undo closing a split with `<C-w>u`
-  'AndrewRadev/undoquit.vim',
-
   {
     -- Jump to previous and next buffer of the jumplist
     'kwkarlwang/bufjump.nvim',
