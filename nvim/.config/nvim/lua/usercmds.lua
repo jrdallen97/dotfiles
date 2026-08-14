@@ -10,13 +10,25 @@ map('Qa', 'qa')
 map('Wa', 'wa')
 map('Wq', 'wq')
 
+-- For autocompletion for :Pack commands
+-- stylua: ignore
+local function complete_packages(match)
+  return vim.iter(vim.pack.get(nil, { info = false }))
+    :map(function(pack) return pack.spec.name end)
+    :filter(function(name) return name:find(match, 1, true) end)
+    :totable()
+end
+
 -- Helpers to make vim.pack more ergonomic
-map('PackUpdate', function()
-  vim.pack.update()
-end, { desc = 'Check for package updates' })
+map('PackUpdate', function(info)
+  vim.pack.update(#info.fargs > 0 and info.fargs or nil)
+end, { desc = 'Check for package updates', nargs = '*', complete = complete_packages })
 map('PackRestore', function()
   vim.pack.update(nil, { target = 'lockfile' })
 end, { desc = 'Restore installed packages to versions in lockfile' })
+map('PackDelete', function(info)
+  vim.pack.del(info.fargs, { force = info.bang })
+end, { desc = 'Delete packages', nargs = '+', bang = true, complete = complete_packages })
 
 -- These used to be built-in to nvim-lspconfig
 map('LspInfo', ':checkhealth vim.lsp')
