@@ -57,6 +57,7 @@ vim.pack.add {
 
   -- Other
   { src = 'https://github.com/HiPhish/rainbow-delimiters.nvim' },
+  { src = 'https://github.com/MagicDuck/grug-far.nvim' },
   { src = 'https://github.com/catppuccin/nvim', name = 'catppuccin' },
   { src = 'https://github.com/chrisgrieser/nvim-spider' },
   { src = 'https://github.com/crispgm/nvim-tabline' },
@@ -75,6 +76,7 @@ vim.pack.add {
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
   { src = 'https://github.com/roodolv/markdown-toggle.nvim' },
   { src = 'https://github.com/stevearc/conform.nvim' },
+  { src = 'https://github.com/stevearc/oil.nvim' },
   { src = 'https://github.com/tpope/vim-fugitive' },
   { src = 'https://github.com/windwp/nvim-autopairs' },
   { src = 'https://github.com/windwp/nvim-ts-autotag' },
