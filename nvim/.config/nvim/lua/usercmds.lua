@@ -30,12 +30,6 @@ map('PackDelete', function(info)
   vim.pack.del(info.fargs, { force = info.bang })
 end, { desc = 'Delete packages', nargs = '+', bang = true, complete = complete_packages })
 
--- These used to be built-in to nvim-lspconfig
-map('LspInfo', ':checkhealth vim.lsp')
-map('LspLog', function()
-  vim.cmd('tabnew ' .. vim.lsp.log.get_filename())
-end)
-
 -- [[ Extend gx ]]
 
 -- Get github repo from cwd

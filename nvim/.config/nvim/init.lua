@@ -23,6 +23,9 @@ vim.api.nvim_create_autocmd('PackChanged', {
       if vim.fn.has 'win32' == 0 and vim.fn.executable 'make' == 1 then
         vim.system({ 'make', 'install_jsregexp' }, { cwd = event.data.path })
       end
+    elseif event.data.spec.name == 'nvim-treesitter' then
+      vim.cmd.packadd 'nvim-treesitter'
+      vim.cmd 'TSUpdate'
     end
   end,
 })
@@ -63,6 +66,7 @@ vim.pack.add {
   { src = 'https://github.com/monaqa/dial.nvim' },
   { src = 'https://github.com/nvim-lualine/lualine.nvim' },
   { src = 'https://github.com/nvim-mini/mini.nvim' },
+  { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
   { src = 'https://github.com/tpope/vim-fugitive' },
   { src = 'https://github.com/windwp/nvim-ts-autotag' },
 

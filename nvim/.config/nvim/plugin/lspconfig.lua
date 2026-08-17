@@ -146,3 +146,9 @@ end
 
 -- Automatically enable all LSP servers that are installed via Mason
 require('mason-lspconfig').setup()
+
+-- These used to be built-in to nvim-lspconfig
+vim.api.nvim_create_user_command('LspInfo', ':checkhealth vim.lsp', {})
+vim.api.nvim_create_user_command('LspLog', function()
+  vim.cmd('tabnew ' .. vim.lsp.log.get_filename())
+end, {})
