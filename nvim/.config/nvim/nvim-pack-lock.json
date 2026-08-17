@@ -14,6 +14,10 @@
       "src": "https://github.com/saghen/blink.cmp",
       "version": "1.0.0 - 2.0.0"
     },
+    "bufjump.nvim": {
+      "rev": "ae2728a77defbd27e9e5ef64c854fb0813ffba01",
+      "src": "https://github.com/kwkarlwang/bufjump.nvim"
+    },
     "catppuccin": {
       "rev": "edefef779ab08ce1a4a404713e3012b0d202bd35",
       "src": "https://github.com/catppuccin/nvim"
@@ -26,6 +30,10 @@
       "rev": "7e6723aabea044519462958ffcea68d7985c5ed0",
       "src": "https://github.com/zbirenbaum/copilot.lua"
     },
+    "csvview.nvim": {
+      "rev": "5c22774c3ecc7f8883af5d143b366e45b1f0875d",
+      "src": "https://github.com/hat0uma/csvview.nvim"
+    },
     "dial.nvim": {
       "rev": "f2634758455cfa52a8acea6f142dcd6271a1bf57",
       "src": "https://github.com/monaqa/dial.nvim"
@@ -37,6 +45,10 @@
     "friendly-snippets": {
       "rev": "6cd7280adead7f586db6fccbd15d2cac7e2188b9",
       "src": "https://github.com/rafamadriz/friendly-snippets"
+    },
+    "guess-indent.nvim": {
+      "rev": "84a4987ff36798c2fc1169cbaff67960aed9776f",
+      "src": "https://github.com/nmac427/guess-indent.nvim"
     },
     "indent-blankline.nvim": {
       "rev": "d28a3f70721c79e3c5f6693057ae929f3d9c0a03",
@@ -65,6 +77,10 @@
     "mini.nvim": {
       "rev": "e58ad4b0c9e9376096b9704f98fc00d4c9448870",
       "src": "https://github.com/nvim-mini/mini.nvim"
+    },
+    "nvim-autopairs": {
+      "rev": "7b9923abad60b903ece7c52940e1321d39eccc79",
+      "src": "https://github.com/windwp/nvim-autopairs"
     },
     "nvim-lspconfig": {
       "rev": "fbaef6156f9ad65790931ab543ab1dfec57bbec7",
@@ -109,6 +125,10 @@
     "vim-fugitive": {
       "rev": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0",
       "src": "https://github.com/tpope/vim-fugitive"
+    },
+    "vim-pairify": {
+      "rev": "119a5f9a56c472ec783be8e0aa34500c2bf19670",
+      "src": "https://github.com/dhruvasagar/vim-pairify"
     },
     "which-key.nvim": {
       "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",

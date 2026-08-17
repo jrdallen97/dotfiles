@@ -1,14 +1,9 @@
 {
   "autolist.nvim": { "branch": "main", "commit": "339499695d3be8c44aefef1d2516464758957004" },
-  "bufjump.nvim": { "branch": "master", "commit": "ae2728a77defbd27e9e5ef64c854fb0813ffba01" },
-  "csvview.nvim": { "branch": "main", "commit": "5c22774c3ecc7f8883af5d143b366e45b1f0875d" },
   "grug-far.nvim": { "branch": "main", "commit": "11595bf747edc270bce2069d1020502ad4ae56cf" },
-  "guess-indent.nvim": { "branch": "main", "commit": "84a4987ff36798c2fc1169cbaff67960aed9776f" },
   "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
   "markdown-toc.nvim": { "branch": "main", "commit": "869af35bce0c27e2006f410fa3f706808db4843d" },
   "markdown-toggle.nvim": { "branch": "main", "commit": "86235e1c5f7ff12174dbb33bdeb091040a8cbe63" },
-  "nvim-autopairs": { "branch": "master", "commit": "7b9923abad60b903ece7c52940e1321d39eccc79" },
   "oil.nvim": { "branch": "master", "commit": "b73018b75affd13fa38e2fc94ef753b465f770d7" },
-  "snacks.nvim": { "branch": "main", "commit": "882c996cf28183f4d63640de0b4c02ec886d01f2" },
-  "vim-pairify": { "branch": "master", "commit": "119a5f9a56c472ec783be8e0aa34500c2bf19670" }
+  "snacks.nvim": { "branch": "main", "commit": "882c996cf28183f4d63640de0b4c02ec886d01f2" }
 }
