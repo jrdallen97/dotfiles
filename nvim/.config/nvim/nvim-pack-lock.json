@@ -5,6 +5,10 @@
       "src": "https://github.com/L3MON4D3/LuaSnip",
       "version": "2.0.0 - 3.0.0"
     },
+    "autolist.nvim": {
+      "rev": "339499695d3be8c44aefef1d2516464758957004",
+      "src": "https://github.com/gaoDean/autolist.nvim"
+    },
     "blink-copilot": {
       "rev": "7ad8209b2f880a2840c94cdcd80ab4dc511d4f39",
       "src": "https://github.com/fang2hou/blink-copilot"
@@ -61,6 +65,14 @@
     "lualine.nvim": {
       "rev": "221ce6b2d999187044529f49da6554a92f740a96",
       "src": "https://github.com/nvim-lualine/lualine.nvim"
+    },
+    "markdown-toc.nvim": {
+      "rev": "869af35bce0c27e2006f410fa3f706808db4843d",
+      "src": "https://github.com/hedyhli/markdown-toc.nvim"
+    },
+    "markdown-toggle.nvim": {
+      "rev": "86235e1c5f7ff12174dbb33bdeb091040a8cbe63",
+      "src": "https://github.com/roodolv/markdown-toggle.nvim"
     },
     "mason-lspconfig.nvim": {
       "rev": "9d28935aa95fa6c1dc7c4d6747f101a72a8a4bec",

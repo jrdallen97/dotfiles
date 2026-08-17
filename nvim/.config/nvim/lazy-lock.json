@@ -1,9 +1,6 @@
 {
-  "autolist.nvim": { "branch": "main", "commit": "339499695d3be8c44aefef1d2516464758957004" },
   "grug-far.nvim": { "branch": "main", "commit": "11595bf747edc270bce2069d1020502ad4ae56cf" },
   "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
-  "markdown-toc.nvim": { "branch": "main", "commit": "869af35bce0c27e2006f410fa3f706808db4843d" },
-  "markdown-toggle.nvim": { "branch": "main", "commit": "86235e1c5f7ff12174dbb33bdeb091040a8cbe63" },
   "oil.nvim": { "branch": "master", "commit": "b73018b75affd13fa38e2fc94ef753b465f770d7" },
   "snacks.nvim": { "branch": "main", "commit": "882c996cf28183f4d63640de0b4c02ec886d01f2" }
 }
