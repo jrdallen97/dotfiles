@@ -32,7 +32,6 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = {
     'grug-far',
     'help',
-    'lazy',
     'markdown',
     'mason',
     'oil_preview',

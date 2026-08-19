@@ -15,7 +15,7 @@ cmd('Save', function(opts)
 end, { nargs = '?', desc = 'mini.sessions: Save/create session' })
 -- Save/create local session
 cmd('SaveLocal', function()
-  MiniSessions.write('session.vim', { force = true })
+  MiniSessions.write('Session.vim', { force = true })
 end, { nargs = 0, desc = 'mini.sessions: Save/create local session' })
 -- Load session (or delete with `<C-x>`)
 cmd('Sessions', function()

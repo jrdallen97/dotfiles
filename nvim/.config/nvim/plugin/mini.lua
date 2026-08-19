@@ -52,7 +52,6 @@ require('mini.bracketed').setup {
   -- Disable the weird ones
   treesitter = { suffix = '' },
   undo = { suffix = '' },
-  yank = { suffix = '' },
 }
 -- Reset `]c` keymap in diff buffers
 vim.api.nvim_create_autocmd({ 'OptionSet', 'UIEnter' }, {

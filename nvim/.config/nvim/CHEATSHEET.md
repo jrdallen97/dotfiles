@@ -19,9 +19,7 @@ NOTE: I'm not gonna list all the basics here, just the stuff that's useful for m
     - [[#Folds]]
     - [[#Quickfix]]
     - [[#Registers]]
-    - [[#netrw]]
 - [[#Plugins]]
-    - [[#Lazy]]
     - [[#LSP]]
     - [[#Formatting]]
     - [[#Diagnostics]]
@@ -36,6 +34,7 @@ NOTE: I'm not gonna list all the basics here, just the stuff that's useful for m
         - [[#Snacks explorer]]
         - [[#Snacks gitbrowse]]
         - [[#Snacks notifier]]
+        - [[#Snacks terminal]]
     - [[#Mini]]
         - [[#Mini-diff]]
         - [[#Mini-surround]]
@@ -45,6 +44,7 @@ NOTE: I'm not gonna list all the basics here, just the stuff that's useful for m
         - [[#Mini-bracketed]]
         - [[#Mini-trailspace]]
         - [[#Mini-sessions]]
+        - [[#Mini-starter]]
 
 <!-- mtoc-end -->
 
@@ -61,8 +61,12 @@ Toggles:
 - `<leader>tw`: Toggle wrap
 - `<leader>ts`: Toggle spellcheck
 - `<leader>td`: Toggle diagnostics
-- `<leader>tr`: Toggle ruler (default to col 100, use `:set cc=<n>` otherwise)
+- `<leader>tr`: Toggle ruler (default to cols 80, 100, & 120; use `:set cc=<n>` otherwise)
 - `<leader>tl`: Toggle light mode
+- `<leader>tc`: Toggle conceal
+- `<leader>th`: Toggle inlay hints
+- `<leader>ta`: Toggle auto-suggestions (buffer)
+- `<leader>tA`: Toggle auto-suggestions (global)
 
 Shortcuts:
 
@@ -192,7 +196,7 @@ Formatting:
 - `gqq`: Format current line
 - `qg`: (VISUAL) Format visual selection
 - Configured by `formatoptions`/`fo`; see `:h fo-table`
-- Target line length is configured with `textwidth`/`tw` (default 79)
+- Target line length is configured with `textwidth`/`tw` (default 100)
 
 Random:
 
@@ -375,8 +379,8 @@ Also, for tabs:
 - `zr`: Reduce folding: Add 1 (or count) to `foldlevel`
 - `zi`: Toggle `foldenable`, i.e. enable/disable all folding in buffer
 - Less useful?
-    - `zo`: Close one fold under the cursor. Accepts count (e.g. `3zo`)
-    - `zO`: Close all folds under the cursor recursively. Folds that don't contain the cursor line are unchanged.
+    - `zo`: Open one fold under the cursor. Accepts count (e.g. `3zo`)
+    - `zO`: Open all folds under the cursor recursively. Folds that don't contain the cursor line are unchanged.
     - `zc`: Close one fold under the cursor. Accepts count (e.g. `3zc`)
     - `zC`: Close all folds under the cursor recursively. Folds that don't contain the cursor line are unchanged.
 
@@ -403,10 +407,7 @@ Keybinds:
 - `]Q`: Jump to first in quickfix list.
 - `[Q`: Jump to last in quickfix list.
 
-The location list also behaves similarly but only stores locations for the current buffer.
-The commands to use it are the same, replacing the first `c` with `l` (e.g. `:lopen`, `]l`).
-
-[[#Mini-bracketed]] provides `q` & `l` bindings for easy quickfix/location list navigation.
+The location list also behaves similarly but only stores locations for the current window. The commands to use it are the same, replacing the first `c` with `l` (e.g. `:lopen`, `]l`).
 
 Handy shortcuts:
 
@@ -433,47 +434,7 @@ Handy shortcuts:
     - `:`: Holds the most recent command
     - `.`: Holds the last inserted text
 
-### netrw
-
-NOTE: I've replaced this with Oil
-
-- `I`: Toggle help
-- `o`: Open in horizontal split
-- `v`: Open in vertical split
-- `t`: Open in new tab
-- `s`: Cycle through sorting methods
-- `r`: Reverse sort
-- `x`: Open with `xdg-open` (or equivalent)
-- `%`: New file
-- `d`: Make directory
-- `D`: Delete selected file(s)/directory(ies)
-- `cd`: Make browsing directory the current directory
-- `gd`: Toggle hiding dotfiles
-
-Enhancements provided by `tpope/vim-vinegar`:
-
-- `-`: Go to parent directory (from file or directory)
-- `~`: Go to `~`
-- `y.`: Yank absolute path to file under cursor
-
-Getting into netrw:
-
-- `Ex[plore]`:  Open netrw in current file's directory
-- `Sex[plore]`: `:Ex` in a new horizontal split
-- `Vex[plore]`: `:Ex` in a new vertical split
-- `Tex[plore]`: `:Ex` in a new tab
-
 ## Plugins
-
-### Lazy
-
-Provided by `folke/lazy.nvim`.
-
-- `<CR>`: Plugin details
-- `]]`: Next plugin
-- `[[`: Prev plugin
-- `d`:  Show diff for commit
-- `K`:  Open links/git commits in browser
 
 ### LSP
 
@@ -491,34 +452,26 @@ Extended by `neovim/nvim-lspconfig` (among others).
 
 Extended keybinds:
 
-- `K`:     Hover information
+- `K`: Hover information
 - `<C-k>`: (INSERT) Hover information
 - `<C-s>`: (NORMAL/INSERT) Signature help
 - `gd`: Goto definition
-- `gr`: Goto references (telescope)
-- `gI`: Goto implementation (telescope)
+- `gr`: Goto references
+- `gI`: Goto implementation
 - `gD`: Goto type definition
-- `<leader>D`:  Goto type definition
-- `<leader>ca`: Code actions
-- `<F4>`:       Code actions
-- `<leader>rn`: Rename symbol under cursor
-- `<F2>`:       Rename symbol under cursor
-- `<leader>ds`: Document symbols, fuzzy find all the symbols in your current document (telescope)
-- `<leader>ws`: Workspace symbols, fuzzy find all the symbols in your current workspace (telescope)
-- `<leader>q`:  Send all diagnostics to the quickfix list (project-wide)
-- `<leader>l`:  Send all diagnostics to the location list (current file only)
-
-Currently disabled:
-
-- `gD`: Goto declaration (some LSPs don't implement this)
+- `gO`: Open document symbols (outline)
+- `gW`: Open workspace symbols
+- `<F2>`: Rename symbol under cursor
+- `<F4>`: Code actions
 
 ### Formatting
 
 Provided by `stevearc/conform.nvim`.
 
-- `<leader>F`:  `:Format` current file
-- `<leader>tf`: `:ToggleFormat` (current buffer)
-- `<leader>tF`: `:ToggleFormatGlobal`
+- `:Format`:   Format current file
+- `<leader>F`: Format current file
+- `<leader>tf`: Toggle autoformat (buffer)
+- `<leader>tF`: Toggle autoformat (global)
 
 ### Diagnostics
 
@@ -530,23 +483,22 @@ Kinda built in, but also fed by LSP.
 - `]D`: Last diagnostic
 - `<leader>q`: Send diagnostics to quickfix (error only)
 - `<leader>Q`: Send diagnostics to quickfix (all diagnostics)
-- `<leader>l`: Send diagnostics to quickfix (error only)
-- `<leader>L`: Send diagnostics to quickfix (all diagnostics)
+- `<leader>l`: Send diagnostics to loclist (error only)
+- `<leader>L`: Send diagnostics to loclist (all diagnostics)
 
 ### Autocompletion
 
 Provided by `saghen/blink.cmp`.
 
-- `<Tab>`:  Accept completion
 - `<Down>`: Next suggestion
 - `<Up>`:   Previous suggestion
-- `<C-e>`:  Exit/cancel completion
-- `<C-n>`:  Next position in snippet
-- `<C-p>`:  Previous position in snippet
-- `<C-m>`:  Cycle snippet choices
-- `<C-b>`:  Scroll documentation up
-- `<C-f>`:  Scroll documentation down
-- `<C-k>`:  Toggle showing signature help
+- `<Tab>`: Accept completion
+- `<C-e>`: Exit/cancel completion
+- `<C-h>`: Next position in snippet
+- `<C-l>`: Previous position in snippet
+- `<C-b>`: Scroll documentation up
+- `<C-f>`: Scroll documentation down
+- `<C-k>`: Toggle showing signature help
 - `<C-Space>`: Toggle showing documentation
 
 ### Oil
@@ -560,7 +512,7 @@ A netrw replacement that lets you browse and edit the filesystem as if it was a 
 
 ### Comments
 
-Provided by `numToStr/Comment.nvim`.
+Provided by `mini.comment`.
 
 Provides some handy shortcuts for commenting/uncommenting blocks of code. Some of this functionality is now built-in, but this plugin extends and improves it.
 
@@ -696,17 +648,17 @@ Picker shortcuts:
 - `<C-s>`: Open in new split
 - `<C-v>`: Open in new vsplit
 - `<C-c>`: Cancel/close picker
-- `<C-b>`: Scroll preview down
-- `<C-f>`: Scroll preview up
+- `<C-b>`: Scroll preview up
+- `<C-f>`: Scroll preview down
 - `<Tab>`:   Select & move to next
 - `<S-Tab>`: Select & move to previous
 - `<C-a>`:   Select all (toggle)
 - `<C-q>`:   Send selected to quickfix
 - NORMAL mode bindings:
-    - `?`:     Toggle help
-    - `a`:     Refocus input
-    - `i`:     Refocus input
-    - `q`:     Cancel/close picker
+    - `?`: Toggle help
+    - `a`: Refocus input
+    - `i`: Refocus input
+    - `q`: Cancel/close picker
     - `<Esc>`: Cancel/close picker
 - Toggles:
     - `<M-h>`: Toggle hidden
@@ -750,6 +702,10 @@ Commands:
 Commands:
 
 - `:Notifications`: Notification history
+
+#### Snacks terminal
+
+- `<C-t>`: Toggle floating terminal
 
 ### Mini
 
@@ -807,7 +763,9 @@ Adds various text editing operators.
 - `gs`: Sort selected
 - `gm`: Multiply (duplicate) selected
     - `gmm`: Multiply (duplicate) current line
-- More?
+- `<leader>x`: Exchange selected
+    - First usage: mark motion to exchange
+    - Second usage: select motion to exchange & swap them
 
 #### Mini-bracketed
 
@@ -831,10 +789,11 @@ Go forward/backward with square brackets (similar to `tpope/vim-unimpaired`).
     - `q`: Quickfix list (now built-in)
     - `w`: Window (current tab)
     - `x`: Conflict
+    - `y`: Yank
+        - After pasting, lets you replace pasted text to older/newer yank entries
 - I've disabled a few suffixes that weren't useful or conflicted with other keybinds:
     - `t`: Treesitter node or parent
-    - `u`: Undo state (???)
-    - `y`: Yank (???)
+    - `u`: Linear undo
 
 #### Mini-trailspace
 
@@ -850,6 +809,11 @@ Session management.
 - Once a session is active (e.g. after load or save), it will be autosaved.
 - Commands:
     - `:Save <name>`: Create session `<name>`, or manually save the current if called with no arguments
-    - `:SaveLocal`:   Create local session; the same as `:Save Session.nvim`
-    - `:Resume`:      Resume the local session, or the most recent global session if none exists
+    - `:SaveLocal`:   Create local session; equivalent to `:Save Session.nvim`
     - `:Sessions`:    Fuzzy-find sessions (`<C-x>` to delete)
+
+#### Mini-starter
+
+Shows recent sessions & files on startup.
+
+- `:Start`: Re-open the start screen

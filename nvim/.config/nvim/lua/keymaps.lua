@@ -16,7 +16,7 @@ end
 -- stylua: ignore start
 
 -- Lazy
-map('<leader>hu', ':Lazy check<CR>', 'Update check')
+map('<leader>hu', ':PackUpdate<CR>', 'Update check')
 
 -- Jump to vim settings
 map('<leader>ev', ':tabe ~/.config/nvim/lua<CR>',                'Vim settings')
