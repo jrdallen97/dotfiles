@@ -7,7 +7,7 @@ alias prettypath='echo $PATH | sed "s/:/\n/g"'
 alias v='nvim'
 alias vd='nvim -d'
 alias ve='nvim .'
-alias vrestore='nvim --headless "+Lazy! restore" +qa'
+alias vrestore='nvim --headless "+PackRestore!" +qa'
 
 # Rebind if installed
 command -v bat &>/dev/null && alias bat='bat -P'
