@@ -32,19 +32,15 @@ NOTE: I'm not gonna list all the basics here, just the stuff that's useful for m
     - [[#Snacks]]
         - [[#Snacks-picker]]
         - [[#Snacks explorer]]
-        - [[#Snacks gitbrowse]]
-        - [[#Snacks notifier]]
-        - [[#Snacks terminal]]
     - [[#Mini]]
+        - [[#Mini-comment]]
         - [[#Mini-diff]]
         - [[#Mini-surround]]
         - [[#Mini-splitjoin]]
         - [[#Mini-move]]
         - [[#Mini-operators]]
         - [[#Mini-bracketed]]
-        - [[#Mini-trailspace]]
         - [[#Mini-sessions]]
-        - [[#Mini-starter]]
 
 <!-- mtoc-end -->
 
@@ -512,14 +508,7 @@ A netrw replacement that lets you browse and edit the filesystem as if it was a 
 
 ### Comments
 
-Provided by `mini.comment`.
-
-Provides some handy shortcuts for commenting/uncommenting blocks of code. Some of this functionality is now built-in, but this plugin extends and improves it.
-
-- `gcc`: Toggle comment on line
-- `gc` (VISUAL): Toggle comment on selected line(s)/region(s)
-
-Also: `folke/todo-comments.nvim`.
+Provided by `folke/todo-comments.nvim`.
 
 - Provides colouring & keybinds for working with various types of comment, including:
     - TODO
@@ -595,6 +584,10 @@ Find and replace plugin for neovim.
 ### Snacks
 
 Provided by `folke/snacks.nvim`.
+
+- `:GitBrowse`: Open current file in browser
+- `:Notifications`: Notification history
+- `<C-t>`: Toggle floating terminal
 
 #### Snacks-picker
 
@@ -691,27 +684,20 @@ Picker shortcuts:
 - `]e`/`[e`: Next/prev file with diagnostics (error)
 - `<C-t>`: Open terminal here
 
-#### Snacks gitbrowse
-
-Commands:
-
-- `:GitBrowse`: Open current file in browser
-
-#### Snacks notifier
-
-Commands:
-
-- `:Notifications`: Notification history
-
-#### Snacks terminal
-
-- `<C-t>`: Toggle floating terminal
-
 ### Mini
 
 Provided by `nvim-mini/mini.nvim`.
 
-A collection of various small independent plugins/modules.
+- `:Start`: Re-open `mini.starter`
+- `:TrimWhitespace`: Trim trailing whitespace
+
+#### Mini-comment
+
+Extends built-in `gc`/`gcc` with configurable mappings and hooks.
+
+- `gcc`: Toggle comment on line
+- `gc`: (VISUAL) Toggle comment on selected line(s)/region(s)
+- `ic`: Comment text object
 
 #### Mini-diff
 
@@ -795,12 +781,6 @@ Go forward/backward with square brackets (similar to `tpope/vim-unimpaired`).
     - `t`: Treesitter node or parent
     - `u`: Linear undo
 
-#### Mini-trailspace
-
-Highlights trailing whitespace.
-
-- `:TrimWhitespace`: Trim trailing whitespace
-
 #### Mini-sessions
 
 Session management.
@@ -811,9 +791,3 @@ Session management.
     - `:Save <name>`: Create session `<name>`, or manually save the current if called with no arguments
     - `:SaveLocal`:   Create local session; equivalent to `:Save Session.nvim`
     - `:Sessions`:    Fuzzy-find sessions (`<C-x>` to delete)
-
-#### Mini-starter
-
-Shows recent sessions & files on startup.
-
-- `:Start`: Re-open the start screen

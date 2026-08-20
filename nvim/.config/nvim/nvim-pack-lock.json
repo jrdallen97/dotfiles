@@ -154,6 +154,10 @@
       "rev": "119a5f9a56c472ec783be8e0aa34500c2bf19670",
       "src": "https://github.com/dhruvasagar/vim-pairify"
     },
+    "vim-repeat": {
+      "rev": "65846025c15494983dafe5e3b46c8f88ab2e9635",
+      "src": "https://github.com/tpope/vim-repeat"
+    },
     "which-key.nvim": {
       "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
       "src": "https://github.com/folke/which-key.nvim"

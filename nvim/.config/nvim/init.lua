@@ -86,6 +86,9 @@ vim.pack.add {
 
   -- Undo closing a split with `<C-w>u`
   { src = 'https://github.com/AndrewRadev/undoquit.vim' },
+
+  -- Can be used to make custom maps dot-repeatable
+  { src = 'https://github.com/tpope/vim-repeat' },
 }
 
 -- Install additional plugins if `work_profile` is enabled
