@@ -79,6 +79,11 @@ vim.diagnostic.config {
 -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
 ---@type table<string, vim.lsp.Config>
 local servers = {
+  markdown_oxide = {
+    -- Prefer `.moxide.toml` root marker (by default `.git` is highest priority)
+    root_markers = { '.moxide.toml', '.obsidian', '.git' },
+  },
+
   ts_ls = {
     root_dir = function(bufnr, on_dir)
       -- Override lspconfig's "monorepo support" bc it just doesn't work
