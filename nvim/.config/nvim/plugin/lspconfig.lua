@@ -101,6 +101,15 @@ local servers = {
       return on_dir(project_root)
     end,
   },
+
+  protols = {
+    -- Recognise protobuf & Google protos
+    cmd = {
+      'protols',
+      '--include-paths',
+      '/opt/homebrew/opt/protobuf/include,' .. vim.fn.expand '~/apis/googleapis/googleapis-master',
+    },
+  },
 }
 
 -- The tools listed below will be installed automatically.
