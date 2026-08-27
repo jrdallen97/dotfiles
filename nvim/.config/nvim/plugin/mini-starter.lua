@@ -21,7 +21,8 @@ end, { desc = 'Open start screen' })
 vim.api.nvim_create_autocmd('User', {
   pattern = 'MiniStarterOpened',
   callback = function()
-    vim.keymap.del('n', '<C-p>', { buffer = true })
-    vim.keymap.del('n', '<C-n>', { buffer = true })
+    -- pcall to prevent errors when Starter hasn't fully initialised yet
+    pcall(vim.keymap.del, 'n', '<C-p>', { buffer = true })
+    pcall(vim.keymap.del, 'n', '<C-n>', { buffer = true })
   end,
 })
