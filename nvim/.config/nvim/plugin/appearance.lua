@@ -31,7 +31,7 @@ require('lualine').setup {
       },
     },
     lualine_b = { 'branch', 'diff', 'diagnostics' },
-    lualine_c = { 'filename', 'selectioncount', 'searchcount' },
+    lualine_c = { 'selectioncount', 'searchcount' },
     lualine_x = {
       'filetype',
       'encoding',
@@ -42,7 +42,7 @@ require('lualine').setup {
   },
   inactive_sections = {
     lualine_b = { 'diff', 'diagnostics' },
-    lualine_c = { 'filename' },
+    lualine_c = {},
     lualine_x = { location },
   },
   winbar = {
