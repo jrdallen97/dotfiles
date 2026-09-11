@@ -9,7 +9,6 @@ require('catppuccin').setup {
   integrations = {
     blink_cmp = true,
     fidget = true,
-    fzf = true,
     grug_far = true,
     which_key = true,
   },
