@@ -22,6 +22,12 @@ setopt PUSHD_IGNORE_DUPS # Don't add dupe directories to the stack
 setopt PUSHD_MINUS # Swap the meaning of `+` & `-` for `cd` (so that e.g. `cd -2` will go back 2 dirs in the stack)
 DIRSTACKSIZE=20 # I don't really need a long history
 
+# Make <Esc> less laggy in vim-mode
+KEYTIMEOUT=3
+
+# Enable extended globbing (e.g. `^` for exclusion, `**` for recursion, etc.)
+setopt EXTENDED_GLOB
+
 # Preferred editor
 if command -v nvim >/dev/null; then
   export EDITOR='nvim'
@@ -41,50 +47,50 @@ export LESS='-RiF --mouse --wheel-lines=3'
 # Load local config
 [[ -r "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
 
-# Install zcomet
+# Set up zcomet for plugin management
 ZCOMET_PATH="$HOME/.zcomet/bin/zcomet.zsh"
 if [[ ! -f $ZCOMET_PATH ]]; then
   git clone --depth=1 https://github.com/agkozak/zcomet.git $HOME/.zcomet/bin
   # Don't trigger an auto-update during initial installation
   touch $HOME/.zcomet/update
 fi
+source $ZCOMET_PATH
 
-# Load plugins
-if [[ -r $ZCOMET_PATH ]]; then
-  source $ZCOMET_PATH
-
-  # Automatically update if we haven't run one for a while
-  # The `(Nm-7)` is a glob:
-  # - `N` makes a missing match expand to nothing instead of the literal pattern
-  # - `mw-2` only matches the file if its modification time is within 2 weeks
-  ZCOMET_LAST_UPDATE=($HOME/.zcomet/update(Nmw-2))
-  if [[ -z $ZCOMET_LAST_UPDATE ]]; then
-    zcomet self-update
-    zcomet update
-    touch $HOME/.zcomet/update
-  fi
-
-  zcomet load "agkozak/zsh-z"
-
-  # Make zvm load like other plugins - this avoids issues with pressing up/down to see history
-  ZVM_INIT_MODE=sourcing
-  zcomet load "jeffreytse/zsh-vi-mode"
-
-  # Must run after compinit but before things like zsh-syntax-highlighting
-  # Note: idk what will happen if fzf is not installed
-  zcomet load "Aloxaf/fzf-tab"
-
-  # It's important to load this almost-last
-  zcomet load "zsh-users/zsh-syntax-highlighting"
-
-  # It's important to load this last
-  zcomet load "zsh-users/zsh-autosuggestions"
-  ZSH_AUTOSUGGEST_STRATEGY=(completion)
-  ZSH_AUTOSUGGEST_USE_ASYNC=true
-
-  # Run compinit and compile its cache
-  zcomet compinit
+# Automatically update if we haven't run one for a while
+# The bracketed part is a glob:
+# - `N` makes a missing match expand to nothing instead of the literal pattern
+# - `mw-2` only matches the file if its modification time is within 2 weeks
+ZCOMET_LAST_UPDATE=($HOME/.zcomet/update(Nmw-2))
+if [[ -z $ZCOMET_LAST_UPDATE ]]; then
+  zcomet self-update
+  zcomet update
+  touch $HOME/.zcomet/update
 fi
+
+zcomet load "agkozak/zsh-z"
+
+# Make zvm load like other plugins - this avoids issues with pressing up/down to see history
+zvm_config() {
+  ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT # Always start in insert mode
+  ZVM_NORMAL_MODE_CURSOR=$ZVM_CURSOR_BLOCK
+  ZVM_VI_HIGHLIGHT_BACKGROUND=cyan
+}
+ZVM_INIT_MODE=sourcing
+zcomet load "jeffreytse/zsh-vi-mode"
+
+# Initialize completions once all completion directories are available
+zcomet compinit
+
+# FZF
+if command -v rg >/dev/null; then
+  # Use rg if available as it's generally faster
+  export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+fi
+[[ -r $HOME/.fzf.zsh ]] && source $HOME/.fzf.zsh
+# Must run after compinit but before things like zsh-syntax-highlighting
+# Note: idk what will happen if fzf is not installed
+zcomet load "Aloxaf/fzf-tab"
 
 # Enable history-scrolling w/ up/down arrows
 autoload -U up-line-or-beginning-search
@@ -100,21 +106,6 @@ bindkey "$terminfo[kcud1]" down-line-or-beginning-search # Down
 # Enable home/end keys
 bindkey "\e[H" beginning-of-line
 bindkey "\e[F" end-of-line
-
-# Vim-mode settings
-KEYTIMEOUT=3
-# ZVM settings
-ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT # Always start in insert mode
-ZVM_NORMAL_MODE_CURSOR=$ZVM_CURSOR_BLOCK
-ZVM_VI_HIGHLIGHT_BACKGROUND=cyan
-
-# FZF
-if command -v rg >/dev/null; then
-  # Use rg if available as it's generally faster
-  export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden'
-  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-fi
-[[ -r $HOME/.fzf.zsh ]] && source $HOME/.fzf.zsh
 
 
 
@@ -159,8 +150,6 @@ local prompt_precmd() {
 }
 # Will be run before every command is executed
 local prompt_preexec() {
-  setopt extended_glob
-
   PROMPT_CMD_START=$(date +%s)
 
   local cmd=${1[(wr)^(*=*|sudo|ssh|mosh|rake|-*)]:gs/%/%%}
@@ -171,7 +160,7 @@ local prompt_preexec() {
 (( ! ${+preexec_functions} )) && preexec_functions=()
 # Hook precmd/preexec functions if not already hooked
 [[ -z ${precmd_functions[(re)prompt_precmd]} ]] && precmd_functions+=(prompt_precmd)
-[[ -z ${preexec_function[(re)prompt_preexec]} ]] && preexec_functions+=(prompt_preexec)
+[[ -z ${preexec_functions[(re)prompt_preexec]} ]] && preexec_functions+=(prompt_preexec)
 
 local set-prompt() {
   local newline=$'\n'
@@ -245,3 +234,15 @@ local reset-prompt-and-accept-line() {
 }
 # Override the built-in accept-line with our version
 zle -N accept-line reset-prompt-and-accept-line
+
+
+
+#############################################
+# More plugin stuff that needs to come last #
+#############################################
+
+ZSH_AUTOSUGGEST_STRATEGY=(completion)
+ZSH_AUTOSUGGEST_USE_ASYNC=true
+zcomet load "zsh-users/zsh-autosuggestions"
+
+zcomet load "zsh-users/zsh-syntax-highlighting"
