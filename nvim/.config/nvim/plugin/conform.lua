@@ -43,6 +43,7 @@ require('conform').setup {
     typescript = js,
     typescriptreact = js,
     json = { 'fixjson' },
+    css = { 'oxfmt' },
 
     go = { 'gofmt', 'goimports' },
   },
