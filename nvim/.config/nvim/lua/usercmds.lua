@@ -19,11 +19,28 @@ local function complete_packages(match)
     :totable()
 end
 
+-- Jump back to the original tab after closing vim.pack's confirmation window
+local function restore_tab()
+  local original_tab = vim.api.nvim_get_current_tabpage()
+  vim.api.nvim_create_autocmd('TabClosed', {
+    once = true,
+    callback = function()
+      vim.schedule(function()
+        if vim.api.nvim_tabpage_is_valid(original_tab) then
+          vim.api.nvim_set_current_tabpage(original_tab)
+        end
+      end)
+    end,
+  })
+end
+
 -- Helpers to make vim.pack more ergonomic
 map('PackUpdate', function(info)
+  restore_tab()
   vim.pack.update(#info.fargs > 0 and info.fargs or nil)
 end, { desc = 'Check for package updates', nargs = '*', complete = complete_packages })
 map('PackRestore', function(info)
+  restore_tab()
   vim.pack.update(nil, { target = 'lockfile', force = info.bang })
 end, { desc = 'Restore installed packages to versions in lockfile', bang = true })
 map('PackDelete', function(info)
