@@ -4,7 +4,9 @@ NOTE: I'm not gonna list all the basics here, just the stuff that's useful for m
 
 <!-- mtoc-start -->
 
-- [[#Personal]]
+- [[#Misc]]
+- [[#Git]]
+    - [[#Fugitive]]
 - [[#Built-in]]
     - [[#Launch options]]
     - [[#Help]]
@@ -27,7 +29,6 @@ NOTE: I'm not gonna list all the basics here, just the stuff that's useful for m
     - [[#Oil]]
     - [[#Comments]]
     - [[#Markdown]]
-    - [[#Git]]
     - [[#Grug-far]]
     - [[#Snacks]]
         - [[#Snacks-picker]]
@@ -44,9 +45,9 @@ NOTE: I'm not gonna list all the basics here, just the stuff that's useful for m
 
 <!-- mtoc-end -->
 
-## Personal
+## Misc
 
-My own stuff...
+Random things I've mostly added myself (i.e. not using plugins).
 
 - `<leader>{n}`: Switch to tab number `{n}`
 - `<leader>rs`:  Save & run current file (using shebang)
@@ -69,6 +70,30 @@ Shortcuts:
 - `<leader>ev`: Open Vim settings in a new tab
 - `<leader>ec`: Open Vim cheatsheet in a new tab
 - `<leader>es`: Open Vim spellfile in a new tab
+
+## Git
+
+Most keybinds sit under a prefix:
+
+- `<leader>g`: Git (status, blame, etc)
+- `gh`: Git hunk (stage, restore)
+
+### Fugitive
+
+- `:Git`: Open fugitive
+- `:Git {cmd}`: Run git command
+
+Within fugitive:
+
+- `]]`: Next section
+- `[[`: Previous section
+- `-`: Toggle staged for file/hunk
+- `=`: Toggle inline diff for file/hunk
+- `s`: Stage file/hunk
+- `u`: Unstage file/hunk
+- `U`: Unstage all
+- `X`: Discard file/hunk
+
 
 ## Built-in
 
@@ -541,37 +566,6 @@ Provided by `gaoDean/autolist.nvim`:
 - `<M-r>`: Recalculate ordered list numbering
 - Deleting list items automatically recalculates numbering
 
-### Git
-
-Provided by `tpope/vim-fugitive`.
-
-- `:Git`: Open fugitive
-- `:Git {cmd}`: Run git command
-- `<leader>gg`: Open fugitive in a new tab
-- `<leader>gs`: Git status - [[#Snacks-picker]]
-- `<leader>go`: Git diff overlay - [[#Mini-diff]]
-- `<leader>gd`: Git diff vs. head
-- `<leader>gD`: Git diff vs. previous commit
-- `<leader>gb`: Git blame
-- `<leader>gc`: Git commit
-- `<leader>gp`: Git push
-- `<leader>gl`: Git pull
-- `ghs`: Stage hunk/selection (NORMAL/VISUAL) - [[#Mini-diff]]
-- `ghr`: Restore hunk/selection (NORMAL/VISUAL) - [[#Mini-diff]]
-- `ghS`: Stage entire buffer
-- `ghR`: Restore entire buffer
-
-Within fugitive:
-
-- `]]`: Next section
-- `[[`: Previous section
-- `-`: Toggle staged for file/hunk
-- `=`: Toggle inline diff for file/hunk
-- `s`: Stage file/hunk
-- `u`: Unstage file/hunk
-- `U`: Unstage all
-- `X`: Discard file/hunk
-
 ### Grug-far
 
 Provided by `MagicDuck/grug-far.nvim`.
@@ -593,50 +587,17 @@ Provided by `folke/snacks.nvim`.
 
 Shortcuts:
 
-- Misc:
-    - `<leader><leader>`: Switch buffers
-    - `<leader>/`:  Smart finder
-    - `<leader>gs`: Git status
-    - `<leader>fr`: Resume previous search
-    - `<leader>sr`: Resume previous search
-- Search help:
-    - `<leader>hh`: Help: Help
-    - `<leader>hc`: Help: Commands
-    - `<leader>hk`: Help: Keybinds
-    - `<leader>hp`: Help: Pickers
-    - `<leader>ht`: Help: Themes/colourschemes
-    - `<leader>hi`: Help: Icons/emojis
-    - `<leader>hu`: Help: Update check
-- Find files (or directories!):
-    - `<leader>ff`: Find: Global (all files)
-    - `<leader>fl`: Find: Local (current dir)
-    - `<leader>fo`: Find: Oldfiles (recent files)
-    - `<leader>fd`: Find: Directories
-    - `<leader>fs`: Find: Smart
-- Search for strings (lines, contents, etc):
-    - `<leader>ss`: Global (all files)
-    - `<leader>sl`: Local (current dir)
-    - `<leader>st`: This buffer
-    - `<leader>sb`: All buffers
-- Search for diagnostics/errors:
-    - `<leader>sd`: Search: for Diagnostics (current file)
-    - `<leader>sD`: Search: for Diagnostics (global)
-    - `<leader>se`: Search: for Errors (current file)
-    - `<leader>sE`: Search: for Errors (global)
-- Search for current word/visual selection:
-    - `<leader>sw`: Search for word under cursor/visual selection
-    - `<leader>sW`: Search for WORD under cursor/visual selection
-- Personal shortcuts:
-    - `<leader>fv`: Find vim config
-    - `<leader>sv`: Search vim config
-    - `<leader>fn`: Find note
-    - `<leader>sn`: Search notes
+- `<leader><leader>`: Switch buffers
+- Most commands sit under a prefix to group similar commands:
+    - `<leader>h`: Help (reference, misc)
+    - `<leader>f`: Find files/directories
+    - `<leader>s`: String search
+    - `<leader>d`: Search for diagnostics/errors
 
 Picker shortcuts:
 
 - Note: most of these work in NORMAL & INSERT mode unless specified
 - `<C-/>`: Toggle help
-- `<CR>`:  Confirm
 - `<C-t>`: Open in new tab
 - `<C-s>`: Open in new split
 - `<C-v>`: Open in new vsplit
@@ -647,17 +608,15 @@ Picker shortcuts:
 - `<S-Tab>`: Select & move to previous
 - `<C-a>`:   Select all (toggle)
 - `<C-q>`:   Send selected to quickfix
-- NORMAL mode bindings:
-    - `?`: Toggle help
-    - `a`: Refocus input
-    - `i`: Refocus input
-    - `q`: Cancel/close picker
-    - `<Esc>`: Cancel/close picker
 - Toggles:
     - `<M-h>`: Toggle hidden
     - `<M-i>`: Toggle ignored
     - `<M-m>`: Toggle maximised
     - `<M-p>`: Toggle preview
+- NORMAL mode only:
+    - `?`: Toggle help
+    - `a`/`i`: Refocus input
+    - `<Esc>`/`q`: Cancel/close picker
 
 #### Snacks explorer
 

@@ -43,20 +43,19 @@ end
 do
   -- Misc
   map('<leader><leader>', picker.buffers,    'Switch buffers')
-  map('<leader>/',        picker.smart,      'Smart finder (buffers, recents, files)')
-  map('<leader>gs',       picker.git_status, 'Status')
-  map('<leader>fr',       picker.resume,     'Resume')
-  map('<leader>sr',       picker.resume,     'Resume')
+  map('<leader>gg',       picker.git_status, 'Status')
+  map('<leader>fr',       picker.resume,     'Resume previous search')
+  map('<leader>sr',       picker.resume,     'Resume previous search')
 
   -- Search Help
   map('<leader>hh', picker.help,         'Help')
   map('<leader>hc', picker.commands,     'Commands')
   map('<leader>hk', picker.keymaps,      'Keybinds')
   map('<leader>hp', picker.pickers,      'Pickers')
-  map('<leader>ht', picker.colorschemes, 'Themes')
-  map('<leader>hi', picker.icons,        'Icons')
+  map('<leader>ht', picker.colorschemes, 'Themes/colourschemes')
+  map('<leader>hi', picker.icons,        'Icons/emojis')
 
-  -- Find files (or directories!)
+  -- Find files/directories
   map('<leader>ff', picker.files,  'Global (all files)')
   map('<leader>fl', local_files,   'Local (current dir)')
   map('<leader>fo', picker.recent, 'Oldfiles (recent files)')
@@ -70,10 +69,10 @@ do
   map('<leader>sb', picker.grep_buffers, 'All buffers')
 
   -- Search for diagnostics/errors
-  map('<leader>sd', picker.diagnostics_buffer, 'Diagnostics (buffer)')
-  map('<leader>sD', picker.diagnostics,        'Diagnostics (global)')
-  map('<leader>se', errors_buffer,             'Errors (buffer)')
-  map('<leader>sE', errors,                    'Errors (global)')
+  map('<leader>dd', picker.diagnostics_buffer, 'Diagnostics (buffer)')
+  map('<leader>dD', picker.diagnostics,        'Diagnostics (global)')
+  map('<leader>de', errors_buffer,             'Errors (buffer)')
+  map('<leader>dE', errors,                    'Errors (global)')
 
   -- Search for current word/visual selection
   map('<leader>sw', picker.grep_word, 'Current word', { 'n', 'x' })
