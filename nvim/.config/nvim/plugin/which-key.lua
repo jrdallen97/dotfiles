@@ -7,9 +7,7 @@ require('which-key').setup {
 
   -- Document existing key chains
   spec = {
-    { '<leader>a', group = 'Sidekick' },
     { '<leader>c', group = 'Quickfix' },
-    { '<leader>d', group = 'Diagnostics' },
     { '<leader>e', group = 'Edit' },
     { '<leader>g', group = 'Git' },
     { '<leader>t', group = 'Toggle' },

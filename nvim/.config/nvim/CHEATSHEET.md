@@ -190,7 +190,7 @@ Formatting:
 
 - `gq{motion}`: Format the line(s) that `{motion}` moves over
 - `gqq`: Format current line
-- `qg`: (VISUAL) Format visual selection
+- `gq`: (VISUAL) Format visual selection
 - Configured by `formatoptions`/`fo`; see `:h fo-table`
 - Target line length is configured with `textwidth`/`tw` (default 100)
 
@@ -449,7 +449,7 @@ Extended by `neovim/nvim-lspconfig` (among others).
 Extended keybinds:
 
 - `K`: Hover information
-- `<C-k>`: (INSERT) Hover information
+- `<C-k>`: (NORMAL/INSERT) Hover information
 - `<C-s>`: (NORMAL/INSERT) Signature help
 - `gd`: Goto definition
 - `gr`: Goto references
@@ -490,8 +490,8 @@ Provided by `saghen/blink.cmp`.
 - `<Up>`:   Previous suggestion
 - `<Tab>`: Accept completion
 - `<C-e>`: Exit/cancel completion
-- `<C-h>`: Next position in snippet
-- `<C-l>`: Previous position in snippet
+- `<C-h>`: Previous position in snippet
+- `<C-l>`: Next position in snippet
 - `<C-b>`: Scroll documentation up
 - `<C-f>`: Scroll documentation down
 - `<C-k>`: Toggle showing signature help
@@ -786,8 +786,8 @@ Go forward/backward with square brackets (similar to `tpope/vim-unimpaired`).
 Session management.
 
 - `mini.starter` will show a list of available sessions on startup.
-- Once a session is active (e.g. after load or save), it will be autosaved.
+- Once a session is active (e.g. after load or save), it will be autosaved on exit.
 - Commands:
     - `:Save <name>`: Create session `<name>`, or manually save the current if called with no arguments
-    - `:SaveLocal`:   Create local session; equivalent to `:Save Session.nvim`
+    - `:SaveLocal`:   Create local session; equivalent to `:Save Session.vim`
     - `:Sessions`:    Fuzzy-find sessions (`<C-x>` to delete)

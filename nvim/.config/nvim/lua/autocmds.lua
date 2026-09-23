@@ -80,23 +80,25 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 vim.api.nvim_create_autocmd('BufWinEnter', {
   group = vim.api.nvim_create_augroup('bigfile', { clear = true }),
   callback = function(ev)
-    vim.api.nvim_buf_call(ev.buf, function()
-      local size = vim.fn.getfsize(vim.api.nvim_buf_get_name(ev.buf))
-      if size <= vim.g.bigfile_size then
-        return
-      end
-      local huge = size > vim.g.hugefile_size
+    local size = vim.fn.getfsize(vim.api.nvim_buf_get_name(ev.buf))
+    if size <= vim.g.bigfile_size then
+      return
+    end
+    local huge = size > vim.g.hugefile_size
 
-      if huge then
-        -- :Huge doesn't work properly unless treesitter has already loaded
-        vim.defer_fn(function()
+    if huge then
+      -- :Huge doesn't work properly unless treesitter has already loaded
+      local win = vim.api.nvim_get_current_win()
+      vim.defer_fn(function()
+        -- Ensure the deferred call still targets the correct window
+        vim.api.nvim_win_call(win, function()
           vim.cmd 'Huge'
-        end, 50)
-      else
-        vim.cmd 'Big'
-      end
+        end)
+      end, 50)
+    else
+      vim.cmd 'Big'
+    end
 
-      vim.print((huge and 'Huge' or 'Big') .. ' file, disabling slow features')
-    end)
+    vim.print((huge and 'Huge' or 'Big') .. ' file, disabling slow features')
   end,
 })

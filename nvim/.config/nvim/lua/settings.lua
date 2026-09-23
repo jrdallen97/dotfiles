@@ -25,7 +25,6 @@ o.title       = true
 o.titlestring = "%{fnamemodify(getcwd(), ':t')}: nvim"
 
 -- Default indentation settings (can be overridden by filetype or :GuessIndent)
-o.autoindent = true -- Copy indent from the current line when starting a new line
 o.tabstop    = 8    -- Default to 8 spaces per tab (recommended)
 o.shiftwidth = 2    -- The number of spaces to use for each indent step
 o.expandtab  = true -- Insert spaces rather than tabs (use `<C-v><Tab>` to get a literal tab)
@@ -69,11 +68,9 @@ o.splitright = true -- Vertical splits will be to the right
 
 -- Search/Replace
 o.ignorecase  = true    -- Ignore case when searching (unless you include `\C` in search)
-o.incsearch   = true    -- Show search results while typing
 o.infercase   = true    -- Infer letter cases for a richer built-in keyword completion
 o.smartcase   = true    -- Don't ignore case when searching if pattern has upper case
 o.smartindent = true    -- Make indenting smart
-o.hlsearch    = true    -- Highlight all matches when searching
 o.inccommand  = 'split' -- Preview substitutions as you type
 
 -- Folds
