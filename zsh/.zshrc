@@ -56,16 +56,50 @@ if [[ ! -f $ZCOMET_PATH ]]; then
 fi
 source $ZCOMET_PATH
 
-# Automatically update if we haven't run one for a while
+# Add custom update check (zcomet doesn't support this natively)
+zcomet-update-check() {
+  setopt local_options null_glob
+
+  local repo repos_dir zcomet_dir repo_name changes reply current latest has_updates=0
+  repos_dir=${ZCOMET_PATH:h:h}/repos
+  zcomet_dir=${ZCOMET_PATH:h}
+
+  for repo in "$zcomet_dir" "$repos_dir"/*/*; do
+    repo_name=${repo#$repos_dir/}
+    [[ $repo == $zcomet_dir ]] && repo_name=agkozak/zcomet
+    print -P "%B%F{yellow}$repo_name%f%b:"
+    git -C "$repo" fetch --quiet --no-tags 2>/dev/null || continue
+    changes=$(git -C "$repo" log --oneline 'HEAD..@{upstream}' 2>/dev/null)
+    if [[ -n $changes ]]; then
+      print -r -- "$changes"
+      current=$(git -C "$repo" rev-parse HEAD)
+      latest=$(git -C "$repo" rev-parse '@{upstream}')
+      print -r -- "https://github.com/$repo_name/compare/$current...$latest"
+      has_updates=1
+    else
+      print 'No updates available.'
+    fi
+  done
+
+  print
+  if (( has_updates )); then
+    read -r "reply?Install updates? (Y/n) "
+    if [[ -z $reply || $reply == [Yy] ]]; then
+      print
+      zcomet self-update
+      zcomet update
+    fi
+  fi
+
+  touch "$HOME/.zcomet/update"
+}
+
+# Automatically check for updates every 2 weeks
 # The bracketed part is a glob:
 # - `N` makes a missing match expand to nothing instead of the literal pattern
 # - `mw-2` only matches the file if its modification time is within 2 weeks
 ZCOMET_LAST_UPDATE=($HOME/.zcomet/update(Nmw-2))
-if [[ -z $ZCOMET_LAST_UPDATE ]]; then
-  zcomet self-update
-  zcomet update
-  touch $HOME/.zcomet/update
-fi
+[[ -z $ZCOMET_LAST_UPDATE ]] && zcomet-update-check
 
 zcomet load "agkozak/zsh-z"
 
