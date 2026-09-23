@@ -1,5 +1,15 @@
 -- Use treesitter to auto close and auto rename HTML tags.
-require('nvim-ts-autotag').setup()
+require('nvim-ts-autotag').setup {
+  opts = {
+    -- Auto close on trailing </
+    enable_close_on_slash = true,
+  },
+  per_filetype = {
+    markdown = {
+      enable_close = false,
+    },
+  },
+}
 
 -- Highlight, edit, and navigate code - see `:help nvim-treesitter-intro`
 local treesitter = require 'nvim-treesitter'
