@@ -14,46 +14,44 @@ NOTE: I'm not gonna list all the basics here, just the stuff that's useful for m
     - [[#Marks]]
     - [[#Scrolling]]
 - [[#Editing]]
+- [[#Insert mode bindings]]
 - [[#Spellcheck]]
 - [[#Running/testing files]]
 - [[#Cmdline]]
     - [[#Sort]]
+    - [[#Run command on matching lines]]
     - [[#Search/replace]]
     - [[#Vimgrep]]
     - [[#Diff mode]]
     - [[#Arglist]]
     - [[#Running commands across files]]
     - [[#Command-line window]]
+- [[#Window management]]
+    - [[#Windows]]
+    - [[#Tabs]]
 - [[#Git]]
     - [[#Fugitive]]
 - [[#Oil]]
-- [[#Built-in]]
-    - [[#Editing]]
-    - [[#Insert mode bindings]]
-    - [[#Window commands]]
-    - [[#Folds]]
-    - [[#Quickfix]]
-    - [[#Registers]]
-- [[#Plugins]]
-    - [[#LSP]]
-    - [[#Formatting]]
+- [[#Folds]]
+- [[#Quickfix]]
+- [[#Registers]]
+- [[#LSP]]
     - [[#Diagnostics]]
-    - [[#Autocompletion]]
-    - [[#Comments]]
-    - [[#Markdown]]
-    - [[#Grug-far]]
-    - [[#Snacks]]
-        - [[#Snacks-picker]]
-        - [[#Snacks explorer]]
-    - [[#Mini]]
-        - [[#Mini-comment]]
-        - [[#Mini-diff]]
-        - [[#Mini-surround]]
-        - [[#Mini-splitjoin]]
-        - [[#Mini-move]]
-        - [[#Mini-operators]]
-        - [[#Mini-bracketed]]
-        - [[#Mini-sessions]]
+- [[#Autocompletion]]
+- [[#Comments]]
+- [[#Markdown]]
+- [[#Grug-far]]
+- [[#Snacks]]
+    - [[#Snacks-picker]]
+    - [[#Snacks explorer]]
+- [[#Mini]]
+    - [[#Mini-diff]]
+    - [[#Mini-surround]]
+    - [[#Mini-splitjoin]]
+    - [[#Mini-move]]
+    - [[#Mini-operators]]
+    - [[#Mini-bracketed]]
+    - [[#Mini-sessions]]
 
 <!-- mtoc-end -->
 
@@ -183,6 +181,11 @@ Operators can operate over a motion or visual selection, or the last character c
 - `gw`: The same as `gq`, but without moving the cursor
 - `<`/`>`: Shift text left/right
 
+Formatting:
+
+- `:Format`:   Format current file (`conform`)
+- `<leader>F`: Format current file (`conform`)
+
 Copy/paste:
 
 - `p`: Paste after the cursor
@@ -202,6 +205,14 @@ Undolist:
 - `:undol[ist]`: List the leafs in the undo tree
 - `g-`: Previous leaf in undo tree
 - `g+`: Next leaf in undo tree
+
+## Insert mode bindings
+
+- `<C-u>`: Delete all characters before the cursor (e.g. undo auto-comment continuation)
+- `<C-w>`: Delete word backwards
+- `<C-t>`: Increase indentation of current line
+- `<C-d>`: Decrease indentation of current line
+- `<C-v>`: Insert a character literally
 
 ## Spellcheck
 
@@ -242,7 +253,7 @@ Testing files sits under `<leader>R` and is entirely per-language. For example, 
     - `u`: Deduplicate identical lines (equivalent to `:%!sort | uniq`)
 - Dedupe without sorting: `:%!awk '\!a[$0]++'`
 
-Run command on matching lines:
+### Run command on matching lines
 
 - `:g[lobal]/{pattern}/{cmd}`: Run ex command `{cmd}` on all lines matching `{pattern}`
 - If no pattern is provided (`:g//`), the most recent search term is used instead
@@ -308,6 +319,39 @@ The command-line window lets you find previous commands/searches to edit or reru
     - `<CR>`:  Rerun the selected command
     - `<C-c>`: Move the selected command to the command line and close the window
 
+## Window management
+
+### Windows
+
+Note: most of these work even if you continue holding `Ctrl` for the 2nd key, e.g. `<C-w><C-o>`.
+
+- `<C-w>s`: `:split`
+- `<C-w>v`: `:vsplit`
+- `<C-w><direction>`: Move to the window in `<direction>` (`<Up>`, `k`, etc)
+- `<C-w><DIRECTION>`: Move the current window all the way to `<DIRECTION>`
+    - Only works with `HJKL` by default, but I added custom maps for using `<Shift>` + arrows)
+- `<C-w>x`: Swap current window with the next window
+- `<C-w>c`: Close the current window (also: `:clo[se]`). Fails on the last window.
+- `<C-w>q`: Close the current window (also: `:q[uit]`). On the last window, quit vim.
+- `<C-w>o`: Close all but the current window (also: `:only`)
+- `<C-w>u`: Undo closing a window (provided by `AndrewRadev/undoquit.vim`)
+- `<C-w>t`: Open current window in new tab (_custom_, alias for `:tab split`)
+- `<C-w>T`: Move current window to new tab
+- `<C-w>w`: Move to the previous window (move left/up), loop to last window if already at first
+- `<C-w>p`: Move to the most recently accessed window
+- `<C-w>=`: Equalise splits/make all windows the same size
+- `<C-w>f`: Focus current window (maximise height & width) (_custom_)
+- `<C-w>_`: Maximise height of current window
+- `<C-w>|`: Maximise width of current window
+
+### Tabs
+
+- `gt`: Next tab
+- `gT`: Prev tab
+- `[n]gt`: Goto nth tab
+- `:tabe[dit]`:  Open a file in a new tab
+- `:tabc[lose]`: Close current tab
+
 ## Git
 
 Most keybinds sit under a prefix:
@@ -333,57 +377,21 @@ Within fugitive:
 
 ## Oil
 
-A netrw replacement that lets you browse and edit the filesystem as if it was a regular buffer.
+A file explorer that lets you browse and edit the filesystem as if it was a regular buffer.
 
+- `<C-c>`: Close
+- `<C-t>`: Open in new tab
+- `<C-s>`: Open in vertical split
+- `<C-h>`: Open in horizontal split
+- `<C-t>`: Open in new tab
 - `<M-d>`: Toggle file details (e.g. size, permissions, last modified)
 - `<M-h>`: Toggle hidden files
+- `gx`: Open external
+- `gs`: Change sort
+- `_`: Jump to current working directory
+- `g~`/`` ` ``: Change working directory
 
----
-
-## Built-in
-
-### Editing
-
-### Insert mode bindings
-
-- `<C-u>`: Delete all characters before the cursor (e.g. undo auto-comment continuation)
-- `<C-w>`: Delete word backwards
-- `<C-t>`: Increase indentation of current line
-- `<C-d>`: Decrease indentation of current line
-- `<C-v>`: Insert a character literally
-
-### Window commands
-
-Note: most of these work even if you continue holding `Ctrl` for the 2nd key, e.g. `<C-w><C-o>`.
-
-- `<C-w>s`: `:sp[lit]`
-- `<C-w>v`: `:vsp[lit]`
-- `<C-direction>`:    Move to the window in `<direction>` (only `hjkl`) (_custom_)
-- `<C-w><direction>`: Move to the window in `<direction>` (`<Up>`, `k`, etc)
-- `<C-w><DIRECTION>`: Move the current window all the way to `<DIRECTION>` (only `HJKL` by default but I added maps for shift + arrow keys)
-- `<C-w>x`: Swap current window with the next window
-- `<C-w>c`: Close the current window (also: `:clo[se]`). Fails on the last window.
-- `<C-w>q`: Close the current window (also: `:q[uit]`). On the last window, quit vim.
-- `<C-w>o`: Close all but the current window (also: `:only`)
-- `<C-w>u`: Undo closing a window (provided by `AndrewRadev/undoquit.vim`)
-- `<C-w>t`: Open current window in new tab (alias for `:tab split`) (_custom_)
-- `<C-w>T`: Move current window to new tab
-- `<C-w>w`: Move to the previous window (move left/up), loop to last window if already at first
-- `<C-w>p`: Move to the most recently accessed window
-- `<C-w>=`: Equalise splits/make all windows the same size
-- `<C-w>f`: Focus current window (maximise height & width) (_custom_)
-- `<C-w>_`: Maximise height of current window
-- `<C-w>|`: Maximise width of current window
-
-Also, for tabs:
-
-- `gt`: Next tab
-- `gT`: Prev tab
-- `[n]gt`: Goto nth tab
-- `:tabe[dit]`:  Open a file in a new tab
-- `:tabc[lose]`: Close current tab
-
-### Folds
+## Folds
 
 `:h folds`
 
@@ -404,7 +412,7 @@ Also, for tabs:
 - `:set foldlevel/fdl`: Get/set the foldlevel of the current buffer
     - e.g. `:set fdl=5`: Fold entire file at depth 5. Now you can use `zm`/`zr` to increase/decrease folding.
 
-### Quickfix
+## Quickfix
 
 A special buffer for showing a list of locations/files e.g as the results of a search.
 
@@ -423,19 +431,11 @@ Keybinds:
 - `[q`: Jump to prev in quickfix list.
 - `]Q`: Jump to first in quickfix list.
 - `[Q`: Jump to last in quickfix list.
+- Custom keybinds sit under the `<leader>c` prefix.
 
 The location list also behaves similarly but only stores locations for the current window. The commands to use it are the same, replacing the first `c` with `l` (e.g. `:lopen`, `]l`).
 
-Handy shortcuts:
-
-- `<leader>co`: `:copen`
-- `<leader>cc`: `:cclose`
-- `<leader>cn`: `:cnext`
-- `<leader>cp`: `:cprev`
-- `<leader>cf`: `:cfirst`
-- `<leader>cl`: `:clast`
-
-### Registers
+## Registers
 
 - `:reg[isters]`: Display the contents of all numbered/named registers
 - `"n`: Use register `n` for the next delete, yank or put
@@ -451,9 +451,7 @@ Handy shortcuts:
     - `:`: Holds the most recent command
     - `.`: Holds the last inserted text
 
-## Plugins
-
-### LSP
+## LSP
 
 Built-in keybinds:
 
@@ -481,15 +479,6 @@ Extended keybinds:
 - `<F2>`: Rename symbol under cursor
 - `<F4>`: Code actions
 
-### Formatting
-
-Provided by `stevearc/conform.nvim`.
-
-- `:Format`:   Format current file
-- `<leader>F`: Format current file
-- `<leader>tf`: Toggle autoformat (buffer)
-- `<leader>tF`: Toggle autoformat (global)
-
 ### Diagnostics
 
 Kinda built in, but also fed by LSP.
@@ -503,7 +492,7 @@ Kinda built in, but also fed by LSP.
 - `<leader>l`: Send diagnostics to loclist (error only)
 - `<leader>L`: Send diagnostics to loclist (all diagnostics)
 
-### Autocompletion
+## Autocompletion
 
 Provided by `saghen/blink.cmp`.
 
@@ -518,20 +507,15 @@ Provided by `saghen/blink.cmp`.
 - `<C-k>`: Toggle showing signature help
 - `<C-Space>`: Toggle showing documentation
 
-### Comments
+## Comments
 
-Provided by `folke/todo-comments.nvim`.
+- `gcc`: Toggle comment
+- `<C-/>`: (NORMAL/INSERT) Toggle comment
+- `gc`: (VISUAL) Toggle comment on selected line(s)/region(s)
+- `ic`: Comment text object
+- `[t`/`]t`: Previous/next comment (`todo-comments`)
 
-- Provides colouring & keybinds for working with various types of comment, including:
-    - TODO
-    - NOTE (also INFO)
-    - WARN (also WARNING)
-    - FIX (also BUG, FIXME, ISSUE)
-    - And more!
-- `[t`: Previous TODO/other comment
-- `]t`: Next TODO/other comment
-
-### Markdown
+## Markdown
 
 Provided by `hedyhli/markdown-toc.nvim`:
 
@@ -553,7 +537,7 @@ Provided by `gaoDean/autolist.nvim`:
 - `<M-r>`: Recalculate ordered list numbering
 - Deleting list items automatically recalculates numbering
 
-### Grug-far
+## Grug-far
 
 Provided by `MagicDuck/grug-far.nvim`.
 
@@ -562,7 +546,7 @@ Find and replace plugin for neovim.
 - `:GrugFar`:       Find and replace (uses any visual selection as the search string)
 - `:GrugFarWithin`: Find and replace within the current visual selection
 
-### Snacks
+## Snacks
 
 Provided by `folke/snacks.nvim`.
 
@@ -570,7 +554,7 @@ Provided by `folke/snacks.nvim`.
 - `:Notifications`: Notification history
 - `<C-t>`: Toggle floating terminal
 
-#### Snacks-picker
+### Snacks-picker
 
 Shortcuts:
 
@@ -605,7 +589,7 @@ Picker shortcuts:
     - `a`/`i`: Refocus input
     - `<Esc>`/`q`: Cancel/close picker
 
-#### Snacks explorer
+### Snacks explorer
 
 Shortcuts:
 
@@ -630,23 +614,14 @@ Picker shortcuts:
 - `]e`/`[e`: Next/prev file with diagnostics (error)
 - `<C-t>`: Open terminal here
 
-### Mini
+## Mini
 
 Provided by `nvim-mini/mini.nvim`.
 
 - `:Start`: Re-open `mini.starter`
 - `:TrimWhitespace`: Trim trailing whitespace
 
-#### Mini-comment
-
-Extends built-in `gc`/`gcc` with configurable mappings and hooks.
-
-- `gcc`: Toggle comment
-- `<C-/>`: (NORMAL/INSERT) Toggle comment
-- `gc`: (VISUAL) Toggle comment on selected line(s)/region(s)
-- `ic`: Comment text object
-
-#### Mini-diff
+### Mini-diff
 
 Work with diff hunks.
 
@@ -658,7 +633,7 @@ Work with diff hunks.
 - Examples:
     - `yih`: Yank entire hunk
 
-#### Mini-surround
+### Mini-surround
 
 Add/delete/replace surroundings (brackets, quotes, etc.)
 
@@ -676,17 +651,17 @@ Add/delete/replace surroundings (brackets, quotes, etc.)
 - `cs`: Change surrounding
 - `ds`: Delete surrounding
 
-#### Mini-splitjoin
+### Mini-splitjoin
 
 Split if arguments are on single line, join otherwise (also works on visual selection to disambiguate).
 
 - `gS`: Split/join
 
-#### Mini-move
+### Mini-move
 
 Move current line/selection with `<M-direction>` (NORMAL/INSERT/VISUAL).
 
-#### Mini-operators
+### Mini-operators
 
 Adds various text editing operators.
 
@@ -698,35 +673,27 @@ Adds various text editing operators.
     - First usage: mark motion to exchange
     - Second usage: select motion to exchange & swap them
 
-#### Mini-bracketed
+### Mini-bracketed
 
 Go forward/backward with square brackets (similar to `tpope/vim-unimpaired`).
 
-- All bindings have the same format:
-    - `[x`: prev x
-    - `]x`: next x
-    - `[X`: first x
-    - `]X`: last x
-- Suffixes:
-    - `b`: Buffer (now built-in)
-    - `c`: Comment block
-        - In diff buffers, this jumps between changes instead (built-in)
-    - `d`: Diagnostic (now built-in)
-    - `f`: File on disk
-    - `i`: Indentation change
-    - `j`: Jump in jumplist (current buffer)
-    - `l`: Location list (now built-in)
-    - `o`: Old files
-    - `q`: Quickfix list (now built-in)
-    - `w`: Window (current tab)
-    - `x`: Conflict
-    - `y`: Yank
-        - After pasting, lets you replace pasted text to older/newer yank entries
-- I've disabled a few suffixes that weren't useful or conflicted with other keybinds:
+- `b`: Buffer (now built-in)
+- `c`: Comment block, or changes if in diff-mode
+- `d`: Diagnostic (now built-in)
+- `f`: File on disk
+- `i`: Indentation change
+- `j`: Jump in jumplist (current buffer)
+- `l`: Location list (now built-in)
+- `o`: Old files
+- `q`: Quickfix list (now built-in)
+- `w`: Window (current tab)
+- `x`: Conflict
+- `y`: Yank: after pasting, lets you replace pasted text to older/newer yank entries
+- I've disabled a few that weren't useful or conflicted with other keybinds:
     - `t`: Treesitter node or parent
     - `u`: Linear undo
 
-#### Mini-sessions
+### Mini-sessions
 
 Session management.
 

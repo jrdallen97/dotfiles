@@ -48,8 +48,8 @@ oil.setup {
     ['<C-s>'] = select('Open entry in vertical split', 'vsplit', { vertical = true }),
     ['<C-h>'] = select('Open entry in horizontal split', 'split', { horizontal = true }),
     ['<C-t>'] = select('Open entry in new tab', 'tabedit', { tab = true }),
-    ['<M-h>'] = { 'actions.toggle_hidden', desc = 'Toggle hidden files' },
     ['<C-p>'] = false, -- Conflicts with previous buffer keybind
+    ['<M-h>'] = { 'actions.toggle_hidden', desc = 'Toggle hidden files' },
 
     -- Quick toggle to show file details (:h oil-columns)
     ['<M-d>'] = {
