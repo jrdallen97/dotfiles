@@ -6,22 +6,22 @@ do
   Snacks.toggle.option('spell'):map '<leader>ts'
   Snacks.toggle.diagnostics(  ):map '<leader>td'
 
-  -- Toggle conceallevel (use `:set cole=` for values other than 2)
+  -- Conceallevel (use `:set cole=` for values other than 2)
   Snacks.toggle.new({
-    name = 'conceal',
+    name = 'Conceal',
     get = function()        return vim.o.conceallevel ~= 0          end,
     set = function(enabled) vim.o.conceallevel = enabled and 2 or 0 end,
   }):map '<leader>tc'
-  -- Toggle ruler (use `:set cc=` for values other than 100)
+  -- Ruler (use `:set cc=` for custom values)
   Snacks.toggle.new({
-    name = 'ruler',
+    name = 'Ruler (Colorcolumn)',
     get = function()        return vim.o.colorcolumn ~= ''                     end,
     set = function(enabled) vim.o.colorcolumn = enabled and '80,100,120' or '' end,
   }):map '<leader>tr'
 
-  -- Easily switch between light & dark mode
+  -- Light/dark mode
   Snacks.toggle.new({
-    name = 'light mode',
+    name = 'Light Mode',
     get = function() return vim.o.bg == 'light' end,
     set = function(enabled)
       vim.cmd.colorscheme(enabled and vim.g.light_scheme or vim.g.dark_scheme)
@@ -40,10 +40,10 @@ do
   end
 
   -- Auto-format
-  disable('autoformat', 'disable_autoformat', true ):map '<leader>tf'
-  disable('autoformat', 'disable_autoformat', false):map '<leader>tF'
+  disable('Autoformat', 'disable_autoformat', true ):map '<leader>tf'
+  disable('Autoformat', 'disable_autoformat', false):map '<leader>tF'
 
   -- Autosuggestions
-  disable('autosuggestions', 'disable_autosuggestions', true ):map '<leader>ta'
-  disable('autosuggestions', 'disable_autosuggestions', false):map '<leader>tA'
+  disable('Autosuggestions', 'disable_autosuggestions', true ):map '<leader>ta'
+  disable('Autosuggestions', 'disable_autosuggestions', false):map '<leader>tA'
 end

@@ -4,19 +4,32 @@ NOTE: I'm not gonna list all the basics here, just the stuff that's useful for m
 
 <!-- mtoc-start -->
 
+- [[#Launch options]]
+- [[#Help]]
 - [[#Misc]]
-- [[#Git]]
-    - [[#Fugitive]]
-- [[#Built-in]]
-    - [[#Launch options]]
-    - [[#Help]]
-    - [[#Editing]]
-    - [[#Insert mode bindings]]
-    - [[#Misc]]
+- [[#Movement]]
+    - [[#Motions]]
+    - [[#Search]]
     - [[#Jumps]]
     - [[#Marks]]
-    - [[#Commands]]
-    - [[#Settings]]
+    - [[#Scrolling]]
+- [[#Editing]]
+- [[#Spellcheck]]
+- [[#Running/testing files]]
+- [[#Cmdline]]
+    - [[#Sort]]
+    - [[#Search/replace]]
+    - [[#Vimgrep]]
+    - [[#Diff mode]]
+    - [[#Arglist]]
+    - [[#Running commands across files]]
+    - [[#Command-line window]]
+- [[#Git]]
+    - [[#Fugitive]]
+- [[#Oil]]
+- [[#Built-in]]
+    - [[#Editing]]
+    - [[#Insert mode bindings]]
     - [[#Window commands]]
     - [[#Folds]]
     - [[#Quickfix]]
@@ -26,7 +39,6 @@ NOTE: I'm not gonna list all the basics here, just the stuff that's useful for m
     - [[#Formatting]]
     - [[#Diagnostics]]
     - [[#Autocompletion]]
-    - [[#Oil]]
     - [[#Comments]]
     - [[#Markdown]]
     - [[#Grug-far]]
@@ -45,59 +57,7 @@ NOTE: I'm not gonna list all the basics here, just the stuff that's useful for m
 
 <!-- mtoc-end -->
 
-## Misc
-
-Random things I've mostly added myself (i.e. not using plugins).
-
-- `<leader>{n}`: Switch to tab number `{n}`
-- `<leader>rs`:  Save & run current file (using shebang)
-- `<leader>rts`: Save & time running current file (using shebang)
-
-Toggles:
-
-- `<leader>tw`: Toggle wrap
-- `<leader>ts`: Toggle spellcheck
-- `<leader>td`: Toggle diagnostics
-- `<leader>tr`: Toggle ruler (default to cols 80, 100, & 120; use `:set cc=<n>` otherwise)
-- `<leader>tl`: Toggle light mode
-- `<leader>tc`: Toggle conceal
-- `<leader>th`: Toggle inlay hints
-- `<leader>ta`: Toggle auto-suggestions (buffer)
-- `<leader>tA`: Toggle auto-suggestions (global)
-
-Shortcuts:
-
-- `<leader>ev`: Open Vim settings in a new tab
-- `<leader>ec`: Open Vim cheatsheet in a new tab
-- `<leader>es`: Open Vim spellfile in a new tab
-
-## Git
-
-Most keybinds sit under a prefix:
-
-- `<leader>g`: Git (status, blame, etc)
-- `gh`: Git hunk (stage, restore)
-
-### Fugitive
-
-- `:Git`: Open fugitive
-- `:Git {cmd}`: Run git command
-
-Within fugitive:
-
-- `]]`: Next section
-- `[[`: Previous section
-- `-`: Toggle staged for file/hunk
-- `=`: Toggle inline diff for file/hunk
-- `s`: Stage file/hunk
-- `u`: Unstage file/hunk
-- `U`: Unstage all
-- `X`: Discard file/hunk
-
-
-## Built-in
-
-### Launch options
+## Launch options
 
 - `{file[s]}`: Open with file[s] in the arglist (see [[#Commands]])
 - `+{number}`: Open file at line number
@@ -108,120 +68,51 @@ Within fugitive:
 - `-R`: Open in read-only mode
 - `-M`: Open in very read-only mode (`nomodifiable nowrite`)
 
-### Help
+## Help
 
 - `:h index`: A list of all commands for all modes
 - `<C-]>`: Jump to definition (e.g. open help or follow help link)
 
-### Editing
+## Misc
 
-- `[<Space>`: Insert newline above cursor
-- `]<Space>`: Insert newline below cursor
-- `J`/`:join`: Join lines (also works with a visual range)
-- `gu{motion}`: Make `{motion}` lowercase
-- `gU{motion}`: Make `{motion}` uppercase
-- `g~{motion}`: Invert case over `{motion}`
-- Repeated letters make it apply to the current line, e.g.:
-    - `guu`
-    - `gUU`
-    - `g~~`
+- `<leader>{n}`: Switch to tab number `{n}`
+- Shortcuts to files set under the `<leader>e` prefix (edit). Examples:
+    - `<leader>ev`: Open Vim settings in a new tab
+    - `<leader>ec`: Open Vim cheatsheet in a new tab
+    - `<leader>es`: Open Vim spellfile in a new tab
+- Toggles sit under the `<leader>t` prefix.
+- `<leader>?`: Show buffer-local keymaps (`which-key`)
+- `ga`: Print the ASCII value of the character under the cursor
 
-Increment/decrement:
+## Movement
 
-- `<C-a>`: Increment
-- `<C-x>`: Decrement
-- Extended by `monaqa/dial.nvim` to support dates, booleans, etc (user-extensible).
-- Also works in VISUAL mode
-- Using `g<C-a>`/`g<C-x>` in VISUAL mode will increment each line an additional time (useful for making lists) (accepts a count)
+### Motions
 
-### Insert mode bindings
+`:h cursor-motions`
 
-- `<C-u>`: Delete all characters before the cursor (e.g. undo auto-comment continuation)
-- `<C-w>`: Delete word backwards
-- `<C-t>`: Increase indentation of current line
-- `<C-d>`: Decrease indentation of current line
-- `<C-v>`: Insert a character literally
+Motions can be used after an operator to operate on the text that was moved over.
 
-### Misc
-
-Movement:
-
-- `(` / `)`:    Move backwards/forwards by sentence
-- `{` / `}`:    Move backwards/forwards by paragraph
-- `[\[` / `]]`: Move backwards/forwards by section
-- `*`:  Search for the word under the cursor
-- `g*`: Search for the word under the cursor (including results within other words)
-- `#`:  Search for the word under the cursor (reverse)
-- `;`:  Repeat last f/e/etc movement
-- `,`:  Repeat last f/e/etc movement (reverse)
-- `ge`: Move to the end of the previous word
+- `w`/`b`/`e`/`ge`: Move forwards/backwards to the start/end of words
+    - Prefix with `,` to move by subwords, e.g. camelCase (`nvim-spider`)
+- `(`/`)`:    Move backwards/forwards by sentence
+- `{`/`}`:    Move backwards/forwards by paragraph
+- `[\[`/`]]`: Move backwards/forwards by section
+- `;`/`,`: Repeat last f/e/etc movement (forwards/backwards)
 - `gi`: Continue insert mode from its last position
 - `g;`: Move backwards in change list (e.g. insert, deletion, etc)
 - `g,`: Move forwards in change list (e.g. insert, deletion, etc)
 - `<C-6>`: Switch to the alternate file (usually the previously edited file)
 - `gj`: Move cursor down by screen line (also `g<Down>`)
 - `gk`: Move cursor up by screen line (also `g<Up>`)
-- `g0`: Jump to start of screen line (also `g<Home>`)
-- `g$`: Jump to end of screen line (also `g<End>`)
+- `g0`: Move to start of screen line (also `g<Home>`)
+- `g$`: Move to end of screen line (also `g<End>`)
 - `gv`: Restore previous visual selection
+
+### Search
+
+- `*`/`#`:   Search forwards/backwards for the word under the cursor (whole word matches only)
+- `g*`/`g#`: Search forwards/backwards for the word under the cursor (including matches within words)
 - `gn`: Jump to next search match and visually select it
-
-Scrolling:
-
-- `<C-u>`: Scroll up half a page (note: not a jump)
-- `<C-d>`: Scroll down half a page
-- `<C-b>`: Page up (also `<PageUp>` & `<S-Up`>)
-- `<C-f>`: Page down (also `<PageDown>` & `<S-Down`>)
-- `<C-y>`: Scroll up 1 line
-- `<C-e>`: Scroll down 1 line
-- `zt`:    Re-centre screen with the cursor at the top
-- `zz`:    Re-centre screen with the cursor in the middle
-- `zb`:    Re-centre screen with the cursor at the bottom
-
-Copy/paste:
-
-- `p`: Paste after the cursor
-- `P`: Paste before the cursor
-- VISUAL mode:
-    - `p`: Paste over selection and yank previous contents
-    - `P`: Paste over selection without yanking previous contents
-        - This is especially useful when using something like `vi"` to select an entire string, for example.
-
-Spell:
-
-- `z=`:  Spelling suggestions
-- `zg`:  Mark word as good (add to good word list)
-- `zw`:  Mark word as wrong (add to wrong word list)
-- `zug`: Undo `zg`/`zw`, remove word from spellfile
-
-Modes (as used in mappings):
-
-- `n`: Normal mode
-- `i`: Insert mode
-- `x`: Visual mode only
-- `s`: Select mode only (like visual mode but typing replaces the selection)
-- `v`: Visual and select mode
-- `t`: Terminal mode
-- `c`: Command-line mode
-- `o`: Operator-pending mode
-
-Undolist:
-
-- `:undol[ist]`: List the leafs in the undo tree
-- `g-`: Previous leaf in undo tree
-- `g+`: Next leaf in undo tree
-
-Formatting:
-
-- `gq{motion}`: Format the line(s) that `{motion}` moves over
-- `gqq`: Format current line
-- `gq`: (VISUAL) Format visual selection
-- Configured by `formatoptions`/`fo`; see `:h fo-table`
-- Target line length is configured with `textwidth`/`tw` (default 100)
-
-Random:
-
-- `ga`: Print the ascii value of the character under the cursor
 
 ### Jumps
 
@@ -229,16 +120,15 @@ Random:
 
 Jumps tend to be cursor movements that move your cursor multiple lines. When you jump, your previous position is remembered.
 
-Note: scrolling (e.g. `<C-d>`) is not a jump.
+Note: motions and scrolling are not jumps.
 
-- `:ju[mps]`: List jumps in current window
-- `<C-o>`: Previous cursor position in jump list (i.e. not a motion)
-- `<C-i>`: Next cursor position in jump list
+- `<C-i>`/`<C-o>`: Next/previous cursor position in jump list
+- `<C-n>`/`<C-p>`: Next/previous file in jump list (`bufjump`)
 - `<C-t>`: Previous position in tag stack (e.g. set when using `gd` to goto definition)
-- `%`:     Jump to matching bracket
-- `H`:     Jump the cursor to the top of the screen (Home)
-- `M`:     Jump the cursor to the middle of the screen (Middle)
-- `L`:     Jump the cursor to the bottom of the screen (Last)
+- `%`: Jump to matching bracket
+- `H`: Jump the cursor to the top of the screen (Home)
+- `M`: Jump the cursor to the middle of the screen (Middle)
+- `L`: Jump the cursor to the bottom of the screen (Last)
 
 ### Marks
 
@@ -264,9 +154,84 @@ There are also some special marks:
 - `[`: The first character of previously yanked or changed text
 - `]`: The last character of previously yanked or changed text
 
-### Commands
+### Scrolling
 
-Sorting;
+- `<C-u>`: Scroll up half a page (note: not a jump)
+- `<C-d>`: Scroll down half a page
+- `<C-b>`: Page up (also `<PageUp>` & `<S-Up`>)
+- `<C-f>`: Page down (also `<PageDown>` & `<S-Down`>)
+- `<C-y>`: Scroll up 1 line
+- `<C-e>`: Scroll down 1 line
+- `zt`: Re-centre screen with the cursor at the top
+- `zz`: Re-centre screen with the cursor in the middle
+- `zb`: Re-centre screen with the cursor at the bottom
+
+## Editing
+
+- `[<Space>`/`]<Space>`: Insert newline above/below cursor
+- `J`/`:join`: Join lines (also works with a visual range)
+
+Operators can operate over a motion or visual selection, or the last character can typically be repeated to operate on the current line. Examples:
+
+- `=`: Fix indentation
+- `g~`: Swap case
+- `gu`: Make lowercase
+- `gU`: Make uppercase
+- `gq`: Format text
+    - Configured by `formatoptions`/`fo`; see `:h fo-table`
+    - Target line length is configured with `textwidth`/`tw` (default 100)
+- `gw`: The same as `gq`, but without moving the cursor
+- `<`/`>`: Shift text left/right
+
+Copy/paste:
+
+- `p`: Paste after the cursor
+- `P`: Paste before the cursor
+- `p`: (VISUAL) Paste over selection and yank previous contents
+- `P`: (VISUAL) Paste over selection without yanking previous contents
+    - Especially useful when using something like `vi"` to select an entire string, for example.
+
+Increment/decrement:
+
+- `<C-a>`: Increment
+- `<C-x>`: Decrement
+- `g<C-a>`: (VISUAL) Increment each line an additional time (useful for making lists)
+
+Undolist:
+
+- `:undol[ist]`: List the leafs in the undo tree
+- `g-`: Previous leaf in undo tree
+- `g+`: Next leaf in undo tree
+
+## Spellcheck
+
+Spell:
+
+- `z=`:  Spelling suggestions
+- `zg`:  Mark word as good (add to good word list)
+- `zw`:  Mark word as wrong (add to wrong word list)
+- `zug`: Undo `zg`/`zw`, remove word from spellfile
+
+## Running/testing files
+
+Running files sits under `<leader>r` and is generic, but can be overridden on a per-language level. Examples:
+
+- `<leader>rs`:  Save & run current file (using shebang)
+- `<leader>rts`: Save & time running current file (using shebang)
+
+Testing files sits under `<leader>R` and is entirely per-language. For example, `golang` has:
+
+- `<leader>RR`: Save & test current file
+- `<leader>RV`: Save & test current file (verbose)
+
+## Cmdline
+
+- Use `<C-v>` to type special characters literally
+    - `<C-v><Esc>` outputs a literal escape character `` (useful for `:norm`)
+- `:lua`: Run lua code
+- `:lua=`/`:=`: Run lua code and print return value (equivalent to `:lua vim.print(...)`)
+
+### Sort
 
 - `:sort`: Sort the current file/range
 - Options:
@@ -286,7 +251,7 @@ Run command on matching lines:
     - `p[rint]`:  Print line (default)
     - `d[elete]`: Delete line
 
-Search/replace:
+### Search/replace
 
 - `:%s/pattern/replacement`: Replace `pattern` with `replacement` on all lines in file:
 - `:s` would do this same for current line only
@@ -294,7 +259,7 @@ Search/replace:
 - add `/c` to prompt for confirmation before replacing each match
 - use `:bufdo %s/...` to run this in all open buffers (then `:wa` to save them all)
 
-`vimgrep`:
+### Vimgrep
 
 - `:vim[grep] /pattern/ {file(s)}`: Search for a pattern and put results in the quickfix list:
 - use `%` for the current file
@@ -303,14 +268,14 @@ Search/replace:
 - `:lv[imgrep]` is the same but using the location list
 - `:vimgrepa[dd]`/`:lvimgrepa[dd]` will append to the list rather than replacing it
 
-Diff mode:
+### Diff mode
 
 - `:difft[his]`: Mark the current window as part of the diff.
     - `:windo diffthis`: Applies the above for all windows in the current tab.
 - `:diffo[ff]`:  Turn off diff mode for the current window.
 - `:diffo[ff]!`: Turn off diff mode for all windows in the current tab.
 
-Argument list:
+### Arglist
 
 - `:ar[gs]`:           Print the arglist
 - `:ar[gs] {arglist}`: Set the arglist
@@ -320,7 +285,7 @@ Argument list:
 - `:argd[elete] {pattern}`: Delete files matching pattern from the arglist
 - TIP: Use `:ar **/*.lua` to open all lua files in a project, then `:argd *` to wipe the arglist but leave all the buffers open
 
-Run a command across lots of files:
+### Running commands across files
 
 - `:cdo {cmd}`:   Run `{cmd}` in for each entry in the quickfix list
 - `:cfdo {cmd}`:  Run `{cmd}` in for every file in the quickfix list
@@ -331,30 +296,61 @@ Run a command across lots of files:
 - `:argdo {cmd}`: Run `{cmd}` in all files in argument list
 - `:tabdo {cmd}`: Run `{cmd}` in all tabs
 
-Command-line window:
+### Command-line window
 
-- The command-line window lets you find previous commands/searches to edit or rerun them
-- Opening the window:
-    - `q:`: Command history
-    - `q/`: Search history
-    - `q?`: Backwards search history (same list as `q/`)
-    - `<C-f>`: While already in the command line
+The command-line window lets you find previous commands/searches to edit or rerun them:
+
+- `q:`: Command history
+- `q/`: Search history
+- `q?`: Backwards search history (same list as `q/`)
+- `<C-f>`: While already in the command line
 - Within the window:
     - `<CR>`:  Rerun the selected command
     - `<C-c>`: Move the selected command to the command line and close the window
 
-Lua:
-- `:lua`:       Run lua code
-- `:lua=`/`:=`: Run lua code and print return value (equivalent to `:lua vim.print(...)`)
+## Git
 
-Misc:
+Most keybinds sit under a prefix:
 
-- Use `<C-v>` to type literal escape characters:
-- `<C-v><Esc>` outputs a literal escape character ``, which can be used with commands e.g. `:norm`
+- `<leader>g`: Git (status, blame, etc)
+- `gh`: Git hunk (stage, restore)
 
-### Settings
+### Fugitive
 
-- `:set cc=100`: Show an indent guide on column 100
+- `:Git`: Open fugitive
+- `:Git {cmd}`: Run git command
+
+Within fugitive:
+
+- `]]`: Next section
+- `[[`: Previous section
+- `-`: Toggle staged for file/hunk
+- `=`: Toggle inline diff for file/hunk
+- `s`: Stage file/hunk
+- `u`: Unstage file/hunk
+- `U`: Unstage all
+- `X`: Discard file/hunk
+
+## Oil
+
+A netrw replacement that lets you browse and edit the filesystem as if it was a regular buffer.
+
+- `<M-d>`: Toggle file details (e.g. size, permissions, last modified)
+- `<M-h>`: Toggle hidden files
+
+---
+
+## Built-in
+
+### Editing
+
+### Insert mode bindings
+
+- `<C-u>`: Delete all characters before the cursor (e.g. undo auto-comment continuation)
+- `<C-w>`: Delete word backwards
+- `<C-t>`: Increase indentation of current line
+- `<C-d>`: Decrease indentation of current line
+- `<C-v>`: Insert a character literally
 
 ### Window commands
 
@@ -522,15 +518,6 @@ Provided by `saghen/blink.cmp`.
 - `<C-k>`: Toggle showing signature help
 - `<C-Space>`: Toggle showing documentation
 
-### Oil
-
-Provided by `stevearc/oil.nvim`.
-
-A netrw replacement that lets you browse and edit the filesystem as if it was a regular buffer.
-
-- `<M-d>`: Toggle file details (e.g. size, permissions, last modified)
-- `<M-h>`: Toggle hidden files
-
 ### Comments
 
 Provided by `folke/todo-comments.nvim`.
@@ -654,7 +641,8 @@ Provided by `nvim-mini/mini.nvim`.
 
 Extends built-in `gc`/`gcc` with configurable mappings and hooks.
 
-- `gcc`: Toggle comment on line
+- `gcc`: Toggle comment
+- `<C-/>`: (NORMAL/INSERT) Toggle comment
 - `gc`: (VISUAL) Toggle comment on selected line(s)/region(s)
 - `ic`: Comment text object
 
@@ -696,9 +684,7 @@ Split if arguments are on single line, join otherwise (also works on visual sele
 
 #### Mini-move
 
-Move current line/selection in direction (NORMAL/INSERT/VISUAL).
-
-- `<M-direction>`: Move
+Move current line/selection with `<M-direction>` (NORMAL/INSERT/VISUAL).
 
 #### Mini-operators
 
