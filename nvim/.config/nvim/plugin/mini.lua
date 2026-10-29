@@ -76,4 +76,4 @@ vim.api.nvim_set_hl(0, 'MiniCursorwordCurrent', {})
 
 -- Set up terminal background synchronization
 -- (prevents black borders if terminal size isn't perfectly aligned)
-require('mini.misc').setup_termbg_sync()
+require('mini.misc').setup_termbg_sync { explicit_reset = true }

@@ -559,6 +559,7 @@ Provided by `folke/snacks.nvim`.
 Shortcuts:
 
 - `<leader><leader>`: Switch buffers
+- `<leader>/`: Search current file
 - Most commands sit under a prefix to group similar commands:
     - `<leader>h`: Help (reference, misc)
     - `<leader>f`: Find files/directories

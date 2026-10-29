@@ -43,6 +43,7 @@ end
 do
   -- Misc
   map('<leader><leader>', picker.buffers,    'Switch buffers')
+  map('<leader>/',        picker.lines,      'This buffer')
   map('<leader>gg',       picker.git_status, 'Status')
   map('<leader>fr',       picker.resume,     'Resume previous search')
   map('<leader>sr',       picker.resume,     'Resume previous search')
