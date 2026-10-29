@@ -7,6 +7,9 @@ config.colors = {
   cursor_bg = '#ffffff',
 }
 
+-- Fix macOS titlebar/transparency issues
+config.window_decorations = 'MACOS_USE_BACKGROUND_COLOR_AS_TITLEBAR_COLOR|TITLE|RESIZE'
+
 -- Icons look better using the built-in fallback nerd font rather than an actual patched nerd font (idk why)
 config.font = wezterm.font 'Hack'
 config.font_size = 15
