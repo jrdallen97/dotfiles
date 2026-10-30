@@ -79,7 +79,7 @@
       "src": "https://github.com/roodolv/markdown-toggle.nvim"
     },
     "mason-lspconfig.nvim": {
-      "rev": "a338f44149f5673882c32629697d67b0c0547aec",
+      "rev": "cd6c64d85c9871aaf759d26f2371029d6d674a48",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
     },
     "mason-tool-installer.nvim": {
@@ -99,7 +99,7 @@
       "src": "https://github.com/windwp/nvim-autopairs"
     },
     "nvim-lspconfig": {
-      "rev": "4b2b045b8ceb035f5c8bc9cab19b95706bfa6a19",
+      "rev": "460bb34e7be114f1fda7815781696bc701e60f83",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-spider": {

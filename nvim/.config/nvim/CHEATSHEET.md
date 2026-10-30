@@ -1,7 +1,5 @@
 # Vim cheatsheet
 
-NOTE: I'm not gonna list all the basics here, just the stuff that's useful for me
-
 <!-- mtoc-start -->
 
 - [[#Launch options]]
@@ -14,7 +12,7 @@ NOTE: I'm not gonna list all the basics here, just the stuff that's useful for m
     - [[#Marks]]
     - [[#Scrolling]]
 - [[#Editing]]
-- [[#Insert mode bindings]]
+- [[#Insert mode]]
 - [[#Spellcheck]]
 - [[#Running/testing files]]
 - [[#Cmdline]]
@@ -45,7 +43,6 @@ NOTE: I'm not gonna list all the basics here, just the stuff that's useful for m
     - [[#Snacks-picker]]
     - [[#Snacks explorer]]
 - [[#Mini]]
-    - [[#Mini-diff]]
     - [[#Mini-surround]]
     - [[#Mini-splitjoin]]
     - [[#Mini-move]]
@@ -57,7 +54,7 @@ NOTE: I'm not gonna list all the basics here, just the stuff that's useful for m
 
 ## Launch options
 
-- `{file[s]}`: Open with file[s] in the arglist (see [[#Commands]])
+- `{file[s]}`: Open with file(s) in the [[#Arglist]]
 - `+{number}`: Open file at line number
 - `-d`: Open in diff-mode
 - `-p`: Open a tab for each file passed
@@ -206,7 +203,7 @@ Undolist:
 - `g-`: Previous leaf in undo tree
 - `g+`: Next leaf in undo tree
 
-## Insert mode bindings
+## Insert mode
 
 - `<C-u>`: Delete all characters before the cursor (e.g. undo auto-comment continuation)
 - `<C-w>`: Delete word backwards
@@ -215,8 +212,6 @@ Undolist:
 - `<C-v>`: Insert a character literally
 
 ## Spellcheck
-
-Spell:
 
 - `z=`:  Spelling suggestions
 - `zg`:  Mark word as good (add to good word list)
@@ -244,8 +239,7 @@ Testing files sits under `<leader>R` and is entirely per-language. For example, 
 
 ### Sort
 
-- `:sort`: Sort the current file/range
-- Options:
+- `:sort`: Sort the current file/range. Options:
     - `!`: Reverse order
     - `i`: Case insensitive
     - `n`: Numeric sort (using the first decimal on each line)
@@ -309,7 +303,7 @@ Testing files sits under `<leader>R` and is entirely per-language. For example, 
 
 ### Command-line window
 
-The command-line window lets you find previous commands/searches to edit or rerun them:
+The command-line window lets you find previous commands/searches to edit or rerun them.
 
 - `q:`: Command history
 - `q/`: Search history
@@ -334,7 +328,7 @@ Note: most of these work even if you continue holding `Ctrl` for the 2nd key, e.
 - `<C-w>c`: Close the current window (also: `:clo[se]`). Fails on the last window.
 - `<C-w>q`: Close the current window (also: `:q[uit]`). On the last window, quit vim.
 - `<C-w>o`: Close all but the current window (also: `:only`)
-- `<C-w>u`: Undo closing a window (provided by `AndrewRadev/undoquit.vim`)
+- `<C-w>u`: Undo closing a window (`AndrewRadev/undoquit.vim`)
 - `<C-w>t`: Open current window in new tab (_custom_, alias for `:tab split`)
 - `<C-w>T`: Move current window to new tab
 - `<C-w>w`: Move to the previous window (move left/up), loop to last window if already at first
@@ -358,6 +352,7 @@ Most keybinds sit under a prefix:
 
 - `<leader>g`: Git (status, blame, etc)
 - `gh`: Git hunk (stage, restore)
+    - There's also an operator: `ih` (in hunk)
 
 ### Fugitive
 
@@ -453,20 +448,6 @@ The location list also behaves similarly but only stores locations for the curre
 
 ## LSP
 
-Built-in keybinds:
-
-- `K`:     Hover information
-- `<C-s>`: (INSERT) Signature help
-- `grr`: Goto references
-- `gri`: Goto implementation
-- `grn`: Rename symbol
-- `gra`: Code actions
-- `gO`:  Document symbols
-
-Extended by `neovim/nvim-lspconfig` (among others).
-
-Extended keybinds:
-
 - `K`: Hover information
 - `<C-k>`: (NORMAL/INSERT) Hover information
 - `<C-s>`: (NORMAL/INSERT) Signature help
@@ -480,8 +461,6 @@ Extended keybinds:
 - `<F4>`: Code actions
 
 ### Diagnostics
-
-Kinda built in, but also fed by LSP.
 
 - `[d`: Previous diagnostic
 - `]d`: Next diagnostic
@@ -517,46 +496,29 @@ Provided by `saghen/blink.cmp`.
 
 ## Markdown
 
-Provided by `hedyhli/markdown-toc.nvim`:
-
-- `:Mtoc`: Update existing table of contents, or generate one at the cursor position
-
-Provided by `roodolv/markdown-toggle.nvim`:
-
 - Lists automatically continue when using `o`/`O` in NORMAL mode or `<CR>` in INSERT mode
-    - Use `<C-u>` to undo (see [[CHEATSHEET#Insert mode bindings]])
+    - Use `<C-u>` to undo (see [[#Insert mode]])
+- `<CR>`:  Toggle checkbox & move to next line (NORMAL)
 - `<M-x>`: Toggle checkbox (NORMAL/VISUAL)
 - `<M-u>`: Toggle unordered list (NORMAL/VISUAL)
 - `<M-o>`: Toggle ordered list (NORMAL/VISUAL)
 - `<M-q>`: Toggle quote (NORMAL/VISUAL)
 - `<M-h>`: Toggle heading (NORMAL/VISUAL)
-
-Provided by `gaoDean/autolist.nvim`:
-
-- `<CR>`:  Toggle checkbox & move to next line (NORMAL)
 - `<M-r>`: Recalculate ordered list numbering
-- Deleting list items automatically recalculates numbering
+- `:Mtoc`: Update existing table of contents, or generate one at the cursor position
 
 ## Grug-far
-
-Provided by `MagicDuck/grug-far.nvim`.
-
-Find and replace plugin for neovim.
 
 - `:GrugFar`:       Find and replace (uses any visual selection as the search string)
 - `:GrugFarWithin`: Find and replace within the current visual selection
 
 ## Snacks
 
-Provided by `folke/snacks.nvim`.
-
 - `:GitBrowse`: Open current file in browser
 - `:Notifications`: Notification history
 - `<C-t>`: Toggle floating terminal
 
 ### Snacks-picker
-
-Shortcuts:
 
 - `<leader><leader>`: Switch buffers
 - `<leader>/`: Search current file
@@ -592,12 +554,7 @@ Picker shortcuts:
 
 ### Snacks explorer
 
-Shortcuts:
-
 - `\`: Toggle file explorer
-
-Picker shortcuts:
-
 - `r`: Rename
 - `c`: Copy
 - `p`: Paste
@@ -617,50 +574,32 @@ Picker shortcuts:
 
 ## Mini
 
-Provided by `nvim-mini/mini.nvim`.
-
 - `:Start`: Re-open `mini.starter`
 - `:TrimWhitespace`: Trim trailing whitespace
-
-### Mini-diff
-
-Work with diff hunks.
-
-- `<leader>go`: Toggle diff overlay
-- `ghs`: Apply/stage hunk (either current hunk or visual selection) (NORMAL/VISUAL)
-- `ghr`: Reset hunk (either current hunk or visual selection) (NORMAL/VISUAL)
-- Text operators:
-    - `ih`: In hunk
-- Examples:
-    - `yih`: Yank entire hunk
 
 ### Mini-surround
 
 Add/delete/replace surroundings (brackets, quotes, etc.)
 
 - `ss`: Add surrounding
-    - Special characters for surround:
-        - `B`: Markdown bold (_custom_)
-        - `h`: Markdown hyperlink (_custom_)
-        - `s`: Generic string (_custom_)
-        - `m`: Mirrored string (e.g. `{[` would be mirrored to `]}`) (_custom_)
-        - `t`: HTML tag
-        - `f`: Function call; wraps the motion as a call to the give function
-        - `?`: Interactive; prompts separately for the opening/closing string
-    - Accepts a count to surround with repeated characters
-    - `cstt`: Replace surrounding HTML tag with a different one
 - `cs`: Change surrounding
 - `ds`: Delete surrounding
+- Special surround characters:
+    - `B`: Markdown bold (_custom_)
+    - `h`: Markdown hyperlink (_custom_)
+    - `s`: Generic string (_custom_)
+    - `m`: Mirrored string (e.g. `{[` would be mirrored to `]}`) (_custom_)
+    - `t`: HTML tag (e.g. `cstt` would let you change the surrounding tag)
+    - `f`: Function call; wraps the motion as a call to the give function
+    - `?`: Interactive; prompts separately for the opening/closing string
 
 ### Mini-splitjoin
 
-Split if arguments are on single line, join otherwise (also works on visual selection to disambiguate).
-
-- `gS`: Split/join
+- `gS`: Split if arguments are on single line, join otherwise (also works on visual selection)
 
 ### Mini-move
 
-Move current line/selection with `<M-direction>` (NORMAL/INSERT/VISUAL).
+- `<M-direction>`: Move current line/selection in `direction` (NORMAL/INSERT/VISUAL).
 
 ### Mini-operators
 
@@ -696,11 +635,8 @@ Go forward/backward with square brackets (similar to `tpope/vim-unimpaired`).
 
 ### Mini-sessions
 
-Session management.
-
 - `mini.starter` will show a list of available sessions on startup.
 - Once a session is active (e.g. after load or save), it will be autosaved on exit.
-- Commands:
-    - `:Save <name>`: Create session `<name>`, or manually save the current if called with no arguments
-    - `:SaveLocal`:   Create local session; equivalent to `:Save Session.vim`
-    - `:Sessions`:    Fuzzy-find sessions (`<C-x>` to delete)
+- `:Save <name>`: Create session `<name>`, or manually save the current if called with no arguments
+- `:SaveLocal`:   Create local session; equivalent to `:Save Session.vim`
+- `:Sessions`:    Fuzzy-find sessions (`<C-x>` to delete)
