@@ -57,6 +57,7 @@ vim.pack.add {
 
   -- Other
   { src = 'https://github.com/HiPhish/rainbow-delimiters.nvim' },
+  { src = 'https://github.com/JoosepAlviste/nvim-ts-context-commentstring' },
   { src = 'https://github.com/MagicDuck/grug-far.nvim' },
   { src = 'https://github.com/catppuccin/nvim', name = 'catppuccin' },
   { src = 'https://github.com/chrisgrieser/nvim-spider' },
