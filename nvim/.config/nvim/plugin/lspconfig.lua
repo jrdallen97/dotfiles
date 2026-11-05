@@ -93,6 +93,11 @@ local servers = {
     end,
   },
 
+  cssmodules_ls = {
+    -- Match class names exactly (including PascalCase)
+    init_options = { camelCase = false },
+  },
+
   tailwindcss = {
     hovers = true,
     suggestions = true,
@@ -146,6 +151,7 @@ if vim.g.work_profile then
     'eslint_d',
     'prettierd',
     'cssls',
+    'cssmodules_ls',
     'tailwindcss',
   })
 end
