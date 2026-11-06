@@ -61,6 +61,35 @@ config.keys = {
   { key = 't', mods = 'CTRL|SHIFT', action = new_tab },
 }
 
+-- Work-specific settings
+if wezterm.target_triple == 'aarch64-apple-darwin' then
+  wezterm.on('gui-startup', function(_)
+    -- Open preset tabs
+    local first_tab, notes_pane, window = wezterm.mux.spawn_window { cwd = wezterm.home_dir .. '/notes' }
+    for _ = 1, 3 do
+      window:spawn_tab { cwd = wezterm.home_dir .. '/code/CloudExperiments/' }
+    end
+    window:spawn_tab { cwd = wezterm.home_dir .. '/dotfiles/' }
+    first_tab:activate()
+
+    -- If my home monitor is detected, also resize & position the window how I like it
+    local screens = wezterm.gui.screens()
+    local screen = screens.by_name['VG27A']
+    if screen then
+      local gui_window = window:gui_window()
+      local width, height = 2250, 1100
+      gui_window:set_inner_size(width, height)
+      wezterm.time.call_after(0.2, function()
+        -- set_position uses the built-in display's scale, so we need to manually offset it for regular monitors
+        gui_window:set_position(2 * (screen.x + screen.width - width), screens.main.height - 2 * (screen.y + height))
+      end)
+    end
+
+    -- Open my notes
+    notes_pane:send_text './weekly.sh\n'
+  end)
+end
+
 -- Windows-specific settings
 if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
   config.font_size = 12
