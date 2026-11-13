@@ -15,8 +15,9 @@ end
 
 -- stylua: ignore start
 
--- Lazy
+-- Plugin/tool updates
 map('<leader>hu', ':PackUpdate<CR>', 'Update check')
+map('<leader>hm', ':Mason<CR>', 'Mason')
 
 -- Jump to vim settings
 map('<leader>ev', ':tabe ~/.config/nvim/lua<CR>',                'Vim settings')

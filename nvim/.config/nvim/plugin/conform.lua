@@ -15,12 +15,19 @@ end
 
 -- Shorthand for which formatters to use for all JS files
 local function js(bufnr)
-  return { 'eslint_d', first(bufnr, 'oxfmt', 'prettierd', 'prettier') }
+  return { 'oxlint', first(bufnr, 'oxfmt', 'prettierd', 'prettier') }
 end
 
 -- Autoformat
 require('conform').setup {
   notify_on_error = false,
+
+  formatters = {
+    oxlint = {
+      -- Oxlint works fine from the repo root, but some plugins don't (e.g. panda)
+      cwd = require('conform.util').root_file { 'oxlint.config.ts', 'package.json' },
+    },
+  },
 
   -- Use format_after_save rather than format_on_save to make it async!
   format_after_save = function(bufnr)
