@@ -10,7 +10,31 @@ map('Qa', 'qa')
 map('Wa', 'wa')
 map('Wq', 'wq')
 
--- For autocompletion for :Pack commands
+-- [[ vim.pack improvements ]]
+
+-- Move vim.pack's hardcoded confirmation tab into a float in the original tab.
+-- Reuse its window: save/cancel handlers capture that window's ID.
+local function pack_update(names, update_opts)
+  local parent = vim.api.nvim_get_current_win()
+  vim.pack.update(names, update_opts)
+  local win = vim.api.nvim_get_current_win()
+  -- No new window means there is no confirmation (e.g. :PackRestore!).
+  if win == parent then
+    return
+  end
+
+  local opts = { relative = 'win', win = parent, border = 'rounded' }
+  local dimensions = require 'snacks.win'(vim.tbl_extend('force', opts, { show = false })):dim()
+
+  -- nvim_win_set_config can't move the last window in a tab, so open a temporary split,
+  -- move the confirmation, then close the split.
+  vim.cmd.vsplit()
+  vim.api.nvim_win_set_config(win, vim.tbl_extend('force', dimensions, opts))
+  vim.api.nvim_win_close(0, true) -- Still in the temporary split; closing it removes its tab.
+  vim.api.nvim_set_current_win(win)
+end
+
+-- Tab completion for installed package names
 -- stylua: ignore
 local function complete_packages(match)
   return vim.iter(vim.pack.get(nil, { info = false }))
@@ -19,29 +43,12 @@ local function complete_packages(match)
     :totable()
 end
 
--- Jump back to the original tab after closing vim.pack's confirmation window
-local function restore_tab()
-  local original_tab = vim.api.nvim_get_current_tabpage()
-  vim.api.nvim_create_autocmd('TabClosed', {
-    once = true,
-    callback = function()
-      vim.schedule(function()
-        if vim.api.nvim_tabpage_is_valid(original_tab) then
-          vim.api.nvim_set_current_tabpage(original_tab)
-        end
-      end)
-    end,
-  })
-end
-
 -- Helpers to make vim.pack more ergonomic
 map('PackUpdate', function(info)
-  restore_tab()
-  vim.pack.update(#info.fargs > 0 and info.fargs or nil)
+  pack_update(#info.fargs > 0 and info.fargs or nil)
 end, { desc = 'Check for package updates', nargs = '*', complete = complete_packages })
 map('PackRestore', function(info)
-  restore_tab()
-  vim.pack.update(nil, { target = 'lockfile', force = info.bang })
+  pack_update(nil, { target = 'lockfile', force = info.bang })
 end, { desc = 'Restore installed packages to versions in lockfile', bang = true })
 map('PackDelete', function(info)
   vim.pack.del(info.fargs, { force = info.bang })
