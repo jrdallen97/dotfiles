@@ -11,7 +11,7 @@ Going forward I'll be mainly using GNU stow for managing dotfiles, rather than w
 
 For the most part, just use GNU stow. For example:
 
-```shell
+```bash
 stow -t ~ nvim zsh zsh-sparx
 ```
 
@@ -19,7 +19,7 @@ stow -t ~ nvim zsh zsh-sparx
 
 You may need to uninstall any existing nvim config first:
 
-```shell
+```bash
 rm -rf ~/.config/nvim ~/.local/share/nvim
 ```
 
@@ -33,7 +33,7 @@ The `install_fzf` script just runs the commands needed to clone & set up fzf loc
 
 Some of my dotfiles have their own markdown files (e.g. nvim). You can render these nicely with, for example:
 
-```shell
+```bash
 cd nvim/.config/nvim
 pandoc CHEATSHEET.md -s --to=html --toc --css=../../../styles.css -o CHEATSHEET.html
 ```
