@@ -9,7 +9,6 @@ end
 
 local grep = {
   hidden = true,
-  layout = { hidden = { 'preview' } },
   on_change = set_preview_title,
 }
 

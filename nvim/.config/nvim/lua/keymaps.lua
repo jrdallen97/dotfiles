@@ -16,7 +16,8 @@ end
 -- stylua: ignore start
 
 -- Plugin/tool updates
-map('<leader>hu', ':PackUpdate<CR>', 'Update check')
+-- Suppress mini.starter's query echo to avoid a hit-enter prompt
+map('<leader>hu', '<cmd>silent PackUpdate<CR>', 'Update check')
 map('<leader>hm', ':Mason<CR>', 'Mason')
 
 -- Jump to vim settings

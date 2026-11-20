@@ -22,13 +22,6 @@ end
 require('conform').setup {
   notify_on_error = false,
 
-  formatters = {
-    oxlint = {
-      -- Oxlint works fine from the repo root, but some plugins don't (e.g. panda)
-      cwd = require('conform.util').root_file { 'oxlint.config.ts', 'package.json' },
-    },
-  },
-
   -- Use format_after_save rather than format_on_save to make it async!
   format_after_save = function(bufnr)
     -- Disable with a global or buffer-local variable
