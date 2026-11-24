@@ -47,7 +47,7 @@ pnpm() {
   case $@ in
     if)
       command pnpm i --frozen-lockfile;;
-    dev:test2)
+    dev|dev:test2)
       command pnpm i --frozen-lockfile
       command pnpm $@;;
     *)
@@ -63,7 +63,7 @@ rdr() {(cd "$CLOUDPATH/js/apps/reader"; pnpm ${@:-dev:test2})}
 sci() {(cd "$CLOUDPATH/js/apps/science"; pnpm ${@:-dev:test2})}
 adm() {(cd "$CLOUDPATH/js/apps/admin-portal"; pnpm ${@:-dev})}
 admpf() {orca pf clear && orca pf apply $CLOUDPATH/js/apps/admin-portal/orca.ports}
-curman() {(cd "$CLOUDPATH/js/apps/curman"; pnpm ${@:-dev-test2})}
+curman() {(cd "$CLOUDPATH/js/apps/curman"; pnpm ${@:-dev:test2})}
 curriculum() {(cd "$CLOUDPATH/js/apps/curriculum"; pnpm ${@:-dev:test2})}
 
 # DB connection
